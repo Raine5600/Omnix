@@ -103,6 +103,16 @@
       display: flex;
       align-items: center;
     }
+    .logo a {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
 
     .logo img.logo-icon {
       height: 70px;
@@ -398,19 +408,15 @@
     .feature-image {
       background-color: transparent;
       border-radius: 12px;
-      aspect-ratio: 16 / 10;
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      line-height: 0;
     }
     .feature-image video {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 12px;
-      background: transparent;
+      height: auto;
       display: block;
+      background: transparent;
+      border-radius: 12px;
     }
 
     .feature-content h2 {
@@ -904,7 +910,6 @@
       .hero-buttons { flex-direction: column; }
       .hero-buttons .cta-button { width: 100%; }
       .testimonials-carousel { grid-template-columns: 1fr; }
-      .feature-image { aspect-ratio: 16 / 9; min-height: unset; }
       .trades-grid { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 1rem; }
       .footer-container { grid-template-columns: 1fr; }
     }
@@ -916,7 +921,7 @@
   <header>
     <div class="header-container">
       <div class="logo">
-        <a href="#" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;">
+        <a href="#">
           <img src="Omnix-logo-only.png" alt="Omnix" class="logo-icon">
           <img src="Omnix-name-only.png" alt="Omnix" class="logo-name">
         </a>
