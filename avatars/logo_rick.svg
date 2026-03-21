@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="g3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7B3F00"/>
+      <stop offset="100%" style="stop-color:#C68642"/>
+    </linearGradient>
+    <clipPath id="circle-clip"><circle cx="100" cy="100" r="97"/></clipPath>
+  </defs>
+  <circle cx="100" cy="100" r="100" fill="#5D2E0C"/>
+  <!-- Wood planks clipped to circle -->
+  <g clip-path="url(#circle-clip)">
+    <rect x="3" y="3" width="97" height="28" rx="2" fill="#C68642"/>
+    <rect x="3" y="33" width="97" height="28" rx="2" fill="#A0522D"/>
+    <rect x="3" y="63" width="97" height="28" rx="2" fill="#C68642"/>
+    <rect x="3" y="93" width="97" height="28" rx="2" fill="#A0522D"/>
+    <rect x="3" y="123" width="97" height="28" rx="2" fill="#C68642"/>
+    <rect x="3" y="153" width="97" height="44" rx="2" fill="#A0522D"/>
+    <rect x="102" y="18" width="97" height="28" rx="2" fill="#B8732A"/>
+    <rect x="102" y="48" width="97" height="28" rx="2" fill="#C68642"/>
+    <rect x="102" y="78" width="97" height="28" rx="2" fill="#8B4513"/>
+    <rect x="102" y="108" width="97" height="28" rx="2" fill="#C68642"/>
+    <rect x="102" y="138" width="97" height="28" rx="2" fill="#A0522D"/>
+    <rect x="102" y="168" width="97" height="32" rx="2" fill="#B8732A"/>
+    <!-- Wood grain lines -->
+    <line x1="3" y1="17" x2="100" y2="17" stroke="#7B3F00" stroke-width="1" opacity="0.4"/>
+    <line x1="3" y1="47" x2="100" y2="47" stroke="#5D2E0C" stroke-width="1" opacity="0.4"/>
+    <line x1="102" y1="32" x2="199" y2="32" stroke="#7B3F00" stroke-width="1" opacity="0.4"/>
+  </g>
+  <!-- RF label overlay -->
+  <text x="100" y="113" font-family="Arial Black,sans-serif" font-size="52" font-weight="900" fill="white" text-anchor="middle" opacity="0.85" stroke="#5D2E0C" stroke-width="3">RF</text>
+</svg>

@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Omnix</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --color-primary: #4d9fff;
+      --color-primary-dark: #3a7fd9;
+      --color-secondary: #9b5de5;
+      --color-gradient: linear-gradient(135deg, #4d9fff, #9b5de5);
+      --color-dark: #0d0d1e;
+      --color-dark-light: #161630;
+      --color-white: #ffffff;
+      --color-light-bg: #161630;
+      --color-text: #dde0f0;
+      --color-text-muted: #8888bb;
+      --color-border: #2a2a50;
+      --font-heading: 'Montserrat', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --spacing-unit: 1rem;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-color: var(--color-dark);
+    }
+
+    /* ========== HEADER & NAVIGATION ========== */
+    header {
+      position: sticky;
+      top: 0;
+      background-color: var(--color-dark);
+      color: var(--color-white);
+      padding: 1rem 2rem;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo { display: flex; align-items: center; }
+
+    .logo img.logo-icon { height: 70px; width: auto; display: block; }
+    .logo img.logo-name { height: 28px; width: auto; display: block; margin-left: 8px; }
+
+    nav { display: flex; gap: 2rem; align-items: center; }
+
+    nav a {
+      color: var(--color-white);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover { color: var(--color-primary); }
+
+    nav a.active { color: var(--color-primary); font-weight: 600; }
+
+    .dropdown { position: relative; }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: var(--color-dark-light);
+      border-radius: 8px;
+      min-width: 200px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      margin-top: 0.5rem;
+      overflow: hidden;
+    }
+
+    .dropdown:hover .dropdown-menu { display: block; }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 0.75rem 1.5rem;
+      color: var(--color-white);
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+    }
+
+    .cta-button {
+      background: var(--color-gradient);
+      color: var(--color-white);
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: opacity 0.3s ease, transform 0.2s ease;
+      cursor: pointer;
+      border: none;
+      font-size: 0.95rem;
+    }
+
+    .cta-button:hover { opacity: 0.88; transform: translateY(-2px); }
+
+    /* ========== PAGE HERO ========== */
+    .page-hero {
+      background: radial-gradient(ellipse at top, #1a1040 0%, var(--color-dark) 70%);
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+    }
+
+    .page-hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      font-family: var(--font-heading);
+      color: var(--color-white);
+      margin-bottom: 1rem;
+    }
+
+    .page-hero p {
+      font-size: 1.15rem;
+      color: var(--color-text-muted);
+      max-width: 580px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ========== SHARED SECTION STYLES ========== */
+    .section-container { max-width: 1200px; margin: 0 auto; }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 800;
+      font-family: var(--font-heading);
+      margin-bottom: 3rem;
+      color: var(--color-white);
+    }
+
+    /* ========== OUR PROCESS ========== */
+    .our-process {
+      background-color: var(--color-dark-light);
+      padding: 5rem 2rem;
+    }
+
+    .process-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .process-step {
+      background-color: var(--color-dark);
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .process-number {
+      font-size: 3rem;
+      font-weight: 800;
+      background: var(--color-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+
+    .process-step h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--color-white);
+    }
+
+    .process-step p { color: var(--color-text-muted); font-size: 0.95rem; }
+
+    /* ========== WHY CHOOSE US ========== */
+    .why-choose-us {
+      background-color: var(--color-dark);
+      padding: 5rem 2rem;
+    }
+
+    .reasons-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .reason-card {
+      background-color: var(--color-light-bg);
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .reason-card:hover { transform: translateY(-4px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
+
+    .reason-icon {
+      font-size: 2.5rem;
+      background: var(--color-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+
+    .reason-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; color: var(--color-white); }
+    .reason-card p { color: var(--color-text-muted); font-size: 0.95rem; }
+
+    /* ========== FAQ ========== */
+    .faq {
+      background-color: var(--color-dark-light);
+      padding: 5rem 2rem;
+    }
+
+    .faq-container { max-width: 900px; margin: 0 auto; }
+
+    .faq-item {
+      background-color: var(--color-dark);
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .faq-question {
+      padding: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--color-dark);
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-white);
+      transition: background-color 0.3s ease;
+    }
+
+    .faq-question:hover { background-color: var(--color-dark-light); }
+    .faq-question.active { background: var(--color-gradient); color: var(--color-white); }
+
+    .faq-icon { font-size: 1.2rem; transition: transform 0.3s ease; }
+    .faq-question.active .faq-icon { transform: rotate(180deg); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background-color: var(--color-dark);
+    }
+
+    .faq-answer.active {
+      max-height: 500px;
+      padding: 1.5rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .faq-answer p { color: var(--color-text); line-height: 1.8; margin: 0; }
+
+    /* ========== FINAL CTA ========== */
+    .final-cta {
+      background: radial-gradient(ellipse at top, #1a1040 0%, var(--color-dark) 60%);
+      color: var(--color-white);
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+
+    .final-cta h2 {
+      font-size: 2.5rem;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      margin-bottom: 2rem;
+    }
+
+    .final-cta p {
+      color: rgba(255,255,255,0.75);
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .final-cta .cta-button { padding: 1rem 2.5rem; font-size: 1.05rem; }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background-color: var(--color-dark);
+      color: var(--color-text-muted);
+      padding: 3rem 2rem 1.5rem;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-section h4 { color: var(--color-white); font-size: 1rem; margin-bottom: 1rem; font-weight: 600; }
+
+    .footer-section a {
+      display: block;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      margin-bottom: 0.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover { color: var(--color-primary); }
+
+    .social-icons { display: flex; gap: 1rem; margin-top: 1rem; }
+
+    .social-icons a {
+      display: inline-flex;
+      width: 40px; height: 40px;
+      align-items: center; justify-content: center;
+      background-color: var(--color-dark-light);
+      border-radius: 50%;
+      color: var(--color-primary);
+      text-decoration: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .social-icons a:hover { background-color: var(--color-primary); color: var(--color-dark); }
+
+    .footer-bottom {
+      border-top: 1px solid var(--color-dark-light);
+      padding-top: 2rem;
+      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-bottom a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-bottom a:hover { color: var(--color-primary); }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .page-hero h1 { font-size: 2rem; }
+      .section-title { font-size: 1.8rem; }
+      nav { gap: 1rem; font-size: 0.9rem; }
+      .final-cta h2 { font-size: 1.8rem; }
+    }
+
+    @media (max-width: 480px) {
+      header { padding: 1rem; }
+      .header-container { flex-direction: column; gap: 1rem; }
+      nav { flex-direction: column; gap: 0.5rem; width: 100%; }
+      .footer-container { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER & NAVIGATION -->
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <img src="Omnix-logo-only.png" alt="Omnix" class="logo-icon">
+        <img src="Omnix-name-only.png" alt="Omnix" class="logo-name">
+      </div>
+      <nav>
+        <div class="dropdown">
+          <a href="index.html#products">Products</a>
+          <div class="dropdown-menu">
+            <a href="index.html#functional-website">Functional Website</a>
+            <a href="index.html#review-funnel">5-Star Magic Review Funnel</a>
+            <a href="index.html#missed-calls">Missed Call Text Back</a>
+            <a href="index.html#marketing">One-Click Marketing</a>
+            <a href="index.html#local-seo">Local SEO</a>
+          </div>
+        </div>
+        <a href="pricing.html">Pricing</a>
+        <a href="testimonials.html">Testimonials</a>
+        <a href="index.html#our-work">Our Work</a>
+        <a href="about.html" class="active">About</a>
+        <a href="[LOGIN URL]">Log In</a>
+        <a href="[CONTACT URL]" class="cta-button">Book A Call</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <h1>About Omnix</h1>
+    <p>We built the system we wish existed when we were running a trade business. No fluff, no contracts — just tools that get you more paying customers.</p>
+  </section>
+
+  <!-- OUR PROCESS -->
+  <section class="our-process">
+    <div class="section-container">
+      <h2 class="section-title">Our Process</h2>
+      <div class="process-grid">
+        <div class="process-step">
+          <div class="process-number">1</div>
+          <h3>Demo Call <span style="font-size:0.85rem; font-weight:400; color:var(--color-text-muted);">— 20 min</span></h3>
+          <p>Book a quick call with our team. No pressure, no pitch deck. We listen to your business, show you the system live, and tell you exactly what to expect. You'll know within 20 minutes if Omnix is the right fit.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-number">2</div>
+          <h3>We Build Everything <span style="font-size:0.85rem; font-weight:400; color:var(--color-text-muted);">— 7–10 days</span></h3>
+          <p>Sit back. Our team builds your website, configures your review funnel, sets up missed call texts, and loads your marketing campaigns — all custom to your business. You don't lift a finger.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-number">3</div>
+          <h3>Launch Call <span style="font-size:0.85rem; font-weight:400; color:var(--color-text-muted);">— 25 min</span></h3>
+          <p>We walk you through your live system from start to finish. By the end of this call you'll know exactly how to use every feature — and your pipeline will already be open for business.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section class="why-choose-us">
+    <div class="section-container">
+      <h2 class="section-title">Why Choose Omnix</h2>
+      <div class="reasons-grid">
+        <div class="reason-card">
+          <div class="reason-icon"><i class="fas fa-cube"></i></div>
+          <h3>Simple To Use</h3>
+          <p>If you can send a text, you can run Omnix. No tech background needed — we built this for people who are on the tools, not behind a desk.</p>
+        </div>
+        <div class="reason-card">
+          <div class="reason-icon"><i class="fas fa-dollar-sign"></i></div>
+          <h3>Affordable</h3>
+          <p>One flat monthly rate covers everything. No upsells, no hidden add-ons, no "premium tier" surprises. What you see is what you pay.</p>
+        </div>
+        <div class="reason-card">
+          <div class="reason-icon"><i class="fas fa-handshake"></i></div>
+          <h3>No Contracts</h3>
+          <p>We don't lock you in because we don't need to. The results speak for themselves — stay because it's working, not because you're stuck.</p>
+        </div>
+        <div class="reason-card">
+          <div class="reason-icon"><i class="fas fa-check-circle"></i></div>
+          <h3>No Fluff</h3>
+          <p>We don't sell dashboards, vanity metrics, or features nobody uses. Every tool in Omnix exists for one reason: to get you more paying customers.</p>
+        </div>
+        <div class="reason-card">
+          <div class="reason-icon"><i class="fas fa-chart-line"></i></div>
+          <h3>We Have Proof</h3>
+          <p>Real businesses. Real numbers. Our customers aren't just satisfied — they're growing. Scroll up and read what they're saying in their own words.</p>
+        </div>
+        <div class="reason-card">
+          <div class="reason-icon"><i class="fas fa-sync"></i></div>
+          <h3>Constant Improvements</h3>
+          <p>Omnix never stands still. We push updates, add features, and refine what's working — all without charging you extra or asking you to migrate.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section id="faq" class="faq">
+    <div class="faq-container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>How long does it take to get my system set up?</span>
+          <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+        </button>
+        <div class="faq-answer">
+          <p>We typically have your system set up and ready to go within 7-10 business days of your demo call. This includes building your website, setting up lead management, and configuring your marketing campaigns.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Do I need technical knowledge to use this?</span>
+          <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+        </button>
+        <div class="faq-answer">
+          <p>Not at all! Our system is designed specifically for contractors and business owners, not tech people. We provide comprehensive training and ongoing support to make sure you feel confident using everything.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>What if I'm not happy with the results?</span>
+          <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+        </button>
+        <div class="faq-answer">
+          <p>We offer a satisfaction guarantee. If you're not getting results within the first 30 days, we'll work with you to optimize the system or provide a full refund. We're confident in what we deliver.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>How much does Omnix cost?</span>
+          <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+        </button>
+        <div class="faq-answer">
+          <p>Our pricing starts at [PRICE]/month for everything: website, review management, missed call texts, marketing campaigns, and local SEO support. No hidden fees, no contracts. We can discuss customized pricing based on your specific needs during the demo call.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Can I cancel anytime?</span>
+          <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+        </button>
+        <div class="faq-answer">
+          <p>Yes! We don't believe in long-term contracts that lock you in. You can cancel your subscription anytime without penalty. We're confident you'll love the results, so we don't need to force you to stay.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>What support do you provide?</span>
+          <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+        </button>
+        <div class="faq-answer">
+          <p>You get dedicated support from our team. We provide initial training, ongoing technical support, marketing guidance, and regular check-ins to make sure you're getting the most out of the system.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Do you work with my industry?</span>
+          <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+        </button>
+        <div class="faq-answer">
+          <p>We work with over 20 different industries including landscaping, HVAC, plumbing, electrical, remodeling, roofing, pest control, and many more. Check out our "Industries We Serve" section to see if we work with your business type. Even if you don't see your exact industry listed, we likely work with contractors like you!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <h2>Ready to grow your business with Omnix?</h2>
+    <p>Book a free 20-minute demo. No pressure, no commitment — just a straight look at what Omnix can do for your business.</p>
+    <a href="[CONTACT URL]" class="cta-button">Book Your Demo Call Today</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h4>Omnix</h4>
+        <a href="index.html#products">Products</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="index.html#our-work">Our Work</a>
+        <a href="about.html">About</a>
+      </div>
+      <div class="footer-section">
+        <h4>Support</h4>
+        <a href="mailto:[EMAIL]">[EMAIL]</a>
+        <a href="tel:[PHONE]">[PHONE]</a>
+        <a href="#">Help Center</a>
+        <a href="#">Contact Us</a>
+      </div>
+      <div class="footer-section">
+        <h4>Company</h4>
+        <a href="about.html">About Us</a>
+        <a href="#">Blog</a>
+        <a href="#">Careers</a>
+        <a href="#">Press</a>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="social-icons">
+          <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Omnix. All rights reserved.</p>
+      <div>
+        <a href="#">Terms & Conditions</a> •
+        <a href="#">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleFaq(button) {
+      const isActive = button.classList.contains('active');
+      document.querySelectorAll('.faq-question').forEach(btn => {
+        btn.classList.remove('active');
+        btn.nextElementSibling.classList.remove('active');
+      });
+      if (!isActive) {
+        button.classList.add('active');
+        button.nextElementSibling.classList.add('active');
+      }
+    }
+  </script>
+
+</body>
+</html>

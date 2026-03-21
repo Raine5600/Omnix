@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="g4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a2a4a"/>
+      <stop offset="100%" style="stop-color:#2e5fa3"/>
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="100" fill="url(#g4)"/>
+  <!-- House shape -->
+  <!-- Roof -->
+  <polygon points="100,36 164,88 36,88" fill="#5a9fd4"/>
+  <!-- Chimney -->
+  <rect x="130" y="50" width="14" height="34" fill="#4a8fc4"/>
+  <!-- House body -->
+  <rect x="46" y="88" width="108" height="72" fill="#3d7ab5"/>
+  <!-- Door -->
+  <rect x="84" y="124" width="32" height="36" rx="16" fill="#1a2a4a"/>
+  <!-- Windows -->
+  <rect x="54" y="96" width="28" height="22" rx="4" fill="#a8d4f5" opacity="0.8"/>
+  <rect x="118" y="96" width="28" height="22" rx="4" fill="#a8d4f5" opacity="0.8"/>
+  <!-- Roof shingles detail -->
+  <line x1="100" y1="36" x2="36" y2="88" stroke="#1a2a4a" stroke-width="2" opacity="0.3"/>
+  <line x1="100" y1="36" x2="164" y2="88" stroke="#1a2a4a" stroke-width="2" opacity="0.3"/>
+</svg>

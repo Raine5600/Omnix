@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <clipPath id="c8"><circle cx="100" cy="100" r="97"/></clipPath>
+  </defs>
+  <circle cx="100" cy="100" r="100" fill="#3d1f0a"/>
+  <g clip-path="url(#c8)">
+    <!-- Diamond/rotated tile grid -->
+    <g transform="rotate(45 100 100)">
+      <!-- Row 1 -->
+      <rect x="10" y="10" width="50" height="50" rx="2" fill="#c1440e"/>
+      <rect x="65" y="10" width="50" height="50" rx="2" fill="#e8611a"/>
+      <rect x="120" y="10" width="50" height="50" rx="2" fill="#c1440e"/>
+      <rect x="175" y="10" width="50" height="50" rx="2" fill="#e8611a"/>
+      <!-- Row 2 -->
+      <rect x="10" y="65" width="50" height="50" rx="2" fill="#e8611a"/>
+      <rect x="65" y="65" width="50" height="50" rx="2" fill="#b83c0c"/>
+      <rect x="120" y="65" width="50" height="50" rx="2" fill="#e8611a"/>
+      <rect x="175" y="65" width="50" height="50" rx="2" fill="#c1440e"/>
+      <!-- Row 3 -->
+      <rect x="10" y="120" width="50" height="50" rx="2" fill="#c1440e"/>
+      <rect x="65" y="120" width="50" height="50" rx="2" fill="#e8611a"/>
+      <rect x="120" y="120" width="50" height="50" rx="2" fill="#b83c0c"/>
+      <rect x="175" y="120" width="50" height="50" rx="2" fill="#e8611a"/>
+      <!-- Row 4 -->
+      <rect x="10" y="175" width="50" height="50" rx="2" fill="#e8611a"/>
+      <rect x="65" y="175" width="50" height="50" rx="2" fill="#c1440e"/>
+      <rect x="120" y="175" width="50" height="50" rx="2" fill="#e8611a"/>
+      <rect x="175" y="175" width="50" height="50" rx="2" fill="#b83c0c"/>
+    </g>
+  </g>
+  <!-- SF overlay -->
+  <text x="100" y="115" font-family="Arial Black,sans-serif" font-size="54" font-weight="900" fill="white" text-anchor="middle" opacity="0.9" stroke="#3d1f0a" stroke-width="4">SF</text>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="g7" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6c3483"/>
+      <stop offset="100%" style="stop-color:#a93226"/>
+    </linearGradient>
+    <linearGradient id="g7b" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#e8d5a3"/>
+      <stop offset="100%" style="stop-color:#c4a97a"/>
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="100" fill="url(#g7)"/>
+  <!-- Paintbrush handle (diagonal) -->
+  <rect x="44" y="40" width="18" height="100" rx="9" fill="url(#g7b)" transform="rotate(40 100 100)"/>
+  <!-- Ferrule (metal band) -->
+  <rect x="44" y="40" width="18" height="16" rx="4" fill="#b0b8c8" transform="rotate(40 100 100)"/>
+  <!-- Bristles -->
+  <ellipse cx="137" cy="137" rx="16" ry="22" fill="#e74c3c" transform="rotate(40 137 137)"/>
+  <ellipse cx="137" cy="137" rx="10" ry="18" fill="#c0392b" transform="rotate(40 137 137)"/>
+  <!-- Paint smear / splash -->
+  <ellipse cx="68" cy="148" rx="24" ry="10" fill="#e74c3c" opacity="0.5" transform="rotate(-20 68 148)"/>
+  <circle cx="52" cy="158" r="8" fill="#a93226" opacity="0.4"/>
+  <circle cx="78" cy="162" r="5" fill="#e74c3c" opacity="0.5"/>
+</svg>

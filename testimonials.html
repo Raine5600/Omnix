@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Omnix - Testimonials</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --color-primary: #4d9fff;
+      --color-primary-dark: #3a7fd9;
+      --color-secondary: #9b5de5;
+      --color-gradient: linear-gradient(135deg, #4d9fff, #9b5de5);
+      --color-dark: #0d0d1e;
+      --color-dark-light: #161630;
+      --color-white: #ffffff;
+      --color-text: #dde0f0;
+      --color-text-muted: #8888bb;
+      --color-border: #2a2a50;
+      --font-heading: 'Montserrat', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-color: var(--color-dark);
+    }
+
+    /* ========== NAV ========== */
+    header {
+      position: sticky; top: 0;
+      background-color: var(--color-dark);
+      color: var(--color-white);
+      padding: 1rem 2rem;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    .header-container {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .logo { display: flex; align-items: center; }
+    .logo img.logo-icon { height: 70px; width: auto; display: block; }
+    .logo img.logo-name  { height: 28px; width: auto; display: block; margin-left: 8px; }
+    nav { display: flex; gap: 2rem; align-items: center; }
+    nav a { color: var(--color-white); text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
+    nav a:hover { color: var(--color-primary); }
+    .dropdown { position: relative; }
+    .dropdown-menu {
+      display: none; position: absolute; top: 100%; left: 0;
+      background-color: var(--color-dark-light);
+      border-radius: 8px; min-width: 200px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      margin-top: 0.5rem; overflow: hidden;
+    }
+    .dropdown:hover .dropdown-menu { display: block; }
+    .dropdown-menu a { display: block; padding: 0.75rem 1.5rem; color: var(--color-white); text-decoration: none; transition: background 0.3s; }
+    .dropdown-menu a:hover { background-color: var(--color-primary); color: var(--color-white); }
+    .cta-button {
+      background: var(--color-gradient);
+      color: var(--color-white);
+      padding: 0.75rem 1.5rem; border-radius: 6px;
+      text-decoration: none; font-weight: 600;
+      transition: opacity 0.3s, transform 0.2s;
+      cursor: pointer; border: none; font-size: 0.95rem;
+    }
+    .cta-button:hover { opacity: 0.88; transform: translateY(-2px); }
+
+    /* ========== HERO ========== */
+    .testimonials-hero {
+      background: radial-gradient(ellipse at top, #1a1040 0%, var(--color-dark) 60%);
+      padding: 5rem 2rem 3rem;
+      text-align: center;
+    }
+    .testimonials-hero h1 {
+      font-family: var(--font-heading);
+      font-size: 3rem; font-weight: 800;
+      color: var(--color-white);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .testimonials-hero h1 span {
+      background: var(--color-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .testimonials-hero p {
+      color: var(--color-text-muted);
+      font-size: 1.15rem;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* ========== STATS BAR ========== */
+    .stats-bar {
+      background-color: var(--color-dark-light);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+      padding: 1.5rem 2rem;
+      display: flex; justify-content: center; gap: 4rem;
+      flex-wrap: wrap;
+    }
+    .stat-item { text-align: center; }
+    .stat-number {
+      font-family: var(--font-heading);
+      font-size: 2rem; font-weight: 800;
+      background: var(--color-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ========== TESTIMONIALS GRID ========== */
+    .testimonials-section {
+      padding: 5rem 2rem;
+      background-color: var(--color-dark);
+    }
+    .testimonials-grid {
+      max-width: 1200px; margin: 0 auto;
+      columns: 3;
+      column-gap: 1.5rem;
+    }
+    @media (max-width: 900px) { .testimonials-grid { columns: 2; } }
+    @media (max-width: 580px) { .testimonials-grid { columns: 1; } }
+
+    .t-card {
+      background-color: var(--color-dark-light);
+      border-radius: 14px;
+      padding: 1.75rem;
+      border: 1px solid var(--color-border);
+      margin-bottom: 1.5rem;
+      break-inside: avoid;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .t-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(77,159,255,0.12);
+    }
+    .t-card-header {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .t-avatar {
+      width: 56px; height: 56px; border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--color-dark);
+      border: 2px solid var(--color-border);
+    }
+    .t-avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    /* Logo avatars: square with rounded corners instead of circle */
+    .t-avatar.logo-avatar {
+      border-radius: 10px;
+    }
+    .t-avatar.logo-avatar img {
+      object-fit: contain;
+      background: transparent;
+    }
+    /* Building photo avatars: slightly wider crop */
+    .t-avatar.building-avatar {
+      border-radius: 8px;
+      width: 72px;
+      height: 56px;
+    }
+    .t-meta { flex: 1; }
+    .t-name { font-weight: 700; color: var(--color-white); font-size: 0.95rem; }
+    .t-role { font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.1rem; }
+    .t-stars { color: #fbbf24; font-size: 0.9rem; margin-bottom: 0.75rem; letter-spacing: 0.05em; }
+    .t-quote {
+      font-size: 0.93rem;
+      color: var(--color-text);
+      line-height: 1.75;
+      font-style: italic;
+    }
+
+    /* ========== PROCESS SECTION ========== */
+    .process-section {
+      padding: 5rem 2rem;
+      background-color: var(--color-dark-light);
+    }
+    .process-section h2 {
+      font-family: var(--font-heading);
+      font-size: 2.5rem; font-weight: 800;
+      color: var(--color-white);
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .process-grid {
+      max-width: 1000px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+    }
+    .process-step {
+      background-color: var(--color-dark);
+      border-radius: 14px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+    .process-icon {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--color-gradient);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.25rem;
+      font-size: 1.6rem; color: var(--color-white);
+      font-family: var(--font-heading); font-weight: 800;
+    }
+    .process-step h3 {
+      font-family: var(--font-heading);
+      font-size: 1.2rem; font-weight: 700;
+      color: var(--color-white);
+      margin-bottom: 0.5rem;
+    }
+    .process-step .step-time {
+      font-size: 0.85rem;
+      color: var(--color-primary);
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+    .process-step p {
+      color: var(--color-text-muted);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    /* ========== CTA ========== */
+    .cta-section {
+      background: radial-gradient(ellipse at top, #1a1040 0%, var(--color-dark) 60%);
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+    .cta-section h2 {
+      font-family: var(--font-heading);
+      font-size: 2.5rem; font-weight: 800;
+      color: var(--color-white);
+      margin-bottom: 1rem;
+    }
+    .cta-section p {
+      color: rgba(255,255,255,0.7);
+      font-size: 1.1rem;
+      max-width: 560px;
+      margin: 0 auto 2rem;
+    }
+    .cta-section .cta-button {
+      padding: 1rem 2.5rem; font-size: 1.05rem;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background-color: var(--color-dark);
+      color: var(--color-text-muted);
+      padding: 3rem 2rem 1.5rem;
+    }
+    .footer-container {
+      max-width: 1200px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .footer-section h4 { color: var(--color-white); font-size: 1rem; margin-bottom: 1rem; font-weight: 600; }
+    .footer-section a { display: block; color: var(--color-text-muted); text-decoration: none; margin-bottom: 0.5rem; transition: color 0.3s; }
+    .footer-section a:hover { color: var(--color-primary); }
+    .social-icons { display: flex; gap: 1rem; margin-top: 1rem; }
+    .social-icons a {
+      display: inline-flex; width: 40px; height: 40px;
+      align-items: center; justify-content: center;
+      background-color: var(--color-dark-light);
+      border-radius: 50%; color: var(--color-primary);
+      text-decoration: none; transition: background 0.3s, color 0.3s;
+    }
+    .social-icons a:hover { background-color: var(--color-primary); color: var(--color-white); }
+    .footer-bottom {
+      border-top: 1px solid var(--color-border);
+      padding-top: 2rem; text-align: center;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-bottom a { color: var(--color-text-muted); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+    .footer-bottom a:hover { color: var(--color-primary); }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .testimonials-hero h1 { font-size: 2rem; }
+      nav { gap: 1rem; font-size: 0.9rem; }
+      .stats-bar { gap: 2rem; }
+    }
+    @media (max-width: 480px) {
+      header { padding: 1rem; }
+      .header-container { flex-direction: column; gap: 1rem; }
+      nav { flex-direction: column; gap: 0.5rem; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <img src="Omnix-logo-only.png" alt="Omnix" class="logo-icon">
+        <img src="Omnix-name-only.png" alt="Omnix" class="logo-name">
+      </div>
+      <nav>
+        <div class="dropdown">
+          <a href="index.html#products">Products</a>
+          <div class="dropdown-menu">
+            <a href="index.html#functional-website">Functional Website</a>
+            <a href="index.html#review-funnel">5-Star Magic Review Funnel</a>
+            <a href="index.html#missed-calls">Missed Call Text Back</a>
+            <a href="index.html#marketing">One-Click Marketing</a>
+            <a href="index.html#local-seo">Local SEO</a>
+          </div>
+        </div>
+        <a href="pricing.html">Pricing</a>
+        <a href="testimonials.html" style="color: var(--color-primary);">Testimonials</a>
+        <a href="index.html#our-work">Our Work</a>
+        <a href="about.html">About</a>
+        <a href="[LOGIN URL]">Log In</a>
+        <a href="[CONTACT URL]" class="cta-button">Book A Call</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="testimonials-hero">
+    <h1>The proof is in<br><span>the results.</span></h1>
+    <p>Real contractors. Real growth. See what happens when you put the right system behind your business.</p>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <span class="stat-number">500+</span>
+      <span class="stat-label">Contractors Served</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">4.9★</span>
+      <span class="stat-label">Average Rating</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">7–10</span>
+      <span class="stat-label">Days to Go Live</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">100%</span>
+      <span class="stat-label">Money-Back Guarantee</span>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS GRID -->
+  <section class="testimonials-section">
+    <div class="testimonials-grid">
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar"><img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Adam"></div>
+          <div class="t-meta">
+            <div class="t-name">Adam</div>
+            <div class="t-role">General Contractor</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"Highly recommended — they are here to help us contractors that don't like to deal with the website stuff. It feels like you have a partner looking out for you that's actually helping you succeed."</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar building-avatar"><img src="avatars/building_roofing.png" alt="Dale"></div>
+          <div class="t-meta">
+            <div class="t-name">Dale</div>
+            <div class="t-role">Roofing Contractor</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"I've been working with Omnix for the last few months and it's been absolutely amazing. If you're out there and you need someone that's gonna be there for you — we love working with this team."</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar logo-avatar"><img src="avatars/logo_george.svg" alt="George"></div>
+          <div class="t-meta">
+            <div class="t-name">George</div>
+            <div class="t-role">Painting Contractor</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"The Omnix team did an amazing job on my website. I've been a pain in the butt every now and then but they did it right. Check them out, you won't be disappointed."</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar logo-avatar"><img src="avatars/logo_frank.svg" alt="Frank"></div>
+          <div class="t-meta">
+            <div class="t-name">Frank</div>
+            <div class="t-role">Landscaping Business Owner</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"I would highly recommend going with Omnix — my business has ramped up, literally overnight, and their prices are very affordable. Feel free to reach out to me personally with any questions about them!"</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar"><img src="https://randomuser.me/api/portraits/men/5.jpg" alt="Armando"></div>
+          <div class="t-meta">
+            <div class="t-name">Armando</div>
+            <div class="t-role">General Contractor</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"They are the absolute best at what they do. They built me a new website and within 10 days I got my first unpaid lead! Best money I've spent on my business."</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar"><img src="https://randomuser.me/api/portraits/men/6.jpg" alt="David"></div>
+          <div class="t-meta">
+            <div class="t-name">David</div>
+            <div class="t-role">HVAC Contractor</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"I've seen a significant improvement in my business. Omnix has made my life so much easier!"</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar"><img src="https://randomuser.me/api/portraits/men/7.jpg" alt="Cody"></div>
+          <div class="t-meta">
+            <div class="t-name">Cody</div>
+            <div class="t-role">Plumbing Company</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"If you are looking for someone to get that phone ringing, they're the right fit for you! I'm so happy with them!"</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar"><img src="https://randomuser.me/api/portraits/men/8.jpg" alt="Netane"></div>
+          <div class="t-meta">
+            <div class="t-name">Netane</div>
+            <div class="t-role">Electrical Contractor</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"Nothing but professional and awesome in every way — they are absolutely great to work with."</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar"><img src="https://randomuser.me/api/portraits/men/9.jpg" alt="Ben"></div>
+          <div class="t-meta">
+            <div class="t-name">Ben</div>
+            <div class="t-role">Remodeling Contractor</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"They took our website from basic to very high end, and made getting 5-star Google reviews easy with their review funnel. I can't say enough good things — thank you!"</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar logo-avatar"><img src="avatars/logo_rick.svg" alt="Rick"></div>
+          <div class="t-meta">
+            <div class="t-name">Rick</div>
+            <div class="t-role">Flooring Company</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"Our company finally has the web presence it needs and our sales and profits have grown significantly. We look forward to working with them for many years to come!"</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar"><img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Wendy"></div>
+          <div class="t-meta">
+            <div class="t-name">Wendy</div>
+            <div class="t-role">Cleaning Services</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"Getting 5-star reviews has always given me anxiety. The Omnix team took all that away and I've seen a significant increase in business since I started working with them."</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar logo-avatar"><img src="avatars/logo_luckie.svg" alt="Luckie"></div>
+          <div class="t-meta">
+            <div class="t-name">Luckie</div>
+            <div class="t-role">Landscaping Business Owner</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"Their business marketing systems have helped us a lot. Anytime I need anything I can always give them a call. They're super helpful with everything they do — I'd recommend them to anybody."</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar"><img src="https://randomuser.me/api/portraits/men/12.jpg" alt="Lopaka"></div>
+          <div class="t-meta">
+            <div class="t-name">Lopaka</div>
+            <div class="t-role">General Contractor</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"Before Omnix I was paying $1,500/month with another service that just wasn't working for me. Omnix is super affordable and they do a fantastic job!"</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar building-avatar"><img src="avatars/building_hvac.png" alt="Emannuel"></div>
+          <div class="t-meta">
+            <div class="t-name">Emannuel</div>
+            <div class="t-role">HVAC Contractor</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"Fantastic product. I use them for my website and my CRM. Anytime I have any questions the team is always available. I highly recommend Omnix."</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar"><img src="https://randomuser.me/api/portraits/men/14.jpg" alt="Adam M."></div>
+          <div class="t-meta">
+            <div class="t-name">Adam M.</div>
+            <div class="t-role">Roofing Contractor</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"It's been great — all I needed was one sale a month to pay for the service. Since I signed up I've gotten quite a bit more than that. I would recommend them to anyone!"</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar building-avatar"><img src="avatars/building_painter.png" alt="Andrew"></div>
+          <div class="t-meta">
+            <div class="t-name">Andrew</div>
+            <div class="t-role">Painting Contractor</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"Since we started working with Omnix, our website has been on point. These guys really know what they're doing and I highly recommend them!"</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar"><img src="https://randomuser.me/api/portraits/men/16.jpg" alt="James"></div>
+          <div class="t-meta">
+            <div class="t-name">James</div>
+            <div class="t-role">Electrical Contractor</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"After going through 2–3 other providers I finally found someone that told me the truth. Really easy to work with and very respectable. I would recommend them to anyone!"</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar building-avatar"><img src="avatars/building_plumber.png" alt="Manny"></div>
+          <div class="t-meta">
+            <div class="t-name">Manny</div>
+            <div class="t-role">Plumbing Company</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"Ever since they implemented the new website and landing pages, it's been nothing but great and our conversion has gone way up. We started getting calls almost immediately."</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar"><img src="https://randomuser.me/api/portraits/women/2.jpg" alt="Mariah"></div>
+          <div class="t-meta">
+            <div class="t-name">Mariah</div>
+            <div class="t-role">Interior Design Contractor</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"They were incredibly helpful and made everything super smooth and efficient. We highly recommend them to anyone that needs top-notch web services!"</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar"><img src="https://randomuser.me/api/portraits/men/28.jpg" alt="Mason"></div>
+          <div class="t-meta">
+            <div class="t-name">Mason</div>
+            <div class="t-role">General Contractor</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"They made me a brand new website — super professional — and it's been absolutely amazing. I cannot say enough good things. It turned those hundreds of viewers into hundreds of clients!"</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar building-avatar"><img src="avatars/building_landscaping.png" alt="Matt"></div>
+          <div class="t-meta">
+            <div class="t-name">Matt</div>
+            <div class="t-role">Landscaping Business Owner</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"At first I was skeptical, but it turns out they're just a really good company at a really good price. I would recommend them to anyone!"</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar"><img src="https://randomuser.me/api/portraits/men/20.jpg" alt="Ryan"></div>
+          <div class="t-meta">
+            <div class="t-name">Ryan</div>
+            <div class="t-role">HVAC Contractor</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"They've made it so easy with all their automations and the awesome website. I can't thank them enough — you should all definitely check them out."</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar"><img src="https://randomuser.me/api/portraits/men/21.jpg" alt="Scott"></div>
+          <div class="t-meta">
+            <div class="t-name">Scott</div>
+            <div class="t-role">Electrician</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"They really got everything going well. I'm getting organic leads now that don't cost me a penny. I would recommend them to anyone!"</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar logo-avatar"><img src="avatars/logo_zach.svg" alt="Zach"></div>
+          <div class="t-meta">
+            <div class="t-name">Zach</div>
+            <div class="t-role">Roofing Contractor</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"Big shoutout to the Omnix team for helping me with my website and getting me more leads. I would recommend them to anyone!"</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar logo-avatar"><img src="avatars/logo_andrewp.svg" alt="Andrew P."></div>
+          <div class="t-meta">
+            <div class="t-name">Andrew P.</div>
+            <div class="t-role">General Contractor</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"If you're looking to take your business to the next level, definitely reach out to the Omnix team. They are great!"</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar logo-avatar"><img src="avatars/logo_tom.svg" alt="Tom"></div>
+          <div class="t-meta">
+            <div class="t-name">Tom</div>
+            <div class="t-role">Remodeling Contractor</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"If you're looking for someone to help your business grow, this is the team. I'm getting about 10 times the value of what I'm spending!"</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar logo-avatar"><img src="avatars/logo_tommy.svg" alt="Tommy"></div>
+          <div class="t-meta">
+            <div class="t-name">Tommy</div>
+            <div class="t-role">Painting Contractor</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"I was impressed and shocked by what they included while only charging so little. They've gone above and beyond, and I would highly recommend them!"</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar logo-avatar"><img src="avatars/logo_steve.svg" alt="Steve"></div>
+          <div class="t-meta">
+            <div class="t-name">Steve</div>
+            <div class="t-role">Flooring Company</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"I've been through the ringer trying to find a legit company. I can tell you — Omnix is the truth. Spot on, communication is amazing, give these guys a try."</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar logo-avatar"><img src="avatars/logo_jason.svg" alt="Jason"></div>
+          <div class="t-meta">
+            <div class="t-name">Jason</div>
+            <div class="t-role">HVAC Contractor</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"Omnix did a great job on our website. It makes it super easy for our customers to leave us their information. If you need a good website, give Omnix a call."</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar"><img src="https://randomuser.me/api/portraits/women/3.jpg" alt="Jeslin"></div>
+          <div class="t-meta">
+            <div class="t-name">Jeslin</div>
+            <div class="t-role">Cleaning Services</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"They re-did our website and they are AMAZING at getting you 5-star Google reviews. If you're looking to get your business found on Google, you need to give Omnix a try. We got 5 Google reviews within 22 hours — that's incredible!"</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2>Ready to see results like these?</h2>
+    <p>Book a free 20-minute demo. No pressure, no commitment — just a straight look at what Omnix can do for your business.</p>
+    <a href="[CONTACT URL]" class="cta-button">Book Your Demo Call Today</a>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process-section">
+    <h2>What working with us looks like</h2>
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="process-icon">1</div>
+        <h3>Demo Call</h3>
+        <p class="step-time">20 minutes</p>
+        <p>Yeah, it's technically a sales call — but we don't do pushy. We'll answer every question, show you the platform live with real client accounts, and tell you straight whether Omnix is the right fit for your business.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-icon">2</div>
+        <h3>We Build Your System</h3>
+        <p class="step-time">7–10 days</p>
+        <p>Fill out a quick onboarding form with your business details. From there, our team builds your website and full marketing system from scratch. You don't write a single line of copy or touch a single setting.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-icon">3</div>
+        <h3>Launch Call</h3>
+        <p class="step-time">25 minutes</p>
+        <p>We walk you through your live system, answer any questions, and show you how everything works. Spoiler: it mostly comes down to pressing two buttons. By the end of this call, you're open for business.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h4>Omnix</h4>
+        <a href="index.html#products">Products</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="index.html#our-work">Our Work</a>
+        <a href="about.html">About</a>
+      </div>
+      <div class="footer-section">
+        <h4>Support</h4>
+        <a href="mailto:[EMAIL]">[EMAIL]</a>
+        <a href="tel:[PHONE]">[PHONE]</a>
+        <a href="#">Help Center</a>
+        <a href="#">Contact Us</a>
+      </div>
+      <div class="footer-section">
+        <h4>Company</h4>
+        <a href="#">About Us</a>
+        <a href="#">Blog</a>
+        <a href="#">Careers</a>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="social-icons">
+          <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Omnix. All rights reserved.</p>
+      <div>
+        <a href="#">Terms &amp; Conditions</a> &bull;
+        <a href="#">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

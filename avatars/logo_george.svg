@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c0392b"/>
+      <stop offset="100%" style="stop-color:#e67e22"/>
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="100" fill="url(#g1)"/>
+  <!-- Paint roller handle -->
+  <rect x="112" y="55" width="12" height="70" rx="6" fill="white" opacity="0.95"/>
+  <!-- Roller frame arm -->
+  <rect x="60" y="55" width="58" height="10" rx="5" fill="white" opacity="0.95"/>
+  <!-- Roller drum -->
+  <rect x="52" y="62" width="28" height="44" rx="8" fill="white" opacity="0.9"/>
+  <!-- Roller texture lines -->
+  <rect x="58" y="67" width="4" height="34" rx="2" fill="#e67e22" opacity="0.6"/>
+  <rect x="66" y="67" width="4" height="34" rx="2" fill="#e67e22" opacity="0.6"/>
+  <!-- Paint drip -->
+  <ellipse cx="66" cy="112" rx="12" ry="6" fill="white" opacity="0.7"/>
+  <path d="M62,118 Q64,134 66,138 Q68,134 70,118 Z" fill="white" opacity="0.7"/>
+  <!-- Company label -->
+  <text x="100" y="158" font-family="Arial Black,sans-serif" font-size="20" font-weight="900" fill="white" text-anchor="middle" opacity="0.9">PAINTING</text>
+</svg>

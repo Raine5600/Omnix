@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Omnix - Software for [CITY/REGION]</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /*
+    ==========================================
+    CUSTOMIZATION GUIDE
+    ==========================================
+
+    BRAND COLORS: Edit the CSS variables below in the :root {} section
+
+    COMPANY NAME: Already set to "Omnix" throughout the file.
+
+    REMAINING PLACEHOLDERS TO FILL IN:
+    - The Next Generation          → Your main headline
+    - Welcome       → Your subheadline
+    - [CONTACT URL]      → Your contact/booking page URL
+    - [LOGIN URL]        → Your app/portal login URL
+    - [PHONE]            → Your phone number
+    - [EMAIL]            → Your email address
+    - [PRICE]            → Your monthly price
+    - [CITY/REGION]      → Your service area
+
+    LOGO:
+    - Save your logo as "omnix-logo.png" in the same folder as this HTML file
+    - It is already referenced as <img src="omnix-logo.png"> in the nav
+
+    IMAGES TO REPLACE:
+    - Feature demos: Replace [ PRODUCT DEMO GIF ] divs with your GIF/video
+    - Testimonial avatars: Replace placeholder circles with real photos
+    - Trade category images: Replace colored boxes with real images
+
+    ==========================================
+    */
+
+    :root {
+      --color-primary: #4d9fff;
+      --color-primary-dark: #3a7fd9;
+      --color-secondary: #9b5de5;
+      --color-gradient: linear-gradient(135deg, #4d9fff, #9b5de5);
+      --color-dark: #0d0d1e;
+      --color-dark-light: #161630;
+      --color-white: #ffffff;
+      --color-light-bg: #161630;
+      --color-text: #dde0f0;
+      --color-text-muted: #8888bb;
+      --color-border: #2a2a50;
+      --font-heading: 'Montserrat', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --spacing-unit: 1rem;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-color: var(--color-dark);
+    }
+
+    /* ========== HEADER & NAVIGATION ========== */
+    header {
+      position: sticky;
+      top: 0;
+      background-color: var(--color-dark);
+      color: var(--color-white);
+      padding: 1rem 2rem;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img.logo-icon {
+      height: 70px;
+      width: auto;
+      display: block;
+    }
+
+    .logo img.logo-name {
+      height: 28px;
+      width: auto;
+      display: block;
+      margin-left: 8px;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--color-white);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--color-primary);
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: var(--color-dark-light);
+      border-radius: 8px;
+      min-width: 200px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      margin-top: 0.5rem;
+      overflow: hidden;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 0.75rem 1.5rem;
+      color: var(--color-white);
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+    }
+
+    .cta-button {
+      background: var(--color-gradient);
+      color: var(--color-white);
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: opacity 0.3s ease, transform 0.2s ease;
+      cursor: pointer;
+      border: none;
+      font-size: 0.95rem;
+    }
+
+    .cta-button:hover {
+      opacity: 0.88;
+      transform: translateY(-2px);
+    }
+
+    /* ========== HERO SECTION ========== */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      color: var(--color-white);
+      padding: 6rem 2rem;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+    }
+
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 8, 25, 0.10);
+      z-index: 1;
+    }
+
+    .hero-container {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      font-family: var(--font-heading);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: #ccc;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-buttons .cta-button {
+      padding: 1rem 2rem;
+      font-size: 1rem;
+    }
+
+    .hero-buttons .secondary-button {
+      background: transparent;
+      border: 2px solid var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    .hero-buttons .secondary-button:hover {
+      background: var(--color-gradient);
+      border-color: transparent;
+      color: var(--color-white);
+    }
+
+    .ratings {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .rating-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .rating-badge .stars {
+      color: var(--color-primary);
+      font-size: 0.9rem;
+    }
+
+    .rating-badge p {
+      font-size: 0.85rem;
+      color: #999;
+      margin: 0;
+    }
+
+    /* ========== TESTIMONIALS SECTION ========== */
+    .testimonials {
+      background-color: var(--color-dark);
+      padding: 4rem 2rem;
+    }
+
+    .section-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 800;
+      font-family: var(--font-heading);
+      margin-bottom: 3rem;
+      color: var(--color-white);
+    }
+
+    .testimonials-carousel {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .testimonial-card {
+      background-color: var(--color-light-bg);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .stars {
+      color: var(--color-primary);
+      margin-bottom: 1rem;
+    }
+
+    .testimonial-text {
+      font-size: 0.95rem;
+      color: var(--color-text);
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .testimonial-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--color-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-white);
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .testimonial-name {
+      font-weight: 600;
+      color: var(--color-white);
+    }
+
+    .testimonial-role {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+    }
+
+    /* ========== FEATURE SECTIONS ========== */
+    .feature-section {
+      padding: 4rem 2rem;
+      background-color: var(--color-dark);
+    }
+
+    .feature-section:nth-child(even) {
+      background-color: var(--color-dark-light);
+    }
+
+    .feature-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .feature-container.reverse {
+      direction: rtl;
+    }
+
+    .feature-container.reverse > * {
+      direction: ltr;
+    }
+
+    .feature-image {
+      background-color: #1e1e3a;
+      border-radius: 12px;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .feature-image video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .feature-content h2 {
+      font-size: 2rem;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--color-white);
+    }
+
+    .feature-content p {
+      font-size: 1rem;
+      color: var(--color-text);
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+
+    .feature-checklist {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .feature-checklist li {
+      padding: 0.75rem 0;
+      padding-left: 2rem;
+      position: relative;
+      color: var(--color-text);
+    }
+
+    .feature-checklist li:before {
+      content: "\2713";
+      position: absolute;
+      left: 0;
+      top: 0.85rem;
+      color: var(--color-primary);
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .feature-checklist li strong {
+      display: block;
+      color: var(--color-white);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .feature-checklist li span {
+      display: block;
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* ========== WHO WE SERVE ========== */
+    .who-we-serve {
+      background-color: var(--color-dark);
+      padding: 4rem 2rem;
+    }
+
+    .trades-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .trade-card {
+      background-color: var(--color-light-bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .trade-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .trade-icon {
+      font-size: 2.5rem;
+      color: var(--color-primary);
+      margin-bottom: 1rem;
+    }
+
+    .trade-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-white);
+      margin: 0;
+    }
+
+    /* ========== OUR PROCESS ========== */
+    .our-process {
+      background-color: var(--color-dark-light);
+      padding: 4rem 2rem;
+    }
+
+    .process-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .process-step {
+      background-color: var(--color-dark);
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .process-number {
+      font-size: 3rem;
+      font-weight: 800;
+      background: var(--color-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+
+    .process-step h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--color-white);
+    }
+
+    .process-step p {
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* ========== WHY CHOOSE US ========== */
+    .why-choose-us {
+      background-color: var(--color-dark);
+      padding: 4rem 2rem;
+    }
+
+    .reasons-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .reason-card {
+      background-color: var(--color-light-bg);
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .reason-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .reason-icon {
+      font-size: 2.5rem;
+      background: var(--color-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+
+    .reason-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--color-white);
+    }
+
+    .reason-card p {
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* ========== FAQ SECTION ========== */
+    .faq {
+      background-color: var(--color-dark-light);
+      padding: 4rem 2rem;
+    }
+
+    .faq-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background-color: var(--color-dark);
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .faq-question {
+      padding: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--color-dark);
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-white);
+      transition: background-color 0.3s ease;
+    }
+
+    .faq-question:hover {
+      background-color: var(--color-dark-light);
+    }
+
+    .faq-question.active {
+      background: var(--color-gradient);
+      color: var(--color-white);
+    }
+
+    .faq-icon {
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-question.active .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background-color: var(--color-dark);
+    }
+
+    .faq-answer.active {
+      max-height: 500px;
+      padding: 1.5rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .faq-answer p {
+      color: var(--color-text);
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    /* ========== CTA SECTION ========== */
+    .final-cta {
+      background: radial-gradient(ellipse at top, #1a1040 0%, var(--color-dark) 60%);
+      color: var(--color-white);
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .final-cta h2 {
+      font-size: 2.5rem;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      margin-bottom: 2rem;
+    }
+
+    .final-cta .cta-button {
+      padding: 1rem 2.5rem;
+      font-size: 1.05rem;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background-color: var(--color-dark);
+      color: var(--color-text-muted);
+      padding: 3rem 2rem 1.5rem;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-section h4 {
+      color: var(--color-white);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .footer-section a {
+      display: block;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      margin-bottom: 0.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+      color: var(--color-primary);
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-icons a {
+      display: inline-flex;
+      width: 40px;
+      height: 40px;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--color-dark-light);
+      border-radius: 50%;
+      color: var(--color-primary);
+      text-decoration: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      background-color: var(--color-primary);
+      color: var(--color-dark);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--color-dark-light);
+      padding-top: 2rem;
+      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-bottom a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-bottom a:hover {
+      color: var(--color-primary);
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+      }
+
+      .feature-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .trades-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      }
+
+      nav {
+        gap: 1rem;
+        font-size: 0.9rem;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .ratings {
+        gap: 1.5rem;
+      }
+
+      .final-cta h2 {
+        font-size: 1.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 1rem;
+      }
+
+      .header-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+      }
+
+      .hero {
+        padding: 3rem 1rem;
+      }
+
+      .hero h1 {
+        font-size: 1.5rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .hero-buttons .cta-button {
+        width: 100%;
+      }
+
+      .testimonials-carousel {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-image {
+        aspect-ratio: auto;
+        min-height: 300px;
+      }
+
+      .trades-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 1rem;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER & NAVIGATION -->
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <img src="Omnix-logo-only.png" alt="Omnix" class="logo-icon">
+        <img src="Omnix-name-only.png" alt="Omnix" class="logo-name">
+      </div>
+      <nav>
+        <div class="dropdown">
+          <a href="#products">Products</a>
+          <div class="dropdown-menu">
+            <a href="#functional-website">Functional Website</a>
+            <a href="#review-funnel">5-Star Magic Review Funnel</a>
+            <a href="#missed-calls">Missed Call Text Back</a>
+            <a href="#marketing">One-Click Marketing</a>
+            <a href="#local-seo">Local SEO</a>
+          </div>
+        </div>
+        <a href="pricing.html">Pricing</a>
+        <a href="testimonials.html">Testimonials</a>
+        <a href="#our-work">Our Work</a>
+        <a href="about.html">About</a>
+        <a href="[LOGIN URL]">Log In</a>
+        <a href="[CONTACT URL]" class="cta-button">Book A Call</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <video class="hero-video" autoplay muted loop playsinline src="Swirl.mp4"></video>
+    <div class="hero-overlay"></div>
+    <div class="hero-container">
+      <h1>The Next Generation</h1>
+      <p>Welcome</p>
+      <div class="hero-buttons">
+        <a href="[CONTACT URL]" class="cta-button">Schedule Demo</a>
+        <a href="#testimonials" class="cta-button secondary-button">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.querySelector('.hero-video').playbackRate = 0.6;
+  </script>
+
+  <!-- TESTIMONIALS SECTION -->
+  <section id="testimonials" class="testimonials">
+    <div class="section-container">
+      <h2 class="section-title">What Our Customers Say</h2>
+      <div class="testimonials-carousel">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"Omnix completely transformed how we manage leads. We went from missing calls to converting them into jobs. The system is so easy to use!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">JD</div>
+            <div>
+              <div class="testimonial-name">John D.</div>
+              <div class="testimonial-role">Landscaping Business Owner</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"The review funnel has been a game-changer for our business. We're getting 5-star reviews consistently and it's helping us stand out from competitors."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">SM</div>
+            <div>
+              <div class="testimonial-name">Sarah M.</div>
+              <div class="testimonial-role">HVAC Contractor</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"I've tried other systems before. This one actually delivers results. My lead conversion has increased by 40% in just three months!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">RK</div>
+            <div>
+              <div class="testimonial-name">Robert K.</div>
+              <div class="testimonial-role">Plumbing Company</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"Finally, a solution that actually works. The marketing campaigns save me so much time and generate qualified leads. Highly recommend!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">EM</div>
+            <div>
+              <div class="testimonial-name">Emma M.</div>
+              <div class="testimonial-role">Remodeling Contractor</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"The support team is incredible. They helped us set everything up perfectly. Now we're getting consistent high-quality leads!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">MJ</div>
+            <div>
+              <div class="testimonial-name">Mike J.</div>
+              <div class="testimonial-role">Roofing Specialist</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"Best decision for our business. No more guessing about what works. The system is data-driven and the results speak for themselves."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">LT</div>
+            <div>
+              <div class="testimonial-name">Lisa T.</div>
+              <div class="testimonial-role">Electrician</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE 1: FUNCTIONAL WEBSITE -->
+  <section id="functional-website" class="feature-section">
+    <div class="section-container">
+      <div class="feature-container">
+        <div class="feature-image"><video autoplay muted loop playsinline src="Grok1.mp4"></video></div>
+        <div class="feature-content">
+          <h2>Functional Website</h2>
+          <p>Your customers are searching for you online right now. Our functional websites are built to showcase your best work, display customer reviews, and convert visitors into calls and appointments.</p>
+          <ul class="feature-checklist">
+            <li><strong>Get Found Online</strong><span>Your next customer is searching right now. Omnix puts your business in front of them before your competitors even load.</span></li>
+            <li><strong>Showcase Your Reviews</strong><span>Turn your best feedback into your most powerful sales tool — reviews front and center, exactly where buyers look.</span></li>
+            <li><strong>Mobile Friendly</strong><span>Over 60% of searches happen on phones. Your Omnix site looks flawless on every screen, every time, without any extra effort.</span></li>
+            <li><strong>Optimized for Local Search</strong><span>Every site we build has local SEO baked in from day one — no plugins, no guessing, no hidden add-ons.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE 2: 5-STAR REVIEW FUNNEL -->
+  <section id="review-funnel" class="feature-section">
+    <div class="section-container">
+      <div class="feature-container reverse">
+        <div class="feature-image">[ PRODUCT DEMO GIF ]</div>
+        <div class="feature-content">
+          <h2>5-Star Magic Review Funnel</h2>
+          <p>Let your happy customers do the marketing. Our review funnel automatically asks satisfied customers for reviews while they're still excited about your work. Bad reviews? They go to you privately, so you can fix the issue before it becomes public.</p>
+          <ul class="feature-checklist">
+            <li><strong>5-Star Reviews Only</strong><span>Our smart funnel tilts the odds in your favor. Five stars, by design — every single time.</span></li>
+            <li><strong>Automatic Follow-Up Reminders</strong><span>"Sure, I'll leave a review" — then life happens. Omnix follows up automatically until it's actually done.</span></li>
+            <li><strong>Ask For Reviews In One Click</strong><span>Simple enough for anyone. Tap once, request sent. If you're ever confused, we've failed — and we take that seriously.</span></li>
+            <li><strong>Stop Worrying About Bad Reviews</strong><span>Unhappy customer? We route them to you privately so you can resolve it before it ever goes public.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE 3: MISSED CALL TEXT BACK -->
+  <section id="missed-calls" class="feature-section">
+    <div class="section-container">
+      <div class="feature-container">
+        <div class="feature-image">[ PRODUCT DEMO GIF ]</div>
+        <div class="feature-content">
+          <h2>Missed Call Text Back</h2>
+          <p>No more lost leads from missed calls. When someone calls and you can't pick up, they instantly get a text message with your information. You stay connected to every potential customer, 24/7.</p>
+          <ul class="feature-checklist">
+            <li><strong>Stand Out From Competition</strong><span>Most businesses let missed calls disappear into voicemail. Omnix turns every missed call into an instant follow-up — automatically.</span></li>
+            <li><strong>No More Lost Leads</strong><span>A missed call is a missed opportunity. We make sure every caller hears back within seconds, even when you're in the middle of a job.</span></li>
+            <li><strong>Show Customers You Care</strong><span>An instant response tells people you value their time. That first impression wins jobs before you've said a single word.</span></li>
+            <li><strong>Be Available 24/7</strong><span>Your business doesn't sleep with Omnix. Every call, every hour, gets acknowledged — day or night, weekday or weekend.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE 4: ONE-CLICK MARKETING CAMPAIGNS -->
+  <section id="marketing" class="feature-section">
+    <div class="section-container">
+      <div class="feature-container reverse">
+        <div class="feature-image">[ PRODUCT DEMO GIF ]</div>
+        <div class="feature-content">
+          <h2>One-Click Marketing Campaigns</h2>
+          <p>Marketing shouldn't be complicated. Our done-for-you campaigns let you launch referral campaigns, re-engage past customers, and build lasting relationships with just one click.</p>
+          <ul class="feature-checklist">
+            <li><strong>Done For You</strong><span>No copywriters, no ad agencies, no guesswork. Omnix pre-builds your campaigns so all you have to do is press go.</span></li>
+            <li><strong>Referral Campaigns</strong><span>Your happiest customers know more people just like them. One click turns word-of-mouth into a repeatable, scalable system.</span></li>
+            <li><strong>Return Customer Campaigns</strong><span>Past customers are your easiest sale. Omnix re-engages them at exactly the right moment to book again.</span></li>
+            <li><strong>Marketing At Your Fingertips</strong><span>A full marketing engine in your pocket. Launch campaigns, track results, and grow your business — all from one place.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE 5: LOCAL SEO -->
+  <section id="local-seo" class="feature-section">
+    <div class="section-container">
+      <div class="feature-container">
+        <div class="feature-image">[ PRODUCT DEMO GIF ]</div>
+        <div class="feature-content">
+          <h2>Local SEO</h2>
+          <p>Get found by the right customers in your area. Our local SEO system brings qualified leads directly to you, organically. Stop paying for unqualified leads and start attracting customers actively searching for your services.</p>
+          <ul class="feature-checklist">
+            <li><strong>Qualified Leads</strong><span>Forget tire-kickers. Local SEO brings in people who are already searching for exactly what you offer — ready to buy.</span></li>
+            <li><strong>Stop Paying For Unqualified Leads</strong><span>Every dollar invested in Omnix SEO works harder than paid ads because the intent is already there when they find you.</span></li>
+            <li><strong>Organic Acquisition System</strong><span>We build a compounding pipeline that grows stronger over time — not a faucet you have to keep paying to turn on.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO WE SERVE -->
+  <section id="our-work" class="who-we-serve">
+    <div class="section-container">
+      <h2 class="section-title">Industries We Serve</h2>
+      <div class="trades-grid">
+        <div class="trade-card">
+          <div class="trade-icon"><i class="fas fa-leaf"></i></div>
+          <h3>Landscaping</h3>
+        </div>
+        <div class="trade-card">
+          <div class="trade-icon"><i class="fas fa-hammer"></i></div>
+          <h3>Remodeling</h3>
+        </div>
+        <div class="trade-card">
+          <div class="trade-icon"><i class="fas fa-spray-can"></i></div>
+          <h3>Pressure Washing</h3>
+        </div>
+        <div class="trade-card">
+          <div class="trade-icon"><i class="fas fa-bug"></i></div>
+          <h3>Pest Control</h3>
+        </div>
+        <div class="trade-card">
+          <div class="trade-icon"><i class="fas fa-boxes"></i></div>
+          <h3>Moving Companies</h3>
+        </div>
+        <div class="trade-card">
+          <div class="trade-icon"><i class="fas fa-home"></i></div>
+          <h3>Flooring & Carpet</h3>
+        </div>
+        <div class="trade-card">
+          <div class="trade-icon"><i class="fas fa-house-damage"></i></div>
+          <h3>Roofing</h3>
+        </div>
+        <div class="trade-card">
+          <div class="trade-icon"><i class="fas fa-fan"></i></div>
+          <h3>HVAC</h3>
+        </div>
+        <div class="trade-card">
+          <div class="trade-icon"><i class="fas fa-wrench"></i></div>
+          <h3>Plumbing</h3>
+        </div>
+        <div class="trade-card">
+          <div class="trade-icon"><i class="fas fa-bolt"></i></div>
+          <h3>Electrician</h3>
+        </div>
+        <div class="trade-card">
+          <div class="trade-icon"><i class="fas fa-tools"></i></div>
+          <h3>Handyman</h3>
+        </div>
+        <div class="trade-card">
+          <div class="trade-icon"><i class="fas fa-paint-roller"></i></div>
+          <h3>Painters</h3>
+        </div>
+        <div class="trade-card">
+          <div class="trade-icon"><i class="fas fa-wood"></i></div>
+          <h3>Decks & Patios</h3>
+        </div>
+        <div class="trade-card">
+          <div class="trade-icon"><i class="fas fa-siding"></i></div>
+          <h3>Siding</h3>
+        </div>
+        <div class="trade-card">
+          <div class="trade-icon"><i class="fas fa-water"></i></div>
+          <h3>Pool Construction</h3>
+        </div>
+        <div class="trade-card">
+          <div class="trade-icon"><i class="fas fa-road"></i></div>
+          <h3>Paving</h3>
+        </div>
+        <div class="trade-card">
+          <div class="trade-icon"><i class="fas fa-mountain"></i></div>
+          <h3>Hardscaping</h3>
+        </div>
+        <div class="trade-card">
+          <div class="trade-icon"><i class="fas fa-window-maximize"></i></div>
+          <h3>Windows & Doors</h3>
+        </div>
+        <div class="trade-card">
+          <div class="trade-icon"><i class="fas fa-building"></i></div>
+          <h3>General Contractors</h3>
+        </div>
+        <div class="trade-card">
+          <div class="trade-icon"><i class="fas fa-dog"></i></div>
+          <h3>Dog Groomers</h3>
+        </div>
+        <div class="trade-card">
+          <div class="trade-icon"><i class="fas fa-tree"></i></div>
+          <h3>Tree Service</h3>
+        </div>
+        <div class="trade-card">
+          <div class="trade-icon"><i class="fas fa-house-user"></i></div>
+          <h3>Home Builders</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR PROCESS -->
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h4>Omnix</h4>
+        <a href="#products">Products</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="#our-work">Our Work</a>
+        <a href="about.html">About</a>
+      </div>
+      <div class="footer-section">
+        <h4>Support</h4>
+        <a href="mailto:[EMAIL]">[EMAIL]</a>
+        <a href="tel:[PHONE]">[PHONE]</a>
+        <a href="#">Help Center</a>
+        <a href="#">Contact Us</a>
+      </div>
+      <div class="footer-section">
+        <h4>Company</h4>
+        <a href="about.html">About Us</a>
+        <a href="#">Blog</a>
+        <a href="#">Careers</a>
+        <a href="#">Press</a>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="social-icons">
+          <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Omnix. All rights reserved.</p>
+      <div>
+        <a href="#">Terms & Conditions</a> •
+        <a href="#">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // FAQ Accordion Functionality
+    function toggleFaq(button) {
+      const isActive = button.classList.contains('active');
+
+      // Close all other FAQs
+      document.querySelectorAll('.faq-question').forEach(btn => {
+        btn.classList.remove('active');
+        btn.nextElementSibling.classList.remove('active');
+      });
+
+      // Toggle current FAQ
+      if (!isActive) {
+        button.classList.add('active');
+        button.nextElementSibling.classList.add('active');
+      }
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href !== '#' && document.querySelector(href)) {
+          e.preventDefault();
+          document.querySelector(href).scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
