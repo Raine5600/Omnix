@@ -87,6 +87,8 @@
       padding: 1rem 2rem;
       z-index: 1000;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      /* needed so mobile nav dropdown is positioned relative to header */
+      position: sticky;
     }
 
     .header-container {
@@ -767,96 +769,142 @@
       color: var(--color-primary);
     }
 
+    /* ========== HAMBURGER BUTTON ========== */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      z-index: 1100;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--color-white);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
     /* ========== RESPONSIVE ========== */
     @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 2rem;
-      }
-
-      .hero p {
-        font-size: 1rem;
-      }
-
-      .section-title {
-        font-size: 1.8rem;
-      }
-
-      .feature-container {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-
-      .trades-grid {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      .hamburger {
+        display: flex;
       }
 
       nav {
-        gap: 1rem;
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--color-dark);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        padding: 0.5rem 0 1rem;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        border-top: 1px solid var(--color-border);
+        z-index: 999;
+      }
+
+      nav.open {
+        display: flex;
+      }
+
+      nav a {
+        width: 100%;
+        padding: 0.85rem 1.5rem;
+        font-size: 1rem;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+      }
+
+      nav a.cta-button {
+        margin: 0.75rem 1.5rem 0;
+        width: calc(100% - 3rem);
+        text-align: center;
+        border-bottom: none;
+      }
+
+      .dropdown {
+        width: 100%;
+      }
+
+      .dropdown > a {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .dropdown > a::after {
+        content: '▾';
+        font-size: 0.8rem;
+        margin-right: 0.5rem;
+      }
+
+      .dropdown-menu {
+        display: block;
+        position: static;
+        background-color: rgba(255,255,255,0.04);
+        border-radius: 0;
+        box-shadow: none;
+        margin-top: 0;
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.3s ease;
+      }
+
+      .dropdown.open .dropdown-menu {
+        max-height: 400px;
+      }
+
+      .dropdown-menu a {
+        padding: 0.7rem 2rem;
         font-size: 0.9rem;
+        color: var(--color-text-muted);
+        border-bottom: 1px solid rgba(255,255,255,0.04);
       }
 
-      .hero h1 {
-        font-size: 2rem;
+      .dropdown-menu a:hover {
+        background-color: rgba(77,159,255,0.1);
+        color: var(--color-primary);
       }
 
-      .ratings {
-        gap: 1.5rem;
-      }
-
-      .final-cta h2 {
-        font-size: 1.8rem;
-      }
+      .hero h1 { font-size: 2rem; }
+      .hero p { font-size: 1rem; }
+      .section-title { font-size: 1.8rem; }
+      .feature-container { grid-template-columns: 1fr; gap: 2rem; }
+      .trades-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+      .ratings { gap: 1.5rem; }
+      .final-cta h2 { font-size: 1.8rem; }
     }
 
     @media (max-width: 480px) {
-      header {
-        padding: 1rem;
-      }
-
-      .header-container {
-        flex-direction: column;
-        gap: 1rem;
-      }
-
-      nav {
-        flex-direction: column;
-        gap: 0.5rem;
-        width: 100%;
-      }
-
-      .hero {
-        padding: 3rem 1rem;
-      }
-
-      .hero h1 {
-        font-size: 1.5rem;
-      }
-
-      .hero-buttons {
-        flex-direction: column;
-      }
-
-      .hero-buttons .cta-button {
-        width: 100%;
-      }
-
-      .testimonials-carousel {
-        grid-template-columns: 1fr;
-      }
-
-      .feature-image {
-        aspect-ratio: auto;
-        min-height: 300px;
-      }
-
-      .trades-grid {
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-        gap: 1rem;
-      }
-
-      .footer-container {
-        grid-template-columns: 1fr;
-      }
+      .hero { padding: 3rem 1rem; }
+      .hero h1 { font-size: 1.5rem; }
+      .hero-buttons { flex-direction: column; }
+      .hero-buttons .cta-button { width: 100%; }
+      .testimonials-carousel { grid-template-columns: 1fr; }
+      .feature-image { aspect-ratio: auto; min-height: 300px; }
+      .trades-grid { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 1rem; }
+      .footer-container { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -869,20 +917,23 @@
         <img src="Omnix-logo-only.png" alt="Omnix" class="logo-icon">
         <img src="Omnix-name-only.png" alt="Omnix" class="logo-name">
       </div>
-      <nav>
-        <div class="dropdown">
-          <a href="#products">Products</a>
+      <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="main-nav">
+        <div class="dropdown" id="products-dropdown">
+          <a href="#products" onclick="toggleDropdown(event, 'products-dropdown')">Products</a>
           <div class="dropdown-menu">
-            <a href="#functional-website">Functional Website</a>
-            <a href="#review-funnel">5-Star Magic Review Funnel</a>
-            <a href="#missed-calls">Missed Call Text Back</a>
-            <a href="#marketing">One-Click Marketing</a>
-            <a href="#local-seo">Local SEO</a>
+            <a href="#functional-website" onclick="closeNav()">Functional Website</a>
+            <a href="#review-funnel" onclick="closeNav()">5-Star Magic Review Funnel</a>
+            <a href="#missed-calls" onclick="closeNav()">Missed Call Text Back</a>
+            <a href="#marketing" onclick="closeNav()">One-Click Marketing</a>
+            <a href="#local-seo" onclick="closeNav()">Local SEO</a>
           </div>
         </div>
         <a href="pricing.html">Pricing</a>
         <a href="testimonials.html">Testimonials</a>
-        <a href="#our-work">Our Work</a>
+        <a href="#our-work" onclick="closeNav()">Our Work</a>
         <a href="about.html">About</a>
         <a href="[LOGIN URL]">Log In</a>
         <a href="[CONTACT URL]" class="cta-button">Book A Call</a>
@@ -907,86 +958,6 @@
   <script>
     document.querySelector('.hero-video').playbackRate = 0.6;
   </script>
-
-  <!-- TESTIMONIALS SECTION -->
-  <section id="testimonials" class="testimonials">
-    <div class="section-container">
-      <h2 class="section-title">What Our Customers Say</h2>
-      <div class="testimonials-carousel">
-        <div class="testimonial-card">
-          <div class="stars">★★★★★</div>
-          <p class="testimonial-text">"Omnix completely transformed how we manage leads. We went from missing calls to converting them into jobs. The system is so easy to use!"</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">JD</div>
-            <div>
-              <div class="testimonial-name">John D.</div>
-              <div class="testimonial-role">Landscaping Business Owner</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card">
-          <div class="stars">★★★★★</div>
-          <p class="testimonial-text">"The review funnel has been a game-changer for our business. We're getting 5-star reviews consistently and it's helping us stand out from competitors."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">SM</div>
-            <div>
-              <div class="testimonial-name">Sarah M.</div>
-              <div class="testimonial-role">HVAC Contractor</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card">
-          <div class="stars">★★★★★</div>
-          <p class="testimonial-text">"I've tried other systems before. This one actually delivers results. My lead conversion has increased by 40% in just three months!"</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">RK</div>
-            <div>
-              <div class="testimonial-name">Robert K.</div>
-              <div class="testimonial-role">Plumbing Company</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card">
-          <div class="stars">★★★★★</div>
-          <p class="testimonial-text">"Finally, a solution that actually works. The marketing campaigns save me so much time and generate qualified leads. Highly recommend!"</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">EM</div>
-            <div>
-              <div class="testimonial-name">Emma M.</div>
-              <div class="testimonial-role">Remodeling Contractor</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card">
-          <div class="stars">★★★★★</div>
-          <p class="testimonial-text">"The support team is incredible. They helped us set everything up perfectly. Now we're getting consistent high-quality leads!"</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">MJ</div>
-            <div>
-              <div class="testimonial-name">Mike J.</div>
-              <div class="testimonial-role">Roofing Specialist</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card">
-          <div class="stars">★★★★★</div>
-          <p class="testimonial-text">"Best decision for our business. No more guessing about what works. The system is data-driven and the results speak for themselves."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">LT</div>
-            <div>
-              <div class="testimonial-name">Lisa T.</div>
-              <div class="testimonial-role">Electrician</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- FEATURE 1: FUNCTIONAL WEBSITE -->
   <section id="functional-website" class="feature-section">
@@ -1082,103 +1053,6 @@
     </div>
   </section>
 
-  <!-- WHO WE SERVE -->
-  <section id="our-work" class="who-we-serve">
-    <div class="section-container">
-      <h2 class="section-title">Industries We Serve</h2>
-      <div class="trades-grid">
-        <div class="trade-card">
-          <div class="trade-icon"><i class="fas fa-leaf"></i></div>
-          <h3>Landscaping</h3>
-        </div>
-        <div class="trade-card">
-          <div class="trade-icon"><i class="fas fa-hammer"></i></div>
-          <h3>Remodeling</h3>
-        </div>
-        <div class="trade-card">
-          <div class="trade-icon"><i class="fas fa-spray-can"></i></div>
-          <h3>Pressure Washing</h3>
-        </div>
-        <div class="trade-card">
-          <div class="trade-icon"><i class="fas fa-bug"></i></div>
-          <h3>Pest Control</h3>
-        </div>
-        <div class="trade-card">
-          <div class="trade-icon"><i class="fas fa-boxes"></i></div>
-          <h3>Moving Companies</h3>
-        </div>
-        <div class="trade-card">
-          <div class="trade-icon"><i class="fas fa-home"></i></div>
-          <h3>Flooring & Carpet</h3>
-        </div>
-        <div class="trade-card">
-          <div class="trade-icon"><i class="fas fa-house-damage"></i></div>
-          <h3>Roofing</h3>
-        </div>
-        <div class="trade-card">
-          <div class="trade-icon"><i class="fas fa-fan"></i></div>
-          <h3>HVAC</h3>
-        </div>
-        <div class="trade-card">
-          <div class="trade-icon"><i class="fas fa-wrench"></i></div>
-          <h3>Plumbing</h3>
-        </div>
-        <div class="trade-card">
-          <div class="trade-icon"><i class="fas fa-bolt"></i></div>
-          <h3>Electrician</h3>
-        </div>
-        <div class="trade-card">
-          <div class="trade-icon"><i class="fas fa-tools"></i></div>
-          <h3>Handyman</h3>
-        </div>
-        <div class="trade-card">
-          <div class="trade-icon"><i class="fas fa-paint-roller"></i></div>
-          <h3>Painters</h3>
-        </div>
-        <div class="trade-card">
-          <div class="trade-icon"><i class="fas fa-wood"></i></div>
-          <h3>Decks & Patios</h3>
-        </div>
-        <div class="trade-card">
-          <div class="trade-icon"><i class="fas fa-siding"></i></div>
-          <h3>Siding</h3>
-        </div>
-        <div class="trade-card">
-          <div class="trade-icon"><i class="fas fa-water"></i></div>
-          <h3>Pool Construction</h3>
-        </div>
-        <div class="trade-card">
-          <div class="trade-icon"><i class="fas fa-road"></i></div>
-          <h3>Paving</h3>
-        </div>
-        <div class="trade-card">
-          <div class="trade-icon"><i class="fas fa-mountain"></i></div>
-          <h3>Hardscaping</h3>
-        </div>
-        <div class="trade-card">
-          <div class="trade-icon"><i class="fas fa-window-maximize"></i></div>
-          <h3>Windows & Doors</h3>
-        </div>
-        <div class="trade-card">
-          <div class="trade-icon"><i class="fas fa-building"></i></div>
-          <h3>General Contractors</h3>
-        </div>
-        <div class="trade-card">
-          <div class="trade-icon"><i class="fas fa-dog"></i></div>
-          <h3>Dog Groomers</h3>
-        </div>
-        <div class="trade-card">
-          <div class="trade-icon"><i class="fas fa-tree"></i></div>
-          <h3>Tree Service</h3>
-        </div>
-        <div class="trade-card">
-          <div class="trade-icon"><i class="fas fa-house-user"></i></div>
-          <h3>Home Builders</h3>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- OUR PROCESS -->
   <!-- FOOTER -->
   <footer>
@@ -1224,6 +1098,32 @@
   </footer>
 
   <script>
+    // Mobile Nav
+    function toggleNav() {
+      const nav = document.getElementById('main-nav');
+      const btn = document.getElementById('hamburger');
+      nav.classList.toggle('open');
+      btn.classList.toggle('open');
+    }
+
+    function closeNav() {
+      document.getElementById('main-nav').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+    }
+
+    function toggleDropdown(e, id) {
+      if (window.innerWidth <= 768) {
+        e.preventDefault();
+        document.getElementById(id).classList.toggle('open');
+      }
+    }
+
+    // Close nav when clicking outside
+    document.addEventListener('click', function(e) {
+      const header = document.querySelector('header');
+      if (!header.contains(e.target)) closeNav();
+    });
+
     // FAQ Accordion Functionality
     function toggleFaq(button) {
       const isActive = button.classList.contains('active');

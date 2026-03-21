@@ -471,16 +471,31 @@
     .footer-bottom a { color: var(--color-text-muted); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
     .footer-bottom a:hover { color: var(--color-primary); }
 
+    /* ========== HAMBURGER ========== */
+    .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; z-index: 1100; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--color-white); border-radius: 2px; transition: all 0.3s ease; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
     /* ========== RESPONSIVE ========== */
     @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background-color: var(--color-dark); flex-direction: column; align-items: flex-start; gap: 0; padding: 0.5rem 0 1rem; box-shadow: 0 8px 24px rgba(0,0,0,0.3); border-top: 1px solid var(--color-border); z-index: 999; }
+      nav.open { display: flex; }
+      nav a { width: 100%; padding: 0.85rem 1.5rem; font-size: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+      nav a.cta-button { margin: 0.75rem 1.5rem 0; width: calc(100% - 3rem); text-align: center; border-bottom: none; }
+      .dropdown { width: 100%; }
+      .dropdown > a { display: flex; justify-content: space-between; align-items: center; }
+      .dropdown > a::after { content: "▾"; font-size: 0.8rem; margin-right: 0.5rem; }
+      .dropdown-menu { display: block; position: static; background-color: rgba(255,255,255,0.04); border-radius: 0; box-shadow: none; margin-top: 0; overflow: hidden; max-height: 0; transition: max-height 0.3s ease; }
+      .dropdown.open .dropdown-menu { max-height: 400px; }
+      .dropdown-menu a { padding: 0.7rem 2rem; font-size: 0.9rem; color: var(--color-text-muted); border-bottom: 1px solid rgba(255,255,255,0.04); }
       .pricing-hero h1 { font-size: 2rem; }
       .process-section h2 { font-size: 1.8rem; }
-      nav { gap: 1rem; font-size: 0.9rem; }
     }
     @media (max-width: 480px) {
-      header { padding: 1rem; }
-      .header-container { flex-direction: column; gap: 1rem; }
-      nav { flex-direction: column; gap: 0.5rem; width: 100%; }
+      .footer-container { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -493,9 +508,12 @@
         <img src="Omnix-logo-only.png" alt="Omnix" class="logo-icon">
         <img src="Omnix-name-only.png" alt="Omnix" class="logo-name">
       </div>
-      <nav>
-        <div class="dropdown">
-          <a href="index.html#products">Products</a>
+      <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="main-nav">
+        <div class="dropdown" id="products-dropdown">
+          <a href="index.html#products" onclick="toggleDropdown(event, 'products-dropdown')">Products</a>
           <div class="dropdown-menu">
             <a href="index.html#functional-website">Functional Website</a>
             <a href="index.html#review-funnel">5-Star Magic Review Funnel</a>
@@ -505,8 +523,8 @@
           </div>
         </div>
         <a href="pricing.html" style="color: var(--color-primary);">Pricing</a>
-        <a href="index.html#testimonials">Testimonials</a>
-        <a href="index.html#our-work">Our Work</a>
+        <a href="testimonials.html">Testimonials</a>
+        <a href="index.html#our-work" onclick="closeNav()">Our Work</a>
         <a href="about.html">About</a>
         <a href="[LOGIN URL]">Log In</a>
         <a href="[CONTACT URL]" class="cta-button">Book A Call</a>
@@ -856,6 +874,27 @@
   </footer>
 
   <script>
+    function toggleNav() {
+      const nav = document.getElementById('main-nav');
+      const btn = document.getElementById('hamburger');
+      nav.classList.toggle('open');
+      btn.classList.toggle('open');
+    }
+    function closeNav() {
+      document.getElementById('main-nav').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+    }
+    function toggleDropdown(e, id) {
+      if (window.innerWidth <= 768) {
+        e.preventDefault();
+        document.getElementById(id).classList.toggle('open');
+      }
+    }
+    document.addEventListener('click', function(e) {
+      const header = document.querySelector('header');
+      if (!header.contains(e.target)) closeNav();
+    });
+
     /* ---- Billing toggle ---- */
     let billingMode = 'monthly';
 
