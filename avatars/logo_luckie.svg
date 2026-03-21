@@ -1,20 +1,51 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
   <defs>
-    <linearGradient id="g10" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#145a32"/>
-      <stop offset="100%" style="stop-color:#1e8449"/>
+    <filter id="ls"><feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#00000066"/></filter>
+    <linearGradient id="lg1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B5E20"/>
+      <stop offset="100%" style="stop-color:#2E7D32"/>
     </linearGradient>
+    <linearGradient id="lg2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFF9C4"/>
+      <stop offset="100%" style="stop-color:#FDD835"/>
+    </linearGradient>
+    <clipPath id="loval"><ellipse cx="100" cy="100" rx="90" ry="78"/></clipPath>
   </defs>
-  <circle cx="100" cy="100" r="100" fill="url(#g10)"/>
-  <!-- Shovel handle -->
-  <rect x="94" y="55" width="12" height="90" rx="6" fill="#c8a96e"/>
-  <!-- Shovel blade -->
-  <path d="M72,120 Q72,156 100,156 Q128,156 128,120 L120,108 L80,108 Z" fill="#9BA3B5"/>
-  <rect x="80" y="105" width="40" height="10" rx="4" fill="#c8a96e"/>
-  <!-- Leaves sprouting from handle -->
-  <path d="M94,82 Q70,68 62,48 Q80,55 94,75 Z" fill="#2ecc71"/>
-  <path d="M106,75 Q130,58 140,40 Q122,50 106,68 Z" fill="#27ae60"/>
-  <path d="M94,95 Q64,88 52,72 Q72,78 94,90 Z" fill="#2ecc71" opacity="0.8"/>
-  <!-- LL text -->
-  <text x="100" y="186" font-family="Arial Black,sans-serif" font-size="20" font-weight="900" fill="white" text-anchor="middle" opacity="0.85">LANDSCAPING</text>
+  <!-- Oval -->
+  <ellipse cx="100" cy="100" rx="90" ry="78" fill="url(#lg1)" filter="url(#ls)"/>
+  <!-- Sky gradient in top half -->
+  <rect x="10" y="22" width="180" height="68" clip-path="url(#loval)" fill="#1565C0" opacity="0.3"/>
+  <!-- Sunrise arc -->
+  <ellipse cx="100" cy="115" rx="34" ry="34" fill="#FDD835" clip-path="url(#loval)" opacity="0.95"/>
+  <ellipse cx="100" cy="115" rx="26" ry="26" fill="url(#lg2)" clip-path="url(#loval)"/>
+  <!-- Sun rays -->
+  <g stroke="#FDD835" stroke-width="2.5" stroke-linecap="round" opacity="0.8" clip-path="url(#loval)">
+    <line x1="100" y1="74" x2="100" y2="66"/>
+    <line x1="124" y1="80" x2="130" y2="74"/>
+    <line x1="134" y1="100" x2="142" y2="100"/>
+    <line x1="76" y1="80" x2="70" y2="74"/>
+    <line x1="66" y1="100" x2="58" y2="100"/>
+    <line x1="120" y1="92" x2="126" y2="86"/>
+    <line x1="80" y1="92" x2="74" y2="86"/>
+  </g>
+  <!-- Ground / horizon -->
+  <ellipse cx="100" cy="138" rx="90" ry="12" fill="#2E7D32" clip-path="url(#loval)"/>
+  <!-- Grass blades -->
+  <g fill="#4CAF50" clip-path="url(#loval)">
+    <path d="M25,138 Q28,122 31,138Z"/>
+    <path d="M38,137 Q42,118 46,137Z"/>
+    <path d="M55,136 Q58,120 61,136Z"/>
+    <path d="M68,136 Q72,117 76,136Z"/>
+    <path d="M82,136 Q85,119 88,136Z"/>
+    <path d="M112,136 Q116,119 120,136Z"/>
+    <path d="M128,136 Q131,120 134,136Z"/>
+    <path d="M142,137 Q146,121 150,137Z"/>
+    <path d="M158,137 Q162,122 166,137Z"/>
+    <path d="M170,138 Q173,124 176,138Z"/>
+  </g>
+  <!-- Oval border -->
+  <ellipse cx="100" cy="100" rx="90" ry="78" fill="none" stroke="#A5D6A7" stroke-width="3"/>
+  <!-- Text -->
+  <text x="100" y="68" font-family="Arial Black,sans-serif" font-size="22" font-weight="900" fill="white" text-anchor="middle" letter-spacing="1">LUCKIE'S</text>
+  <text x="100" y="86" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#C8E6C9" text-anchor="middle" letter-spacing="2">LAWN CARE</text>
 </svg>

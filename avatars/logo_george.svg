@@ -1,23 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
   <defs>
-    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#c0392b"/>
-      <stop offset="100%" style="stop-color:#e67e22"/>
+    <filter id="gs"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#00000055"/></filter>
+    <linearGradient id="gg1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D92B2B"/>
+      <stop offset="100%" style="stop-color:#8B0000"/>
     </linearGradient>
   </defs>
-  <circle cx="100" cy="100" r="100" fill="url(#g1)"/>
-  <!-- Paint roller handle -->
-  <rect x="112" y="55" width="12" height="70" rx="6" fill="white" opacity="0.95"/>
-  <!-- Roller frame arm -->
-  <rect x="60" y="55" width="58" height="10" rx="5" fill="white" opacity="0.95"/>
-  <!-- Roller drum -->
-  <rect x="52" y="62" width="28" height="44" rx="8" fill="white" opacity="0.9"/>
-  <!-- Roller texture lines -->
-  <rect x="58" y="67" width="4" height="34" rx="2" fill="#e67e22" opacity="0.6"/>
-  <rect x="66" y="67" width="4" height="34" rx="2" fill="#e67e22" opacity="0.6"/>
+  <!-- Shield shape -->
+  <path d="M100,12 L182,46 L182,114 Q182,168 100,192 Q18,168 18,114 L18,46 Z" fill="url(#gg1)" filter="url(#gs)"/>
+  <path d="M100,22 L172,52 L172,114 Q172,160 100,182 Q28,160 28,114 L28,52 Z" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+  <!-- Paint roller -->
+  <rect x="105" y="52" width="11" height="55" rx="5.5" fill="#f0e0c0"/>
+  <rect x="65" y="52" width="46" height="9" rx="4.5" fill="#f0e0c0"/>
+  <rect x="57" y="58" width="26" height="38" rx="7" fill="white"/>
+  <rect x="61" y="63" width="5" height="28" rx="2.5" fill="#D92B2B" opacity="0.5"/>
+  <rect x="70" y="63" width="5" height="28" rx="2.5" fill="#D92B2B" opacity="0.5"/>
   <!-- Paint drip -->
-  <ellipse cx="66" cy="112" rx="12" ry="6" fill="white" opacity="0.7"/>
-  <path d="M62,118 Q64,134 66,138 Q68,134 70,118 Z" fill="white" opacity="0.7"/>
-  <!-- Company label -->
-  <text x="100" y="158" font-family="Arial Black,sans-serif" font-size="20" font-weight="900" fill="white" text-anchor="middle" opacity="0.9">PAINTING</text>
+  <ellipse cx="70" cy="99" rx="10" ry="5" fill="white" opacity="0.8"/>
+  <path d="M66,104 Q68,118 70,122 Q72,118 74,104Z" fill="white" opacity="0.8"/>
+  <!-- Divider -->
+  <line x1="38" y1="135" x2="162" y2="135" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+  <!-- Text -->
+  <text x="100" y="151" font-family="Arial Black,sans-serif" font-size="17" font-weight="900" fill="white" text-anchor="middle" letter-spacing="1.5">GEORGE'S</text>
+  <text x="100" y="168" font-family="Arial Black,sans-serif" font-size="13" font-weight="700" fill="#ffcfcf" text-anchor="middle" letter-spacing="2">PAINTING CO.</text>
 </svg>

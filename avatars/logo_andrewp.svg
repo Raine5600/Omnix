@@ -1,18 +1,28 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
   <defs>
-    <linearGradient id="g5" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#f39c12"/>
-      <stop offset="100%" style="stop-color:#e67e22"/>
-    </linearGradient>
+    <filter id="as"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#00000088"/></filter>
   </defs>
-  <circle cx="100" cy="100" r="100" fill="#1a1a2e"/>
-  <!-- Hard hat dome -->
-  <path d="M40,105 Q40,52 100,52 Q160,52 160,105 Z" fill="url(#g5)"/>
-  <!-- Hard hat brim -->
-  <rect x="28" y="104" width="144" height="14" rx="7" fill="#f39c12"/>
-  <!-- Hard hat stripe -->
-  <path d="M42,105 Q42,58 100,58 Q158,58 158,105" fill="none" stroke="#c0392b" stroke-width="8" opacity="0.8"/>
-  <!-- AP text -->
-  <text x="100" y="148" font-family="Arial Black,sans-serif" font-size="30" font-weight="900" fill="#f39c12" text-anchor="middle" letter-spacing="2">AP</text>
-  <text x="100" y="168" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#e67e22" text-anchor="middle" letter-spacing="1">CONSTRUCTION</text>
+  <!-- Outer hex ring (yellow) -->
+  <polygon points="100,10 182,55 182,145 100,190 18,145 18,55" fill="#FFB300" filter="url(#as)"/>
+  <!-- Inner hex (black) -->
+  <polygon points="100,24 168,63 168,137 100,176 32,137 32,63" fill="#1A1A1A"/>
+  <!-- Crossed wrench & hammer -->
+  <!-- Wrench (rotated -40deg around center) -->
+  <g transform="rotate(-40,100,100)">
+    <rect x="93" y="42" width="14" height="80" rx="7" fill="#9E9E9E"/>
+    <circle cx="100" cy="42" r="16" fill="#757575"/>
+    <circle cx="100" cy="42" r="9" fill="#1A1A1A"/>
+    <circle cx="100" cy="122" r="10" fill="#757575"/>
+  </g>
+  <!-- Hammer (rotated +40deg around center) -->
+  <g transform="rotate(40,100,100)">
+    <rect x="93" y="48" width="14" height="75" rx="7" fill="#BCAAA4"/>
+    <rect x="72" y="38" width="56" height="26" rx="6" fill="#757575"/>
+    <rect x="74" y="41" width="20" height="8" rx="3" fill="#9E9E9E" opacity="0.6"/>
+  </g>
+  <!-- Yellow ring border on inner hex -->
+  <polygon points="100,24 168,63 168,137 100,176 32,137 32,63" fill="none" stroke="#FFB300" stroke-width="2.5"/>
+  <!-- Text -->
+  <text x="100" y="108" font-family="Arial Black,sans-serif" font-size="26" font-weight="900" fill="#FFB300" text-anchor="middle" letter-spacing="1">AP</text>
+  <text x="100" y="165" font-family="Arial Black,sans-serif" font-size="11" font-weight="900" fill="#FFB300" text-anchor="middle" letter-spacing="1.5">CONSTRUCTION</text>
 </svg>

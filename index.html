@@ -396,7 +396,7 @@
     }
 
     .feature-image {
-      background-color: #1e1e3a;
+      background-color: transparent;
       border-radius: 12px;
       aspect-ratio: 16 / 10;
       overflow: hidden;
@@ -409,6 +409,8 @@
       height: 100%;
       object-fit: cover;
       border-radius: 12px;
+      background: transparent;
+      display: block;
     }
 
     .feature-content h2 {
@@ -902,7 +904,7 @@
       .hero-buttons { flex-direction: column; }
       .hero-buttons .cta-button { width: 100%; }
       .testimonials-carousel { grid-template-columns: 1fr; }
-      .feature-image { aspect-ratio: auto; min-height: 300px; }
+      .feature-image { aspect-ratio: 16 / 9; min-height: unset; }
       .trades-grid { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 1rem; }
       .footer-container { grid-template-columns: 1fr; }
     }
@@ -914,8 +916,10 @@
   <header>
     <div class="header-container">
       <div class="logo">
-        <img src="Omnix-logo-only.png" alt="Omnix" class="logo-icon">
-        <img src="Omnix-name-only.png" alt="Omnix" class="logo-name">
+        <a href="#" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;">
+          <img src="Omnix-logo-only.png" alt="Omnix" class="logo-icon">
+          <img src="Omnix-name-only.png" alt="Omnix" class="logo-name">
+        </a>
       </div>
       <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Toggle menu">
         <span></span><span></span><span></span>

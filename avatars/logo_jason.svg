@@ -1,31 +1,41 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
   <defs>
-    <linearGradient id="g9" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0a3d4a"/>
-      <stop offset="100%" style="stop-color:#0e7f8f"/>
+    <filter id="js"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#00000088"/></filter>
+    <linearGradient id="jg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0D2137"/>
+      <stop offset="100%" style="stop-color:#0A1628"/>
     </linearGradient>
   </defs>
-  <circle cx="100" cy="100" r="100" fill="url(#g9)"/>
-  <!-- Snowflake arms (6) -->
-  <g stroke="#7ee8f5" stroke-width="8" stroke-linecap="round">
-    <line x1="100" y1="36" x2="100" y2="164"/>
-    <line x1="100" y1="36" x2="100" y2="164" transform="rotate(60 100 100)"/>
-    <line x1="100" y1="36" x2="100" y2="164" transform="rotate(120 100 100)"/>
+  <!-- Rounded rect -->
+  <rect x="12" y="22" width="176" height="156" rx="20" fill="url(#jg1)" filter="url(#js)"/>
+  <rect x="12" y="22" width="176" height="156" rx="20" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+  <!-- Divider line -->
+  <line x1="100" y1="28" x2="100" y2="170" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <!-- LEFT: Snowflake (cooling) -->
+  <g stroke="#4FC3F7" stroke-width="4" stroke-linecap="round">
+    <line x1="50" y1="58" x2="50" y2="118"/>
+    <line x1="50" y1="58" x2="50" y2="118" transform="rotate(60 50 88)"/>
+    <line x1="50" y1="58" x2="50" y2="118" transform="rotate(120 50 88)"/>
   </g>
-  <!-- Snowflake cross-bars -->
-  <g stroke="#7ee8f5" stroke-width="5" stroke-linecap="round">
-    <line x1="80" y1="56" x2="100" y2="68"/><line x1="120" y1="56" x2="100" y2="68"/>
-    <line x1="80" y1="56" x2="100" y2="68" transform="rotate(60 100 100)"/>
-    <line x1="120" y1="56" x2="100" y2="68" transform="rotate(60 100 100)"/>
-    <line x1="80" y1="56" x2="100" y2="68" transform="rotate(120 100 100)"/>
-    <line x1="120" y1="56" x2="100" y2="68" transform="rotate(120 100 100)"/>
-    <line x1="80" y1="144" x2="100" y2="132"/><line x1="120" y1="144" x2="100" y2="132"/>
-    <line x1="80" y1="144" x2="100" y2="132" transform="rotate(60 100 100)"/>
-    <line x1="120" y1="144" x2="100" y2="132" transform="rotate(60 100 100)"/>
-    <line x1="80" y1="144" x2="100" y2="132" transform="rotate(120 100 100)"/>
-    <line x1="120" y1="144" x2="100" y2="132" transform="rotate(120 100 100)"/>
+  <g stroke="#4FC3F7" stroke-width="2.5" stroke-linecap="round">
+    <line x1="36" y1="70" x2="50" y2="78"/><line x1="64" y1="70" x2="50" y2="78"/>
+    <line x1="36" y1="106" x2="50" y2="98"/><line x1="64" y1="106" x2="50" y2="98"/>
+    <line x1="36" y1="70" x2="50" y2="78" transform="rotate(60 50 88)"/>
+    <line x1="64" y1="70" x2="50" y2="78" transform="rotate(60 50 88)"/>
+    <line x1="36" y1="106" x2="50" y2="98" transform="rotate(60 50 88)"/>
+    <line x1="64" y1="106" x2="50" y2="98" transform="rotate(60 50 88)"/>
+    <line x1="36" y1="70" x2="50" y2="78" transform="rotate(120 50 88)"/>
+    <line x1="64" y1="70" x2="50" y2="78" transform="rotate(120 50 88)"/>
+    <line x1="36" y1="106" x2="50" y2="98" transform="rotate(120 50 88)"/>
+    <line x1="64" y1="106" x2="50" y2="98" transform="rotate(120 50 88)"/>
   </g>
-  <!-- Center circle -->
-  <circle cx="100" cy="100" r="16" fill="#0e7f8f" stroke="#7ee8f5" stroke-width="4"/>
-  <circle cx="100" cy="100" r="8" fill="#7ee8f5"/>
+  <circle cx="50" cy="88" r="9" fill="#0D2137" stroke="#4FC3F7" stroke-width="3"/>
+  <text x="50" y="132" font-family="Arial,sans-serif" font-size="9" fill="#80DEEA" text-anchor="middle" letter-spacing="1">COOLING</text>
+  <!-- RIGHT: Flame (heating) -->
+  <path d="M150,115 Q136,100 140,80 Q144,64 150,58 Q148,70 155,76 Q155,60 162,50 Q165,68 158,80 Q164,74 165,84 Q168,98 150,115Z" fill="#FF6D00"/>
+  <path d="M150,113 Q140,100 143,85 Q147,74 150,68 Q149,76 154,80 Q154,70 159,62 Q161,75 157,83 Q161,78 162,86 Q164,97 150,113Z" fill="#FFAB40"/>
+  <path d="M150,112 Q143,100 146,88 Q149,80 150,76 Q150,82 153,84 Q153,78 156,72 Q157,81 155,86 Q157,83 158,88 Q159,96 150,112Z" fill="#FFEE58"/>
+  <text x="150" y="132" font-family="Arial,sans-serif" font-size="9" fill="#FFAB40" text-anchor="middle" letter-spacing="1">HEATING</text>
+  <!-- Bottom text -->
+  <text x="100" y="157" font-family="Arial Black,sans-serif" font-size="20" font-weight="900" fill="white" text-anchor="middle" letter-spacing="1">JASON'S HVAC</text>
 </svg>

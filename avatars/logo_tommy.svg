@@ -1,24 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
   <defs>
-    <linearGradient id="g7" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#6c3483"/>
-      <stop offset="100%" style="stop-color:#a93226"/>
-    </linearGradient>
-    <linearGradient id="g7b" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#e8d5a3"/>
-      <stop offset="100%" style="stop-color:#c4a97a"/>
-    </linearGradient>
+    <filter id="tms"><feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#00000055"/></filter>
   </defs>
-  <circle cx="100" cy="100" r="100" fill="url(#g7)"/>
-  <!-- Paintbrush handle (diagonal) -->
-  <rect x="44" y="40" width="18" height="100" rx="9" fill="url(#g7b)" transform="rotate(40 100 100)"/>
-  <!-- Ferrule (metal band) -->
-  <rect x="44" y="40" width="18" height="16" rx="4" fill="#b0b8c8" transform="rotate(40 100 100)"/>
-  <!-- Bristles -->
-  <ellipse cx="137" cy="137" rx="16" ry="22" fill="#e74c3c" transform="rotate(40 137 137)"/>
-  <ellipse cx="137" cy="137" rx="10" ry="18" fill="#c0392b" transform="rotate(40 137 137)"/>
-  <!-- Paint smear / splash -->
-  <ellipse cx="68" cy="148" rx="24" ry="10" fill="#e74c3c" opacity="0.5" transform="rotate(-20 68 148)"/>
-  <circle cx="52" cy="158" r="8" fill="#a93226" opacity="0.4"/>
-  <circle cx="78" cy="162" r="5" fill="#e74c3c" opacity="0.5"/>
+  <!-- White circle -->
+  <circle cx="100" cy="100" r="92" fill="white" filter="url(#tms)"/>
+  <!-- Colorful paint arc border segments -->
+  <circle cx="100" cy="100" r="86" fill="none" stroke="#E53935" stroke-width="12" stroke-dasharray="80 452" stroke-dashoffset="0"/>
+  <circle cx="100" cy="100" r="86" fill="none" stroke="#FB8C00" stroke-width="12" stroke-dasharray="70 452" stroke-dashoffset="-85"/>
+  <circle cx="100" cy="100" r="86" fill="none" stroke="#FDD835" stroke-width="12" stroke-dasharray="65 452" stroke-dashoffset="-160"/>
+  <circle cx="100" cy="100" r="86" fill="none" stroke="#43A047" stroke-width="12" stroke-dasharray="75 452" stroke-dashoffset="-230"/>
+  <circle cx="100" cy="100" r="86" fill="none" stroke="#1E88E5" stroke-width="12" stroke-dasharray="70 452" stroke-dashoffset="-310"/>
+  <circle cx="100" cy="100" r="86" fill="none" stroke="#8E24AA" stroke-width="12" stroke-dasharray="60 452" stroke-dashoffset="-385"/>
+  <!-- Inner white mask for clean edge -->
+  <circle cx="100" cy="100" r="80" fill="white"/>
+  <!-- Paintbrush icon - simple, clean -->
+  <rect x="93" y="32" width="14" height="52" rx="4" fill="#5D4037"/>
+  <rect x="89" y="78" width="22" height="8" rx="2" fill="#9E9E9E"/>
+  <ellipse cx="100" cy="94" rx="11" ry="16" fill="#1565C0"/>
+  <ellipse cx="100" cy="102" rx="8" ry="10" fill="#1976D2"/>
+  <ellipse cx="100" cy="108" rx="5" ry="6" fill="#42A5F5"/>
+  <!-- Text -->
+  <text x="100" y="144" font-family="Arial Black,sans-serif" font-size="21" font-weight="900" fill="#1A1A1A" text-anchor="middle">TOMMY'S</text>
+  <text x="100" y="163" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#555" text-anchor="middle" letter-spacing="2">PAINTING</text>
 </svg>
