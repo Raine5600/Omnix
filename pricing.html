@@ -87,7 +87,7 @@
       text-decoration: none; font-weight: 600;
       transition: transform 0.1s ease, box-shadow 0.3s ease;
       cursor: pointer; border: none; font-size: 0.95rem;
-      position: relative;
+      position: relative; white-space: nowrap;
     }
     .cta-button:hover { animation: btn-glow-pulse 1.4s ease-in-out infinite; transform: translateY(-2px); color: #000000; }
     .cta-button:active { transform: translateY(2px) scale(0.97); box-shadow: 0 1px 4px rgba(0,0,0,0.5), inset 0 2px 6px rgba(0,0,0,0.35); animation: none; }
@@ -227,7 +227,17 @@
       margin-top: 1.75rem;
       padding: 1rem 2.5rem;
       font-size: 1rem;
-      width: 75%;
+      width: auto;
+      white-space: nowrap;
+    }
+    .pricing-card .btn-row .cta-button {
+      display: block;
+      margin-top: 0;
+      padding: 0.75rem 1.5rem;
+      font-size: 0.95rem;
+      width: auto;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     /* Guarantee badge */
@@ -463,9 +473,16 @@
       align-items: center;
       flex-wrap: nowrap;
     }
+    .btn-row .cta-button {
+      flex-shrink: 0;
+      white-space: nowrap;
+      padding: 0.75rem 1.5rem;
+      font-size: 0.95rem;
+      margin-top: 0;
+    }
     @media (max-width: 480px) {
       .btn-row { flex-wrap: wrap; }
-      .btn-row .cta-button { width: 100%; text-align: center; }
+      .btn-row .cta-button { width: 100%; text-align: center; flex-shrink: 1; }
     }
 
     /* ========== FOOTER ========== */
@@ -724,8 +741,26 @@
       </div>
 
       <!-- RIGHT: Add-on / other services -->
-      <div class="breakdown-col">
+      <div class="breakdown-col" style="padding-top: 1.5rem;">
         <h3>Optional Add-On Services</h3>
+
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggleAcc(this)">
+            AI Secretary
+            <i class="fas fa-chevron-down acc-chevron"></i>
+          </button>
+          <div class="acc-body">
+            <p class="acc-subtitle">A 24/7 AI receptionist that answers calls, answers questions, and represents your business like a pro — even when you're on the job.</p>
+            <ul>
+              <li>Answers incoming calls on your behalf, any time of day or night</li>
+              <li>Trained with in-depth knowledge of your business — services, pricing, FAQs, and more</li>
+              <li>Holds natural, human-like conversations with callers</li>
+              <li>Captures caller details and books appointments directly into your calendar</li>
+              <li>Handles objections, answers service questions, and qualifies leads</li>
+              <li>Never puts a customer on hold or sends them to voicemail</li>
+            </ul>
+          </div>
+        </div>
 
         <div class="acc-item">
           <button class="acc-trigger" onclick="toggleAcc(this)">
