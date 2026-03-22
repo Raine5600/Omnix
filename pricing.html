@@ -629,7 +629,7 @@
       <p class="pricing-feature">On-Site SEO</p>
 
       <div class="btn-row" style="margin-top:0.5rem;">
-        <a href="pricing.html" class="cta-button">Purchase Now</a>
+        <button id="checkout-btn" class="cta-button" onclick="startCheckout()">Purchase Now</button>
         <a href="contact.html" class="cta-button">Contact Us</a>
       </div>
 
@@ -847,7 +847,7 @@
     <h2>Ready to get started?</h2>
     <p>Ready to grow your business? Get started today — no pressure, no commitment.</p>
     <div class="btn-row">
-      <a href="pricing.html" class="cta-button">Purchase Now</a>
+      <button class="cta-button" onclick="startCheckout()">Purchase Now</button>
       <a href="contact.html" class="cta-button">Contact Us</a>
     </div>
   </section>
@@ -950,6 +950,41 @@
       if (!isOpen) {
         trigger.classList.add('open');
         body.classList.add('open');
+      }
+    }
+
+    /* ---- Stripe Checkout ---- */
+    async function startCheckout() {
+      // Update all Purchase Now buttons to show loading state
+      const btns = document.querySelectorAll('[onclick="startCheckout()"]');
+      btns.forEach(btn => {
+        btn.textContent = 'Loading…';
+        btn.disabled = true;
+        btn.style.opacity = '0.7';
+      });
+
+      try {
+        const res = await fetch('/api/create-checkout-session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ plan: billingMode }),
+        });
+
+        const data = await res.json();
+
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          throw new Error(data.error || 'Could not create checkout session.');
+        }
+      } catch (err) {
+        console.error(err);
+        btns.forEach(btn => {
+          btn.textContent = 'Purchase Now';
+          btn.disabled = false;
+          btn.style.opacity = '1';
+        });
+        alert('Something went wrong. Please try again or contact us directly.');
       }
     }
   </script>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Omnix - Welcome Aboard!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --color-primary: #4d9fff;
+      --color-primary-dark: #3a7fd9;
+      --color-secondary: #9b5de5;
+      --color-gradient: linear-gradient(135deg, #4d9fff, #9b5de5);
+      --color-dark: #0d0d1e;
+      --color-dark-light: #161630;
+      --color-white: #ffffff;
+      --color-text: #dde0f0;
+      --color-text-muted: #8888bb;
+      --color-border: #2a2a50;
+      --font-heading: 'Montserrat', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-color: var(--color-dark);
+    }
+
+    /* ========== NAV ========== */
+    header {
+      position: sticky; top: 0;
+      background-color: var(--color-dark);
+      color: var(--color-white);
+      padding: 1rem 2rem;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    .header-container {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .logo { display: flex; align-items: center; }
+    .logo a {
+      display: flex; align-items: center; gap: 0.5rem;
+      text-decoration: none; cursor: pointer;
+    }
+    .logo img.logo-icon { height: 70px; width: auto; display: block; }
+    .logo img.logo-name { height: 30px; width: auto; display: block; }
+    nav { display: flex; align-items: center; gap: 1.5rem; }
+    nav a { color: var(--color-white); text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: color 0.3s; }
+    nav a:hover { color: var(--color-primary); }
+    .dropdown { position: relative; }
+    .dropdown > a::after { content: " ▾"; font-size: 0.7rem; }
+    .dropdown-menu {
+      display: none; position: absolute; top: 100%; left: 0;
+      background-color: var(--color-dark-light);
+      border-radius: 8px; min-width: 200px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      margin-top: 0.5rem; overflow: hidden;
+    }
+    .dropdown:hover .dropdown-menu { display: block; }
+    .dropdown-menu a { display: block; padding: 0.75rem 1.5rem; color: var(--color-white); text-decoration: none; transition: background 0.3s; }
+    .dropdown-menu a:hover { background-color: var(--color-primary); color: var(--color-white); }
+
+    @keyframes btn-glow-pulse {
+      0%   { box-shadow:  0 0 10px 3px rgba(77,159,255,0.7),  0 0 30px 8px  rgba(155,93,229,0.2),  -6px 0 18px 4px rgba(77,159,255,0.4),   6px 0 18px 4px rgba(155,93,229,0.4); }
+      25%  { box-shadow:  6px 0 22px 8px rgba(77,159,255,0.5),  0 0 40px 12px rgba(155,93,229,0.5), -6px 0 12px 2px rgba(155,93,229,0.3),   0 0 10px 2px rgba(77,159,255,0.3); }
+      50%  { box-shadow: -6px 0 22px 8px rgba(155,93,229,0.7),  0 0 40px 14px rgba(77,159,255,0.4),  6px 0 18px 6px rgba(77,159,255,0.5),   0 0 12px 3px rgba(155,93,229,0.4); }
+      75%  { box-shadow:  0 0 18px 6px rgba(155,93,229,0.5),   6px 0 28px 10px rgba(77,159,255,0.6), -6px 0 14px 4px rgba(155,93,229,0.3),  0 0 8px  2px rgba(77,159,255,0.4); }
+      100% { box-shadow:  0 0 10px 3px rgba(77,159,255,0.7),   0 0 30px 8px  rgba(155,93,229,0.2), -6px 0 18px 4px rgba(77,159,255,0.4),   6px 0 18px 4px rgba(155,93,229,0.4); }
+    }
+    .cta-button {
+      background: var(--color-gradient);
+      color: var(--color-white);
+      padding: 0.75rem 1.5rem; border-radius: 6px;
+      text-decoration: none; font-weight: 600;
+      transition: transform 0.1s ease, box-shadow 0.3s ease;
+      cursor: pointer; border: none; font-size: 0.95rem;
+      position: relative; white-space: nowrap;
+    }
+    .cta-button:hover { animation: btn-glow-pulse 1.4s ease-in-out infinite; transform: translateY(-2px); color: #000000; }
+    .cta-button:active { transform: translateY(2px) scale(0.97); box-shadow: 0 1px 4px rgba(0,0,0,0.5), inset 0 2px 6px rgba(0,0,0,0.35); animation: none; }
+
+    /* ========== HAMBURGER ========== */
+    .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; z-index: 1100; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--color-white); border-radius: 2px; transition: all 0.3s ease; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ========== SUCCESS HERO ========== */
+    .success-hero {
+      background: radial-gradient(ellipse at top, #1a1040 0%, var(--color-dark) 60%);
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+    }
+    .checkmark-ring {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4dffb0, #4d9fff);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 2rem;
+      box-shadow: 0 0 40px rgba(77,255,176,0.4);
+    }
+    .checkmark-ring i {
+      font-size: 2.2rem;
+      color: var(--color-dark);
+    }
+    .success-hero h1 {
+      font-family: var(--font-heading);
+      font-size: 2.8rem; font-weight: 800;
+      color: var(--color-white);
+      margin-bottom: 1rem;
+    }
+    .success-hero p {
+      font-size: 1.1rem;
+      color: var(--color-text-muted);
+      max-width: 540px;
+      margin: 0 auto 2.5rem;
+    }
+
+    /* ========== NEXT STEPS ========== */
+    .next-steps {
+      padding: 5rem 2rem;
+      background-color: var(--color-dark-light);
+    }
+    .next-steps h2 {
+      font-family: var(--font-heading);
+      font-size: 2rem; font-weight: 800;
+      color: var(--color-white);
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .steps-grid {
+      max-width: 900px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+    .step-card {
+      background-color: var(--color-dark);
+      border-radius: 14px;
+      padding: 2rem;
+      text-align: center;
+      border: 1px solid var(--color-border);
+    }
+    .step-num {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: var(--color-gradient);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.25rem;
+      font-family: var(--font-heading);
+      font-size: 1.3rem; font-weight: 800;
+      color: var(--color-white);
+    }
+    .step-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--color-white);
+      margin-bottom: 0.6rem;
+    }
+    .step-card p {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background-color: var(--color-dark-light);
+      padding: 3rem 2rem 1.5rem;
+    }
+    .footer-container {
+      max-width: 1200px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .footer-section h4 { color: var(--color-white); font-size: 1rem; margin-bottom: 1rem; font-weight: 600; }
+    .footer-section a { display: block; color: var(--color-text-muted); text-decoration: none; margin-bottom: 0.5rem; transition: color 0.3s; }
+    .footer-section a:hover { color: var(--color-primary); }
+    .footer-bottom {
+      border-top: 1px solid var(--color-border);
+      padding-top: 2rem; text-align: center;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-bottom a { color: var(--color-text-muted); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+    .footer-bottom a:hover { color: var(--color-primary); }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background-color: var(--color-dark); flex-direction: column; align-items: flex-start; gap: 0; padding: 0.5rem 0 1rem; box-shadow: 0 8px 24px rgba(0,0,0,0.3); border-top: 1px solid var(--color-border); z-index: 999; }
+      nav.open { display: flex; }
+      nav a { width: 100%; padding: 0.85rem 1.5rem; font-size: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+      nav a.cta-button { margin: 0.75rem 1.5rem 0; width: calc(100% - 3rem); text-align: center; border-bottom: none; }
+      .dropdown { width: 100%; }
+      .dropdown > a { display: flex; justify-content: space-between; align-items: center; }
+      .dropdown > a::after { content: "▾"; font-size: 0.8rem; margin-right: 0.5rem; }
+      .dropdown-menu { display: block; position: static; background-color: rgba(255,255,255,0.04); border-radius: 0; box-shadow: none; margin-top: 0; overflow: hidden; max-height: 0; transition: max-height 0.3s ease; }
+      .dropdown.open .dropdown-menu { max-height: 400px; }
+      .dropdown-menu a { padding: 0.7rem 2rem; font-size: 0.9rem; color: var(--color-text-muted); border-bottom: 1px solid rgba(255,255,255,0.04); }
+      .success-hero h1 { font-size: 2rem; }
+    }
+    @media (max-width: 480px) {
+      .footer-container { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <a href="index.html">
+          <img src="Omnix-logo-only.png" alt="Omnix" class="logo-icon">
+          <img src="Omnix-name-only.png" alt="Omnix" class="logo-name">
+        </a>
+      </div>
+      <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="main-nav">
+        <div class="dropdown" id="products-dropdown">
+          <a href="index.html#products" onclick="toggleDropdown(event, 'products-dropdown')">Products</a>
+          <div class="dropdown-menu">
+            <a href="index.html#functional-website">Functional Website</a>
+            <a href="index.html#review-funnel">5-Star Magic Review Funnel</a>
+            <a href="index.html#missed-calls">Missed Call Text Back</a>
+            <a href="index.html#marketing">One-Click Marketing</a>
+            <a href="index.html#local-seo">Local SEO</a>
+          </div>
+        </div>
+        <a href="pricing.html">Pricing</a>
+        <a href="testimonials.html">Testimonials</a>
+        <a href="about.html">About</a>
+        <a href="contact.html" class="cta-button">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- SUCCESS HERO -->
+  <section class="success-hero">
+    <div class="checkmark-ring">
+      <i class="fas fa-check"></i>
+    </div>
+    <h1>You're in. Welcome to Omnix.</h1>
+    <p>Your payment was successful. Our team will be in touch within one business day to kick things off.</p>
+    <a href="index.html" class="cta-button">Back to Home</a>
+  </section>
+
+  <!-- NEXT STEPS -->
+  <section class="next-steps">
+    <h2>Here's what happens next</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Check your inbox</h3>
+        <p>You'll receive a confirmation email from Stripe with your receipt and subscription details.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>We reach out</h3>
+        <p>Someone from our team will contact you within one business day to begin your onboarding.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Go live</h3>
+        <p>We handle the setup end to end. Most clients are fully live and running within a week.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h4>Omnix</h4>
+        <a href="index.html#products">Products</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="about.html">About</a>
+      </div>
+      <div class="footer-section">
+        <h4>Support</h4>
+        <a href="mailto:[EMAIL]">[EMAIL]</a>
+        <a href="#">Help Center</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Omnix. All rights reserved.</p>
+      <div>
+        <a href="terms.html">Terms &amp; Conditions</a> &bull;
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleNav() {
+      const nav = document.getElementById('main-nav');
+      const btn = document.getElementById('hamburger');
+      nav.classList.toggle('open');
+      btn.classList.toggle('open');
+    }
+    function closeNav() {
+      document.getElementById('main-nav').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+    }
+    function toggleDropdown(e, id) {
+      if (window.innerWidth <= 768) {
+        e.preventDefault();
+        document.getElementById(id).classList.toggle('open');
+      }
+    }
+    document.addEventListener('click', function(e) {
+      const header = document.querySelector('header');
+      if (!header.contains(e.target)) closeNav();
+    });
+  </script>
+</body>
+</html>
