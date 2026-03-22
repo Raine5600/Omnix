@@ -599,7 +599,7 @@
         <div class="toggle-thumb" id="toggle-thumb"></div>
       </div>
       <span class="toggle-label" id="lbl-yearly" onclick="setBilling('yearly')">
-        Yearly <span class="save-pill">SAVE $1,499</span>
+        Yearly <span class="save-pill">SAVE 50%</span>
       </span>
     </div>
 
@@ -613,6 +613,7 @@
         <span class="period" id="price-period">/mo</span>
       </div>
       <p class="setup-fee-line" id="setup-fee-line">+ $1,499 one-time setup fee</p>
+      <p class="yearly-savings-line" id="yearly-savings-line" style="display:none; font-size:0.82rem; color:#4dffb0; font-weight:600; margin-top:0.35rem;">✓ Setup fee waived — save $1,499 &nbsp;·&nbsp; 50% off vs monthly</p>
 
       <hr class="pricing-divider">
       <p class="pricing-feature">Functional Website (10–20 pages)</p>
@@ -904,27 +905,30 @@
 
     function setBilling(mode) {
       billingMode = mode;
-      const toggle    = document.getElementById('billing-toggle');
-      const feeLine   = document.getElementById('setup-fee-line');
-      const amount    = document.getElementById('price-amount');
-      const period    = document.getElementById('price-period');
-      const lblMo     = document.getElementById('lbl-monthly');
-      const lblYr     = document.getElementById('lbl-yearly');
+      const toggle       = document.getElementById('billing-toggle');
+      const feeLine      = document.getElementById('setup-fee-line');
+      const savingsLine  = document.getElementById('yearly-savings-line');
+      const amount       = document.getElementById('price-amount');
+      const period       = document.getElementById('price-period');
+      const lblMo        = document.getElementById('lbl-monthly');
+      const lblYr        = document.getElementById('lbl-yearly');
 
       if (mode === 'yearly') {
         toggle.classList.add('yearly');
         amount.textContent = '$3,564';
         period.textContent = '/yr';
-        feeLine.textContent = '✓ Setup fee waived — save $1,499';
-        feeLine.classList.add('waived');
+        feeLine.style.display = 'none';
+        savingsLine.style.display = 'block';
         lblMo.classList.remove('active');
         lblYr.classList.add('active');
       } else {
         toggle.classList.remove('yearly');
         amount.textContent = '$597';
         period.textContent = '/mo';
+        feeLine.style.display = 'block';
         feeLine.textContent = '+ $1,499 one-time setup fee';
         feeLine.classList.remove('waived');
+        savingsLine.style.display = 'none';
         lblMo.classList.add('active');
         lblYr.classList.remove('active');
       }
