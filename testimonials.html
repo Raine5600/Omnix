@@ -203,6 +203,34 @@
       font-style: italic;
     }
 
+    /* ========== FEATURED CARD (Matt) ========== */
+    .t-card.t-featured {
+      column-span: all;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      background: linear-gradient(135deg, #161630, #1a1040);
+      border-color: var(--color-primary);
+      box-shadow: 0 0 30px rgba(77,159,255,0.12);
+    }
+    .t-featured-video {
+      flex: 0 0 280px;
+      border-radius: 12px;
+      overflow: hidden;
+      line-height: 0;
+    }
+    .t-featured-video video {
+      width: 100%;
+      display: block;
+      border-radius: 12px;
+    }
+    .t-featured-content { flex: 1; }
+    .t-featured-content .t-name { font-size: 1.1rem; }
+    @media (max-width: 768px) {
+      .t-card.t-featured { flex-direction: column; }
+      .t-featured-video { flex: none; width: 100%; }
+    }
+
     /* ========== PROCESS SECTION ========== */
     .process-section {
       padding: 5rem 2rem;
@@ -643,16 +671,20 @@
         <p class="t-quote">"They made me a brand new website — super professional — and it's been absolutely amazing. I cannot say enough good things. It turned those hundreds of viewers into hundreds of clients!"</p>
       </div>
 
-      <div class="t-card">
-        <div class="t-card-header">
-          <div class="t-avatar building-avatar"><img src="avatars/building_landscaping.png" alt="Matt"></div>
-          <div class="t-meta">
-            <div class="t-name">Matt</div>
-            <div class="t-role">Landscaping Business Owner</div>
-          </div>
+      <div class="t-card t-featured">
+        <div class="t-featured-video">
+          <video id="chibi-video" src="Swirl.mp4" autoplay muted playsinline></video>
         </div>
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"At first I was skeptical, but it turns out they're just a really good company at a really good price. I would recommend them to anyone!"</p>
+        <div class="t-featured-content">
+          <div class="t-card-header">
+            <div class="t-meta">
+              <div class="t-name">Matt's Lawn Care &amp; Snow Plow LLC</div>
+              <div class="t-role">Landscaping &amp; Snow Removal</div>
+            </div>
+          </div>
+          <div class="t-stars">★★★★★</div>
+          <p class="t-quote">"At first I was skeptical, but it turns out they're just a really good company at a really good price. I would recommend them to anyone!"</p>
+        </div>
       </div>
 
       <div class="t-card">
@@ -861,6 +893,15 @@
       const header = document.querySelector('header');
       if (!header.contains(e.target)) closeNav();
     });
+
+    // Chibi video: pause 3 seconds on last frame, then replay
+    (function() {
+      var v = document.getElementById('chibi-video');
+      if (!v) return;
+      v.addEventListener('ended', function() {
+        setTimeout(function() { v.play(); }, 3000);
+      });
+    })();
   </script>
 
 </body>
