@@ -38,6 +38,6 @@
   <!-- Diamond border -->
   <polygon points="100,8 192,100 100,192 8,100" fill="none" stroke="#F5CBA7" stroke-width="3"/>
   <!-- Text -->
-  <text x="100" y="95" font-family="Arial Black,sans-serif" font-size="30" font-weight="900" fill="#F5CBA7" text-anchor="middle">SF</text>
-  <text x="100" y="115" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#FFCCBC" text-anchor="middle" letter-spacing="1">TILE &amp; FLOORING</text>
+  <text x="100" y="90" font-family="Arial Black,sans-serif" font-size="19" font-weight="900" fill="#F5CBA7" text-anchor="middle" letter-spacing="1">SOLETECH</text>
+  <text x="100" y="112" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#FFCCBC" text-anchor="middle" letter-spacing="1">FLOORING</text>
 </svg>

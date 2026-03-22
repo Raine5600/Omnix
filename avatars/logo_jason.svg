@@ -37,5 +37,5 @@
   <path d="M150,112 Q143,100 146,88 Q149,80 150,76 Q150,82 153,84 Q153,78 156,72 Q157,81 155,86 Q157,83 158,88 Q159,96 150,112Z" fill="#FFEE58"/>
   <text x="150" y="132" font-family="Arial,sans-serif" font-size="9" fill="#FFAB40" text-anchor="middle" letter-spacing="1">HEATING</text>
   <!-- Bottom text -->
-  <text x="100" y="157" font-family="Arial Black,sans-serif" font-size="20" font-weight="900" fill="white" text-anchor="middle" letter-spacing="1">JASON'S HVAC</text>
+  <text x="100" y="157" font-family="Arial Black,sans-serif" font-size="18" font-weight="900" fill="white" text-anchor="middle" letter-spacing="1">ARCTICFLOW HVAC</text>
 </svg>

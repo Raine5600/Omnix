@@ -21,9 +21,9 @@
   <!-- Pull tab -->
   <rect x="120" y="52" width="16" height="4" rx="2" fill="#C8972A"/>
   <!-- Main text in gold band area -->
-  <text x="100" y="104" font-family="Arial Black,sans-serif" font-size="22" font-weight="900" fill="#C8972A" text-anchor="middle" letter-spacing="2">TOM'S</text>
+  <text x="100" y="104" font-family="Arial Black,sans-serif" font-size="18" font-weight="900" fill="#C8972A" text-anchor="middle" letter-spacing="2">CRAFTSMAN</text>
   <!-- Sub text -->
-  <text x="100" y="138" font-family="Arial Black,sans-serif" font-size="17" font-weight="900" fill="white" text-anchor="middle" letter-spacing="1">REMODELING</text>
+  <text x="100" y="133" font-family="Arial Black,sans-serif" font-size="15" font-weight="900" fill="white" text-anchor="middle" letter-spacing="1">BUILD CO.</text>
   <text x="100" y="157" font-family="Arial,sans-serif" font-size="10" fill="#7986CB" text-anchor="middle" letter-spacing="1.5">LICENSED &amp; INSURED</text>
   <!-- Outer border -->
   <rect x="12" y="12" width="176" height="176" rx="16" fill="none" stroke="#C8972A" stroke-width="2" opacity="0.4"/>
