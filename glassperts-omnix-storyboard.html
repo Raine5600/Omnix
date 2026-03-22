@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Glassperts Website — Omnix Storyboard</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Courier+Prime:wght@400;700&display=swap');
+
+    :root {
+      --navy: #1a2340;
+      --gold: #f5a623;
+      --charcoal: #2c2c2c;
+      --white: #ffffff;
+      --light-gray: #f4f6fa;
+      --mid-gray: #e2e8f0;
+      --accent-teal: #2ab5c4;
+      --prompt-bg: #0f172a;
+      --prompt-border: #334155;
+      --label: #64748b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0f2f8;
+      color: var(--charcoal);
+    }
+
+    /* ── COVER ── */
+    .cover {
+      background: linear-gradient(135deg, var(--navy) 0%, #0d1730 100%);
+      color: white;
+      padding: 60px 48px 50px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 32px;
+    }
+    .cover-left h1 {
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .cover-left h1 span { color: var(--gold); }
+    .cover-left p {
+      font-size: 15px;
+      color: #94a3b8;
+      max-width: 540px;
+      line-height: 1.7;
+    }
+    .cover-meta {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 20px 28px;
+      font-size: 13px;
+      color: #94a3b8;
+      white-space: nowrap;
+    }
+    .cover-meta strong { color: white; font-size: 14px; display: block; margin-bottom: 8px; }
+    .cover-meta div { margin-bottom: 6px; }
+    .cover-meta span { color: var(--gold); }
+
+    /* ── FLOW OVERVIEW ── */
+    .flow-section {
+      background: white;
+      padding: 40px 48px;
+      border-bottom: 1px solid var(--mid-gray);
+    }
+    .flow-section h2 {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--label);
+      margin-bottom: 24px;
+    }
+    .flow-steps {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+    .flow-step {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .flow-step-box {
+      background: var(--navy);
+      color: white;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      text-align: center;
+      min-width: 110px;
+    }
+    .flow-step-box .step-num {
+      font-size: 10px;
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-bottom: 3px;
+    }
+    .flow-arrow {
+      color: var(--gold);
+      font-size: 22px;
+      font-weight: 700;
+      padding: 0 4px;
+    }
+
+    /* ── STORYBOARD GRID ── */
+    .storyboard {
+      padding: 40px 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* ── SCENE CARD ── */
+    .scene {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      display: grid;
+      grid-template-columns: 280px 1fr;
+    }
+    .scene.reverse { grid-template-columns: 1fr 280px; }
+
+    /* Scene visual panel */
+    .scene-visual {
+      position: relative;
+      min-height: 240px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+    }
+    .scene-visual .scene-num {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+    .scene-visual .scene-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: white;
+      line-height: 1.3;
+    }
+    .scene-visual .scene-sub {
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+      margin-top: 4px;
+    }
+
+    /* Visual backgrounds */
+    .bg-nav    { background: linear-gradient(175deg, #2c2c2c 60%, #1a1a1a 100%); }
+    .bg-hero   { background: linear-gradient(135deg, #1e3a5f 0%, #2c4a3e 100%); }
+    .bg-modal  { background: linear-gradient(160deg, var(--navy) 0%, #0d1a30 100%); }
+    .bg-form   { background: linear-gradient(160deg, #1a2340 0%, #0f1a2e 100%); }
+    .bg-submit { background: linear-gradient(135deg, #1a3a20 0%, #1a2340 100%); }
+    .bg-sms    { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+    .bg-full   { background: linear-gradient(135deg, #1a2340 0%, #2c4a5e 100%); }
+    .bg-brand  { background: linear-gradient(135deg, #1a2340 0%, #0d1730 100%); }
+
+    /* Scene content panel */
+    .scene-content {
+      padding: 28px 32px;
+      border-left: 1px solid var(--mid-gray);
+    }
+    .scene.reverse .scene-content { border-left: none; border-right: 1px solid var(--mid-gray); }
+
+    .scene-content .element-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 20px;
+      letter-spacing: 0.04em;
+    }
+    .tag-ui    { background: #eff6ff; color: #2563eb; }
+    .tag-copy  { background: #fef9ee; color: #b45309; }
+    .tag-flow  { background: #f0fdf4; color: #15803d; }
+    .tag-brand { background: #faf5ff; color: #7c3aed; }
+    .tag-sms   { background: #fdf4ff; color: #a21caf; }
+    .tag-logic { background: #fff7ed; color: #c2410c; }
+
+    .scene-content h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--charcoal);
+      margin-bottom: 14px;
+    }
+
+    /* Prompt block */
+    .prompt-block {
+      background: var(--prompt-bg);
+      border: 1px solid var(--prompt-border);
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin-bottom: 14px;
+      position: relative;
+    }
+    .prompt-block .prompt-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .prompt-block p {
+      font-family: 'Courier Prime', monospace;
+      font-size: 12.5px;
+      color: #e2e8f0;
+      line-height: 1.75;
+    }
+    .prompt-block p .hl { color: var(--gold); }
+    .prompt-block p .hl-teal { color: #67e8f9; }
+    .prompt-block p .hl-green { color: #86efac; }
+
+    /* Spec list */
+    .spec-list {
+      list-style: none;
+      margin-top: 10px;
+    }
+    .spec-list li {
+      font-size: 12.5px;
+      color: #475569;
+      padding: 5px 0 5px 16px;
+      border-bottom: 1px solid #f1f5f9;
+      position: relative;
+      line-height: 1.5;
+    }
+    .spec-list li:last-child { border-bottom: none; }
+    .spec-list li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 10px;
+      top: 6px;
+    }
+    .spec-list li strong { color: var(--charcoal); font-weight: 600; }
+
+    /* Mini mockup elements embedded in visuals */
+    .mini-nav {
+      background: rgba(44,44,44,0.95);
+      border-radius: 8px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .mini-logo {
+      width: 28px; height: 28px;
+      background: var(--navy);
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 8px; font-weight: 900; color: var(--gold);
+    }
+    .mini-links { display: flex; gap: 8px; }
+    .mini-link { font-size: 8px; color: #ccc; font-weight: 600; letter-spacing: 0.06em; }
+    .mini-cta { background: var(--gold); color: var(--navy); font-size: 8px; font-weight: 800; padding: 4px 8px; border-radius: 4px; }
+    .mini-phone-btn { border: 1px solid #555; color: #ccc; font-size: 8px; padding: 4px 8px; border-radius: 4px; }
+
+    .mini-hero-text { margin-bottom: 10px; }
+    .mini-hero-text h4 { font-size: 14px; font-weight: 900; color: white; line-height: 1.2; text-transform: uppercase; }
+    .mini-hero-text p { font-size: 9px; color: rgba(255,255,255,0.7); margin-top: 6px; line-height: 1.5; }
+
+    .mini-modal {
+      background: var(--navy);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .mini-modal h5 { font-size: 10px; font-weight: 900; color: white; text-align: center; letter-spacing: 0.06em; margin-bottom: 10px; }
+    .mini-input-row { display: flex; gap: 6px; margin-bottom: 6px; }
+    .mini-input { background: white; border-radius: 3px; height: 16px; flex: 1; font-size: 7px; color: #999; padding: 0 5px; display: flex; align-items: center; }
+    .mini-textarea { background: white; border-radius: 3px; height: 28px; width: 100%; margin-bottom: 6px; }
+    .mini-checkbox-row { display: flex; align-items: flex-start; gap: 5px; margin-bottom: 8px; }
+    .mini-checkbox { width: 8px; height: 8px; border: 1px solid #aaa; border-radius: 1px; flex-shrink: 0; margin-top: 1px; }
+    .mini-checkbox-text { font-size: 7px; color: rgba(255,255,255,0.6); line-height: 1.4; }
+    .mini-send-btn { background: var(--gold); color: var(--navy); font-size: 9px; font-weight: 900; width: 100%; text-align: center; padding: 5px; border-radius: 4px; letter-spacing: 0.08em; }
+
+    .mini-phone {
+      background: #1a1a2e;
+      border-radius: 16px;
+      border: 3px solid #2d2d4e;
+      padding: 14px 10px;
+      width: 120px;
+      margin: 0 auto;
+    }
+    .mini-phone-screen { background: #0a0a1a; border-radius: 8px; padding: 8px; }
+    .mini-sms-bubble {
+      background: #2563eb;
+      border-radius: 8px 8px 8px 2px;
+      padding: 7px 10px;
+      font-size: 8px;
+      color: white;
+      line-height: 1.5;
+      margin-bottom: 5px;
+    }
+    .mini-sms-time { font-size: 7px; color: #64748b; text-align: center; margin-top: 4px; }
+
+    .color-swatches { display: flex; gap: 8px; margin-top: 10px; }
+    .swatch { width: 36px; height: 36px; border-radius: 6px; position: relative; }
+    .swatch span { position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); font-size: 9px; color: #666; white-space: nowrap; font-weight: 600; }
+
+    /* Section dividers */
+    .section-header {
+      padding: 24px 48px 10px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .section-header h2 {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--label);
+    }
+    .section-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--mid-gray);
+    }
+    .section-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* Full-width scene for journey */
+    .scene-full {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+    .scene-full-header {
+      padding: 24px 32px;
+      border-bottom: 1px solid var(--mid-gray);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .scene-full-header .badge {
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+    .scene-full-header h3 { font-size: 16px; font-weight: 800; color: var(--charcoal); }
+    .scene-full-body { padding: 28px 32px; }
+    .journey-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .journey-step {
+      background: var(--light-gray);
+      border-radius: 10px;
+      padding: 16px;
+      position: relative;
+    }
+    .journey-step .j-num {
+      width: 24px; height: 24px;
+      background: var(--navy);
+      color: var(--gold);
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 10px;
+    }
+    .journey-step h4 { font-size: 13px; font-weight: 700; margin-bottom: 6px; color: var(--navy); }
+    .journey-step p { font-size: 11.5px; color: #64748b; line-height: 1.55; }
+    .journey-step .j-prompt {
+      margin-top: 10px;
+      background: var(--prompt-bg);
+      border-radius: 6px;
+      padding: 10px;
+      font-family: 'Courier Prime', monospace;
+      font-size: 10.5px;
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+    .journey-step .j-prompt .hl { color: var(--gold); }
+
+    /* Footer */
+    .doc-footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      font-size: 12px;
+      padding: 24px;
+      margin-top: 8px;
+    }
+    .doc-footer strong { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-left">
+    <h1>The Glassperts<br/><span>Omnix Prompt Storyboard</span></h1>
+    <p>A complete frame-by-frame breakdown of every visual, interaction, and automation element needed to recreate the Glassperts contractor website experience — including the live SMS lead notification flow.</p>
+  </div>
+  <div class="cover-meta">
+    <strong>Document Details</strong>
+    <div>Reference Site: <span>The Glassperts</span></div>
+    <div>Business Type: <span>Contractor / Local Service</span></div>
+    <div>Key Feature: <span>Quote Form → SMS Alert</span></div>
+    <div>Total Scenes: <span>8</span></div>
+    <div>Created: <span>March 2026</span></div>
+  </div>
+</div>
+
+<!-- FLOW OVERVIEW -->
+<div class="flow-section">
+  <h2>End-to-End User Journey</h2>
+  <div class="flow-steps">
+    <div class="flow-step">
+      <div class="flow-step-box"><div class="step-num">SCENE 1</div>Brand Setup</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-step-box"><div class="step-num">SCENE 2</div>Nav Bar</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-step-box"><div class="step-num">SCENE 3</div>Hero Section</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-step-box"><div class="step-num">SCENE 4</div>Quote Modal</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-step-box"><div class="step-num">SCENE 5</div>Form Fields</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-step-box"><div class="step-num">SCENE 6</div>Submission</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-step-box"><div class="step-num">SCENE 7</div>SMS Alert</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-step-box"><div class="step-num">SCENE 8</div>Full Journey</div>
+    </div>
+  </div>
+</div>
+
+<!-- STORYBOARD SCENES -->
+<div class="storyboard">
+
+  <!-- SECTION: BRAND -->
+  <div class="section-header">
+    <div class="section-dot"></div>
+    <h2>Brand Foundation</h2>
+  </div>
+
+  <!-- SCENE 1 — Brand & Colors -->
+  <div class="scene">
+    <div class="scene-visual bg-brand">
+      <div class="scene-num">SCENE 01</div>
+      <div style="padding: 20px 0 10px;">
+        <div style="display:flex; align-items:center; gap:14px; margin-bottom:16px;">
+          <div style="width:52px;height:52px;background:var(--navy);border:3px solid var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:9px;font-weight:900;color:var(--gold);letter-spacing:0.04em;">GLASS<br/>PERTS</span>
+          </div>
+          <div>
+            <div style="font-size:16px;font-weight:900;color:white;">THE GLASSPERTS</div>
+            <div style="font-size:9px;color:var(--gold);letter-spacing:0.08em;margin-top:2px;">SLIDING GLASS DOOR & WINDOW REPAIR</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <div style="width:28px;height:28px;border-radius:5px;background:#1a2340;border:1px solid rgba(255,255,255,0.2);"></div>
+          <div style="width:28px;height:28px;border-radius:5px;background:#f5a623;"></div>
+          <div style="width:28px;height:28px;border-radius:5px;background:#2ab5c4;"></div>
+          <div style="width:28px;height:28px;border-radius:5px;background:#2c2c2c;"></div>
+          <div style="width:28px;height:28px;border-radius:5px;background:#ffffff;border:1px solid rgba(255,255,255,0.3);"></div>
+        </div>
+      </div>
+      <div class="scene-title">Brand Identity & Color System</div>
+      <div class="scene-sub">Logo · Colors · Typography</div>
+    </div>
+    <div class="scene-content">
+      <div class="element-tags">
+        <span class="tag tag-brand">Brand</span>
+        <span class="tag tag-ui">UI System</span>
+      </div>
+      <h3>Omnix Prompt — Brand Setup</h3>
+      <div class="prompt-block">
+        <div class="prompt-label">Prompt</div>
+        <p>Create a website for a local contractor business called <span class="hl">"The Glassperts"</span> specializing in <span class="hl-teal">sliding glass door and window repair</span>. Use this exact color palette:
+<br/><br/>
+— Primary background: <span class="hl">#1A2340</span> (deep navy)
+<br/>— Accent/CTA color: <span class="hl">#F5A623</span> (gold/amber)
+<br/>— Secondary accent: <span class="hl">#2AB5C4</span> (teal)
+<br/>— Dark UI chrome: <span class="hl">#2C2C2C</span> (charcoal)
+<br/>— Text on dark: <span class="hl-green">#FFFFFF</span>
+<br/><br/>
+The logo is a <span class="hl-teal">hexagonal badge</span> with the business name. Font: bold, uppercase sans-serif. The tagline is <span class="hl">"Sliding Glass Door &amp; Window Repair"</span>.</p>
+      </div>
+      <ul class="spec-list">
+        <li><strong>Logo shape:</strong> Hexagonal badge/shield with dark navy fill and gold border</li>
+        <li><strong>Wordmark:</strong> All-caps "THE GLASSPERTS" in bold white, tagline smaller below</li>
+        <li><strong>Typeface:</strong> Heavy/black weight sans-serif (similar to Montserrat Black or Impact)</li>
+        <li><strong>Icon teal:</strong> Used for interactive elements like chat bubble</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION: WEBSITE LAYOUT -->
+  <div class="section-header">
+    <div class="section-dot"></div>
+    <h2>Website Layout</h2>
+  </div>
+
+  <!-- SCENE 2 — Navigation Bar -->
+  <div class="scene">
+    <div class="scene-visual bg-nav">
+      <div class="scene-num">SCENE 02</div>
+      <div class="mini-nav" style="margin-bottom:auto; margin-top:60px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div class="mini-logo">GP</div>
+        </div>
+        <div class="mini-links">
+          <span class="mini-link">HOME</span>
+          <span class="mini-link">SERVICES ▾</span>
+          <span class="mini-link">GALLERY</span>
+          <span class="mini-link">SERVICE AREAS ▾</span>
+          <span class="mini-link">BLOG</span>
+          <span class="mini-link">CONTACT</span>
+        </div>
+        <div style="display:flex;gap:6px;">
+          <div class="mini-cta">GET FREE QUOTE</div>
+          <div class="mini-phone-btn">☎ (866)-483-7546</div>
+        </div>
+      </div>
+      <div class="scene-title">Navigation Bar</div>
+      <div class="scene-sub">Header · Links · CTA Buttons</div>
+    </div>
+    <div class="scene-content">
+      <div class="element-tags">
+        <span class="tag tag-ui">UI Component</span>
+        <span class="tag tag-copy">Copy</span>
+      </div>
+      <h3>Omnix Prompt — Navigation Header</h3>
+      <div class="prompt-block">
+        <div class="prompt-label">Prompt</div>
+        <p>Build a <span class="hl">sticky navigation bar</span> with a <span class="hl-teal">dark charcoal (#2C2C2C)</span> background. Include:
+<br/><br/>
+<span class="hl">Left:</span> The Glassperts hexagonal logo
+<br/><span class="hl">Center:</span> Nav links — HOME | SERVICES (dropdown) | GALLERY | SERVICE AREAS (dropdown) | BLOG | CONTACT
+<br/><span class="hl">Right:</span> Two buttons:
+<br/>  1. Gold filled button: <span class="hl">"GET FREE QUOTE"</span> — scrolls to quote form
+<br/>  2. Dark outlined button: <span class="hl-green">"☎ (866)-483-7546"</span> — initiates phone call
+<br/><br/>Nav link style: white, uppercase, small font, spaced out. SERVICES and SERVICE AREAS have dropdown chevrons.</p>
+      </div>
+      <ul class="spec-list">
+        <li><strong>Background:</strong> Charcoal #2C2C2C, full-width, slight shadow</li>
+        <li><strong>Logo:</strong> Left-aligned, ~40px height</li>
+        <li><strong>Nav links:</strong> White, uppercase, ~13px, spaced evenly in center</li>
+        <li><strong>GET FREE QUOTE:</strong> Gold fill (#F5A623), navy text, rounded corners, bold</li>
+        <li><strong>Phone button:</strong> Dark outlined, white text, phone icon prefix</li>
+        <li><strong>Dropdowns:</strong> SERVICES and SERVICE AREAS have ▾ chevrons indicating submenus</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SCENE 3 — Hero Section -->
+  <div class="scene reverse">
+    <div class="scene-content" style="border-right:1px solid var(--mid-gray);">
+      <div class="element-tags">
+        <span class="tag tag-ui">Hero</span>
+        <span class="tag tag-copy">Headline Copy</span>
+        <span class="tag tag-brand">Background</span>
+      </div>
+      <h3>Omnix Prompt — Hero Section</h3>
+      <div class="prompt-block">
+        <div class="prompt-label">Prompt</div>
+        <p>Create a <span class="hl">full-viewport hero section</span> with a <span class="hl-teal">full-bleed background photo</span> of sliding glass doors opening to an ocean/pool view. Apply a dark overlay (opacity ~40%) to ensure text readability.
+<br/><br/>
+<span class="hl">Left side (≈45% width) — text block:</span>
+<br/>Headline (white, bold, all-caps, large):
+<br/><span class="hl">"THE GLASSPERTS SLIDING GLASS DOOR &amp; WINDOW REPAIR"</span>
+<br/><br/>
+Body text (white, smaller):
+<br/><span class="hl-green">"The Glassperts sliding glass door &amp; window repair specializes in sliding door, window, and glass repair. With a foundation built on expertise gained from over 5 years of industry experience..."</span>
+<br/><br/>
+<span class="hl">Right side:</span> Floating quote form card (see Scene 04).</p>
+      </div>
+      <ul class="spec-list">
+        <li><strong>Background photo:</strong> Luxury home interior with open sliding glass doors, ocean/water in background</li>
+        <li><strong>Headline size:</strong> 48–56px, font-weight 900, line-height tight</li>
+        <li><strong>Body text:</strong> 14–15px, white, ~50% opacity or slightly dimmed</li>
+        <li><strong>Layout split:</strong> 45% text left | 55% modal right</li>
+        <li><strong>Vertical centering:</strong> Content vertically centered in the viewport</li>
+      </ul>
+    </div>
+    <div class="scene-visual bg-hero">
+      <div class="scene-num">SCENE 03</div>
+      <div class="mini-hero-text" style="margin-top:60px;">
+        <h4>THE GLASSPERTS<br/>SLIDING GLASS<br/>DOOR & WINDOW<br/>REPAIR</h4>
+        <p>Specializes in sliding door, window, and glass repair. 5+ years of industry experience...</p>
+      </div>
+      <div class="scene-title">Hero Section</div>
+      <div class="scene-sub">Background Photo · Headline · Body Copy</div>
+    </div>
+  </div>
+
+  <!-- SECTION: QUOTE FORM -->
+  <div class="section-header">
+    <div class="section-dot"></div>
+    <h2>Quote Form & Modal</h2>
+  </div>
+
+  <!-- SCENE 4 — Quote Modal Card -->
+  <div class="scene">
+    <div class="scene-visual bg-modal">
+      <div class="scene-num">SCENE 04</div>
+      <div style="margin-top:50px; margin-bottom:10px;">
+        <div class="mini-modal">
+          <div style="width:32px;height:32px;background:var(--navy);border:2px solid var(--gold);border-radius:5px;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:6px;font-weight:900;color:var(--gold);">GP</span>
+          </div>
+          <h5>GET A FREE QUOTE</h5>
+          <div class="mini-input-row">
+            <div class="mini-input">Full Name *</div>
+            <div class="mini-input">Phone *</div>
+          </div>
+          <div class="mini-textarea"></div>
+          <div class="mini-checkbox-row">
+            <div class="mini-checkbox"></div>
+            <div class="mini-checkbox-text">I agree to terms & conditions...</div>
+          </div>
+          <div class="mini-send-btn">SEND</div>
+        </div>
+      </div>
+      <div class="scene-title">Quote Form Card</div>
+      <div class="scene-sub">Floating Modal · Dark Navy</div>
+    </div>
+    <div class="scene-content">
+      <div class="element-tags">
+        <span class="tag tag-ui">Modal / Card</span>
+        <span class="tag tag-ui">Form UI</span>
+        <span class="tag tag-brand">Dark Theme</span>
+      </div>
+      <h3>Omnix Prompt — Quote Form Card Layout</h3>
+      <div class="prompt-block">
+        <div class="prompt-label">Prompt</div>
+        <p>On the right side of the hero, place a <span class="hl">floating dark navy card</span> (#1A2340) with slight box-shadow, rounded corners. The card contains:
+<br/><br/>
+<span class="hl">Top:</span> The Glassperts logo (centered)
+<br/><span class="hl">Heading:</span> <span class="hl-green">"GET A FREE QUOTE"</span> — white, bold, centered, uppercase, large
+<br/><span class="hl">Form layout below</span> (see Scene 05 for field details)
+<br/><br/>
+Card styling: <span class="hl-teal">dark navy background</span>, white text, approximately 380px wide, vertically centered in the hero. The card should feel like a popup/overlay panel floating over the background image.</p>
+      </div>
+      <ul class="spec-list">
+        <li><strong>Card background:</strong> Deep navy #1A2340 with subtle drop shadow</li>
+        <li><strong>Card width:</strong> ~380px, padding 28–32px all sides</li>
+        <li><strong>Logo:</strong> Centered at top, ~50px height</li>
+        <li><strong>"GET A FREE QUOTE":</strong> Centered, white, ~22px, font-weight 800, letter-spacing</li>
+        <li><strong>Position:</strong> Right-aligned in hero, vertically centered</li>
+        <li><strong>Border-radius:</strong> ~12px rounded corners</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SCENE 5 — Form Fields Detail -->
+  <div class="scene reverse">
+    <div class="scene-content" style="border-right:1px solid var(--mid-gray);">
+      <div class="element-tags">
+        <span class="tag tag-ui">Form Fields</span>
+        <span class="tag tag-copy">Labels</span>
+        <span class="tag tag-logic">Validation</span>
+      </div>
+      <h3>Omnix Prompt — Form Fields & Inputs</h3>
+      <div class="prompt-block">
+        <div class="prompt-label">Prompt</div>
+        <p>Inside the quote card, build this exact form structure:
+<br/><br/>
+<span class="hl">Row 1 (side by side, 50/50 split):</span>
+<br/>— Input: <span class="hl-teal">"Full Name *"</span> (required, text)
+<br/>— Input: <span class="hl-teal">"Phone *"</span> (required, tel)
+<br/><br/>
+<span class="hl">Row 2 (full width):</span>
+<br/>— Textarea: <span class="hl-teal">"Short message about your needs *"</span> (required, ~3 rows tall)
+<br/><br/>
+<span class="hl">Row 3:</span>
+<br/>— Checkbox + label text: <span class="hl-green">"I agree to terms &amp; conditions provided by the company. By providing my phone number, I agree to receive text messages from the business."</span>
+<br/>  (The words "terms &amp; conditions" should be a gold underlined hyperlink)
+<br/><br/>
+<span class="hl">Row 4 (full width):</span>
+<br/>— Submit button: <span class="hl">"SEND"</span> — gold fill, navy text, full width, bold uppercase</p>
+      </div>
+      <ul class="spec-list">
+        <li><strong>Input styling:</strong> White background, no border or thin gray border, rounded ~4px</li>
+        <li><strong>Input labels:</strong> Small white text above each field with asterisk for required</li>
+        <li><strong>Checkbox:</strong> Standard checkbox, unchecked by default — user must check to submit</li>
+        <li><strong>"terms & conditions" link:</strong> Gold color, underlined, opens terms page</li>
+        <li><strong>SEND button:</strong> Full width, gold (#F5A623), navy text (#1A2340), ~44px height, font-weight 900</li>
+        <li><strong>All fields required:</strong> Form validates before submitting</li>
+      </ul>
+    </div>
+    <div class="scene-visual bg-form">
+      <div class="scene-num">SCENE 05</div>
+      <div style="margin-top:40px; padding:0 10px;">
+        <div style="font-size:9px;color:rgba(255,255,255,0.6);margin-bottom:4px;">Full Name * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Phone *</div>
+        <div class="mini-input-row" style="margin-bottom:8px;">
+          <div class="mini-input" style="height:20px;"></div>
+          <div class="mini-input" style="height:20px;"></div>
+        </div>
+        <div style="font-size:9px;color:rgba(255,255,255,0.6);margin-bottom:4px;">Short message about your needs *</div>
+        <div class="mini-textarea" style="height:36px;background:white;border-radius:3px;width:100%;margin-bottom:8px;"></div>
+        <div class="mini-checkbox-row">
+          <div class="mini-checkbox"></div>
+          <div class="mini-checkbox-text">I agree to <span style="color:var(--gold);text-decoration:underline;">terms &amp; conditions</span>. By providing my phone number, I agree to receive text messages from the business.</div>
+        </div>
+        <div class="mini-send-btn" style="margin-top:8px;">SEND</div>
+      </div>
+      <div class="scene-title">Form Fields Detail</div>
+      <div class="scene-sub">Inputs · Checkbox · Submit</div>
+    </div>
+  </div>
+
+  <!-- SECTION: AUTOMATION -->
+  <div class="section-header">
+    <div class="section-dot"></div>
+    <h2>Submission & SMS Automation</h2>
+  </div>
+
+  <!-- SCENE 6 — Form Submission -->
+  <div class="scene">
+    <div class="scene-visual bg-submit">
+      <div class="scene-num">SCENE 06</div>
+      <div style="margin-top:60px;text-align:center;padding:0 16px;">
+        <div style="width:48px;height:48px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+          <span style="font-size:22px;color:var(--navy);">✓</span>
+        </div>
+        <div style="font-size:12px;font-weight:700;color:white;margin-bottom:6px;">Form Submitted!</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.6);line-height:1.5;">Lead captured.<br/>SMS trigger firing...</div>
+      </div>
+      <div class="scene-title">Form Submission Event</div>
+      <div class="scene-sub">Validation · Confirmation · Trigger</div>
+    </div>
+    <div class="scene-content">
+      <div class="element-tags">
+        <span class="tag tag-flow">Automation</span>
+        <span class="tag tag-logic">Logic</span>
+        <span class="tag tag-ui">UX Feedback</span>
+      </div>
+      <h3>Omnix Prompt — Submission Handling</h3>
+      <div class="prompt-block">
+        <div class="prompt-label">Prompt</div>
+        <p>When the user clicks <span class="hl">SEND</span>, run this logic:
+<br/><br/>
+1. <span class="hl-teal">Validate</span> that Full Name, Phone, and Message are filled AND checkbox is checked. Show inline red error messages if not.
+<br/><br/>
+2. On valid submit: <span class="hl">show a success confirmation</span> inside the card — replace the form with a message like: <span class="hl-green">"Thank you! We'll be in touch shortly."</span> with a gold checkmark icon.
+<br/><br/>
+3. <span class="hl">Simultaneously trigger</span> a backend webhook / SMS automation with the submitted lead data: name, phone number, and message.
+<br/><br/>
+4. Log the lead to a database or CRM entry for the business owner to review.</p>
+      </div>
+      <ul class="spec-list">
+        <li><strong>Validation:</strong> Required fields highlight red if empty on submit attempt</li>
+        <li><strong>Checkbox required:</strong> Must be checked — show error if unchecked</li>
+        <li><strong>Success state:</strong> Form replaced with thank-you message, gold ✓ icon, warm confirmation copy</li>
+        <li><strong>Backend trigger:</strong> POST request fires to webhook (Twilio / SMS provider) with lead data</li>
+        <li><strong>Lead data captured:</strong> Full Name, Phone Number, Message, Timestamp, Source URL</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SCENE 7 — SMS Notification -->
+  <div class="scene reverse">
+    <div class="scene-content" style="border-right:1px solid var(--mid-gray);">
+      <div class="element-tags">
+        <span class="tag tag-sms">SMS / Text</span>
+        <span class="tag tag-flow">Automation</span>
+        <span class="tag tag-logic">Twilio / Backend</span>
+      </div>
+      <h3>Omnix Prompt — SMS Text Alert to Business Owner</h3>
+      <div class="prompt-block">
+        <div class="prompt-label">Prompt</div>
+        <p>When a quote form is submitted, <span class="hl">instantly send an SMS text message</span> to the business owner's phone number using a messaging service (e.g. <span class="hl-teal">Twilio</span> or similar).
+<br/><br/>
+The text message should read:
+<br/><br/>
+<span class="hl-green">"🔔 New Quote Request!
+<br/>Name: [Full Name]
+<br/>Phone: [Phone Number]
+<br/>Message: [Their message]
+<br/>Time: [Timestamp]
+<br/>Source: TheGlassperts.com"</span>
+<br/><br/>
+This allows the business owner to <span class="hl">see the lead notification right on their phone</span>, even if they're not at a computer. The text arrives within seconds of form submission.</p>
+      </div>
+      <ul class="spec-list">
+        <li><strong>SMS provider:</strong> Twilio (recommended), or any webhook-to-SMS service</li>
+        <li><strong>Recipient:</strong> Business owner's mobile number (set in backend config)</li>
+        <li><strong>Content:</strong> Includes all submitted fields — name, phone, message, timestamp</li>
+        <li><strong>Speed:</strong> Delivers within 3–10 seconds of form submission</li>
+        <li><strong>Also optional:</strong> Send confirmation SMS to the customer's number as well</li>
+        <li><strong>Fallback:</strong> Email notification also sent as backup</li>
+      </ul>
+    </div>
+    <div class="scene-visual bg-sms">
+      <div class="scene-num">SCENE 07</div>
+      <div style="margin-top:40px;">
+        <div class="mini-phone">
+          <div class="mini-phone-screen">
+            <div style="font-size:7px;color:#64748b;text-align:center;margin-bottom:6px;">theglassp... • now</div>
+            <div class="mini-sms-bubble">
+              🔔 New Quote Request!<br/>
+              Name: John Smith<br/>
+              Phone: (305) 555-0192<br/>
+              Msg: "Need sliding door fix"<br/>
+              TheGlassperts.com
+            </div>
+            <div class="mini-sms-time">Delivered ✓</div>
+          </div>
+        </div>
+      </div>
+      <div class="scene-title">SMS to Owner's Phone</div>
+      <div class="scene-sub">Instant Lead Alert · Real-Time</div>
+    </div>
+  </div>
+
+  <!-- SECTION: ADDITIONAL ELEMENTS -->
+  <div class="section-header">
+    <div class="section-dot"></div>
+    <h2>Supporting Elements</h2>
+  </div>
+
+  <!-- SCENE 8 — Full Journey + Chat Widget -->
+  <div class="scene-full">
+    <div class="scene-full-header">
+      <div class="badge">SCENE 08</div>
+      <h3>Complete User Journey + Chat Widget</h3>
+    </div>
+    <div class="scene-full-body">
+      <div class="journey-grid">
+        <div class="journey-step">
+          <div class="j-num">1</div>
+          <h4>Customer Lands on Page</h4>
+          <p>Visitor arrives from Google search or ad. Hero image and headline immediately communicate what the business does.</p>
+          <div class="j-prompt">Prompt: <span class="hl">Show a high-quality hero image of sliding glass doors with an ocean view. Overlay headline is bold and immediately communicates the service.</span></div>
+        </div>
+        <div class="journey-step">
+          <div class="j-num">2</div>
+          <h4>Customer Sees the Form</h4>
+          <p>The quote card floats over the hero, impossible to miss. Draws the eye with dark navy on photo background.</p>
+          <div class="j-prompt">Prompt: <span class="hl">Position the dark navy form card on the right side of the hero. It should be the most visually prominent element after the headline.</span></div>
+        </div>
+        <div class="journey-step">
+          <div class="j-num">3</div>
+          <h4>Customer Fills & Submits</h4>
+          <p>3 simple fields + checkbox. Low friction. Checking the SMS consent checkbox is required.</p>
+          <div class="j-prompt">Prompt: <span class="hl">Form has only 3 inputs — Name, Phone, Message — and a consent checkbox. Keep it minimal to maximize conversions.</span></div>
+        </div>
+        <div class="journey-step">
+          <div class="j-num">4</div>
+          <h4>Owner Gets Text Instantly</h4>
+          <p>The business owner's phone buzzes with the new lead within seconds — name, number, and message all included.</p>
+          <div class="j-prompt">Prompt: <span class="hl">On form submit, trigger an SMS to the owner's phone with all lead details formatted clearly. Display text arriving on a phone in the demo.</span></div>
+        </div>
+      </div>
+
+      <!-- Chat widget note -->
+      <div style="margin-top:24px;background:var(--light-gray);border-radius:10px;padding:18px 22px;display:flex;align-items:flex-start;gap:16px;">
+        <div style="width:38px;height:38px;background:var(--accent-teal);border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px;">💬</div>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:5px;">Chat Bubble Widget (Bottom-Right Corner)</div>
+          <div style="font-size:12.5px;color:#475569;line-height:1.6;">A teal circular chat icon is pinned to the bottom-right corner of the page. <strong>Omnix Prompt:</strong> "Add a floating chat widget button in the bottom-right corner using a teal (#2AB5C4) circular icon. Clicking it opens a live chat or directs to the phone number. This should persist across all scroll positions (position: fixed)."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FULL PROMPT SUMMARY -->
+  <div class="scene-full" style="margin-top:0;">
+    <div class="scene-full-header">
+      <div class="badge">MASTER PROMPT</div>
+      <h3>Single All-In-One Omnix Prompt to Build Everything</h3>
+    </div>
+    <div class="scene-full-body">
+      <div class="prompt-block" style="margin-bottom:0;">
+        <div class="prompt-label">Complete Omnix Prompt</div>
+        <p>Build a <span class="hl">contractor website</span> for a local glass repair business called <span class="hl">"The Glassperts"</span>. The site should include:
+<br/><br/>
+<span class="hl">1. HEADER:</span> Sticky charcoal nav bar with the Glassperts hexagon logo, nav links (Home, Services▾, Gallery, Service Areas▾, Blog, Contact), a gold "GET FREE QUOTE" button that scrolls to the form, and a phone button showing <span class="hl-teal">(866)-483-7546</span>.
+<br/><br/>
+<span class="hl">2. HERO:</span> Full-viewport section with a background photo of open sliding glass doors (ocean view). Left side has a large bold white headline: <span class="hl-green">"THE GLASSPERTS SLIDING GLASS DOOR & WINDOW REPAIR"</span> plus a short body paragraph about 5+ years experience.
+<br/><br/>
+<span class="hl">3. QUOTE FORM CARD:</span> A floating dark navy card on the right side of the hero containing: the logo, "GET A FREE QUOTE" heading, two side-by-side inputs (Full Name, Phone), a full-width textarea (Short message about your needs), a terms & conditions checkbox with SMS consent language, and a full-width gold SEND button.
+<br/><br/>
+<span class="hl">4. AUTOMATION:</span> When the form is submitted, validate all required fields, show a success confirmation, and <span class="hl">instantly send an SMS text message to the business owner's phone</span> with the lead's name, phone number, message, and timestamp using Twilio.
+<br/><br/>
+<span class="hl">5. CHAT WIDGET:</span> Fixed teal circular chat button in the bottom-right corner of every page.
+<br/><br/>
+<span class="hl">COLOR PALETTE:</span> Navy #1A2340 | Gold #F5A623 | Charcoal #2C2C2C | Teal #2AB5C4 | White text.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="doc-footer">
+  <strong>The Glassperts — Omnix Storyboard</strong> &nbsp;·&nbsp; 8 Scenes &nbsp;·&nbsp; Created March 2026
+</div>
+
+</body>
+</html>

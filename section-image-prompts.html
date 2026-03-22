@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Omnix Section Image Prompts — Grok</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap');
+
+    :root {
+      --navy: #0f172a;
+      --gold: #f59e0b;
+      --border: #e2e8f0;
+      --muted: #64748b;
+      --soft: #f8fafc;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #f1f5f9; color: #1e293b; }
+
+    header {
+      background: var(--navy);
+      padding: 40px 48px 32px;
+    }
+    .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    header h1 { font-size: 28px; font-weight: 900; color: white; line-height: 1.2; margin-bottom: 10px; }
+    header h1 span { color: var(--gold); }
+    header p { font-size: 13.5px; color: #94a3b8; max-width: 580px; line-height: 1.7; }
+    .note { margin-top: 18px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 12px 18px; font-size: 12.5px; color: #94a3b8; max-width: 620px; }
+    .note strong { color: #67e8f9; }
+
+    main { padding: 32px 48px 52px; display: flex; flex-direction: column; gap: 20px; }
+
+    .card {
+      background: white;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    }
+
+    .card-header {
+      display: grid;
+      grid-template-columns: 64px 1fr auto;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      background: #fafbfc;
+    }
+
+    .section-badge {
+      width: 48px; height: 48px;
+      border-radius: 10px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .b1 { background: #fdf4ff; }
+    .b2 { background: #fff7ed; }
+    .b3 { background: #f0fdf4; }
+    .b4 { background: #eff6ff; }
+
+    .card-header-text h2 { font-size: 15px; font-weight: 800; color: #0f172a; margin-bottom: 3px; }
+    .card-header-text p { font-size: 11.5px; color: var(--muted); line-height: 1.5; }
+
+    .site-tag {
+      font-size: 10px; font-weight: 700; padding: 4px 10px;
+      border-radius: 20px; white-space: nowrap; letter-spacing: 0.05em;
+    }
+    .t1 { background: #fdf4ff; color: #7e22ce; }
+    .t2 { background: #fff7ed; color: #c2410c; }
+    .t3 { background: #f0fdf4; color: #15803d; }
+    .t4 { background: #eff6ff; color: #1d4ed8; }
+
+    .card-body { padding: 20px 24px; }
+
+    .prompt-label {
+      font-size: 10px; font-weight: 800; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+    }
+    .prompt-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    .prompt-box {
+      background: #0f172a;
+      border-radius: 10px;
+      padding: 18px 20px;
+      position: relative;
+      margin-bottom: 16px;
+    }
+    .copy-hint {
+      position: absolute; top: 12px; right: 14px;
+      font-size: 10px; font-weight: 600; color: #475569;
+      background: #1e293b; padding: 3px 8px; border-radius: 4px;
+    }
+    .prompt-text {
+      font-family: 'Fira Code', monospace;
+      font-size: 13px; color: #e2e8f0;
+      line-height: 1.85; white-space: pre-wrap; word-break: break-word;
+    }
+    .prompt-text .k { color: #f59e0b; font-weight: 500; }
+    .prompt-text .v { color: #86efac; }
+    .prompt-text .s { color: #67e8f9; }
+
+    .tips-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+    .tip {
+      background: #f8fafc; border: 1px solid var(--border);
+      border-radius: 8px; padding: 9px 13px;
+      font-size: 11.5px; color: #475569;
+      flex: 1; min-width: 160px; line-height: 1.5;
+    }
+    .tip strong { display: block; color: #0f172a; font-weight: 700; font-size: 11px; margin-bottom: 2px; }
+
+    .neg-section {
+      background: #fff1f2; border: 1px solid #fecaca;
+      border-radius: 8px; padding: 10px 14px;
+    }
+    .neg-label { font-size: 10px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #be123c; margin-bottom: 5px; }
+    .neg-section p { font-family: 'Fira Code', monospace; font-size: 11px; color: #7f1d1d; line-height: 1.6; }
+
+    footer { background: var(--navy); color: #475569; text-align: center; font-size: 12px; padding: 20px; }
+    footer strong { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Grok Image Generation · Omnix Website</div>
+  <h1>Section <span>Feature Image Prompts</span></h1>
+  <p>One Grok image prompt per feature section. Generate each image and drop it into the matching placeholder on the Omnix website.</p>
+  <div class="note">
+    <strong>How to use:</strong> Copy each prompt into Grok → Generate Image. The result replaces the <code>[ PRODUCT DEMO GIF ]</code> placeholder in that section of the site. Aim for a 16:10 or 4:3 aspect ratio to match the feature image frame.
+  </div>
+</header>
+
+<main>
+
+  <!-- SECTION 1: MAGIC REVIEW FUNNEL -->
+  <div class="card">
+    <div class="card-header">
+      <div class="section-badge b1">⭐</div>
+      <div class="card-header-text">
+        <h2>5-Star Magic Review Funnel</h2>
+        <p>Smart routing — 5-star reviews go to Google, unhappy customers go to a private form. The image should show the split decision moment.</p>
+      </div>
+      <span class="site-tag t1">Section 2 on Homepage</span>
+    </div>
+    <div class="card-body">
+      <div class="prompt-label">Grok Image Prompt — Copy &amp; Paste</div>
+      <div class="prompt-box">
+        <span class="copy-hint">COPY →</span>
+        <div class="prompt-text"><span class="k">Photorealistic close-up</span> of a <span class="v">smartphone screen held in a person's hand</span>, showing a clean <span class="k">star rating interface</span> with 5 large gold stars. The <span class="v">5th star is being tapped</span> by a thumb, all 5 stars glowing bright gold. In the <span class="k">soft blurred background</span>, a <span class="v">Google Maps review page</span> is faintly visible on a laptop screen, suggesting the 5-star tap is sending them to Google. The overall mood is <span class="k">warm, satisfying, and rewarding</span>. <span class="s">Dark navy UI on the phone, gold star glow, cinematic product photography, shallow depth of field, 4K, professional lifestyle shot, warm ambient lighting.</span></div>
+      </div>
+      <div class="tips-row">
+        <div class="tip"><strong>Core story</strong>Happy customer tapping 5 stars → gets sent to Google. The Google page blurred in the background tells that story without needing text.</div>
+        <div class="tip"><strong>Phone UI</strong>Dark navy background with gold stars matches the Omnix brand palette perfectly.</div>
+        <div class="tip"><strong>Mood</strong>Warm and rewarding — this is a win for the business owner.</div>
+      </div>
+      <div class="neg-section">
+        <div class="neg-label">Negative Prompt</div>
+        <p>empty stars, red stars, unhappy expression, internal form visible, cartoon, illustration, blurry stars, text overlays, Yelp or Facebook logos</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: MISSED CALL TEXT BACK -->
+  <div class="card">
+    <div class="card-header">
+      <div class="section-badge b2">📲</div>
+      <div class="card-header-text">
+        <h2>Missed Call Text Back</h2>
+        <p>Someone calls and can't reach the business — an automatic text fires back instantly. Show the phone interaction and the instant reply.</p>
+      </div>
+      <span class="site-tag t2">Section 3 on Homepage</span>
+    </div>
+    <div class="card-body">
+      <div class="prompt-label">Grok Image Prompt — Copy &amp; Paste</div>
+      <div class="prompt-box">
+        <span class="copy-hint">COPY →</span>
+        <div class="prompt-text"><span class="k">Photorealistic split-scene image</span>: On the <span class="v">left side</span>, a <span class="k">contractor or tradesperson</span> in a work shirt is on a job site, hands busy working, their phone face-down on a surface showing a <span class="v">missed call notification</span>. On the <span class="k">right side</span>, a <span class="v">close-up of a customer's phone screen</span> lighting up with an <span class="k">incoming text message</span> that reads: <span class="v">"Hi! Sorry we missed your call — we'd love to help. Reply here or visit our site to book."</span> The customer's hand is visible picking up the phone, looking pleased. <span class="s">Cinematic lighting, professional lifestyle photography, dark and moody left side contrasting with warm glowing right side, 4K, photorealistic.</span></div>
+      </div>
+      <div class="tips-row">
+        <div class="tip"><strong>Split composition</strong>Two halves tell the whole story — busy contractor misses call, customer instantly gets a text back. No explanation needed.</div>
+        <div class="tip"><strong>Lighting contrast</strong>Dark/cool left side (missed call) vs. warm/bright right side (text reply) creates visual storytelling.</div>
+        <div class="tip"><strong>Alternative</strong>If Grok struggles with split-scene, just generate the customer's phone lighting up with the auto-text — that's the money shot.</div>
+      </div>
+      <div class="neg-section">
+        <div class="neg-label">Negative Prompt</div>
+        <p>cartoon, illustration, angry customer, voicemail screen, office setting, suit and tie, blurry text, unreadable message, distorted phone</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: ONE-CLICK MARKETING CAMPAIGNS -->
+  <div class="card">
+    <div class="card-header">
+      <div class="section-badge b3">🚀</div>
+      <div class="card-header-text">
+        <h2>One-Click Marketing Campaigns</h2>
+        <p>Pre-built campaigns launched with a single tap — referrals, return customers. Show the simplicity: one finger, one tap, campaign sent.</p>
+      </div>
+      <span class="site-tag t3">Section 4 on Homepage</span>
+    </div>
+    <div class="card-body">
+      <div class="prompt-label">Grok Image Prompt — Copy &amp; Paste</div>
+      <div class="prompt-box">
+        <span class="copy-hint">COPY →</span>
+        <div class="prompt-text"><span class="k">Photorealistic close-up</span> of a <span class="v">contractor's rough, work-worn hand</span> holding a smartphone. The phone screen shows a <span class="k">clean dark-themed mobile app dashboard</span> with a list of <span class="v">pre-built marketing campaign cards</span> — one labeled <span class="k">"Referral Campaign"</span> and another labeled <span class="k">"Win-Back Campaign"</span>. The thumb is hovering over a <span class="v">large glowing blue/gold "Send" or "Launch" button</span>. In the <span class="k">blurred background</span>, multiple faint phone notification bubbles are floating outward, suggesting messages being sent to many customers at once. <span class="s">Dark navy UI on phone, gradient button glow, cinematic macro photography, shallow depth of field, 4K, professional, high-tech but approachable feel.</span></div>
+      </div>
+      <div class="tips-row">
+        <div class="tip"><strong>Hands matter</strong>A contractor's rough, calloused hand holding a sleek phone creates the contrast that makes this product relatable — built for real workers.</div>
+        <div class="tip"><strong>The button</strong>The glowing "Launch" button is the hero of this image — it should pop. Gold or gradient glow works best.</div>
+        <div class="tip"><strong>Background bubbles</strong>Faint message icons floating outward in the background visualize "campaigns going out to many people at once."</div>
+      </div>
+      <div class="neg-section">
+        <div class="neg-label">Negative Prompt</div>
+        <p>office worker, suit, desktop computer, complex cluttered UI, email client, spreadsheet, cartoon, illustration, blurry screen, empty dashboard</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: LOCAL SEO -->
+  <div class="card">
+    <div class="card-header">
+      <div class="section-badge b4">📍</div>
+      <div class="card-header-text">
+        <h2>Local SEO</h2>
+        <p>Getting found on Google by local customers actively searching. Show a real Google search result or map pack with a contractor business ranked at the top.</p>
+      </div>
+      <span class="site-tag t4">Section 5 on Homepage</span>
+    </div>
+    <div class="card-body">
+      <div class="prompt-label">Grok Image Prompt — Copy &amp; Paste</div>
+      <div class="prompt-box">
+        <span class="copy-hint">COPY →</span>
+        <div class="prompt-text"><span class="k">Photorealistic close-up</span> of a <span class="v">smartphone screen</span> showing a <span class="k">Google search results page</span> for a query like <span class="v">"plumber near me"</span> or <span class="v">"HVAC repair [city name]"</span>. The screen shows the <span class="k">Google Maps local pack</span> — 3 business listings with star ratings and review counts. The <span class="v">top listing is highlighted</span> with a subtle glow, showing 5 gold stars and 120+ reviews, clearly ranked #1. A <span class="k">location pin icon</span> glows on a faint map in the background of the listing. The phone is held in a hand against a <span class="v">blurred outdoor background</span> suggesting someone searching from their neighborhood. <span class="s">Realistic Google UI, warm outdoor lighting reflecting off phone screen, shallow depth of field, 4K, photorealistic, clean and trustworthy feel.</span></div>
+      </div>
+      <div class="tips-row">
+        <div class="tip"><strong>#1 ranking</strong>The top listing should clearly stand out — slight glow or highlight makes it obvious this is the goal. Being #1 on Google is the whole pitch.</div>
+        <div class="tip"><strong>Google UI</strong>Real-looking Google Maps local pack is immediately recognizable to any business owner — no explanation needed.</div>
+        <div class="tip"><strong>Stars + reviews</strong>"5 stars · 120 reviews" next to the top listing reinforces that SEO and review funnels work together.</div>
+      </div>
+      <div class="neg-section">
+        <div class="neg-label">Negative Prompt</div>
+        <p>Bing, Yahoo, fake search engine, desktop computer, paid ad labels, cartoon, illustration, blurry text, empty results, low star ratings on top listing</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <strong>Omnix Section Image Prompts</strong> &nbsp;·&nbsp; 4 Features &nbsp;·&nbsp; March 2026
+</footer>
+
+</body>
+</html>

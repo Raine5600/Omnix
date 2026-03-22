@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Grok Image Prompts — Contractor Website GIF Storyboard</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap');
+
+    :root {
+      --navy: #0f172a;
+      --gold: #f59e0b;
+      --teal: #06b6d4;
+      --green: #22c55e;
+      --white: #ffffff;
+      --soft: #f8fafc;
+      --border: #e2e8f0;
+      --muted: #64748b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f1f5f9;
+      color: #1e293b;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--navy);
+      padding: 44px 52px 36px;
+    }
+    header .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    header h1 {
+      font-size: 32px;
+      font-weight: 900;
+      color: white;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    header h1 span { color: var(--gold); }
+    header p {
+      font-size: 14px;
+      color: #94a3b8;
+      max-width: 600px;
+      line-height: 1.7;
+    }
+    .how-to {
+      margin-top: 22px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 14px 20px;
+      font-size: 13px;
+      color: #94a3b8;
+      max-width: 660px;
+    }
+    .how-to strong { color: var(--teal); }
+
+    /* FRAME SEQUENCE */
+    .sequence-bar {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 16px 52px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+    }
+    .seq-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .seq-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .seq-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .seq-arrow { color: #cbd5e1; font-size: 14px; }
+
+    /* MAIN CONTENT */
+    main {
+      padding: 36px 52px 52px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* PROMPT CARD */
+    .card {
+      background: white;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    }
+
+    .card-header {
+      display: grid;
+      grid-template-columns: 72px 1fr auto;
+      align-items: center;
+      gap: 18px;
+      padding: 20px 28px;
+      border-bottom: 1px solid var(--border);
+      background: #fafbfc;
+    }
+
+    .frame-number {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .frame-number .f-label {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1px;
+    }
+    .frame-number .f-num {
+      font-size: 22px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .fn-1 { background: #fff7ed; color: #c2410c; }
+    .fn-2 { background: #eff6ff; color: #1d4ed8; }
+    .fn-3 { background: #f0fdf4; color: #15803d; }
+    .fn-4 { background: #fdf4ff; color: #7e22ce; }
+    .fn-5 { background: #fff1f2; color: #be123c; }
+    .fn-6 { background: #ecfeff; color: #0e7490; }
+
+    .card-header-text h2 {
+      font-size: 16px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+    .card-header-text p {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .scene-tag {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+      letter-spacing: 0.04em;
+    }
+    .st-1 { background: #fff7ed; color: #c2410c; }
+    .st-2 { background: #eff6ff; color: #1d4ed8; }
+    .st-3 { background: #f0fdf4; color: #15803d; }
+    .st-4 { background: #fdf4ff; color: #7e22ce; }
+    .st-5 { background: #fff1f2; color: #be123c; }
+    .st-6 { background: #ecfeff; color: #0e7490; }
+
+    /* PROMPT BODY */
+    .card-body {
+      padding: 24px 28px;
+    }
+
+    .prompt-label {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .prompt-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .prompt-box {
+      background: #0f172a;
+      border-radius: 10px;
+      padding: 20px 22px;
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .prompt-box .copy-hint {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #475569;
+      background: #1e293b;
+      padding: 3px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.06em;
+    }
+    .prompt-text {
+      font-family: 'Fira Code', monospace;
+      font-size: 13px;
+      color: #e2e8f0;
+      line-height: 1.85;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .prompt-text .key { color: #f59e0b; font-weight: 500; }
+    .prompt-text .val { color: #86efac; }
+    .prompt-text .style { color: #67e8f9; }
+    .prompt-text .neg { color: #fca5a5; }
+
+    /* TIPS ROW */
+    .tips-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .tip {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 12px;
+      color: #475569;
+      flex: 1;
+      min-width: 180px;
+      line-height: 1.55;
+    }
+    .tip strong {
+      display: block;
+      color: #0f172a;
+      font-weight: 700;
+      font-size: 11.5px;
+      margin-bottom: 3px;
+    }
+
+    /* NEGATIVE PROMPT SECTION */
+    .neg-section {
+      margin-top: 18px;
+      background: #fff1f2;
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      padding: 12px 16px;
+    }
+    .neg-section .neg-label {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #be123c;
+      margin-bottom: 6px;
+    }
+    .neg-section p {
+      font-family: 'Fira Code', monospace;
+      font-size: 11.5px;
+      color: #7f1d1d;
+      line-height: 1.6;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy);
+      color: #475569;
+      text-align: center;
+      font-size: 12px;
+      padding: 22px;
+    }
+    footer strong { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Grok Image Generation</div>
+  <h1>Contractor Website <span>GIF Storyboard</span><br/>— Grok Image Prompts</h1>
+  <p>Copy each prompt into Grok's image generator in order. Together the 6 images tell the complete story: a local business website → customer fills out a quote form → the business owner texts the customer back right on their phone.</p>
+  <div class="how-to">
+    <strong>How to use:</strong> Go to Grok → Image Generation. Paste each prompt below in order (Frame 1 through 6). Generate each image, then string them together into your GIF.
+  </div>
+</header>
+
+<!-- SEQUENCE BAR -->
+<div class="sequence-bar">
+  <div class="seq-item"><div class="seq-dot">1</div><span class="seq-label">Website on Laptop</span></div>
+  <span class="seq-arrow">→</span>
+  <div class="seq-item"><div class="seq-dot">2</div><span class="seq-label">Customer Views Site</span></div>
+  <span class="seq-arrow">→</span>
+  <div class="seq-item"><div class="seq-dot">3</div><span class="seq-label">Form Fills In</span></div>
+  <span class="seq-arrow">→</span>
+  <div class="seq-item"><div class="seq-dot">4</div><span class="seq-label">Click SEND</span></div>
+  <span class="seq-arrow">→</span>
+  <div class="seq-item"><div class="seq-dot">5</div><span class="seq-label">Customer Gets Text</span></div>
+  <span class="seq-arrow">→</span>
+  <div class="seq-item"><div class="seq-dot">6</div><span class="seq-label">Customer Reacts</span></div>
+</div>
+
+<main>
+
+  <!-- FRAME 1 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="frame-number fn-1">
+        <span class="f-label">Frame</span>
+        <span class="f-num">01</span>
+      </div>
+      <div class="card-header-text">
+        <h2>The Contractor Website — Full View on a Laptop</h2>
+        <p>Establishes the scene. Viewer sees the complete website on a laptop screen for the first time.</p>
+      </div>
+      <span class="scene-tag st-1">Opening Shot</span>
+    </div>
+    <div class="card-body">
+      <div class="prompt-label">Grok Image Prompt — Copy &amp; Paste This</div>
+      <div class="prompt-box">
+        <span class="copy-hint">COPY →</span>
+        <div class="prompt-text"><span class="key">Photorealistic</span> MacBook Pro laptop sitting on a clean modern desk, screen displaying a <span class="val">contractor business website</span> for a sliding glass door and window repair company. The website has a <span class="key">dark navy blue and gold color scheme</span>. The hero section shows a stunning full-width <span class="val">background photo of open sliding glass doors leading to an ocean view</span>. On the left side of the hero is a <span class="key">large bold white headline</span> reading "SLIDING GLASS DOOR &amp; WINDOW REPAIR". On the right side floats a <span class="key">dark navy card with a gold "GET A FREE QUOTE" form</span> containing input fields. The top navigation bar is dark charcoal with a hexagonal logo badge, white navigation links, a gold button, and a phone number button. <span class="style">Soft ambient desk lighting, shallow depth of field, professional product photography style, 4K, sharp screen details, clean background.</span></div>
+      </div>
+      <div class="tips-row">
+        <div class="tip"><strong>Aspect Ratio</strong>16:9 or 4:3 — landscape feels most natural for a laptop screen shot</div>
+        <div class="tip"><strong>Style Tip</strong>Add "product photography" to get clean, crisp screen rendering</div>
+        <div class="tip"><strong>Lighting</strong>Soft studio or window light from the left creates depth</div>
+      </div>
+      <div class="neg-section">
+        <div class="neg-label">Negative Prompt (add this to avoid bad results)</div>
+        <p>blurry screen, distorted text, cartoon, illustration, unrealistic proportions, bad hands, low resolution, overexposed, neon colors</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FRAME 2 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="frame-number fn-2">
+        <span class="f-label">Frame</span>
+        <span class="f-num">02</span>
+      </div>
+      <div class="card-header-text">
+        <h2>Customer Discovers the Website</h2>
+        <p>A homeowner at their computer sees the site. Viewer connects emotionally — this is a real person with a real need.</p>
+      </div>
+      <span class="scene-tag st-2">Character Intro</span>
+    </div>
+    <div class="card-body">
+      <div class="prompt-label">Grok Image Prompt — Copy &amp; Paste This</div>
+      <div class="prompt-box">
+        <span class="copy-hint">COPY →</span>
+        <div class="prompt-text"><span class="key">Photorealistic</span> over-the-shoulder shot of a <span class="val">homeowner sitting at a home office desk</span>, looking at a laptop screen showing a <span class="key">contractor company website with a dark navy and gold design</span>. The screen clearly shows a <span class="val">hero section with a sliding glass door background image</span> and a <span class="key">floating quote request form card on the right</span>. The person appears interested and is leaning slightly forward. <span class="style">Warm natural home lighting, shallow depth of field with the screen in sharp focus, lifestyle photography aesthetic, candid, realistic skin tones, cozy home office setting, 4K quality.</span></div>
+      </div>
+      <div class="tips-row">
+        <div class="tip"><strong>Camera Angle</strong>Over-the-shoulder (OTS) keeps the screen visible while showing the human element</div>
+        <div class="tip"><strong>Person</strong>Keep neutral — avoid specifying race/gender so it stays universally relatable</div>
+        <div class="tip"><strong>Screen</strong>The website should be visible but person is the focus here</div>
+      </div>
+      <div class="neg-section">
+        <div class="neg-label">Negative Prompt</div>
+        <p>facing camera, stock photo smile, unnatural pose, blurry, cartoon, painting, illustration, office building, cubicle</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FRAME 3 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="frame-number fn-3">
+        <span class="f-label">Frame</span>
+        <span class="f-num">03</span>
+      </div>
+      <div class="card-header-text">
+        <h2>Customer Fills Out the Quote Form</h2>
+        <p>Close-up of the form being typed into. Hands on keyboard. Fields visibly being filled in with a name, phone number, and message.</p>
+      </div>
+      <span class="scene-tag st-3">Action — Typing</span>
+    </div>
+    <div class="card-body">
+      <div class="prompt-label">Grok Image Prompt — Copy &amp; Paste This</div>
+      <div class="prompt-box">
+        <span class="copy-hint">COPY →</span>
+        <div class="prompt-text"><span class="key">Photorealistic close-up</span> of a person's hands typing on a laptop keyboard. The <span class="val">laptop screen shows a dark navy quote request form</span> with the heading <span class="key">"GET A FREE QUOTE"</span> in white bold text. The form has <span class="val">two side-by-side white input fields labeled "Full Name" and "Phone"</span>, a larger text area below labeled "Short message about your needs", and a <span class="key">gold SEND button</span> at the bottom. The name field appears to have text being typed into it. A small <span class="val">hexagonal contractor logo</span> sits at the top of the card. <span class="style">Screen glow lighting on hands, macro-style photography, sharp focus on screen and fingers, dark ambient background, cinematic, 4K.</span></div>
+      </div>
+      <div class="tips-row">
+        <div class="tip"><strong>Focus Point</strong>Screen form + hands both in focus — use "tack sharp" in the prompt if needed</div>
+        <div class="tip"><strong>Screen Glow</strong>The navy card glowing onto the hands adds cinematic realism</div>
+        <div class="tip"><strong>Form Detail</strong>Ask Grok for the form fields to be legible</div>
+      </div>
+      <div class="neg-section">
+        <div class="neg-label">Negative Prompt</div>
+        <p>blurry hands, six fingers, deformed fingers, cartoon UI, flat design, bright room, washed out, text errors, illegible screen</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FRAME 4 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="frame-number fn-4">
+        <span class="f-label">Frame</span>
+        <span class="f-num">04</span>
+      </div>
+      <div class="card-header-text">
+        <h2>Clicking the SEND Button</h2>
+        <p>The critical moment. Cursor hovers over the gold SEND button. This is the trigger for everything that follows.</p>
+      </div>
+      <span class="scene-tag st-4">The Trigger</span>
+    </div>
+    <div class="card-body">
+      <div class="prompt-label">Grok Image Prompt — Copy &amp; Paste This</div>
+      <div class="prompt-box">
+        <span class="copy-hint">COPY →</span>
+        <div class="prompt-text"><span class="key">Extreme close-up photorealistic</span> shot of a laptop screen showing a <span class="val">dark navy blue web form card</span>. The form has white text fields filled in with a name and phone number, and a message in the textarea. At the bottom is a <span class="key">wide gold/amber button with the word "SEND" in dark navy bold uppercase text</span>. A <span class="val">white mouse cursor arrow is hovering directly over the SEND button</span>, about to click. The button has a <span class="key">subtle golden glow or hover highlight</span> around it indicating it's being hovered. <span class="style">Ultra sharp screen macro photography, cinematic color grading, dark vignette around edges, screen glow, 4K resolution, professional UI screenshot aesthetic.</span></div>
+      </div>
+      <div class="tips-row">
+        <div class="tip"><strong>Key Detail</strong>The cursor hovering on SEND is the visual storytelling moment — make sure it's prominent</div>
+        <div class="tip"><strong>Gold Glow</strong>"golden glow hover state" tells Grok the button is active/highlighted</div>
+        <div class="tip"><strong>Filled Fields</strong>Partially visible filled-in text in the fields above shows the form is complete</div>
+      </div>
+      <div class="neg-section">
+        <div class="neg-label">Negative Prompt</div>
+        <p>no cursor visible, empty form fields, blurry, cartoon, illustration, error message, red button, wrong colors</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FRAME 5 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="frame-number fn-5">
+        <span class="f-label">Frame</span>
+        <span class="f-num">05</span>
+      </div>
+      <div class="card-header-text">
+        <h2>Customer's Phone Lights Up — Text From the Business</h2>
+        <p>Right after submitting the form, the customer's phone buzzes with a personal text from the business owner confirming their request.</p>
+      </div>
+      <span class="scene-tag st-5">The Payoff</span>
+    </div>
+    <div class="card-body">
+      <div class="prompt-label">Grok Image Prompt — Copy &amp; Paste This</div>
+      <div class="prompt-box">
+        <span class="copy-hint">COPY →</span>
+        <div class="prompt-text"><span class="key">Photorealistic</span> close-up of a <span class="val">modern iPhone lying on a desk or table, screen lighting up</span> with a new <span class="key">SMS text message notification banner</span> at the top of the screen. The notification is from a <span class="val">business called "The Glassperts"</span> and the message preview reads: <span class="key">"Hi! This is Mike from The Glassperts. Thanks for reaching out — we'll have someone out to you within 24 hours!"</span>. The notification banner has the standard iOS Messages app green icon. The phone screen was dark and is now illuminating with a warm glow. <span class="style">Dark moody background surface (dark wood or granite countertop), dramatic phone screen glow lighting the surface around it, sharp focus on notification text, cinematic product photography, 4K, shallow depth of field.</span></div>
+      </div>
+      <div class="tips-row">
+        <div class="tip"><strong>Key Shift</strong>The text is FROM the business TO the customer — this is the instant follow-up that closes the deal</div>
+        <div class="tip"><strong>Personal tone</strong>The message reads like a real human text, not a bot — "Hi! This is Mike…" feels warm and trustworthy</div>
+        <div class="tip"><strong>Surface</strong>A kitchen countertop or desk ties it to the homeowner's world</div>
+      </div>
+      <div class="neg-section">
+        <div class="neg-label">Negative Prompt</div>
+        <p>cracked screen, old phone, blurry text, unreadable notification, bright daylight background, distorted phone shape, spam-looking message, robotic text</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FRAME 6 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="frame-number fn-6">
+        <span class="f-label">Frame</span>
+        <span class="f-num">06</span>
+      </div>
+      <div class="card-header-text">
+        <h2>Customer Reads the Text — Relieved &amp; Happy Reaction</h2>
+        <p>The homeowner picks up their phone, reads the reply from the business, and feels reassured. The loop is closed: they got help fast.</p>
+      </div>
+      <span class="scene-tag st-6">Closing Shot</span>
+    </div>
+    <div class="card-body">
+      <div class="prompt-label">Grok Image Prompt — Copy &amp; Paste This</div>
+      <div class="prompt-box">
+        <span class="copy-hint">COPY →</span>
+        <div class="prompt-text"><span class="key">Photorealistic</span> lifestyle portrait of a <span class="val">homeowner — a regular adult person in casual clothing</span> — sitting at home or in a living room, <span class="key">holding a smartphone and smiling with relief</span> while reading a text message. The phone screen faintly shows a <span class="val">green SMS conversation bubble with a short message from a local business</span>. The person looks relieved and happy, as if they just got a quick response after requesting help online. <span class="style">Warm natural indoor home lighting, cozy living room or kitchen background slightly blurred, candid lifestyle photography, genuine expression, shallow depth of field, 4K, realistic skin tones, approachable and relatable feel.</span></div>
+      </div>
+      <div class="tips-row">
+        <div class="tip"><strong>Closing Energy</strong>Relief + happiness = the emotional payoff for the customer. They submitted a form and got a real human reply instantly</div>
+        <div class="tip"><strong>Setting</strong>Home environment (couch, kitchen, living room) reinforces this is a homeowner, not a business person</div>
+        <div class="tip"><strong>Phone Screen</strong>Green SMS bubble faintly visible ties it visually back to Frame 5's notification</div>
+      </div>
+      <div class="neg-section">
+        <div class="neg-label">Negative Prompt</div>
+        <p>work clothes, contractor outfit, office setting, stock photo forced smile, looking directly at camera, cartoon, illustration, bad hands, distorted phone, business attire</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BONUS: CONSISTENCY TIPS -->
+  <div class="card" style="border: 2px solid var(--gold);">
+    <div class="card-header" style="background: #fffbeb;">
+      <div class="frame-number" style="background:#fef3c7;color:#92400e;width:52px;height:52px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+        <span style="font-size:9px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1px;">BONUS</span>
+        <span style="font-size:22px;font-weight:900;line-height:1;">★</span>
+      </div>
+      <div class="card-header-text">
+        <h2>Tips for GIF Consistency Across All 6 Frames</h2>
+        <p>Keep these consistent across every Grok generation to make the frames look like they belong together.</p>
+      </div>
+      <span class="scene-tag" style="background:#fef3c7;color:#92400e;">Pro Tips</span>
+    </div>
+    <div class="card-body">
+      <div class="tips-row">
+        <div class="tip" style="border-color:#fde68a;background:#fffbeb;">
+          <strong>🎨 Add to EVERY prompt:</strong>
+          "photorealistic, 4K, cinematic lighting, sharp focus, professional photography" — this keeps the visual style unified.
+        </div>
+        <div class="tip" style="border-color:#fde68a;background:#fffbeb;">
+          <strong>🎨 Color consistency:</strong>
+          Always mention "dark navy blue #1A2340 and gold/amber" when the website UI is visible so Grok keeps the brand colors consistent.
+        </div>
+        <div class="tip" style="border-color:#fde68a;background:#fffbeb;">
+          <strong>🎨 Same person across frames:</strong>
+          If Grok supports "seed" or "style reference," use the same seed number for Frames 2, 3, 4, and 6 to keep the same customer/hands consistent throughout.
+        </div>
+        <div class="tip" style="border-color:#fde68a;background:#fffbeb;">
+          <strong>🎨 GIF assembly order:</strong>
+          Frame 1 (3s) → Frame 2 (2s) → Frame 3 (2s) → Frame 4 (1.5s) → Frame 5 (2.5s) → Frame 6 (3s). Loop once or twice.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <strong>Grok Image Prompts</strong> — Contractor Website GIF Storyboard &nbsp;·&nbsp; 6 Frames &nbsp;·&nbsp; March 2026
+</footer>
+
+</body>
+</html>

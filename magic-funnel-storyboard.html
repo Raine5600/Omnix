@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Magic Funnel — Grok Image Prompts</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap');
+
+    :root {
+      --navy: #0f172a;
+      --gold: #f59e0b;
+      --red: #ef4444;
+      --green: #22c55e;
+      --google-blue: #4285f4;
+      --white: #ffffff;
+      --border: #e2e8f0;
+      --muted: #64748b;
+      --soft: #f8fafc;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #f1f5f9; color: #1e293b; }
+
+    /* HEADER */
+    header {
+      background: var(--navy);
+      padding: 44px 52px 36px;
+    }
+    .eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 10px;
+    }
+    header h1 { font-size: 32px; font-weight: 900; color: white; line-height: 1.2; margin-bottom: 12px; }
+    header h1 span { color: var(--gold); }
+    header p { font-size: 14px; color: #94a3b8; max-width: 640px; line-height: 1.7; }
+    .how-to {
+      margin-top: 22px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px; padding: 14px 20px;
+      font-size: 13px; color: #94a3b8; max-width: 680px;
+    }
+    .how-to strong { color: #67e8f9; }
+
+    /* FUNNEL DIAGRAM */
+    .funnel-section {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 28px 52px;
+    }
+    .funnel-label {
+      font-size: 11px; font-weight: 800; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 20px;
+    }
+    .funnel-flow {
+      display: flex; align-items: flex-start; gap: 0;
+    }
+    .funnel-step {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 6px; flex-shrink: 0;
+    }
+    .funnel-box {
+      border-radius: 10px; padding: 10px 14px;
+      font-size: 11px; font-weight: 700; text-align: center;
+      min-width: 120px; line-height: 1.4;
+    }
+    .fb-neutral { background: var(--navy); color: white; }
+    .fb-neutral .fn { color: var(--gold); font-size: 9px; font-weight: 800; letter-spacing: 0.08em; display: block; margin-bottom: 2px; }
+    .fb-red { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+    .fb-red .fn { color: var(--red); font-size: 9px; font-weight: 800; letter-spacing: 0.08em; display: block; margin-bottom: 2px; }
+    .fb-green { background: #f0fdf4; color: #14532d; border: 1px solid #bbf7d0; }
+    .fb-green .fn { color: var(--green); font-size: 9px; font-weight: 800; letter-spacing: 0.08em; display: block; margin-bottom: 2px; }
+    .fb-google { background: #eff6ff; color: #1e3a8a; border: 1px solid #bfdbfe; }
+    .fb-google .fn { color: var(--google-blue); font-size: 9px; font-weight: 800; letter-spacing: 0.08em; display: block; margin-bottom: 2px; }
+    .funnel-connector {
+      display: flex; align-items: center; padding: 0 6px; padding-top: 20px;
+    }
+    .funnel-arrow { color: #cbd5e1; font-size: 18px; font-weight: 700; }
+    .funnel-split {
+      display: flex; flex-direction: column; align-items: center;
+      padding-top: 18px; gap: 8px;
+    }
+    .split-arrow-up { color: var(--red); font-size: 13px; transform: rotate(-30deg); }
+    .split-arrow-down { color: var(--green); font-size: 13px; transform: rotate(30deg); }
+    .split-label { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; }
+
+    /* SEQUENCE BAR */
+    .sequence-bar {
+      background: white; border-bottom: 1px solid var(--border);
+      padding: 14px 52px; display: flex; align-items: center; gap: 6px; overflow-x: auto;
+    }
+    .seq-item { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+    .seq-dot {
+      width: 28px; height: 28px; border-radius: 50%;
+      font-size: 11px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .sd-neutral { background: var(--navy); color: var(--gold); }
+    .sd-red { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+    .sd-green { background: #f0fdf4; color: #14532d; border: 1px solid #bbf7d0; }
+    .sd-google { background: #eff6ff; color: #1e3a8a; border: 1px solid #bfdbfe; }
+    .seq-label { font-size: 11px; font-weight: 600; color: var(--muted); white-space: nowrap; }
+    .seq-arrow { color: #cbd5e1; font-size: 14px; }
+    .seq-divider {
+      height: 28px; width: 1px; background: var(--border); margin: 0 8px; flex-shrink: 0;
+    }
+    .seq-path-label {
+      font-size: 9px; font-weight: 800; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 3px 8px; border-radius: 4px; flex-shrink: 0;
+    }
+    .spl-red { background: #fef2f2; color: #991b1b; }
+    .spl-green { background: #f0fdf4; color: #14532d; }
+
+    /* MAIN */
+    main { padding: 36px 52px 52px; display: flex; flex-direction: column; gap: 24px; }
+
+    /* PATH HEADERS */
+    .path-header {
+      border-radius: 12px; padding: 16px 24px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .ph-red { background: linear-gradient(135deg, #fef2f2 0%, #ffe4e6 100%); border: 1px solid #fecaca; }
+    .ph-green { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #bbf7d0; }
+    .path-icon { font-size: 28px; }
+    .path-header h2 { font-size: 17px; font-weight: 800; margin-bottom: 3px; }
+    .ph-red h2 { color: #991b1b; }
+    .ph-green h2 { color: #14532d; }
+    .path-header p { font-size: 13px; line-height: 1.5; }
+    .ph-red p { color: #b91c1c; }
+    .ph-green p { color: #166534; }
+
+    /* CARDS */
+    .card {
+      background: white; border-radius: 16px;
+      border: 1px solid var(--border); overflow: hidden;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    }
+    .card.path-red { border-left: 4px solid var(--red); }
+    .card.path-green { border-left: 4px solid var(--green); }
+    .card.path-shared { border-left: 4px solid var(--gold); }
+
+    .card-header {
+      display: grid; grid-template-columns: 72px 1fr auto;
+      align-items: center; gap: 18px;
+      padding: 18px 26px; border-bottom: 1px solid var(--border);
+      background: #fafbfc;
+    }
+    .frame-number {
+      width: 52px; height: 52px; border-radius: 12px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .f-label { font-size: 9px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1px; }
+    .f-num { font-size: 22px; font-weight: 900; line-height: 1; }
+    .fn-shared { background: #fffbeb; color: #92400e; }
+    .fn-red { background: #fef2f2; color: #991b1b; }
+    .fn-green { background: #f0fdf4; color: #15803d; }
+    .fn-google { background: #eff6ff; color: #1e3a8a; }
+
+    .card-header-text h2 { font-size: 15px; font-weight: 800; color: #0f172a; margin-bottom: 4px; }
+    .card-header-text p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+    .scene-tag {
+      font-size: 11px; font-weight: 700; padding: 5px 12px;
+      border-radius: 20px; white-space: nowrap; letter-spacing: 0.04em;
+    }
+    .st-shared { background: #fffbeb; color: #92400e; }
+    .st-red { background: #fef2f2; color: #991b1b; }
+    .st-green { background: #f0fdf4; color: #15803d; }
+    .st-google { background: #eff6ff; color: #1e3a8a; }
+
+    /* BODY */
+    .card-body { padding: 22px 26px; }
+    .prompt-label {
+      font-size: 10px; font-weight: 800; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+    }
+    .prompt-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    .prompt-box {
+      background: #0f172a; border-radius: 10px;
+      padding: 18px 20px; position: relative; margin-bottom: 18px;
+    }
+    .copy-hint {
+      position: absolute; top: 12px; right: 14px;
+      font-size: 10px; font-weight: 600; color: #475569;
+      background: #1e293b; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.06em;
+    }
+    .prompt-text {
+      font-family: 'Fira Code', monospace; font-size: 13px;
+      color: #e2e8f0; line-height: 1.85; white-space: pre-wrap; word-break: break-word;
+    }
+    .prompt-text .key { color: #f59e0b; font-weight: 500; }
+    .prompt-text .val { color: #86efac; }
+    .prompt-text .style { color: #67e8f9; }
+    .prompt-text .red { color: #fca5a5; }
+    .prompt-text .gblue { color: #93c5fd; }
+
+    .tips-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .tip {
+      background: #f8fafc; border: 1px solid var(--border);
+      border-radius: 8px; padding: 10px 14px;
+      font-size: 12px; color: #475569;
+      flex: 1; min-width: 170px; line-height: 1.55;
+    }
+    .tip strong { display: block; color: #0f172a; font-weight: 700; font-size: 11.5px; margin-bottom: 3px; }
+
+    .neg-section {
+      margin-top: 16px; background: #fff1f2;
+      border: 1px solid #fecaca; border-radius: 8px; padding: 12px 16px;
+    }
+    .neg-label {
+      font-size: 10px; font-weight: 800; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #be123c; margin-bottom: 6px;
+    }
+    .neg-section p {
+      font-family: 'Fira Code', monospace; font-size: 11.5px;
+      color: #7f1d1d; line-height: 1.6;
+    }
+
+    /* SECTION DIVIDER */
+    .section-divider {
+      display: flex; align-items: center; gap: 14px; padding: 4px 0;
+    }
+    .section-divider::before, .section-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    .section-divider span {
+      font-size: 11px; font-weight: 800; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted); white-space: nowrap;
+    }
+
+    /* MASTER PROMPT */
+    .master-card {
+      background: white; border-radius: 16px;
+      border: 2px solid var(--gold); overflow: hidden;
+      box-shadow: 0 2px 12px rgba(245,158,11,0.15);
+    }
+    .master-header {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      padding: 20px 26px; border-bottom: 1px solid #fde68a;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .master-badge {
+      background: var(--gold); color: var(--navy);
+      font-size: 11px; font-weight: 800; letter-spacing: 0.1em;
+      padding: 5px 12px; border-radius: 20px; white-space: nowrap;
+    }
+    .master-header h2 { font-size: 16px; font-weight: 800; color: #92400e; }
+    .master-header p { font-size: 12.5px; color: #b45309; margin-top: 2px; }
+
+    footer {
+      background: var(--navy); color: #475569;
+      text-align: center; font-size: 12px; padding: 22px;
+    }
+    footer strong { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="eyebrow">Grok Image Generation · Magic Funnel</div>
+  <h1>The <span>Magic Review Funnel</span><br/>Grok Image Prompts</h1>
+  <p>6 image prompts that tell the complete story of the Magic Funnel — a smart review system that routes unhappy customers to an internal form while sending happy customers straight to Google to boost your public ratings.</p>
+  <div class="how-to">
+    <strong>How to use:</strong> Generate each frame in Grok in order. Frames 1–2 are shared setup. Then follow the two paths: the 2-star path (Frames 3A–4A) and the 5-star path (Frames 3B–4B).
+  </div>
+</header>
+
+<!-- FUNNEL DIAGRAM -->
+<div class="funnel-section">
+  <div class="funnel-label">How the Magic Funnel Works</div>
+  <div class="funnel-flow">
+    <div class="funnel-step">
+      <div class="funnel-box fb-neutral"><span class="fn">FRAME 1</span>Customer on Website</div>
+    </div>
+    <div class="funnel-connector"><span class="funnel-arrow">→</span></div>
+    <div class="funnel-step">
+      <div class="funnel-box fb-neutral"><span class="fn">FRAME 2</span>Sees Review Widget</div>
+    </div>
+    <div class="funnel-connector"><span class="funnel-arrow">→</span></div>
+    <div class="funnel-step">
+      <div class="funnel-box fb-neutral"><span class="fn">FRAME 3</span>Clicks Star Rating</div>
+    </div>
+    <div class="funnel-connector" style="flex-direction:column;align-items:center;gap:4px;padding-top:0;">
+      <div style="display:flex;flex-direction:column;gap:4px;padding:0 10px;">
+        <div style="display:flex;align-items:center;gap:6px;">
+          <span style="color:var(--red);font-size:12px;">↗</span>
+          <span style="font-size:9px;font-weight:800;color:#991b1b;letter-spacing:0.06em;">1–3 STARS</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <span style="color:var(--green);font-size:12px;">↘</span>
+          <span style="font-size:9px;font-weight:800;color:#166534;letter-spacing:0.06em;">4–5 STARS</span>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="funnel-box fb-red" style="min-width:140px;"><span class="fn">FRAME 4A</span>Internal Feedback Form<br/><span style="font-size:9px;font-weight:600;">(stays on website)</span></div>
+      <div class="funnel-box fb-google" style="min-width:140px;"><span class="fn">FRAME 4B</span>Redirected to Google<br/><span style="font-size:9px;font-weight:600;">(public 5-star review)</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SEQUENCE BAR -->
+<div class="sequence-bar">
+  <div class="seq-item"><div class="seq-dot sd-neutral">1</div><span class="seq-label">Website Visit</span></div>
+  <span class="seq-arrow">→</span>
+  <div class="seq-item"><div class="seq-dot sd-neutral">2</div><span class="seq-label">Review Widget</span></div>
+  <span class="seq-arrow">→</span>
+  <div class="seq-item"><div class="seq-dot sd-neutral">3</div><span class="seq-label">Clicks Stars</span></div>
+  <span class="seq-arrow">→</span>
+  <div class="seq-divider"></div>
+  <span class="seq-path-label spl-red">⭐⭐ PATH A</span>
+  <div class="seq-item"><div class="seq-dot sd-red">4A</div><span class="seq-label">Internal Form</span></div>
+  <div class="seq-divider"></div>
+  <span class="seq-path-label spl-green">⭐⭐⭐⭐⭐ PATH B</span>
+  <div class="seq-item"><div class="seq-dot sd-google">4B</div><span class="seq-label">→ Google</span></div>
+</div>
+
+<main>
+
+  <!-- ── SHARED FRAMES ── -->
+  <div class="section-divider"><span>Shared Opening Frames</span></div>
+
+  <!-- FRAME 1 -->
+  <div class="card path-shared">
+    <div class="card-header">
+      <div class="frame-number fn-shared">
+        <span class="f-label">Frame</span>
+        <span class="f-num">01</span>
+      </div>
+      <div class="card-header-text">
+        <h2>Customer Browsing the Contractor Website</h2>
+        <p>Sets the scene — a real homeowner on the glass repair company's site, scrolling down toward the reviews section.</p>
+      </div>
+      <span class="scene-tag st-shared">Opening Shot</span>
+    </div>
+    <div class="card-body">
+      <div class="prompt-label">Grok Image Prompt — Copy &amp; Paste This</div>
+      <div class="prompt-box">
+        <span class="copy-hint">COPY →</span>
+        <div class="prompt-text"><span class="key">Photorealistic</span> over-the-shoulder shot of a <span class="val">homeowner sitting at a desk or on a couch</span>, scrolling through a <span class="key">contractor company website on a laptop</span>. The website has a <span class="val">dark navy blue and gold color scheme</span> for a sliding glass door and window repair company. The page has scrolled down past the hero section and the person is now looking at a <span class="key">section of the website with customer reviews or a "Leave a Review" area</span> visible near the bottom of the screen. The person looks calm and engaged. <span class="style">Warm home lighting, shallow depth of field, candid lifestyle photography, 4K, realistic.</span></div>
+      </div>
+      <div class="tips-row">
+        <div class="tip"><strong>Purpose</strong>Establishes the homeowner as the main character before the review interaction begins</div>
+        <div class="tip"><strong>Screen content</strong>The review section should be just visible — the cursor is near it, suggesting they're about to interact</div>
+        <div class="tip"><strong>Mood</strong>Neutral — they haven't formed an opinion yet, just browsing</div>
+      </div>
+      <div class="neg-section">
+        <div class="neg-label">Negative Prompt</div>
+        <p>facing camera, stock photo smile, office building, cubicle, blurry screen, cartoon, illustration, distorted hands</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FRAME 2 -->
+  <div class="card path-shared">
+    <div class="card-header">
+      <div class="frame-number fn-shared">
+        <span class="f-label">Frame</span>
+        <span class="f-num">02</span>
+      </div>
+      <div class="card-header-text">
+        <h2>The Review Star Rating Widget — Close-Up on Screen</h2>
+        <p>A clean close-up of the review widget on the website. Five hollow/empty gold stars waiting to be clicked. The moment before the split.</p>
+      </div>
+      <span class="scene-tag st-shared">The Decision Point</span>
+    </div>
+    <div class="card-body">
+      <div class="prompt-label">Grok Image Prompt — Copy &amp; Paste This</div>
+      <div class="prompt-box">
+        <span class="copy-hint">COPY →</span>
+        <div class="prompt-text"><span class="key">Extreme close-up photorealistic</span> shot of a <span class="val">laptop or desktop screen</span> showing a section of a <span class="key">dark navy contractor website</span>. The section heading reads <span class="val">"How Was Your Experience?"</span> or <span class="val">"Leave a Review"</span> in bold white text. Below the heading are <span class="key">five large gold star icons in a row</span>, currently empty/outlined and not yet selected, waiting to be clicked. A <span class="val">white mouse cursor arrow is hovering near the stars</span>, about to select a rating. The overall UI is clean, minimal, and dark-themed. <span class="style">Sharp screen macro photography, dark vignette edges, screen glow, cinematic, 4K, professional UI aesthetic.</span></div>
+      </div>
+      <div class="tips-row">
+        <div class="tip"><strong>Key detail</strong>All 5 stars are empty/unfilled — the choice hasn't been made yet. This is the tension frame</div>
+        <div class="tip"><strong>Stars</strong>Large, gold outlined stars on dark navy background look premium and clear</div>
+        <div class="tip"><strong>Cursor</strong>Hovering cursor near the stars builds anticipation before the split</div>
+      </div>
+      <div class="neg-section">
+        <div class="neg-label">Negative Prompt</div>
+        <p>already filled stars, red stars, colored stars, blurry, cartoon UI, bright background, stars already selected, Google interface visible yet</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PATH A: LOW STARS ── -->
+  <div class="section-divider"><span>Path A — Low Star Rating (1–3 Stars) → Internal Form</span></div>
+
+  <div class="path-header ph-red">
+    <div class="path-icon">⭐⭐</div>
+    <div>
+      <h2>2-Star Path — Stay On Site</h2>
+      <p>Customer clicks a low rating. Instead of going to Google, the Magic Funnel keeps the negative review private — showing an internal feedback form on the website.</p>
+    </div>
+  </div>
+
+  <!-- FRAME 3A -->
+  <div class="card path-red">
+    <div class="card-header">
+      <div class="frame-number fn-red">
+        <span class="f-label">Frame</span>
+        <span class="f-num">3A</span>
+      </div>
+      <div class="card-header-text">
+        <h2>Customer Clicks 2 Stars — Low Rating Selected</h2>
+        <p>The cursor clicks the 2nd star. Two stars fill with color, three remain empty. The expression on the person's face shows mild frustration.</p>
+      </div>
+      <span class="scene-tag st-red">Low Rating Clicked</span>
+    </div>
+    <div class="card-body">
+      <div class="prompt-label">Grok Image Prompt — Copy &amp; Paste This</div>
+      <div class="prompt-box">
+        <span class="copy-hint">COPY →</span>
+        <div class="prompt-text"><span class="key">Close-up photorealistic</span> shot of a laptop screen showing a <span class="val">dark navy contractor website review section</span>. A row of <span class="key">5 star icons</span> is visible — the <span class="red">first two stars are filled in red or dim gold</span> and the remaining three stars are <span class="val">empty/grey</span>, showing a 2-star rating has just been selected. A <span class="val">white mouse cursor</span> is sitting on or just after the 2nd star. In the background behind the laptop, <span class="key">a person's slightly frustrated or disappointed expression</span> is softly blurred — they are not happy with their experience. <span class="style">Dark moody screen glow, shallow depth of field with screen sharp and face blurred, cinematic, 4K, realistic.</span></div>
+      </div>
+      <div class="tips-row">
+        <div class="tip"><strong>Star colors</strong>2 stars filled (dim gold or reddish) + 3 empty grey stars = clearly a bad rating</div>
+        <div class="tip"><strong>Expression</strong>Person in soft background blur looks mildly annoyed or disappointed — not angry, just unsatisfied</div>
+        <div class="tip"><strong>Tension</strong>This frame builds the "uh oh" moment before the funnel catches it</div>
+      </div>
+      <div class="neg-section">
+        <div class="neg-label">Negative Prompt</div>
+        <p>5 stars selected, all stars filled gold, happy person, Google page, bright room, cartoon, blurry screen, wrong number of stars</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FRAME 4A -->
+  <div class="card path-red">
+    <div class="card-header">
+      <div class="frame-number fn-red">
+        <span class="f-label">Frame</span>
+        <span class="f-num">4A</span>
+      </div>
+      <div class="card-header-text">
+        <h2>Internal Feedback Form Appears — Kept On the Website</h2>
+        <p>The Magic Funnel catches the low rating. A private feedback form slides in asking the customer to share what went wrong — directly on the site, never on Google.</p>
+      </div>
+      <span class="scene-tag st-red">Funnel Catches It</span>
+    </div>
+    <div class="card-body">
+      <div class="prompt-label">Grok Image Prompt — Copy &amp; Paste This</div>
+      <div class="prompt-box">
+        <span class="copy-hint">COPY →</span>
+        <div class="prompt-text"><span class="key">Close-up photorealistic</span> shot of a laptop screen showing a <span class="val">dark navy website with a feedback popup or card</span> that has appeared after a low star rating was selected. The card reads: <span class="red">"We're sorry to hear that! We'd love to make it right."</span> with a <span class="key">text input area labeled "Tell us what happened"</span> and a <span class="val">submit button</span>. The overall tone of the card is apologetic and private — <span class="key">there is no Google logo or external link</span>. The review form is entirely contained within the website. The 2 dim stars are still faintly visible above the card as context. <span class="style">Screen glow, dark ambient environment, sharp screen focus, 4K, cinematic, professional UI screenshot style.</span></div>
+      </div>
+      <div class="tips-row">
+        <div class="tip"><strong>Critical detail</strong>NO Google logo anywhere — this feedback stays private on the website, that's the whole point of the funnel</div>
+        <div class="tip"><strong>Tone of UI</strong>Warm, apologetic copy ("We'd love to make it right") feels human, not like a wall blocking them</div>
+        <div class="tip"><strong>The 2 dim stars</strong>Still visible above the form connects it visually to the previous frame</div>
+      </div>
+      <div class="neg-section">
+        <div class="neg-label">Negative Prompt</div>
+        <p>Google logo, Google Maps, Google branding, 5 stars, bright happy colors, external browser redirect, error message, cartoon, blurry</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PATH B: HIGH STARS ── -->
+  <div class="section-divider"><span>Path B — High Star Rating (4–5 Stars) → Google Review</span></div>
+
+  <div class="path-header ph-green">
+    <div class="path-icon">⭐⭐⭐⭐⭐</div>
+    <div>
+      <h2>5-Star Path — Send to Google</h2>
+      <p>A different customer clicks 5 stars. The Magic Funnel immediately redirects them to the business's Google review page to post their positive review publicly.</p>
+    </div>
+  </div>
+
+  <!-- FRAME 3B -->
+  <div class="card path-green">
+    <div class="card-header">
+      <div class="frame-number fn-green">
+        <span class="f-label">Frame</span>
+        <span class="f-num">3B</span>
+      </div>
+      <div class="card-header-text">
+        <h2>Customer Clicks 5 Stars — Full Gold Rating</h2>
+        <p>All five stars light up bright gold. The cursor sits on the 5th star. The person's expression in the blurred background is happy and satisfied.</p>
+      </div>
+      <span class="scene-tag st-green">5 Stars Selected</span>
+    </div>
+    <div class="card-body">
+      <div class="prompt-label">Grok Image Prompt — Copy &amp; Paste This</div>
+      <div class="prompt-box">
+        <span class="copy-hint">COPY →</span>
+        <div class="prompt-text"><span class="key">Close-up photorealistic</span> shot of a laptop screen showing a <span class="val">dark navy contractor website review section</span>. A row of <span class="key">5 large gold star icons — all fully filled and glowing bright gold</span> — is displayed after a 5-star rating has just been selected. The stars look vibrant and celebratory. A <span class="val">white mouse cursor</span> sits on or just past the 5th star. In the soft blurred background, <span class="key">a person is smiling with genuine satisfaction</span>. A subtle <span class="val">animated glow or golden light pulse</span> radiates around the 5 stars. <span class="style">Dark background with warm golden screen glow, shallow depth of field with stars sharp and person blurred, cinematic, 4K, celebratory yet clean UI.</span></div>
+      </div>
+      <div class="tips-row">
+        <div class="tip"><strong>Star glow</strong>All 5 stars fully filled bright gold with a subtle radial glow — celebratory and rewarding</div>
+        <div class="tip"><strong>Expression</strong>Happy, genuinely satisfied person in the blurred background — contrast to Frame 3A</div>
+        <div class="tip"><strong>Energy</strong>This frame should feel like a win — the opposite of 3A</div>
+      </div>
+      <div class="neg-section">
+        <div class="neg-label">Negative Prompt</div>
+        <p>partially filled stars, red stars, unhappy face, empty stars, Google page visible yet, cartoon, blurry stars, wrong star count</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FRAME 4B -->
+  <div class="card path-green">
+    <div class="card-header">
+      <div class="frame-number fn-google">
+        <span class="f-label">Frame</span>
+        <span class="f-num">4B</span>
+      </div>
+      <div class="card-header-text">
+        <h2>Browser Redirects to Google Reviews Page</h2>
+        <p>The 5-star click instantly opens Google Maps / Google Business review page. The customer is now looking at the real Google review form ready to post publicly.</p>
+      </div>
+      <span class="scene-tag st-google">→ Google Review</span>
+    </div>
+    <div class="card-body">
+      <div class="prompt-label">Grok Image Prompt — Copy &amp; Paste This</div>
+      <div class="prompt-box">
+        <span class="copy-hint">COPY →</span>
+        <div class="prompt-text"><span class="key">Photorealistic close-up</span> of a laptop screen showing a <span class="gblue">Google Maps or Google Business review page</span> that has just loaded in the browser. The page shows the <span class="key">Google review interface</span> for a local glass door repair company — with the <span class="val">Google logo visible in the top left</span>, the business name shown, <span class="key">five empty gold Google-style star rating icons</span> waiting to be selected, and a <span class="val">text field that says "Share details of your own experience at this place"</span>. The browser address bar faintly shows a <span class="gblue">maps.google.com</span> URL. The person's hands are visible near the keyboard, ready to type. <span class="style">Clean bright Google UI on a laptop screen, natural desk lighting, sharp screen focus, 4K, realistic, professional product photography style.</span></div>
+      </div>
+      <div class="tips-row">
+        <div class="tip"><strong>Google branding</strong>Google logo and Google-style star UI must be clearly visible — this is the public Google review page</div>
+        <div class="tip"><strong>Browser URL</strong>Faint maps.google.com in the address bar confirms the redirect happened</div>
+        <div class="tip"><strong>Contrast</strong>This frame feels brighter and more open than Frame 4A — the outside world vs. the private on-site form</div>
+      </div>
+      <div class="neg-section">
+        <div class="neg-label">Negative Prompt</div>
+        <p>dark navy website, internal form, Yelp, Facebook, TripAdvisor, cartoon, blurry, distorted Google logo, error page, non-Google review interface</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MASTER VIDEO PROMPT -->
+  <div class="section-divider"><span>Video Prompt — Combine All Frames</span></div>
+
+  <div class="master-card">
+    <div class="master-header">
+      <div class="master-badge">🎬 VIDEO PROMPT</div>
+      <div>
+        <h2>Grok Video Generation — Magic Funnel Story</h2>
+        <p>Paste this into Grok's video generator to combine all frames into one continuous story</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="prompt-label">Master Grok Video Prompt — Copy &amp; Paste This</div>
+      <div class="prompt-box" style="margin-bottom:0;">
+        <div class="prompt-text"><span class="key">Create a smooth cinematic short video</span> demonstrating a smart review funnel on a contractor website. The video flows through these scenes:
+
+<span class="val">Scene 1:</span> A homeowner scrolling a dark navy and gold contractor website for a glass door repair company, approaching the review section.
+
+<span class="val">Scene 2:</span> Close-up of the screen — a "Leave a Review" widget shows <span class="key">5 large empty gold stars</span> waiting to be clicked. A cursor hovers near them.
+
+<span class="red">Scene 3A — Low Rating Path:</span> The cursor clicks the <span class="red">2nd star</span>. Two dim stars fill, three stay grey. A <span class="key">private internal feedback form</span> slides onto the screen reading "We're sorry to hear that — tell us what happened" with a text box. No Google logo. The negative review stays on the website.
+
+<span class="val">Scene 3B — High Rating Path:</span> (New scene, different customer) The cursor clicks the <span class="key">5th star</span>. All five stars <span class="val">light up bright gold with a glowing pulse</span>. The browser immediately <span class="gblue">redirects to a Google Business review page</span>, Google logo visible, stars ready to be filled, text field reading "Share your experience."
+
+<span class="style">Style: Photorealistic, cinematic, 4K, dark navy UI throughout, smooth cross-dissolve transitions between scenes, warm ambient lighting on person shots, sharp screen focus on UI shots. Total duration 18–22 seconds. No text overlays.</span></div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <strong>Magic Funnel — Grok Image Prompts</strong> &nbsp;·&nbsp; 6 Frames across 2 Paths &nbsp;·&nbsp; March 2026
+</footer>
+
+</body>
+</html>
