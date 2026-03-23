@@ -423,7 +423,8 @@
       .footer-container { grid-template-columns: 1fr; }
     }
   
-    /* ===== SHOOTING STARS ===== */
+        /* ===== SHOOTING STARS ===== */
+    /* Keyframes: wrapper translates only — no rotation */
     @keyframes shoot-lr {
       0%    { transform: translate(-180px, 0px);               opacity: 0; }
       5%    { opacity: 1; }
@@ -439,81 +440,77 @@
       100%  { transform: translate(calc(100vw + 180px), 0px);  opacity: 0; }
     }
     @keyframes shoot-dtr {
-      0%    { transform: translate(-180px, -25px);              opacity: 0; }
+      0%    { transform: translate(-180px, -25px);             opacity: 0; }
       5%    { opacity: 1; }
-      20%   { transform: translate(calc(100vw + 180px), 25px);  opacity: 0; }
-      20.1% { transform: translate(-180px, -25px);              opacity: 0; }
-      100%  { transform: translate(-180px, -25px);              opacity: 0; }
+      20%   { transform: translate(calc(100vw + 180px), 25px); opacity: 0; }
+      20.1% { transform: translate(-180px, -25px);             opacity: 0; }
+      100%  { transform: translate(-180px, -25px);             opacity: 0; }
     }
     @keyframes shoot-dtl {
-      0%    { transform: translate(calc(100vw + 180px), -25px); opacity: 0; }
+      0%    { transform: translate(calc(100vw + 180px), -25px);opacity: 0; }
       5%    { opacity: 1; }
-      20%   { transform: translate(-180px, 25px);               opacity: 0; }
-      20.1% { transform: translate(calc(100vw + 180px), -25px); opacity: 0; }
-      100%  { transform: translate(calc(100vw + 180px), -25px); opacity: 0; }
+      20%   { transform: translate(-180px, 25px);              opacity: 0; }
+      20.1% { transform: translate(calc(100vw + 180px), -25px);opacity: 0; }
+      100%  { transform: translate(calc(100vw + 180px), -25px);opacity: 0; }
     }
 
-    /* ===== TWINKLING RAY STARS ===== */
-    @keyframes ray-twinkle {
-      0%   { opacity: 0;   transform: scale(0.3) rotate(0deg);   }
-      20%  { opacity: 1;   transform: scale(1)   rotate(15deg);  }
-      50%  { opacity: 0.7; transform: scale(0.8) rotate(30deg);  }
-      80%  { opacity: 1;   transform: scale(1.1) rotate(45deg);  }
-      100% { opacity: 0;   transform: scale(0.3) rotate(60deg);  }
-    }
-
-    /* Star head: small glowing dot */
+    /* Outer wrapper: zero-size anchor that only translates */
     .shoot-star {
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: visible;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    /* Inner visual: rotated trail bar with glowing head */
+    .ss-inner {
+      display: block;
+      position: absolute;
+      width: 88px;
+      height: 2px;
+      border-radius: 2px;
+      top: -1px;
+    }
+
+    /* LR & DTR: head is on RIGHT end → trail extends LEFT from anchor */
+    .ss-lr .ss-inner,
+    .ss-dtr .ss-inner {
+      right: 0;
+      background: linear-gradient(to right, transparent 0%, currentColor 85%);
+      transform-origin: right center;
+    }
+
+    /* RL & DTL: head is on LEFT end → trail extends RIGHT from anchor */
+    .ss-rl .ss-inner,
+    .ss-dtl .ss-inner {
+      left: 0;
+      background: linear-gradient(to left, transparent 0%, currentColor 85%);
+      transform-origin: left center;
+    }
+
+    /* Static angle — trail tilts to follow direction of travel */
+    .ss-lr  .ss-inner { transform: rotate(0deg);   }
+    .ss-rl  .ss-inner { transform: rotate(0deg);   }
+    .ss-dtr .ss-inner { transform: rotate(-15deg); } /* head goes right+down, trail upper-left */
+    .ss-dtl .ss-inner { transform: rotate(-15deg); } /* head goes left+down, trail upper-right */
+
+    /* Glowing head dot at the leading end */
+    .ss-inner::after {
+      content: '';
       position: absolute;
       width: 5px;
       height: 5px;
       border-radius: 50%;
       background: currentColor;
       box-shadow: 0 0 6px 3px currentColor;
-      pointer-events: none;
-      opacity: 0;
+      top: -1.5px;
     }
-
-    /* Trail: positioned behind the head, direction-specific */
-    .shoot-star::before {
-      content: '';
-      position: absolute;
-      height: 2px;
-      width: 90px;
-      top: 50%;
-      margin-top: -1px;
-      border-radius: 2px;
-      pointer-events: none;
-    }
-
-    /* LR: moving right → trail extends LEFT */
-    .ss-lr::before {
-      right: 4px;
-      transform-origin: right center;
-      transform: rotate(0deg);
-      background: linear-gradient(to right, transparent 0%, currentColor 100%);
-    }
-    /* RL: moving left → trail extends RIGHT */
-    .ss-rl::before {
-      left: 4px;
-      transform-origin: left center;
-      transform: rotate(0deg);
-      background: linear-gradient(to left, transparent 0%, currentColor 100%);
-    }
-    /* DTR: moving right+down ~15° → trail extends left+up */
-    .ss-dtr::before {
-      right: 4px;
-      transform-origin: right center;
-      transform: rotate(-15deg);
-      background: linear-gradient(to right, transparent 0%, currentColor 100%);
-    }
-    /* DTL: moving left+down ~15° → trail extends right+up */
-    .ss-dtl::before {
-      left: 4px;
-      transform-origin: left center;
-      transform: rotate(15deg);
-      background: linear-gradient(to left, transparent 0%, currentColor 100%);
-    }
+    .ss-lr  .ss-inner::after,
+    .ss-dtr .ss-inner::after { right: -2px; }
+    .ss-rl  .ss-inner::after,
+    .ss-dtl .ss-inner::after { left: -2px;  }
 
     .ss1 { color:#ff6ec7; top:28%; animation: shoot-lr  linear infinite 24s  0s;  }
     .ss2 { color:#4fc3ff; top:62%; animation: shoot-rl  linear infinite 28s  13s; }
@@ -522,7 +519,15 @@
     .ss5 { color:#ff9ef0; top:45%; animation: shoot-lr  linear infinite 30s  9s;  }
     .ss6 { color:#c07aff; top:55%; animation: shoot-rl  linear infinite 22s  16s; }
 
-    /* ===== PLANET WRAP + RAY STARS ===== */
+    /* ===== TWINKLING RAY STARS ===== */
+    @keyframes ray-twinkle {
+      0%   { opacity: 0;   transform: scale(0.2) rotate(0deg);  }
+      25%  { opacity: 0.9; transform: scale(1)   rotate(20deg); }
+      50%  { opacity: 0.4; transform: scale(0.6) rotate(35deg); }
+      75%  { opacity: 0.8; transform: scale(0.9) rotate(50deg); }
+      100% { opacity: 0;   transform: scale(0.2) rotate(70deg); }
+    }
+
     .logo-planet-wrap {
       position: relative;
       display: inline-flex;
@@ -531,17 +536,19 @@
     }
     .ray-star {
       position: absolute;
-      font-size: 12px;
+      font-size: 9px;
       line-height: 1;
       pointer-events: none;
+      opacity: 0;
       animation: ray-twinkle ease-in-out infinite;
     }
-    .rs1 { color:#4fc3ff; top: -4px;  left: 10px;  font-size:11px; animation-duration:3.2s; animation-delay:0s;    }
-    .rs2 { color:#c07aff; top:  2px;  right: 5px;  font-size:10px; animation-duration:2.8s; animation-delay:0.9s;  }
-    .rs3 { color:#82d8ff; bottom:-2px;left: 22px;  font-size: 9px; animation-duration:3.6s; animation-delay:1.7s;  }
-    .rs4 { color:#b070ff; top: 12px;  left: -4px;  font-size:10px; animation-duration:2.5s; animation-delay:0.5s;  }
-    .rs5 { color:#4fc3ff; bottom: 6px;right: 8px;  font-size:11px; animation-duration:3.0s; animation-delay:2.1s;  }
-    .rs6 { color:#c07aff; top: -2px;  right:22px;  font-size: 9px; animation-duration:4.0s; animation-delay:1.3s;  }
+    /* Positioned just outside the planet image edge, not overlapping it */
+    .rs1 { color:#4fc3ff; top: -8px;  left: 14px;  font-size: 8px; animation-duration:5.0s; animation-delay:0s;    }
+    .rs2 { color:#c07aff; top: -6px;  right: 2px;  font-size: 7px; animation-duration:4.5s; animation-delay:1.4s;  }
+    .rs3 { color:#82d8ff; bottom:-8px;left: 18px;  font-size: 7px; animation-duration:5.8s; animation-delay:2.6s;  }
+    .rs4 { color:#b070ff; top: 10px;  left: -8px;  font-size: 8px; animation-duration:4.0s; animation-delay:0.8s;  }
+    .rs5 { color:#4fc3ff; bottom:-4px;right: 2px;  font-size: 7px; animation-duration:4.8s; animation-delay:3.2s;  }
+    .rs6 { color:#c07aff; top: -4px;  right:18px;  font-size: 7px; animation-duration:6.0s; animation-delay:1.8s;  }
 
   </style>
 </head>
@@ -549,7 +556,7 @@
 
   <!-- HEADER & NAVIGATION -->
   <header>
-    <span class="shoot-star ss-lr ss1"></span><span class="shoot-star ss-rl ss2"></span><span class="shoot-star ss-dtr ss3"></span><span class="shoot-star ss-dtl ss4"></span><span class="shoot-star ss-lr ss5"></span><span class="shoot-star ss-rl ss6"></span>
+    <span class="shoot-star ss-lr ss1"><span class="ss-inner"></span></span><span class="shoot-star ss-rl ss2"><span class="ss-inner"></span></span><span class="shoot-star ss-dtr ss3"><span class="ss-inner"></span></span><span class="shoot-star ss-dtl ss4"><span class="ss-inner"></span></span><span class="shoot-star ss-lr ss5"><span class="ss-inner"></span></span><span class="shoot-star ss-rl ss6"><span class="ss-inner"></span></span>
     <div class="header-container">
       <div class="logo">
         <a href="index.html">
