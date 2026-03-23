@@ -131,16 +131,23 @@
       border-radius: 20px;
       white-space: nowrap;
     }
+    @keyframes toggle-pulse {
+      0%   { box-shadow: 0 0 0 0px rgba(124,197,255,0.55); }
+      60%  { box-shadow: 0 0 0 7px rgba(124,197,255,0.12); }
+      100% { box-shadow: 0 0 0 10px rgba(124,197,255,0); }
+    }
     .billing-toggle {
       width: 56px; height: 28px;
-      background-color: var(--color-border);
+      background-color: #3a3a5c;
       border-radius: 14px;
       position: relative; cursor: pointer;
       transition: background 0.3s;
       flex-shrink: 0;
+      animation: toggle-pulse 2.4s ease-out infinite;
     }
     .billing-toggle.yearly {
       background: linear-gradient(135deg, #7cc5ff, #c07aff);
+      animation: none;
     }
     .toggle-thumb {
       position: absolute;
