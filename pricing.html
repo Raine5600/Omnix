@@ -173,13 +173,28 @@
       0%   { background-position: -200% center; }
       100% { background-position:  200% center; }
     }
-    .popular-badge {
+    /* shared badge base */
+    .popular-badge, .best-value-badge {
       display: inline-block;
       font-family: var(--font-heading);
       font-size: 0.78rem; font-weight: 800;
       letter-spacing: 0.12em;
       padding: 0.3rem 0.9rem;
       border-radius: 20px;
+      margin-bottom: 0.75rem;
+      text-shadow: none;
+    }
+    /* Most Popular — blue/purple gradient oval */
+    .popular-badge {
+      border: 1.5px solid var(--color-primary);
+      background: var(--color-gradient);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    /* Best Value — gold shimmer oval */
+    .best-value-badge {
       border: 1.5px solid #c8960c;
       background: linear-gradient(
         90deg,
@@ -196,8 +211,6 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       animation: gold-shimmer 2.4s linear infinite;
-      margin-bottom: 0.75rem;
-      text-shadow: none;
     }
     .pricing-card h2 {
       font-family: var(--font-heading);
@@ -624,7 +637,8 @@
     </div>
 
     <div class="pricing-card">
-      <p class="popular-badge">★ BEST VALUE ★</p>
+      <p class="popular-badge"  id="badge-popular">★ MOST POPULAR ★</p>
+      <p class="best-value-badge" id="badge-best-value" style="display:none;">★ BEST VALUE ★</p>
       <h2>Omnix Generational</h2>
 
       <!-- Price (shared display, text swapped by JS) -->
@@ -931,6 +945,8 @@
       const period       = document.getElementById('price-period');
       const lblMo        = document.getElementById('lbl-monthly');
       const lblYr        = document.getElementById('lbl-yearly');
+      const badgePopular = document.getElementById('badge-popular');
+      const badgeBest    = document.getElementById('badge-best-value');
 
       if (mode === 'yearly') {
         toggle.classList.add('yearly');
@@ -940,6 +956,8 @@
         savingsLine.style.display = 'block';
         lblMo.classList.remove('active');
         lblYr.classList.add('active');
+        badgePopular.style.display = 'none';
+        badgeBest.style.display    = 'inline-block';
       } else {
         toggle.classList.remove('yearly');
         amount.textContent = '$597';
@@ -950,6 +968,8 @@
         savingsLine.style.display = 'none';
         lblMo.classList.add('active');
         lblYr.classList.remove('active');
+        badgePopular.style.display = 'inline-block';
+        badgeBest.style.display    = 'none';
       }
     }
 
