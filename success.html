@@ -56,18 +56,39 @@
     nav { display: flex; align-items: center; gap: 1.5rem; }
     nav a { color: var(--color-white); text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: color 0.3s; }
     nav a:hover { color: var(--color-primary); }
-    .dropdown { position: relative; }
-    .dropdown > a::after { content: " ▾"; font-size: 0.7rem; }
-    .dropdown-menu {
-      display: none; position: absolute; top: 100%; left: 0;
-      background-color: var(--color-dark-light);
-      border-radius: 8px; min-width: 200px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-      margin-top: 0.5rem; overflow: hidden;
+        .dropdown {
+      position: relative;
     }
-    .dropdown:hover .dropdown-menu { display: block; }
-    .dropdown-menu a { display: block; padding: 0.75rem 1.5rem; color: var(--color-white); text-decoration: none; transition: background 0.3s; }
-    .dropdown-menu a:hover { background-color: var(--color-primary); color: var(--color-white); }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: var(--color-dark-light);
+      border-radius: 8px;
+      min-width: 200px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      padding-top: 0.5rem;
+      overflow: hidden;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 0.75rem 1.5rem;
+      color: var(--color-white);
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+    }
 
     @keyframes btn-glow-pulse {
       0%   { box-shadow:  0 0 10px 3px rgba(124,197,255,0.7),  0 0 30px 8px  rgba(192,122,255,0.2),  -6px 0 18px 4px rgba(124,197,255,0.4),   6px 0 18px 4px rgba(192,122,255,0.4); }
