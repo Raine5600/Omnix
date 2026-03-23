@@ -605,15 +605,6 @@
       20.1% { transform: translate(calc(100vw + 180px), 0px);  opacity: 0; }
       100%  { transform: translate(calc(100vw + 180px), 0px);  opacity: 0; }
     }
-    @keyframes shoot-dtr {
-      0%    { transform: translate(-180px, -55px);              opacity: 0; }
-      5%    { opacity: 1; }
-      20%   { transform: translate(calc(100vw + 180px), 55px);  opacity: 0; }
-      20.1% { transform: translate(-180px, -55px);              opacity: 0; }
-      100%  { transform: translate(-180px, -55px);              opacity: 0; }
-    }
-    @keyframes shoot-dtl {
-      0%    { transform: translate(calc(100vw + 180px), -55px); opacity: 0; }
       5%    { opacity: 1; }
       20%   { transform: translate(-180px, 55px);               opacity: 0; }
       20.1% { transform: translate(calc(100vw + 180px), -55px); opacity: 0; }
@@ -640,18 +631,8 @@
       top: -1.5px;
       filter: drop-shadow(0 0 3px currentColor);
     }
-
-    /* LR & DTR: head on RIGHT, trail extends LEFT */
-    .ss-lr .ss-inner,
-    .ss-dtr .ss-inner {
-      right: 0;
-      background: linear-gradient(to right, transparent 0%, currentColor 65%, white 100%);
-      transform-origin: right center;
-    }
-
     /* RL & DTL: head on LEFT, trail extends RIGHT */
-    .ss-rl .ss-inner,
-    .ss-dtl .ss-inner {
+    .ss-rl .ss-inner {
       left: 0;
       background: linear-gradient(to left, transparent 0%, currentColor 65%, white 100%);
       transform-origin: left center;
@@ -659,8 +640,6 @@
 
     .ss-lr  .ss-inner { transform: rotate(0deg);   }
     .ss-rl  .ss-inner { transform: rotate(0deg);   }
-    .ss-dtr .ss-inner { transform: rotate(25deg);  }
-    .ss-dtl .ss-inner { transform: rotate(-25deg); }
 
     /* Glowing head dot */
     .ss-inner::after {
@@ -673,15 +652,11 @@
       box-shadow: 0 0 8px 4px currentColor, 0 0 3px 1px white;
       top: -2px;
     }
-    .ss-lr  .ss-inner::after,
-    .ss-dtr .ss-inner::after { right: -3px; }
-    .ss-rl  .ss-inner::after,
-    .ss-dtl .ss-inner::after { left: -3px;  }
+    .ss-lr .ss-inner::after { right: -3px; }
+    .ss-rl .ss-inner::after { left: -3px;  }
 
     .ss1 { color:#ff6ec7; top:28%; animation: shoot-lr  linear infinite 24s  0s;  }
     .ss2 { color:#4fc3ff; top:62%; animation: shoot-rl  linear infinite 28s  13s; }
-    .ss3 { color:#c07aff; top:18%; animation: shoot-dtr linear infinite 32s  6s;  }
-    .ss4 { color:#82d8ff; top:72%; animation: shoot-dtl linear infinite 26s  19s; }
     .ss5 { color:#ff9ef0; top:45%; animation: shoot-lr  linear infinite 30s  9s;  }
     .ss6 { color:#c07aff; top:55%; animation: shoot-rl  linear infinite 22s  16s; }
 
@@ -722,7 +697,7 @@
 
   <!-- HEADER -->
   <header>
-    <span class="shoot-star ss-lr ss1"><span class="ss-inner"></span></span><span class="shoot-star ss-rl ss2"><span class="ss-inner"></span></span><span class="shoot-star ss-dtr ss3"><span class="ss-inner"></span></span><span class="shoot-star ss-dtl ss4"><span class="ss-inner"></span></span><span class="shoot-star ss-lr ss5"><span class="ss-inner"></span></span><span class="shoot-star ss-rl ss6"><span class="ss-inner"></span></span>
+    <span class="shoot-star ss-lr ss1"><span class="ss-inner"></span></span><span class="shoot-star ss-rl ss2"><span class="ss-inner"></span></span><span class="shoot-star ss-lr ss5"><span class="ss-inner"></span></span><span class="shoot-star ss-rl ss6"><span class="ss-inner"></span></span>
     <div class="header-container">
       <div class="logo">
         <a href="index.html">
