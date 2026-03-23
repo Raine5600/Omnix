@@ -233,18 +233,18 @@
       100%  { transform: translate(calc(100vw + 180px), 0px);  opacity: 0; }
     }
     @keyframes shoot-dtr {
-      0%    { transform: translate(-180px, -25px);             opacity: 0; }
+      0%    { transform: translate(-180px, -55px);              opacity: 0; }
       5%    { opacity: 1; }
-      20%   { transform: translate(calc(100vw + 180px), 25px); opacity: 0; }
-      20.1% { transform: translate(-180px, -25px);             opacity: 0; }
-      100%  { transform: translate(-180px, -25px);             opacity: 0; }
+      20%   { transform: translate(calc(100vw + 180px), 55px);  opacity: 0; }
+      20.1% { transform: translate(-180px, -55px);              opacity: 0; }
+      100%  { transform: translate(-180px, -55px);              opacity: 0; }
     }
     @keyframes shoot-dtl {
-      0%    { transform: translate(calc(100vw + 180px), -25px);opacity: 0; }
+      0%    { transform: translate(calc(100vw + 180px), -55px); opacity: 0; }
       5%    { opacity: 1; }
-      20%   { transform: translate(-180px, 25px);              opacity: 0; }
-      20.1% { transform: translate(calc(100vw + 180px), -25px);opacity: 0; }
-      100%  { transform: translate(calc(100vw + 180px), -25px);opacity: 0; }
+      20%   { transform: translate(-180px, 55px);               opacity: 0; }
+      20.1% { transform: translate(calc(100vw + 180px), -55px); opacity: 0; }
+      100%  { transform: translate(calc(100vw + 180px), -55px); opacity: 0; }
     }
 
     /* Outer wrapper: zero-size anchor that only translates */
@@ -286,8 +286,8 @@
 
     .ss-lr  .ss-inner { transform: rotate(0deg);   }
     .ss-rl  .ss-inner { transform: rotate(0deg);   }
-    .ss-dtr .ss-inner { transform: rotate(-15deg); }
-    .ss-dtl .ss-inner { transform: rotate(-15deg); }
+    .ss-dtr .ss-inner { transform: rotate(-25deg); }
+    .ss-dtl .ss-inner { transform: rotate(-25deg); }
 
     /* Glowing head dot */
     .ss-inner::after {
