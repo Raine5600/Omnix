@@ -389,24 +389,36 @@
       .footer-container { grid-template-columns: 1fr; }
     }
   
-    /* ===== NAV STARS ===== */
-    @keyframes nav-star-fade {
-      0%, 100% { opacity: 0; }
-      50%       { opacity: 1; }
+    /* ===== SHOOTING STARS ===== */
+    @keyframes shoot {
+      0%   { transform: translateX(-80px) translateY(10px); opacity: 0; }
+      5%   { opacity: 1; }
+      70%  { opacity: 1; }
+      100% { transform: translateX(calc(100vw + 80px)) translateY(-20px); opacity: 0; }
     }
-    header { overflow: visible; }
-    .nav-star {
+    .shoot-star {
       position: absolute;
-      border-radius: 50%;
+      height: 2px;
+      border-radius: 100px;
+      background: linear-gradient(90deg, transparent, currentColor, transparent);
       pointer-events: none;
       opacity: 0;
-      animation: nav-star-fade linear infinite;
+      animation: shoot linear infinite;
     }
-    .nav-star-1 { width:3px;height:3px; background:#ff6ec7; top:22%; left:12%;  animation-duration:6s;  animation-delay:0s;   }
-    .nav-star-2 { width:2px;height:2px; background:#4fc3ff; top:65%; left:28%;  animation-duration:8s;  animation-delay:2.5s; }
-    .nav-star-3 { width:3px;height:3px; background:#c07aff; top:30%; left:52%;  animation-duration:7s;  animation-delay:1.2s; }
-    .nav-star-4 { width:2px;height:2px; background:#ff6ec7; top:70%; left:72%;  animation-duration:9s;  animation-delay:4s;   }
-    .nav-star-5 { width:3px;height:3px; background:#4fc3ff; top:20%; left:88%;  animation-duration:6.5s;animation-delay:3s;   }
+    .shoot-star::after {
+      content: '';
+      position: absolute;
+      right: 0; top: -1px;
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 4px 2px currentColor;
+    }
+    .ss1 { width:60px; color:#ff6ec7; top:25%; animation-duration:7s;  animation-delay:0s;   }
+    .ss2 { width:45px; color:#4fc3ff; top:55%; animation-duration:9s;  animation-delay:3.5s; }
+    .ss3 { width:55px; color:#c07aff; top:40%; animation-duration:11s; animation-delay:6s;   }
+    .ss4 { width:40px; color:#ff6ec7; top:70%; animation-duration:8s;  animation-delay:1.5s; }
+    .ss5 { width:50px; color:#82d8ff; top:15%; animation-duration:10s; animation-delay:5s;   }
 
   </style>
 </head>
@@ -414,7 +426,7 @@
 
   <!-- HEADER -->
   <header>
-    <span class="nav-star nav-star-1"></span><span class="nav-star nav-star-2"></span><span class="nav-star nav-star-3"></span><span class="nav-star nav-star-4"></span><span class="nav-star nav-star-5"></span><div class="header-container">
+    <span class="shoot-star ss1"></span><span class="shoot-star ss2"></span><span class="shoot-star ss3"></span><span class="shoot-star ss4"></span><span class="shoot-star ss5"></span><div class="header-container">
       <div class="logo">
         <a href="index.html">
           <div class="logo-planet-wrap"><img src="Omnix-logo-only.png" alt="Omnix" class="logo-icon"></div>
