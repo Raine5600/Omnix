@@ -434,49 +434,49 @@
     .ss-inner {
       display: block;
       position: absolute;
-      width: 88px;
-      height: 2px;
-      border-radius: 2px;
-      top: -1px;
+      width: 130px;
+      height: 3px;
+      border-radius: 3px;
+      top: -1.5px;
+      filter: drop-shadow(0 0 3px currentColor);
     }
 
-    /* LR & DTR: head is on RIGHT end → trail extends LEFT from anchor */
+    /* LR & DTR: head on RIGHT, trail extends LEFT */
     .ss-lr .ss-inner,
     .ss-dtr .ss-inner {
       right: 0;
-      background: linear-gradient(to right, transparent 0%, currentColor 85%);
+      background: linear-gradient(to right, transparent 0%, currentColor 65%, white 100%);
       transform-origin: right center;
     }
 
-    /* RL & DTL: head is on LEFT end → trail extends RIGHT from anchor */
+    /* RL & DTL: head on LEFT, trail extends RIGHT */
     .ss-rl .ss-inner,
     .ss-dtl .ss-inner {
       left: 0;
-      background: linear-gradient(to left, transparent 0%, currentColor 85%);
+      background: linear-gradient(to left, transparent 0%, currentColor 65%, white 100%);
       transform-origin: left center;
     }
 
-    /* Static angle — trail tilts to follow direction of travel */
     .ss-lr  .ss-inner { transform: rotate(0deg);   }
     .ss-rl  .ss-inner { transform: rotate(0deg);   }
-    .ss-dtr .ss-inner { transform: rotate(-15deg); } /* head goes right+down, trail upper-left */
-    .ss-dtl .ss-inner { transform: rotate(-15deg); } /* head goes left+down, trail upper-right */
+    .ss-dtr .ss-inner { transform: rotate(-15deg); }
+    .ss-dtl .ss-inner { transform: rotate(-15deg); }
 
-    /* Glowing head dot at the leading end */
+    /* Glowing head dot */
     .ss-inner::after {
       content: '';
       position: absolute;
-      width: 5px;
-      height: 5px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      background: currentColor;
-      box-shadow: 0 0 6px 3px currentColor;
-      top: -1.5px;
+      background: white;
+      box-shadow: 0 0 8px 4px currentColor, 0 0 3px 1px white;
+      top: -2px;
     }
     .ss-lr  .ss-inner::after,
-    .ss-dtr .ss-inner::after { right: -2px; }
+    .ss-dtr .ss-inner::after { right: -3px; }
     .ss-rl  .ss-inner::after,
-    .ss-dtl .ss-inner::after { left: -2px;  }
+    .ss-dtl .ss-inner::after { left: -3px;  }
 
     .ss1 { color:#ff6ec7; top:28%; animation: shoot-lr  linear infinite 24s  0s;  }
     .ss2 { color:#4fc3ff; top:62%; animation: shoot-rl  linear infinite 28s  13s; }
