@@ -215,6 +215,80 @@
     @media (max-width: 480px) {
       .footer-container { grid-template-columns: 1fr; }
     }
+  
+    /* ===== NAV STARS ===== */
+    @keyframes star-twinkle {
+      0%, 100% { opacity: 1;  transform: scale(1); }
+      50%       { opacity: 0.15; transform: scale(0.4); }
+    }
+    @keyframes star-twinkle-b {
+      0%, 100% { opacity: 0.7; transform: scale(0.8); }
+      50%       { opacity: 0.05; transform: scale(0.3); }
+    }
+    @keyframes star-twinkle-c {
+      0%, 100% { opacity: 0.9; transform: scale(1.1); }
+      50%       { opacity: 0.2;  transform: scale(0.5); }
+    }
+    .logo-planet-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .logo-planet-wrap::before {
+      content: '';
+      position: absolute;
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: transparent;
+      pointer-events: none;
+      box-shadow:
+        -38px -22px 0 2px #ff6ec7,
+         42px -30px 0 1px #ff6ec7,
+        -28px  38px 0 2px #ff6ec7,
+         48px  18px 0 1px #ff9ef0,
+        -52px  10px 0 2px #ff6ec7,
+         18px  48px 0 1px #ff9ef0,
+        -18px -46px 0 1px #ff6ec7,
+         58px -10px 0 2px #ff9ef0;
+      animation: star-twinkle 2.2s ease-in-out infinite;
+    }
+    .logo-planet-wrap::after {
+      content: '';
+      position: absolute;
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: transparent;
+      pointer-events: none;
+      box-shadow:
+         32px -42px 0 2px #4fc3ff,
+        -44px -18px 0 1px #4fc3ff,
+         50px  30px 0 2px #82d8ff,
+        -24px  44px 0 1px #4fc3ff,
+         12px -52px 0 2px #82d8ff,
+        -56px  22px 0 1px #4fc3ff,
+         38px  -8px 0 2px #82d8ff,
+        -12px  54px 0 1px #4fc3ff;
+      animation: star-twinkle-b 2.8s ease-in-out infinite 0.6s;
+    }
+    .nav-star-purple {
+      position: absolute;
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: transparent;
+      pointer-events: none;
+      box-shadow:
+        -60px  -8px 0 2px #c07aff,
+         24px  56px 0 1px #c07aff,
+        -30px -54px 0 2px #d49aff,
+         60px -36px 0 1px #c07aff,
+        -48px  38px 0 2px #d49aff,
+         44px  44px 0 1px #c07aff,
+         -8px  60px 0 2px #d49aff,
+         66px   8px 0 1px #c07aff;
+      animation: star-twinkle-c 3.1s ease-in-out infinite 1.2s;
+    }
+
   </style>
 </head>
 <body>
@@ -224,7 +298,7 @@
     <div class="header-container">
       <div class="logo">
         <a href="index.html">
-          <img src="Omnix-logo-only.png" alt="Omnix" class="logo-icon">
+          <div class="logo-planet-wrap"><img src="Omnix-logo-only.png" alt="Omnix" class="logo-icon"><span class="nav-star-purple"></span></div>
           <img src="Omnix-name-only.png" alt="Omnix" class="logo-name">
         </a>
       </div>
