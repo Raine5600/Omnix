@@ -22,8 +22,10 @@ module.exports = async (req, res) => {
     // Build the origin for redirect URLs
     const origin = req.headers.origin || `https://${req.headers.host}`;
 
-    // Create the Stripe Checkout session
-    // The one-time setup fee is added as an invoice item alongside the subscription
+    // Create the Stripe Checkout session.
+    // Both the recurring subscription price and the one-time setup fee
+    // are passed as line_items — Stripe supports mixing one-time and
+    // recurring prices in subscription-mode checkout.
     const session = await stripe.checkout.sessions.create({
       mode: 'subscription',
       line_items: [
@@ -31,19 +33,12 @@ module.exports = async (req, res) => {
           price: subscriptionPriceId,
           quantity: 1,
         },
+        {
+          price: process.env.STRIPE_SETUP_FEE_PRICE_ID,
+          quantity: 1,
+        },
       ],
-      subscription_data: {
-        // Add the one-time setup fee to the first invoice
-        add_invoice_items: [
-          {
-            price: process.env.STRIPE_SETUP_FEE_PRICE_ID,
-            quantity: 1,
-          },
-        ],
-      },
-      // Collect billing address for tax purposes
       billing_address_collection: 'required',
-      // Allow promo codes if you want to offer discounts later
       allow_promotion_codes: true,
       success_url: `${origin}/success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/pricing.html`,
