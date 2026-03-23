@@ -588,77 +588,6 @@
     @media (max-width: 480px) {
       .footer-container { grid-template-columns: 1fr; }
     }
-  
-        /* ===== SHOOTING STARS ===== */
-    /* Keyframes: wrapper translates only — no rotation */
-    @keyframes shoot-lr {
-      0%    { transform: translate(-180px, 0px);               opacity: 0; }
-      5%    { opacity: 1; }
-      20%   { transform: translate(calc(100vw + 180px), 0px);  opacity: 0; }
-      20.1% { transform: translate(-180px, 0px);               opacity: 0; }
-      100%  { transform: translate(-180px, 0px);               opacity: 0; }
-    }
-    @keyframes shoot-rl {
-      0%    { transform: translate(calc(100vw + 180px), 0px);  opacity: 0; }
-      5%    { opacity: 1; }
-      20%   { transform: translate(-180px, 0px);               opacity: 0; }
-      20.1% { transform: translate(calc(100vw + 180px), 0px);  opacity: 0; }
-      100%  { transform: translate(calc(100vw + 180px), 0px);  opacity: 0; }
-    }
-      5%    { opacity: 1; }
-      20%   { transform: translate(-180px, 55px);               opacity: 0; }
-      20.1% { transform: translate(calc(100vw + 180px), -55px); opacity: 0; }
-      100%  { transform: translate(calc(100vw + 180px), -55px); opacity: 0; }
-    }
-
-    /* Outer wrapper: zero-size anchor that only translates */
-    .shoot-star {
-      position: absolute;
-      width: 0;
-      height: 0;
-      overflow: visible;
-      pointer-events: none;
-      opacity: 0;
-    }
-
-    /* Inner visual: rotated trail bar with glowing head */
-    .ss-inner {
-      display: block;
-      position: absolute;
-      width: 130px;
-      height: 3px;
-      border-radius: 3px;
-      top: -1.5px;
-      filter: drop-shadow(0 0 3px currentColor);
-    }
-    /* RL & DTL: head on LEFT, trail extends RIGHT */
-    .ss-rl .ss-inner {
-      left: 0;
-      background: linear-gradient(to left, transparent 0%, currentColor 65%, white 100%);
-      transform-origin: left center;
-    }
-
-    .ss-lr  .ss-inner { transform: rotate(0deg);   }
-    .ss-rl  .ss-inner { transform: rotate(0deg);   }
-
-    /* Glowing head dot */
-    .ss-inner::after {
-      content: '';
-      position: absolute;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: white;
-      box-shadow: 0 0 8px 4px currentColor, 0 0 3px 1px white;
-      top: -2px;
-    }
-    .ss-lr .ss-inner::after { right: -3px; }
-    .ss-rl .ss-inner::after { left: -3px;  }
-
-    .ss1 { color:#ff6ec7; top:28%; animation: shoot-lr  linear infinite 24s  0s;  }
-    .ss2 { color:#4fc3ff; top:62%; animation: shoot-rl  linear infinite 28s  13s; }
-    .ss5 { color:#ff9ef0; top:45%; animation: shoot-lr  linear infinite 30s  9s;  }
-    .ss6 { color:#c07aff; top:55%; animation: shoot-rl  linear infinite 22s  16s; }
 
     /* ===== TWINKLING RAY STARS ===== */
     @keyframes ray-twinkle {
@@ -697,7 +626,7 @@
 
   <!-- HEADER -->
   <header>
-    <span class="shoot-star ss-lr ss1"><span class="ss-inner"></span></span><span class="shoot-star ss-rl ss2"><span class="ss-inner"></span></span><span class="shoot-star ss-lr ss5"><span class="ss-inner"></span></span><span class="shoot-star ss-rl ss6"><span class="ss-inner"></span></span>
+    
     <div class="header-container">
       <div class="logo">
         <a href="index.html">
