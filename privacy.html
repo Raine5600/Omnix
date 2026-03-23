@@ -76,11 +76,29 @@
     .footer-bottom a:hover { color: var(--color-primary); }
   
     /* ===== SHOOTING STARS ===== */
-    @keyframes shoot {
-      0%   { transform: translateX(-80px) translateY(10px); opacity: 0; }
-      5%   { opacity: 1; }
-      70%  { opacity: 1; }
-      100% { transform: translateX(calc(100vw + 80px)) translateY(-20px); opacity: 0; }
+    @keyframes shoot-lr {
+      0%   { transform: translate(-100px, 15px);  opacity: 0; }
+      8%   { opacity: 1; }
+      85%  { opacity: 1; }
+      100% { transform: translate(calc(100vw + 100px), -15px); opacity: 0; }
+    }
+    @keyframes shoot-rl {
+      0%   { transform: translate(calc(100vw + 100px), -10px); opacity: 0; }
+      8%   { opacity: 1; }
+      85%  { opacity: 1; }
+      100% { transform: translate(-100px, 15px); opacity: 0; }
+    }
+    @keyframes shoot-td {
+      0%   { transform: translate(20px, -40px);  opacity: 0; }
+      8%   { opacity: 1; }
+      85%  { opacity: 1; }
+      100% { transform: translate(-20px, 80px);  opacity: 0; }
+    }
+    @keyframes shoot-bu {
+      0%   { transform: translate(-20px, 80px);  opacity: 0; }
+      8%   { opacity: 1; }
+      85%  { opacity: 1; }
+      100% { transform: translate(20px, -40px);  opacity: 0; }
     }
     .shoot-star {
       position: absolute;
@@ -89,7 +107,6 @@
       background: linear-gradient(90deg, transparent, currentColor, transparent);
       pointer-events: none;
       opacity: 0;
-      animation: shoot linear infinite;
     }
     .shoot-star::after {
       content: '';
@@ -98,13 +115,14 @@
       width: 4px; height: 4px;
       border-radius: 50%;
       background: currentColor;
-      box-shadow: 0 0 4px 2px currentColor;
+      box-shadow: 0 0 5px 2px currentColor;
     }
-    .ss1 { width:60px; color:#ff6ec7; top:25%; animation-duration:7s;  animation-delay:0s;   }
-    .ss2 { width:45px; color:#4fc3ff; top:55%; animation-duration:9s;  animation-delay:3.5s; }
-    .ss3 { width:55px; color:#c07aff; top:40%; animation-duration:11s; animation-delay:6s;   }
-    .ss4 { width:40px; color:#ff6ec7; top:70%; animation-duration:8s;  animation-delay:1.5s; }
-    .ss5 { width:50px; color:#82d8ff; top:15%; animation-duration:10s; animation-delay:5s;   }
+    .ss1 { width:55px; color:#ff6ec7; top:30%; left:0;   animation: shoot-lr linear infinite; animation-duration:14s; animation-delay:0s;   }
+    .ss2 { width:45px; color:#4fc3ff; top:60%; left:0;   animation: shoot-lr linear infinite; animation-duration:18s; animation-delay:9s;   }
+    .ss3 { width:50px; color:#c07aff; top:20%; left:0;   animation: shoot-rl linear infinite; animation-duration:16s; animation-delay:4s;   }
+    .ss4 { width:40px; color:#82d8ff; top:75%; left:0;   animation: shoot-rl linear infinite; animation-duration:20s; animation-delay:13s;  }
+    .ss5 { width:35px; color:#ff9ef0; top:0;   left:35%; animation: shoot-td linear infinite; animation-duration:12s; animation-delay:7s;   }
+    .ss6 { width:35px; color:#c07aff; top:0;   left:70%; animation: shoot-bu linear infinite; animation-duration:15s; animation-delay:2s;   }
 
   </style>
 </head>
@@ -112,7 +130,7 @@
 
   <!-- HEADER -->
   <header>
-    <span class="shoot-star ss1"></span><span class="shoot-star ss2"></span><span class="shoot-star ss3"></span><span class="shoot-star ss4"></span><span class="shoot-star ss5"></span><div class="header-container">
+    <span class="shoot-star ss1"></span><span class="shoot-star ss2"></span><span class="shoot-star ss3"></span><span class="shoot-star ss4"></span><span class="shoot-star ss5"></span><span class="shoot-star ss6"></span><div class="header-container">
       <div class="logo">
         <a href="index.html">
           <div class="logo-planet-wrap"><img src="Omnix-logo-only.png" alt="Omnix" class="logo-icon"></div>
