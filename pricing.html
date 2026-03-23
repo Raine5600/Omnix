@@ -169,15 +169,35 @@
       box-shadow: 0 0 40px rgba(77, 159, 255, 0.12);
       position: relative;
     }
+    @keyframes gold-shimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position:  200% center; }
+    }
     .popular-badge {
+      display: inline-block;
       font-family: var(--font-heading);
-      font-size: 0.8rem; font-weight: 800;
-      letter-spacing: 0.1em;
-      background: var(--color-gradient);
+      font-size: 0.78rem; font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.3rem 0.9rem;
+      border-radius: 20px;
+      border: 1.5px solid #c8960c;
+      background: linear-gradient(
+        90deg,
+        #7a5800 0%,
+        #c8960c 20%,
+        #ffe066 38%,
+        #fff4a3 50%,
+        #ffe066 62%,
+        #c8960c 80%,
+        #7a5800 100%
+      );
+      background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      animation: gold-shimmer 2.4s linear infinite;
       margin-bottom: 0.75rem;
+      text-shadow: none;
     }
     .pricing-card h2 {
       font-family: var(--font-heading);
@@ -604,7 +624,7 @@
     </div>
 
     <div class="pricing-card">
-      <p class="popular-badge">★ MOST POPULAR ★</p>
+      <p class="popular-badge">★ BEST VALUE ★</p>
       <h2>Omnix Generational</h2>
 
       <!-- Price (shared display, text swapped by JS) -->
