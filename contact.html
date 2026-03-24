@@ -411,14 +411,14 @@
         <div class="form-group">
           <label>Preferred Contact Method</label>
           <div class="contact-pref">
-            <button type="button" class="pref-btn active" onclick="setPref('phone')">
+            <button type="button" class="pref-btn active" onclick="setPref('phone', this)">
               <i class="fas fa-phone" style="margin-right:6px;"></i> Phone
             </button>
-            <button type="button" class="pref-btn" onclick="setPref('email')">
+            <button type="button" class="pref-btn" onclick="setPref('email', this)">
               <i class="fas fa-envelope" style="margin-right:6px;"></i> Email
             </button>
-            <button type="button" class="pref-btn" onclick="setPref('either')">
-              <i class="fas fa-comments" style="margin-right:6px;"></i> Either
+            <button type="button" class="pref-btn" onclick="setPref('either', this)">
+              <i class="fas fa-comments" style="margin-right:6px;"></i> Both
             </button>
           </div>
 
@@ -485,10 +485,10 @@
     }
 
     // Contact preference toggle
-    function setPref(pref) {
+    function setPref(pref, btn) {
       document.querySelectorAll('.pref-btn').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.pref-input').forEach(d => d.classList.remove('visible'));
-      event.currentTarget.classList.add('active');
+      btn.classList.add('active');
       document.getElementById('pref-' + pref).classList.add('visible');
     }
 

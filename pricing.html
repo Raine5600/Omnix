@@ -1202,10 +1202,10 @@
       if (e.target.id === 'info-modal') closeModal();
     });
 
-    function setPrefModal(pref) {
+    function setPrefModal(pref, btn) {
       document.querySelectorAll('.modal-pref-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.modal-pref-input').forEach(d => d.classList.remove('visible'));
-      event.currentTarget.classList.add('active');
+      document.querySelectorAll('.pref-input').forEach(d => d.classList.remove('visible'));
+      btn.classList.add('active');
       document.getElementById('modal-pref-' + pref).classList.add('visible');
     }
 
@@ -1282,9 +1282,9 @@
         <div class="form-group">
           <label>Preferred Contact Method</label>
           <div class="contact-pref">
-            <button type="button" class="pref-btn modal-pref-btn active" onclick="setPrefModal('phone')"><i class="fas fa-phone" style="margin-right:6px;"></i> Phone</button>
-            <button type="button" class="pref-btn modal-pref-btn" onclick="setPrefModal('email')"><i class="fas fa-envelope" style="margin-right:6px;"></i> Email</button>
-            <button type="button" class="pref-btn modal-pref-btn" onclick="setPrefModal('either')"><i class="fas fa-comments" style="margin-right:6px;"></i> Either</button>
+            <button type="button" class="pref-btn modal-pref-btn active" onclick="setPrefModal('phone', this)"><i class="fas fa-phone" style="margin-right:6px;"></i> Phone</button>
+            <button type="button" class="pref-btn modal-pref-btn" onclick="setPrefModal('email', this)"><i class="fas fa-envelope" style="margin-right:6px;"></i> Email</button>
+            <button type="button" class="pref-btn modal-pref-btn" onclick="setPrefModal('either', this)"><i class="fas fa-comments" style="margin-right:6px;"></i> Both</button>
           </div>
           <div id="modal-pref-phone" class="pref-input visible">
             <input type="tel" name="phone" placeholder="(555) 000-0000">
