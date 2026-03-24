@@ -9,13 +9,18 @@ module.exports = async (req, res) => {
   try {
     const { plan } = req.body; // 'monthly' or 'yearly'
 
-    // Pick the correct recurring price based on the selected plan
-    const subscriptionPriceId =
-      plan === 'yearly'
-        ? process.env.STRIPE_YEARLY_PRICE_ID
-        : process.env.STRIPE_MONTHLY_PRICE_ID;
+    const isYearly = plan === 'yearly';
 
-    if (!subscriptionPriceId) {
+    // Pick the correct recurring price and setup fee based on plan
+    const subscriptionPriceId = isYearly
+      ? process.env.STRIPE_YEARLY_PRICE_ID
+      : process.env.STRIPE_MONTHLY_PRICE_ID;
+
+    const setupFeePriceId = isYearly
+      ? process.env.STRIPE_YEARLY_SETUP_FEE_PRICE_ID
+      : process.env.STRIPE_MONTHLY_SETUP_FEE_PRICE_ID;
+
+    if (!subscriptionPriceId || !setupFeePriceId) {
       return res.status(500).json({ error: 'Stripe price IDs are not configured.' });
     }
 
@@ -34,13 +39,13 @@ module.exports = async (req, res) => {
           quantity: 1,
         },
         {
-          price: process.env.STRIPE_SETUP_FEE_PRICE_ID,
+          price: setupFeePriceId,
           quantity: 1,
         },
       ],
       billing_address_collection: 'required',
       allow_promotion_codes: true,
-      success_url: `${origin}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${origin}/success.html?type=purchase&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/pricing.html`,
     });
 
