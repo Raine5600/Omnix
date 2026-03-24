@@ -999,6 +999,72 @@
     .rs5 { color:#4fc3ff; bottom:-4px;right: 2px;  font-size: 7px; animation-duration:4.8s; animation-delay:3.2s;  }
     .rs6 { color:#c07aff; top: -4px;  right:18px;  font-size: 7px; animation-duration:6.0s; animation-delay:1.8s;  }
 
+  
+    /* ===== ADDITIONAL SERVICES ===== */
+    .addons-section {
+      padding: 5rem 2rem;
+      text-align: center;
+      background: linear-gradient(180deg, var(--color-dark) 0%, rgba(30,20,60,0.6) 100%);
+    }
+    .addons-container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .addons-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: 0.75rem;
+    }
+    .addons-section h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      font-family: var(--font-heading);
+      color: var(--color-white);
+      margin-bottom: 1rem;
+    }
+    .addons-sub {
+      color: var(--color-text-muted);
+      font-size: 1.05rem;
+      max-width: 600px;
+      margin: 0 auto 3rem;
+    }
+    .addons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .addon-card {
+      background: var(--color-dark-light);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 1.75rem 1.25rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .addon-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--color-primary);
+    }
+    .addon-icon {
+      font-size: 1.6rem;
+      color: var(--color-primary);
+      margin-bottom: 0.75rem;
+    }
+    .addon-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-white);
+      margin-bottom: 0.5rem;
+    }
+    .addon-card p {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      line-height: 1.55;
+    }
+
   </style>
 </head>
 <body>
@@ -1149,6 +1215,44 @@
 
   <!-- OUR PROCESS -->
   <!-- FOOTER -->
+
+  <!-- ADDITIONAL SERVICES -->
+  <section class="addons-section">
+    <div class="addons-container">
+      <p class="addons-eyebrow">Go Further</p>
+      <h2>More Ways We Can Help</h2>
+      <p class="addons-sub">Beyond the core package, we offer a range of add-on services to accelerate your growth even further.</p>
+      <div class="addons-grid">
+        <div class="addon-card">
+          <div class="addon-icon"><i class="fas fa-robot"></i></div>
+          <h3>AI Secretary</h3>
+          <p>A 24/7 AI receptionist that answers calls, books appointments, and represents your business around the clock.</p>
+        </div>
+        <div class="addon-card">
+          <div class="addon-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <h3>Google Business Profile</h3>
+          <p>Full optimisation of your GBP listing so you rank higher in local search and on Google Maps.</p>
+        </div>
+        <div class="addon-card">
+          <div class="addon-icon"><i class="fas fa-search"></i></div>
+          <h3>Advanced SEO</h3>
+          <p>Backlinks, citations, press releases, and content — the heavy machinery for dominating local search.</p>
+        </div>
+        <div class="addon-card">
+          <div class="addon-icon"><i class="fab fa-google"></i></div>
+          <h3>Google Ads</h3>
+          <p>PPC and Local Services Ads management so the right customers find you at exactly the right moment.</p>
+        </div>
+        <div class="addon-card">
+          <div class="addon-icon"><i class="fab fa-facebook"></i></div>
+          <h3>Facebook Ads</h3>
+          <p>Targeted ad campaigns with custom audiences, retargeting, and ongoing optimisation to drive leads.</p>
+        </div>
+      </div>
+      <a href="pricing.html" class="cta-button">See Full Pricing &amp; Add-Ons</a>
+    </div>
+  </section>
+
   <footer>
     <div class="footer-container">
       <div class="footer-section">
