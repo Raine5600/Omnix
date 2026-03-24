@@ -507,8 +507,7 @@
         });
         const json = await res.json();
         if (json.success) {
-          form.style.display = 'none';
-          document.getElementById('success-msg').style.display = 'block';
+          window.location.href = 'success.html?type=contact';
         } else {
           throw new Error(json.message);
         }
