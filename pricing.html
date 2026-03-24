@@ -1064,6 +1064,8 @@
         amount.textContent = '$3,564';
         period.textContent = '/yr';
         feeLine.style.display = 'block';
+        feeLine.textContent = '+ $749 one-time setup fee (50% off)';
+        feeLine.classList.remove('waived');
         savingsLine.style.display = 'block';
         lblMo.classList.remove('active');
         lblYr.classList.add('active');
@@ -1104,15 +1106,47 @@
       }
     }
 
-    /* ---- Stripe Checkout ---- */
-    async function startCheckout() {
-      // Update all Purchase Now buttons to show loading state
+    /* ---- Pre-purchase modal ---- */
+    function startCheckout() {
+      document.getElementById('info-modal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('info-modal').style.display = 'none';
+    }
+
+    document.addEventListener('click', function(e) {
+      if (e.target.id === 'info-modal') closeModal();
+    });
+
+    function setPrefModal(pref) {
+      document.querySelectorAll('.modal-pref-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.modal-pref-input').forEach(d => d.classList.remove('visible'));
+      event.currentTarget.classList.add('active');
+      document.getElementById('modal-pref-' + pref).classList.add('visible');
+    }
+
+    async function handleModalSubmit(e) {
+      e.preventDefault();
+      const form = document.getElementById('modal-info-form');
+      const btn = form.querySelector('.modal-submit-btn');
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: new FormData(form)
+        });
+        const json = await res.json();
+        if (!json.success) throw new Error(json.message);
+      } catch (err) {
+        console.warn('Form submission error:', err);
+      }
+
+      closeModal();
       const btns = document.querySelectorAll('[onclick="startCheckout()"]');
-      btns.forEach(btn => {
-        btn.textContent = 'Loading…';
-        btn.disabled = true;
-        btn.style.opacity = '0.7';
-      });
+      btns.forEach(b => { b.textContent = 'Loading…'; b.disabled = true; b.style.opacity = '0.7'; });
 
       try {
         const res = await fetch('/api/create-checkout-session', {
@@ -1120,24 +1154,74 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ plan: billingMode }),
         });
-
         const data = await res.json();
-
         if (data.url) {
           window.location.href = data.url;
         } else {
           throw new Error(data.error || 'Could not create checkout session.');
         }
       } catch (err) {
-        console.error(err);
-        btns.forEach(btn => {
-          btn.textContent = 'Purchase Now';
-          btn.disabled = false;
-          btn.style.opacity = '1';
-        });
+        btns.forEach(b => { b.textContent = 'Purchase Now'; b.disabled = false; b.style.opacity = '1'; });
         alert('Something went wrong. Please try again or contact us directly.');
       }
     }
   </script>
+
+  <!-- Pre-purchase info modal -->
+  <div id="info-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:9999; align-items:center; justify-content:center; padding:1rem;">
+    <div style="background:var(--color-dark-light); border:1px solid var(--color-border); border-radius:16px; max-width:520px; width:100%; padding:2rem; max-height:90vh; overflow-y:auto; position:relative;">
+      <button onclick="closeModal()" style="position:absolute; top:1rem; right:1rem; background:none; border:none; color:var(--color-text-muted); font-size:1.4rem; cursor:pointer; line-height:1;">&times;</button>
+      <h2 style="font-family:var(--font-heading); color:var(--color-white); margin-bottom:0.4rem; font-size:1.5rem;">Before you purchase</h2>
+      <p style="color:var(--color-text-muted); margin-bottom:1.5rem; font-size:0.92rem;">We need a few details so we can hit the ground running on your project.</p>
+
+      <form id="modal-info-form" onsubmit="handleModalSubmit(event)">
+        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+        <input type="hidden" name="subject" value="New Omnix Purchase — Customer Info">
+        <input type="hidden" name="from_name" value="Omnix Purchase Form">
+        <input type="checkbox" name="botcheck" style="display:none;">
+
+        <div class="form-group">
+          <label for="m-business-name">Business Name</label>
+          <input type="text" id="m-business-name" name="business_name" placeholder="e.g. Smith's Roofing LLC" required>
+        </div>
+        <div class="form-group">
+          <label for="m-address">Business Address <span class="optional">(optional)</span></label>
+          <input type="text" id="m-address" name="address" placeholder="e.g. 123 Main St, Austin, TX 78701">
+        </div>
+        <div class="form-group">
+          <label for="m-website">Current Website <span class="optional">(optional)</span></label>
+          <input type="url" id="m-website" name="website" placeholder="https://yourbusiness.com">
+        </div>
+        <div class="form-group">
+          <label for="m-full-name">Your Name</label>
+          <input type="text" id="m-full-name" name="full_name" placeholder="First and last name" required>
+        </div>
+        <div class="form-group">
+          <label>Preferred Contact Method</label>
+          <div class="contact-pref">
+            <button type="button" class="pref-btn modal-pref-btn active" onclick="setPrefModal('phone')"><i class="fas fa-phone" style="margin-right:6px;"></i> Phone</button>
+            <button type="button" class="pref-btn modal-pref-btn" onclick="setPrefModal('email')"><i class="fas fa-envelope" style="margin-right:6px;"></i> Email</button>
+            <button type="button" class="pref-btn modal-pref-btn" onclick="setPrefModal('either')"><i class="fas fa-comments" style="margin-right:6px;"></i> Either</button>
+          </div>
+          <div id="modal-pref-phone" class="pref-input visible">
+            <input type="tel" name="phone" placeholder="(555) 000-0000">
+          </div>
+          <div id="modal-pref-email" class="pref-input">
+            <input type="email" name="email" placeholder="you@yourbusiness.com">
+          </div>
+          <div id="modal-pref-either" class="pref-input">
+            <input type="tel" name="phone_either" placeholder="Phone — (555) 000-0000" style="margin-bottom:0.75rem;">
+            <input type="email" name="email_either" placeholder="Email — you@yourbusiness.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="m-message">Anything else? <span class="optional">(optional)</span></label>
+          <textarea id="m-message" name="message" placeholder="Any questions or notes for us…" style="height:80px;"></textarea>
+        </div>
+        <button type="submit" class="cta-button modal-submit-btn" style="width:100%; margin-top:0.5rem;">Continue to Payment &rarr;</button>
+      </form>
+    </div>
+  </div>
+
 </body>
 </html>

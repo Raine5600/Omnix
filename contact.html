@@ -380,10 +380,20 @@
   <section class="form-section">
     <div class="form-card">
       <form id="contact-form" onsubmit="handleSubmit(event)">
+        <!-- Web3Forms access key — get yours free at web3forms.com -->
+        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+        <input type="hidden" name="subject" value="New Omnix Enquiry">
+        <input type="hidden" name="from_name" value="Omnix Contact Form">
+        <input type="checkbox" name="botcheck" style="display:none;">
 
         <div class="form-group">
           <label for="business-name">Business Name</label>
           <input type="text" id="business-name" name="business_name" placeholder="e.g. Smith's Roofing LLC" required>
+        </div>
+
+        <div class="form-group">
+          <label for="address">Business Address <span class="optional">(optional)</span></label>
+          <input type="text" id="address" name="address" placeholder="e.g. 123 Main St, Austin, TX 78701">
         </div>
 
         <div class="form-group">
@@ -482,11 +492,31 @@
       document.getElementById('pref-' + pref).classList.add('visible');
     }
 
-    // Form submit (placeholder — wire up to your backend/Formspree/etc.)
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
       e.preventDefault();
-      document.getElementById('contact-form').style.display = 'none';
-      document.getElementById('success-msg').style.display = 'block';
+      const form = document.getElementById('contact-form');
+      const btn = form.querySelector('.submit-btn');
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+
+      const data = new FormData(form);
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: data
+        });
+        const json = await res.json();
+        if (json.success) {
+          form.style.display = 'none';
+          document.getElementById('success-msg').style.display = 'block';
+        } else {
+          throw new Error(json.message);
+        }
+      } catch (err) {
+        btn.textContent = 'Send Request';
+        btn.disabled = false;
+        alert('Something went wrong. Please email us directly at contact@omnixgenerational.com');
+      }
     }
   </script>
 
