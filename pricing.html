@@ -1518,8 +1518,10 @@
     window.addEventListener('load', sizeStack);
     window.addEventListener('resize', sizeStack);
 
-    /* billingMode kept for checkout compatibility */
+    /* Maps carousel card index to Stripe product key */
+    const PRODUCT_KEYS = ['webpack', 'receptionist', 'ads'];
     let billingMode = 'monthly';
+    let productKey  = 'webpack';
 
     /* ---- Accordion ---- */
     function toggleAcc(trigger) {
@@ -1540,6 +1542,7 @@
     /* ---- Pre-purchase modal ---- */
     function startCheckout() {
       billingMode = cardBilling[currentCard];
+      productKey  = PRODUCT_KEYS[currentCard];
       document.getElementById('info-modal').style.display = 'flex';
     }
 
@@ -1584,7 +1587,7 @@
         const res = await fetch('/api/create-checkout-session', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ plan: billingMode }),
+          body: JSON.stringify({ product: productKey, billing: billingMode }),
         });
         const data = await res.json();
         if (data.url) {
