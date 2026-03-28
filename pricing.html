@@ -364,24 +364,29 @@
       background-color: var(--color-dark);
     }
     .breakdown-container {
-      max-width: 1100px; margin: 0 auto;
+      max-width: 900px; margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
+      grid-template-columns: 1fr;
     }
-    @media (max-width: 768px) {
-      .breakdown-container { grid-template-columns: 1fr; }
+    .breakdown-panel {
+      grid-area: 1 / 1;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
     }
-    .breakdown-col h3 {
+    .breakdown-panel.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .breakdown-panel h3 {
       font-family: var(--font-heading);
       font-size: 1.2rem; font-weight: 800;
       color: var(--color-white);
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
       padding-bottom: 0.75rem;
       border-bottom: 2px solid var(--color-border);
-      min-height: 5rem;
-      display: flex;
-      align-items: flex-end;
+      text-align: center;
+      letter-spacing: 0.03em;
     }
 
     /* Accordion */
@@ -1086,9 +1091,9 @@
   <section class="breakdown-section">
     <div class="breakdown-container">
 
-      <!-- LEFT: Omnix Generational features -->
-      <div class="breakdown-col">
-        <h3>What's included in Omnix Generational</h3>
+      <!-- PANEL 0: OMNIX Generational Web Pack -->
+      <div class="breakdown-panel active" id="panel-0">
+        <h3>What's included in OMNIX Generational Web Pack</h3>
 
         <div class="acc-item">
           <button class="acc-trigger" onclick="toggleAcc(this)">
@@ -1182,78 +1187,95 @@
         </div>
       </div>
 
-      <!-- RIGHT: Add-on / other services -->
-      <div class="breakdown-col">
-        <h3>Optional Add-On Services</h3>
+      <!-- PANEL 1: AI Receptionist -->
+      <div class="breakdown-panel" id="panel-1">
+        <h3>What's included in AI Receptionist</h3>
 
         <div class="acc-item">
           <button class="acc-trigger" onclick="toggleAcc(this)">
-            AI Receptionist
+            24/7 Call Answering
             <i class="fas fa-chevron-down acc-chevron"></i>
           </button>
           <div class="acc-body">
-            <p class="acc-subtitle">A 24/7 AI receptionist that answers calls, answers questions, and represents your business like a pro — even when you're on the job.</p>
+            <p class="acc-subtitle">Your phone never goes unanswered — day, night, weekends, or while you're on the job.</p>
             <ul>
               <li>Answers incoming calls on your behalf, any time of day or night</li>
-              <li>Trained with in-depth knowledge of your business — services, pricing, FAQs, and more</li>
-              <li>Holds natural, human-like conversations with callers</li>
-              <li>Captures caller details and books appointments directly into your calendar</li>
-              <li>Handles objections, answers service questions, and qualifies leads</li>
               <li>Never puts a customer on hold or sends them to voicemail</li>
+              <li>Handles high call volume without missing a single lead</li>
             </ul>
           </div>
         </div>
 
         <div class="acc-item">
           <button class="acc-trigger" onclick="toggleAcc(this)">
-            Google Business Profile Optimisation
+            Trained on Your Business
             <i class="fas fa-chevron-down acc-chevron"></i>
           </button>
           <div class="acc-body">
-            <p class="acc-subtitle">Your business needs more than just a pin on the map.</p>
+            <p class="acc-subtitle">It knows your services, your pricing, and your business inside and out — from day one.</p>
             <ul>
-              <li>Full GBP SEO audit and evaluation</li>
-              <li>Complete profile revamp with photos, services, and descriptions</li>
-              <li>Optimised for local keywords and your service area</li>
+              <li>Trained with in-depth knowledge of your business — services, pricing, FAQs, and more</li>
+              <li>Handles objections, answers service questions, and qualifies leads</li>
+              <li>Represents your brand professionally on every single call</li>
             </ul>
           </div>
         </div>
 
         <div class="acc-item">
           <button class="acc-trigger" onclick="toggleAcc(this)">
-            Advanced SEO
+            Natural Conversations
             <i class="fas fa-chevron-down acc-chevron"></i>
           </button>
           <div class="acc-body">
-            <p class="acc-subtitle">The heavy machinery. For businesses serious about dominating local search.</p>
+            <p class="acc-subtitle">It doesn't sound like a robot. It sounds like your best employee — calm, helpful, and always on-brand.</p>
             <ul>
-              <li>Backlink building across high-authority sources</li>
-              <li>Directory listings and citation management</li>
-              <li>Cloud stacks for domain authority</li>
-              <li>Press release distribution</li>
-              <li>Deep keyword research and targeting</li>
-              <li>Regular blog posts and fresh content publishing</li>
+              <li>Holds natural, human-like conversations with callers</li>
+              <li>Adapts tone and language to match your business style</li>
+              <li>Handles complex multi-turn conversations without losing context</li>
             </ul>
           </div>
         </div>
 
         <div class="acc-item">
           <button class="acc-trigger" onclick="toggleAcc(this)">
-            Google Ads
+            Lead Capture &amp; Booking
             <i class="fas fa-chevron-down acc-chevron"></i>
           </button>
           <div class="acc-body">
-            <p class="acc-subtitle">So the right people find you — for the right reasons, at the right time.</p>
+            <p class="acc-subtitle">Every call ends with a next step — not a voicemail and a missed opportunity.</p>
             <ul>
-              <li>PPC (Pay-Per-Click) campaign management</li>
+              <li>Captures caller details and books appointments directly into your calendar</li>
+              <li>Sends automated follow-up texts after every call</li>
+              <li>Passes hot leads straight to you in real time</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 2: Google & Facebook Ads -->
+      <div class="breakdown-panel" id="panel-2">
+        <h3>What's included in Google &amp; Facebook Ads</h3>
+
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggleAcc(this)">
+            Google Ads Management
+            <i class="fas fa-chevron-down acc-chevron"></i>
+          </button>
+          <div class="acc-body">
+            <p class="acc-subtitle">Show up at the top of Google the moment someone searches for exactly what you offer.</p>
+            <ul>
+              <li>PPC (Pay-Per-Click) campaign setup and ongoing management</li>
               <li>LSA (Local Services Ads) setup and optimisation</li>
+              <li>Keyword targeting focused on high-intent, ready-to-buy searches</li>
+              <li>Bid management to maximise your return on ad spend</li>
+              <li>Monthly performance reports with clear results</li>
             </ul>
           </div>
         </div>
 
         <div class="acc-item">
           <button class="acc-trigger" onclick="toggleAcc(this)">
-            Facebook Ads
+            Facebook &amp; Instagram Ads
             <i class="fas fa-chevron-down acc-chevron"></i>
           </button>
           <div class="acc-body">
@@ -1265,6 +1287,38 @@
               <li>Ad creative direction — copy, visuals, and calls to action</li>
               <li>A/B testing to find what drives the lowest cost per lead</li>
               <li>Ongoing optimisation and monthly performance reporting</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggleAcc(this)">
+            Ad Creative &amp; Strategy
+            <i class="fas fa-chevron-down acc-chevron"></i>
+          </button>
+          <div class="acc-body">
+            <p class="acc-subtitle">We handle everything — you don't need to write a word or design a single image.</p>
+            <ul>
+              <li>Professional ad copywriting tailored to your audience</li>
+              <li>Visual creative direction for scroll-stopping ads</li>
+              <li>Landing page recommendations to maximise conversions</li>
+              <li>Full campaign strategy built around your goals and budget</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggleAcc(this)">
+            Reporting &amp; Optimisation
+            <i class="fas fa-chevron-down acc-chevron"></i>
+          </button>
+          <div class="acc-body">
+            <p class="acc-subtitle">You'll always know exactly where your money is going — and what it's bringing back.</p>
+            <ul>
+              <li>Monthly performance reports with plain-English summaries</li>
+              <li>Ongoing campaign optimisation as data comes in</li>
+              <li>Transparent cost-per-lead tracking across both platforms</li>
+              <li>Regular strategy reviews to keep improving results</li>
             </ul>
           </div>
         </div>
@@ -1430,6 +1484,11 @@
 
       currentCard = target;
       dots.forEach((d, i) => d.classList.toggle('active', i === currentCard));
+
+      // Fade breakdown panels
+      document.querySelectorAll('.breakdown-panel').forEach((p, i) => {
+        p.classList.toggle('active', i === currentCard);
+      });
 
       setTimeout(() => {
         // Put exited card behind
