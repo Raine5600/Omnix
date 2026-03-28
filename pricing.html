@@ -932,29 +932,26 @@
       <!-- Card Stack -->
       <div class="card-stack" id="card-stack">
 
-        <!-- CARD 0: Omnix Generational -->
+        <!-- CARD 0: Omnix Generational Web Pack -->
         <div class="pricing-card card-active" id="card-0">
-          <!-- Per-card billing toggle -->
           <div class="card-billing-wrap">
             <span class="card-toggle-label active" id="c0-lbl-mo" onclick="setCardBilling(0,'monthly')">Monthly</span>
             <div class="card-billing-toggle" id="c0-toggle" onclick="flipCardBilling(0)">
               <div class="card-toggle-thumb"></div>
             </div>
             <span class="card-toggle-label" id="c0-lbl-yr" onclick="setCardBilling(0,'yearly')">
-              Yearly <span class="save-pill">SAVE 50%</span>
+              Yearly <span class="save-pill">SAVE 23%</span>
             </span>
           </div>
-
           <p class="popular-badge" id="c0-badge-popular">★ MOST POPULAR ★</p>
           <p class="best-value-badge" id="c0-badge-best" style="display:none;">★ BEST VALUE ★</p>
-          <h2>Omnix Generational</h2>
+          <h2>OMNIX Generational</h2>
+          <p style="font-size:0.95rem; font-weight:600; color:var(--color-text-muted); margin-top:-0.5rem; margin-bottom:1rem; letter-spacing:0.04em;">Web Pack</p>
           <div class="price-display">
-            <span class="amount" id="c0-amount">$597</span>
+            <span class="amount" id="c0-amount">$297</span>
             <span class="period" id="c0-period">/mo</span>
           </div>
-          <p class="setup-fee-line" id="c0-fee">+ $1,499 one-time setup fee</p>
-          <p id="c0-savings" style="display:none; font-size:0.82rem; color:#4dffb0; font-weight:600; margin-top:0.35rem;">✓ 50% off vs monthly subscription</p>
-
+          <p id="c0-savings" style="display:none; font-size:0.82rem; color:#4dffb0; font-weight:600; margin-bottom:1rem;">✓ Save $816/yr vs monthly</p>
           <hr class="pricing-divider">
           <p class="pricing-feature">Custom Built Website (5–20 pages)</p>
           <hr class="pricing-divider">
@@ -967,7 +964,6 @@
           <p class="pricing-feature">One-Click Marketing Campaigns</p>
           <hr class="pricing-divider">
           <p class="pricing-feature">On-Site SEO</p>
-
           <div class="btn-row" style="margin-top:0.5rem;">
             <button class="cta-button" onclick="startCheckout()">Purchase Now</button>
             <a href="contact.html" class="cta-button">Contact Us</a>
@@ -983,17 +979,15 @@
 
         <!-- CARD 1: AI Receptionist -->
         <div class="pricing-card card-behind" id="card-1">
-          <!-- Per-card billing toggle -->
           <div class="card-billing-wrap">
             <span class="card-toggle-label active" id="c1-lbl-mo" onclick="setCardBilling(1,'monthly')">Monthly</span>
             <div class="card-billing-toggle" id="c1-toggle" onclick="flipCardBilling(1)">
               <div class="card-toggle-thumb"></div>
             </div>
             <span class="card-toggle-label" id="c1-lbl-yr" onclick="setCardBilling(1,'yearly')">
-              Yearly <span class="save-pill">SAVE 40%</span>
+              Yearly <span class="save-pill">SAVE 14%</span>
             </span>
           </div>
-
           <p class="popular-badge" id="c1-badge-popular" style="display:none;">★ MOST POPULAR ★</p>
           <p class="best-value-badge" id="c1-badge-best" style="display:none;">★ BEST VALUE ★</p>
           <h2>AI Receptionist</h2>
@@ -1001,9 +995,7 @@
             <span class="amount" id="c1-amount">$499</span>
             <span class="period" id="c1-period">/mo</span>
           </div>
-          <p class="setup-fee-line" id="c1-fee">No setup fee</p>
-          <p id="c1-savings" style="display:none; font-size:0.82rem; color:#4dffb0; font-weight:600; margin-top:0.35rem;">✓ Save $2,400/yr vs monthly</p>
-
+          <p id="c1-savings" style="display:none; font-size:0.82rem; color:#4dffb0; font-weight:600; margin-bottom:1rem;">✓ Save $840/yr vs monthly</p>
           <hr class="pricing-divider">
           <p class="pricing-feature">24/7 AI Call Answering</p>
           <hr class="pricing-divider">
@@ -1016,9 +1008,8 @@
           <p class="pricing-feature">Natural Human-Like Voice</p>
           <hr class="pricing-divider">
           <p class="pricing-feature">Never Misses a Call</p>
-
           <div class="btn-row" style="margin-top:0.5rem;">
-            <a href="contact.html" class="cta-button">Get Started</a>
+            <button class="cta-button" onclick="startCheckout()">Purchase Now</button>
             <a href="contact.html" class="cta-button">Contact Us</a>
           </div>
           <div class="guarantee-badge">
@@ -1026,6 +1017,51 @@
             <div>
               <div class="g-title">Always On, Never Off</div>
               <div class="g-sub">Your AI receptionist answers every call, day or night — so you never lose a customer to voicemail again.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2: Google / Facebook Ads -->
+        <div class="pricing-card card-behind" id="card-2">
+          <div class="card-billing-wrap">
+            <span class="card-toggle-label active" id="c2-lbl-mo" onclick="setCardBilling(2,'monthly')">Monthly</span>
+            <div class="card-billing-toggle" id="c2-toggle" onclick="flipCardBilling(2)">
+              <div class="card-toggle-thumb"></div>
+            </div>
+            <span class="card-toggle-label" id="c2-lbl-yr" onclick="setCardBilling(2,'yearly')">
+              Yearly <span class="save-pill">SAVE 14%</span>
+            </span>
+          </div>
+          <p class="popular-badge" id="c2-badge-popular" style="display:none;">★ MOST POPULAR ★</p>
+          <p class="best-value-badge" id="c2-badge-best" style="display:none;">★ BEST VALUE ★</p>
+          <h2>Google &amp; Facebook Ads</h2>
+          <p style="font-size:0.9rem; color:var(--color-text-muted); margin-top:-0.5rem; margin-bottom:1rem;">Managed for your business</p>
+          <div class="price-display">
+            <span class="amount" id="c2-amount">$499</span>
+            <span class="period" id="c2-period">/mo</span>
+          </div>
+          <p id="c2-savings" style="display:none; font-size:0.82rem; color:#4dffb0; font-weight:600; margin-bottom:1rem;">✓ Save $840/yr vs monthly</p>
+          <hr class="pricing-divider">
+          <p class="pricing-feature">Google Ads or Facebook Ads</p>
+          <hr class="pricing-divider">
+          <p class="pricing-feature">Custom Ad Strategy</p>
+          <hr class="pricing-divider">
+          <p class="pricing-feature">Ad Copywriting &amp; Creative</p>
+          <hr class="pricing-divider">
+          <p class="pricing-feature">Campaign Setup &amp; Management</p>
+          <hr class="pricing-divider">
+          <p class="pricing-feature">Monthly Performance Reports</p>
+          <hr class="pricing-divider">
+          <p class="pricing-feature">Ongoing Optimisation</p>
+          <div class="btn-row" style="margin-top:0.5rem;">
+            <button class="cta-button" onclick="startCheckout()">Purchase Now</button>
+            <a href="contact.html" class="cta-button">Contact Us</a>
+          </div>
+          <div class="guarantee-badge">
+            <div class="g-icon">📈</div>
+            <div>
+              <div class="g-title">Platform Tailored to You</div>
+              <div class="g-sub">We pick Google or Facebook based on what will drive the most results for your specific business.</div>
             </div>
           </div>
         </div>
@@ -1038,6 +1074,7 @@
         <div class="carousel-dots">
           <span class="c-dot active" onclick="goToCard(0)"></span>
           <span class="c-dot" onclick="goToCard(1)"></span>
+          <span class="c-dot" onclick="goToCard(2)"></span>
         </div>
         <button class="carousel-arrow" onclick="carouselNext()" aria-label="Next">&#8250;</button>
       </div>
@@ -1319,16 +1356,20 @@
     });
 
     /* ---- Per-card billing ---- */
-    const cardBilling = ['monthly', 'monthly'];
+    const cardBilling = ['monthly', 'monthly', 'monthly'];
 
     const cardData = [
       {
-        monthly: { amount: '$597', period: '/mo', fee: '+ $1,499 one-time setup fee', savings: null, badgePopular: true, badgeBest: false },
-        yearly:  { amount: '$3,564', period: '/yr', fee: '+ $749 one-time setup fee (50% off)', savings: '✓ 50% off vs monthly subscription', badgePopular: false, badgeBest: true }
+        monthly: { amount: '$297', period: '/mo', savings: null, badgePopular: true, badgeBest: false },
+        yearly:  { amount: '$2,748', period: '/yr', savings: '✓ Save $816/yr vs monthly', badgePopular: false, badgeBest: true }
       },
       {
-        monthly: { amount: '$499', period: '/mo', fee: 'No setup fee', savings: null, badgePopular: false, badgeBest: false },
-        yearly:  { amount: '$3,588', period: '/yr', fee: 'No setup fee', savings: '✓ Save $2,400/yr vs monthly', badgePopular: false, badgeBest: true }
+        monthly: { amount: '$499', period: '/mo', savings: null, badgePopular: false, badgeBest: false },
+        yearly:  { amount: '$5,148', period: '/yr', savings: '✓ Save $840/yr vs monthly', badgePopular: false, badgeBest: true }
+      },
+      {
+        monthly: { amount: '$499', period: '/mo', savings: null, badgePopular: false, badgeBest: false },
+        yearly:  { amount: '$5,148', period: '/yr', savings: '✓ Save $840/yr vs monthly', badgePopular: false, badgeBest: true }
       }
     ];
 
@@ -1338,7 +1379,6 @@
       const p = 'c' + cardIdx;
       document.getElementById(p + '-amount').textContent = d.amount;
       document.getElementById(p + '-period').textContent = d.period;
-      document.getElementById(p + '-fee').textContent = d.fee;
       const savEl = document.getElementById(p + '-savings');
       if (savEl) savEl.style.display = d.savings ? 'block' : 'none';
       document.getElementById(p + '-toggle').classList.toggle('yearly', mode === 'yearly');
@@ -1356,7 +1396,7 @@
 
     /* ---- Carousel ---- */
     let currentCard = 0;
-    const totalCards = 2;
+    const totalCards = 3;
     let isAnimating = false;
 
     function sizeStack() {
