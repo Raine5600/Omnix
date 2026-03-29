@@ -223,7 +223,7 @@
       background: var(--color-dark-light);
       border-radius: 16px;
       padding: 1.1rem 2.25rem;
-      max-width: 580px; width: 100%;
+      max-width: 680px; width: 100%;
       text-align: center;
       border: 1px solid var(--color-border);
       box-shadow: 0 0 40px rgba(124, 197, 255, 0.12);
@@ -304,16 +304,23 @@
       color: #4dffb0;
       font-weight: 600;
     }
-    .pricing-divider {
-      border: none;
+    .pricing-divider { display: none; }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin: 0.5rem 0 0.2rem;
       border-top: 1px solid var(--color-border);
-      margin: 0.2rem 0;
-      opacity: 0.6;
     }
     .pricing-feature {
-      font-size: 0.88rem; font-weight: 700;
+      font-size: 0.85rem; font-weight: 700;
       color: var(--color-white);
-      padding: 0.22rem 0;
+      padding: 0.32rem 0.5rem;
+      border-bottom: 1px solid var(--color-border);
+      text-align: center;
+    }
+    .pricing-feature:nth-child(odd) {
+      border-right: 1px solid var(--color-border);
     }
     .pricing-card .cta-button {
       display: inline-block;
@@ -741,7 +748,7 @@
     .card-stack {
       position: relative;
       width: 100%;
-      max-width: 600px;
+      max-width: 700px;
       /* height set by JS to match tallest card */
     }
     .pricing-card {
@@ -951,24 +958,20 @@
           <p class="popular-badge" id="c0-badge-popular">★ MOST POPULAR ★</p>
           <p class="best-value-badge" id="c0-badge-best" style="display:none;">★ BEST VALUE ★</p>
           <h2>OMNIX Generational</h2>
-          <p style="font-size:0.95rem; font-weight:600; color:var(--color-text-muted); margin-top:-0.5rem; margin-bottom:1rem; letter-spacing:0.04em;">Web Pack</p>
+          <p style="font-size:0.9rem; font-weight:600; color:var(--color-text-muted); margin-top:-0.3rem; margin-bottom:0.3rem; letter-spacing:0.04em;">Web Pack</p>
           <div class="price-display">
             <span class="amount" id="c0-amount">$297</span>
             <span class="period" id="c0-period">/mo</span>
           </div>
-          <p id="c0-savings" style="display:none; font-size:0.8rem; color:#4dffb0; font-weight:600; margin-bottom:0.3rem;">✓ Save $816/yr vs monthly</p>
-          <hr class="pricing-divider">
-          <p class="pricing-feature">Custom Built Website (5–20 pages)</p>
-          <hr class="pricing-divider">
-          <p class="pricing-feature">Automated Lead Follow Up</p>
-          <hr class="pricing-divider">
-          <p class="pricing-feature">Turn Missed Calls Into Customers</p>
-          <hr class="pricing-divider">
-          <p class="pricing-feature">5-Star Magic Review Funnel</p>
-          <hr class="pricing-divider">
-          <p class="pricing-feature">One-Click Marketing Campaigns</p>
-          <hr class="pricing-divider">
-          <p class="pricing-feature">On-Site SEO</p>
+          <p id="c0-savings" style="display:none; font-size:0.8rem; color:#4dffb0; font-weight:600; margin-bottom:0.2rem;">✓ Save $816/yr vs monthly</p>
+          <div class="feature-grid">
+            <p class="pricing-feature">Custom Built Website</p>
+            <p class="pricing-feature">Automated Lead Follow Up</p>
+            <p class="pricing-feature">Missed Call Text Back</p>
+            <p class="pricing-feature">5-Star Review Funnel</p>
+            <p class="pricing-feature">One-Click Campaigns</p>
+            <p class="pricing-feature">On-Site SEO</p>
+          </div>
           <div class="btn-row" style="margin-top:0.5rem;">
             <button class="cta-button" onclick="startCheckout()">Purchase Now</button>
             <a href="contact.html" class="cta-button">Contact Us</a>
@@ -1000,19 +1003,15 @@
             <span class="amount" id="c1-amount">$499</span>
             <span class="period" id="c1-period">/mo</span>
           </div>
-          <p id="c1-savings" style="display:none; font-size:0.8rem; color:#4dffb0; font-weight:600; margin-bottom:0.3rem;">✓ Save $840/yr vs monthly</p>
-          <hr class="pricing-divider">
-          <p class="pricing-feature">24/7 AI Call Answering</p>
-          <hr class="pricing-divider">
-          <p class="pricing-feature">Appointment Booking</p>
-          <hr class="pricing-divider">
-          <p class="pricing-feature">Lead Qualification</p>
-          <hr class="pricing-divider">
-          <p class="pricing-feature">Custom Business Training</p>
-          <hr class="pricing-divider">
-          <p class="pricing-feature">Natural Human-Like Voice</p>
-          <hr class="pricing-divider">
-          <p class="pricing-feature">Never Misses a Call</p>
+          <p id="c1-savings" style="display:none; font-size:0.8rem; color:#4dffb0; font-weight:600; margin-bottom:0.2rem;">✓ Save $840/yr vs monthly</p>
+          <div class="feature-grid">
+            <p class="pricing-feature">24/7 AI Call Answering</p>
+            <p class="pricing-feature">Appointment Booking</p>
+            <p class="pricing-feature">Lead Qualification</p>
+            <p class="pricing-feature">Custom Business Training</p>
+            <p class="pricing-feature">Natural Human-Like Voice</p>
+            <p class="pricing-feature">Never Misses a Call</p>
+          </div>
           <div class="btn-row" style="margin-top:0.5rem;">
             <button class="cta-button" onclick="startCheckout()">Purchase Now</button>
             <a href="contact.html" class="cta-button">Contact Us</a>
@@ -1040,24 +1039,20 @@
           <p class="popular-badge" id="c2-badge-popular" style="display:none;">★ MOST POPULAR ★</p>
           <p class="best-value-badge" id="c2-badge-best" style="display:none;">★ BEST VALUE ★</p>
           <h2>Google &amp; Facebook Ads</h2>
-          <p style="font-size:0.9rem; color:var(--color-text-muted); margin-top:-0.5rem; margin-bottom:1rem;">Managed for your business</p>
+          <p style="font-size:0.9rem; color:var(--color-text-muted); margin-top:-0.3rem; margin-bottom:0.3rem;">Managed for your business</p>
           <div class="price-display">
             <span class="amount" id="c2-amount">$499</span>
             <span class="period" id="c2-period">/mo</span>
           </div>
-          <p id="c2-savings" style="display:none; font-size:0.8rem; color:#4dffb0; font-weight:600; margin-bottom:0.3rem;">✓ Save $840/yr vs monthly</p>
-          <hr class="pricing-divider">
-          <p class="pricing-feature">Google Ads or Facebook Ads</p>
-          <hr class="pricing-divider">
-          <p class="pricing-feature">Custom Ad Strategy</p>
-          <hr class="pricing-divider">
-          <p class="pricing-feature">Ad Copywriting &amp; Creative</p>
-          <hr class="pricing-divider">
-          <p class="pricing-feature">Campaign Setup &amp; Management</p>
-          <hr class="pricing-divider">
-          <p class="pricing-feature">Monthly Performance Reports</p>
-          <hr class="pricing-divider">
-          <p class="pricing-feature">Ongoing Optimisation</p>
+          <p id="c2-savings" style="display:none; font-size:0.8rem; color:#4dffb0; font-weight:600; margin-bottom:0.2rem;">✓ Save $840/yr vs monthly</p>
+          <div class="feature-grid">
+            <p class="pricing-feature">Google or Facebook Ads</p>
+            <p class="pricing-feature">Custom Ad Strategy</p>
+            <p class="pricing-feature">Ad Copywriting &amp; Creative</p>
+            <p class="pricing-feature">Campaign Management</p>
+            <p class="pricing-feature">Monthly Reports</p>
+            <p class="pricing-feature">Ongoing Optimisation</p>
+          </div>
           <div class="btn-row" style="margin-top:0.5rem;">
             <button class="cta-button" onclick="startCheckout()">Purchase Now</button>
             <a href="contact.html" class="cta-button">Contact Us</a>
