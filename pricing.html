@@ -224,11 +224,20 @@
       border-radius: 16px;
       padding: 1.1rem 2.25rem;
       max-width: 680px; width: 100%;
-      text-align: center;
+      text-align: left;
       border: 1px solid var(--color-border);
       box-shadow: 0 0 40px rgba(124, 197, 255, 0.12);
       position: relative;
     }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.4rem;
+    }
+    .card-header-left { display: flex; flex-direction: column; }
+    .card-header-right { text-align: right; flex-shrink: 0; }
     @keyframes gold-shimmer {
       0%   { background-position: -200% center; }
       100% { background-position:  200% center; }
@@ -954,15 +963,21 @@
               Yearly <span class="save-pill">SAVE 23%</span>
             </span>
           </div>
-          <p class="popular-badge" id="c0-badge-popular">★ MOST POPULAR ★</p>
-          <p class="best-value-badge" id="c0-badge-best" style="display:none;">★ BEST VALUE ★</p>
-          <h2>OMNIX Generational</h2>
-          <p style="font-size:0.9rem; font-weight:600; color:var(--color-text-muted); margin-top:-0.3rem; margin-bottom:0.3rem; letter-spacing:0.04em;">Web Pack</p>
-          <div class="price-display">
-            <span class="amount" id="c0-amount">$297</span>
-            <span class="period" id="c0-period">/mo</span>
+          <div class="card-header">
+            <div class="card-header-left">
+              <p class="popular-badge" id="c0-badge-popular" style="align-self:flex-start;">★ MOST POPULAR ★</p>
+              <p class="best-value-badge" id="c0-badge-best" style="display:none; align-self:flex-start;">★ BEST VALUE ★</p>
+              <h2>OMNIX Generational</h2>
+              <p style="font-size:0.9rem; font-weight:600; color:var(--color-text-muted); margin-top:-0.1rem; letter-spacing:0.04em;">Web Pack</p>
+            </div>
+            <div class="card-header-right">
+              <div class="price-display">
+                <span class="amount" id="c0-amount">$297</span>
+                <span class="period" id="c0-period">/mo</span>
+              </div>
+              <p id="c0-savings" style="display:none; font-size:0.8rem; color:#4dffb0; font-weight:600; margin-top:0.1rem;">✓ Save $816/yr</p>
+            </div>
           </div>
-          <p id="c0-savings" style="display:none; font-size:0.8rem; color:#4dffb0; font-weight:600; margin-bottom:0.2rem;">✓ Save $816/yr vs monthly</p>
           <div class="feature-grid">
             <p class="pricing-feature">Custom Built Website</p>
             <p class="pricing-feature">Automated Lead Follow Up</p>
@@ -995,14 +1010,20 @@
               Yearly <span class="save-pill">SAVE 14%</span>
             </span>
           </div>
-          <p class="popular-badge" id="c1-badge-popular" style="display:none;">★ MOST POPULAR ★</p>
-          <p class="best-value-badge" id="c1-badge-best" style="display:none;">★ BEST VALUE ★</p>
-          <h2>AI Receptionist</h2>
-          <div class="price-display">
-            <span class="amount" id="c1-amount">$499</span>
-            <span class="period" id="c1-period">/mo</span>
+          <div class="card-header">
+            <div class="card-header-left">
+              <p class="popular-badge" id="c1-badge-popular" style="display:none; align-self:flex-start;">★ MOST POPULAR ★</p>
+              <p class="best-value-badge" id="c1-badge-best" style="display:none; align-self:flex-start;">★ BEST VALUE ★</p>
+              <h2>AI Receptionist</h2>
+            </div>
+            <div class="card-header-right">
+              <div class="price-display">
+                <span class="amount" id="c1-amount">$499</span>
+                <span class="period" id="c1-period">/mo</span>
+              </div>
+              <p id="c1-savings" style="display:none; font-size:0.8rem; color:#4dffb0; font-weight:600; margin-top:0.1rem;">✓ Save $840/yr</p>
+            </div>
           </div>
-          <p id="c1-savings" style="display:none; font-size:0.8rem; color:#4dffb0; font-weight:600; margin-bottom:0.2rem;">✓ Save $840/yr vs monthly</p>
           <div class="feature-grid">
             <p class="pricing-feature">24/7 AI Call Answering</p>
             <p class="pricing-feature">Appointment Booking</p>
@@ -1035,15 +1056,21 @@
               Yearly <span class="save-pill">SAVE 14%</span>
             </span>
           </div>
-          <p class="popular-badge" id="c2-badge-popular" style="display:none;">★ MOST POPULAR ★</p>
-          <p class="best-value-badge" id="c2-badge-best" style="display:none;">★ BEST VALUE ★</p>
-          <h2>Google &amp; Facebook Ads</h2>
-          <p style="font-size:0.9rem; color:var(--color-text-muted); margin-top:-0.3rem; margin-bottom:0.3rem;">Managed for your business</p>
-          <div class="price-display">
-            <span class="amount" id="c2-amount">$499</span>
-            <span class="period" id="c2-period">/mo</span>
+          <div class="card-header">
+            <div class="card-header-left">
+              <p class="popular-badge" id="c2-badge-popular" style="display:none; align-self:flex-start;">★ MOST POPULAR ★</p>
+              <p class="best-value-badge" id="c2-badge-best" style="display:none; align-self:flex-start;">★ BEST VALUE ★</p>
+              <h2>Google &amp; Facebook Ads</h2>
+              <p style="font-size:0.9rem; color:var(--color-text-muted); margin-top:-0.1rem;">Managed for your business</p>
+            </div>
+            <div class="card-header-right">
+              <div class="price-display">
+                <span class="amount" id="c2-amount">$499</span>
+                <span class="period" id="c2-period">/mo</span>
+              </div>
+              <p id="c2-savings" style="display:none; font-size:0.8rem; color:#4dffb0; font-weight:600; margin-top:0.1rem;">✓ Save $840/yr</p>
+            </div>
           </div>
-          <p id="c2-savings" style="display:none; font-size:0.8rem; color:#4dffb0; font-weight:600; margin-bottom:0.2rem;">✓ Save $840/yr vs monthly</p>
           <div class="feature-grid">
             <p class="pricing-feature">Google or Facebook Ads</p>
             <p class="pricing-feature">Custom Ad Strategy</p>
