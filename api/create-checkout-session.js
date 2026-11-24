@@ -49,7 +49,7 @@ module.exports = async (req, res) => {
             recurring: { interval: 'month' },
             product_data: {
               name: 'Never Miss a Job',
-              description: 'Monthly. Missed-call text-back with after-hours answering, non-gated review requests after every job, an estimate follow-up sequence, and a custom website. Phone, SMS, and AI usage are billed separately at cost.',
+              description: 'Monthly. Missed-call text-back with after-hours answering, non-gated review requests after every job, an estimate follow-up sequence, and a custom website. Phone, SMS, and AI usage are billed separately at cost. No new paying customer within 30 days of going live? Your first month back. The setup fee and pass-through usage costs are not refundable.',
             },
           },
         },
@@ -60,7 +60,7 @@ module.exports = async (req, res) => {
             unit_amount: SETUP_CENTS,
             product_data: {
               name: 'Never Miss a Job — Setup',
-              description: 'One-time setup. Live within 7 days of purchase. Starts with a short kickoff call.',
+              description: 'One-time setup. Live within 7 days of purchase. Starts with a short kickoff call. This setup fee is not refundable.',
             },
           },
         },
