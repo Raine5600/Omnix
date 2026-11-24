@@ -156,25 +156,33 @@
     .divider {
       background: linear-gradient(180deg, transparent, #7cc5ff 20%, #c07aff 80%, transparent);
     }
-    .fallback {
-      display: inline-block;
-      margin: 0.75rem 0 1rem;
-      color: var(--color-primary);
-    }
-    .meetings-iframe-container { min-height: 640px; }
     .carousel { outline: none; }
-    .carousel-viewport { overflow: hidden; touch-action: pan-y; }
-    .carousel-track { display: flex; align-items: stretch; transform: translateX(-200%); }
-    .pkg-card {
+    .carousel-viewport { overflow: hidden; touch-action: pan-y; padding: 8px 0 16px; }
+    .carousel-track { display: flex; align-items: stretch; }
+    .pkg-slide {
       flex: 0 0 100%;
       min-width: 100%;
-      background: var(--color-dark-light);
-      border: 1px solid var(--color-border);
+      box-sizing: border-box;
+      padding: 0 14px;
+      display: flex;
+    }
+    .pkg-card {
+      width: 100%;
+      min-width: 0;
+      background: #161630;
+      border: 1px solid rgba(124, 197, 255, 0.4);
       border-radius: 16px;
-      padding: 1.25rem 1.25rem 1.15rem;
-      box-shadow: 0 0 40px rgba(124, 197, 255, 0.14);
+      padding: 1.25rem 1.2rem 1.15rem;
+      box-shadow: 0 0 32px rgba(124, 197, 255, 0.16), 0 0 56px rgba(192, 122, 255, 0.1);
       display: flex;
       flex-direction: column;
+    }
+    @media (min-width: 1000px) {
+      .pkg-slide {
+        flex: 0 0 calc(100% - 56px);
+        min-width: calc(100% - 56px);
+        padding: 0 8px;
+      }
     }
     .pkg-card .price {
       background: var(--color-gradient);
@@ -213,7 +221,7 @@
     .price-sub { color: var(--color-text); margin: 0.15rem 0 0.7rem; }
     .pkg-card ul { margin: 0.4rem 0 0.8rem 1.1rem; }
     .pkg-card li { margin: 0.28rem 0; }
-    .fine, .proposed-note { color: var(--color-text-muted); font-size: 0.88rem; }
+    .fine, .proposed-note { color: var(--color-text-muted); font-size: 0.78rem; line-height: 1.4; margin: 0.15rem 0 0.7rem; }
     .guarantee { margin-top: 0.45rem; color: #fff; font-weight: 700; }
     .carousel-controls {
       display: flex;
@@ -317,6 +325,7 @@
       .cta-button:hover { transform: none; }
     }
   </style>
+  <link rel="stylesheet" href="/booking.css">
   <link rel="stylesheet" href="/motion.css">
 </head>
 <body>
@@ -359,10 +368,14 @@
 
     <div class="split">
       <section class="pane book" id="book" aria-labelledby="book-heading">
-        <h2 id="book-heading">Book a call</h2>
-        <p class="lede">A short call on weekdays, 9–5 ET. If you would rather not buy on this page, book here.</p>
-        <a class="fallback" href="https://meetings-na2.hubspot.com/raine5600">Open the booking page</a>
-        <div class="meetings-iframe-container" data-src="https://meetings-na2.hubspot.com/raine5600?embed=true"></div>
+        <div class="book-card">
+          <h2 id="book-heading">Book your free kickoff call</h2>
+          <p class="lede">Pick a weekday, 9–5 ET. We use the call to start setup. If you would rather buy, the packages are beside this.</p>
+          <div class="meetings-frame">
+            <div class="meetings-iframe-container" data-src="https://meetings-na2.hubspot.com/raine5600?embed=true"></div>
+          </div>
+          <a class="fallback" href="https://meetings-na2.hubspot.com/raine5600">Open the booking page</a>
+        </div>
       </section>
 
       <div class="divider" role="separator" aria-orientation="vertical"></div>
@@ -377,30 +390,29 @@
           <div class="carousel-viewport" id="pkg-viewport">
             <div class="carousel-track" id="pkg-track">
 
-              <article class="pkg-card" data-clone="custom-ai" aria-hidden="true">
+              <div class="pkg-slide"><article class="pkg-card" data-clone="custom-ai" aria-hidden="true">
                 <h3>Custom AI</h3>
                 <p class="fine">No price on this page.</p>
                 <p>AI integration into your business, such as custom programs, CRMs, or AI across the work you already do, so those processes take fewer steps.</p>
-                <button type="button" class="cta-button" data-action="book">Book a call</button>
-              </article>
+                <button type="button" class="cta-button" data-action="book">Book a call about Custom AI</button>
+              </article></div>
 
-              <article class="pkg-card" id="pkg-card-0" data-real="0" aria-labelledby="pkg-title-0">
+              <div class="pkg-slide"><article class="pkg-card" id="pkg-card-0" data-real="0" aria-labelledby="pkg-title-0">
                 <h3 id="pkg-title-0">Answer the Call</h3>
                 <p class="price">$350 <span>setup</span></p>
                 <p class="price-sub">+ $97/month</p>
+                <p class="guarantee"><a href="/terms#guarantee">30-day money-back guarantee</a></p>
+                <p class="fine">Phone, SMS, and AI usage are passed through at cost, on top of this price.</p>
                 <ul>
                   <li>Missed-call text-back with after-hours answering</li>
                   <li>Custom-designed website</li>
                   <li>Short kickoff call</li>
-                  <li>Does not include review requests</li>
-                  <li>Does not include estimate follow-up</li>
+                  <li>Live within 7 days of purchase</li>
                 </ul>
-                <p class="fine">Phone, SMS, and AI usage are passed through at cost, on top of this price.</p>
-                <p class="guarantee"><a href="/terms#guarantee">30-day money-back guarantee</a></p>
                 <button type="button" class="cta-button" data-action="answer-the-call">Buy Answer the Call</button>
-              </article>
+              </article></div>
 
-              <article class="pkg-card" id="pkg-card-1" data-real="1" aria-labelledby="pkg-title-1">
+              <div class="pkg-slide"><article class="pkg-card" id="pkg-card-1" data-real="1" aria-labelledby="pkg-title-1">
                 <div class="pkg-kicker">
                   <span class="flag flag-rec">Recommended</span>
                 </div>
@@ -419,31 +431,30 @@
                 <p class="fine">Phone, SMS, and AI usage are passed through at cost, on top of this price.</p>
                 <p class="guarantee"><a href="/terms#guarantee">30-day money-back guarantee</a></p>
                 <button type="button" class="cta-button" data-action="never-miss-a-job">Buy Never Miss a Job</button>
-              </article>
+              </article></div>
 
               <!-- Custom AI has no price and must not create a Stripe charge. -->
-              <article class="pkg-card" id="pkg-card-2" data-real="2" aria-labelledby="pkg-title-2">
+              <div class="pkg-slide"><article class="pkg-card" id="pkg-card-2" data-real="2" aria-labelledby="pkg-title-2">
                 <h3 id="pkg-title-2">Custom AI</h3>
                 <p class="fine">No price on this page.</p>
                 <p>AI integration into your business, such as custom programs, CRMs, or AI across the work you already do, so those processes take fewer steps.</p>
-                <button type="button" class="cta-button" data-action="book">Book a call</button>
-              </article>
+                <button type="button" class="cta-button" data-action="book">Book a call about Custom AI</button>
+              </article></div>
 
-              <article class="pkg-card" data-clone="answer-the-call" aria-hidden="true">
+              <div class="pkg-slide"><article class="pkg-card" data-clone="answer-the-call" aria-hidden="true">
                 <h3>Answer the Call</h3>
                 <p class="price">$350 <span>setup</span></p>
                 <p class="price-sub">+ $97/month</p>
+                <p class="guarantee"><a href="/terms#guarantee">30-day money-back guarantee</a></p>
+                <p class="fine">Phone, SMS, and AI usage are passed through at cost, on top of this price.</p>
                 <ul>
                   <li>Missed-call text-back with after-hours answering</li>
                   <li>Custom-designed website</li>
                   <li>Short kickoff call</li>
-                  <li>Does not include review requests</li>
-                  <li>Does not include estimate follow-up</li>
+                  <li>Live within 7 days of purchase</li>
                 </ul>
-                <p class="fine">Phone, SMS, and AI usage are passed through at cost, on top of this price.</p>
-                <p class="guarantee"><a href="/terms#guarantee">30-day money-back guarantee</a></p>
                 <button type="button" class="cta-button" data-action="answer-the-call">Buy Answer the Call</button>
-              </article>
+              </article></div>
 
             </div>
           </div>
@@ -554,9 +565,16 @@
         return i - 1;
       }
 
+      function metrics() {
+        var slide = track.children[0].getBoundingClientRect().width;
+        var view = viewport.getBoundingClientRect().width;
+        return { slide: slide, pad: (view - slide) / 2 };
+      }
+
       function paint(animate) {
+        var m = metrics();
         track.style.transition = animate && !reduce ? 'transform 0.45s ease' : 'none';
-        track.style.transform = 'translateX(' + (-index * 100) + '%)';
+        track.style.transform = 'translate3d(' + (m.pad - index * m.slide) + 'px,0,0)';
       }
 
       function updateChrome() {
@@ -648,8 +666,8 @@
         if (!dragging) return;
         var dx = e.clientX - startX;
         if (Math.abs(dx) > 8) dragMoved = true;
-        var width = viewport.getBoundingClientRect().width;
-        track.style.transform = 'translateX(' + ((-startIndex * width) + dx) + 'px)';
+        var m = metrics();
+        track.style.transform = 'translate3d(' + (m.pad - startIndex * m.slide + dx) + 'px,0,0)';
       });
       function endDrag(e) {
         if (!dragging) return;
@@ -686,6 +704,7 @@
 
       paint(false);
       updateChrome();
+      window.addEventListener('resize', function () { paint(false); });
       if (paused) {
         pauseBtn.textContent = 'Play';
         pauseBtn.setAttribute('aria-pressed', 'true');

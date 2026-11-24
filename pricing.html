@@ -953,6 +953,7 @@
       .plan-grid { grid-template-columns: 1fr; }
     }
   </style>
+  <link rel="stylesheet" href="/booking.css">
   <link rel="stylesheet" href="/motion.css">
 </head>
 <body>
@@ -990,7 +991,7 @@
 
   <!-- PRICING HERO -->
   <section class="pricing-hero">
-    <h1>Never Miss a Job</h1>
+    <h1>Pricing</h1>
     <p>For service businesses and small businesses anywhere in the US. Omnix sets it up and runs it.</p>
   </section>
 
@@ -1032,10 +1033,21 @@
           <li>Custom programs and CRMs</li>
           <li>AI across the work you already do</li>
         </ul>
-        <a class="cta-button" href="/start#book">Book a call</a>
+        <a class="cta-button" href="#book">Book a call about Custom AI</a>
       </article>
     </div>
     <p id="checkout-error" role="alert"></p>
+  </section>
+
+  <section class="book-section" id="book" aria-labelledby="pricing-book-heading">
+    <div class="book-card">
+      <h2 id="pricing-book-heading">Not ready to buy? Book a call</h2>
+      <p class="lede">Pick a weekday, 9–5 ET. We will help you choose a package, or talk through Custom AI.</p>
+      <div class="meetings-frame">
+        <div class="meetings-iframe-container" data-src="https://meetings-na2.hubspot.com/raine5600?embed=true"></div>
+      </div>
+      <a class="fallback" href="https://meetings-na2.hubspot.com/raine5600">Open the booking page</a>
+    </div>
   </section>
 
   <footer>
@@ -1062,6 +1074,7 @@
     </div>
   </footer>
 
+  <script src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js"></script>
   <script src="/checkout.js"></script>
   <script src="/motion.js"></script>
   <script>
