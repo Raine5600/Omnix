@@ -1,0 +1,52 @@
+/* Light motion and focus. Loaded after each page's own CSS. */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+summary:focus-visible {
+  outline: 2px solid #7cc5ff;
+  outline-offset: 3px;
+}
+
+/* Gradient buttons are light. Dark text keeps the label readable. */
+.cta-button,
+nav a.cta-button,
+button.cta-button {
+  color: #0d0d1e;
+}
+
+.cta-button:hover,
+nav a.cta-button:hover,
+button.cta-button:hover {
+  color: #0d0d1e;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.motion-ready .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  html.motion-ready .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

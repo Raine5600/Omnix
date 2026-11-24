@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intake | Never Miss a Job | OMNIX</title>
+  <meta name="description" content="After you buy Never Miss a Job, send Omnix your business details. A name or business name, and a phone or email, are required. Everything else can wait.">
+  <link rel="canonical" href="https://omnixgenerational.com/intake">
+  <meta name="robots" content="noindex, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="OMNIX">
+  <meta property="og:title" content="Intake | Never Miss a Job | OMNIX">
+  <meta property="og:description" content="Tell Omnix about your trade business after checkout. No passwords. Add contact@omnixgenerational.com as a manager, or cover it on the kickoff call.">
+  <meta property="og:url" content="https://omnixgenerational.com/intake">
+  <meta property="og:image" content="https://omnixgenerational.com/favicon-512.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Intake | Never Miss a Job | OMNIX">
+  <meta name="twitter:description" content="Post-purchase intake for Never Miss a Job. Name or business name, and phone or email, are required.">
+  <meta name="twitter:image" content="https://omnixgenerational.com/favicon-512.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png">
+  <link rel="apple-touch-icon" href="/favicon-512.png">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-primary: #7cc5ff;
+      --color-secondary: #c07aff;
+      --color-gradient: linear-gradient(135deg, #7cc5ff, #c07aff);
+      --color-dark: #0d0d1e;
+      --color-dark-light: #161630;
+      --color-white: #ffffff;
+      --color-text: #dde0f0;
+      --color-text-muted: #b0b8e0;
+      --color-border: #2a2a50;
+      --font-heading: 'Montserrat', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      line-height: 1.55;
+      background: var(--color-dark);
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--color-dark);
+      padding: 0 2rem 6px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo a { display: flex; align-items: center; text-decoration: none; }
+    .logo img.logo-icon { height: 70px; width: auto; display: block; padding: 5px 0; }
+    .logo img.logo-name { height: 28px; width: auto; display: block; margin-left: 4px; }
+    nav { display: flex; gap: 2rem; align-items: center; }
+    nav a { color: #fff; text-decoration: none; font-size: 0.95rem; }
+    nav a:hover { color: var(--color-primary); }
+    .dropdown { position: relative; }
+    .dropdown-menu {
+      display: none; position: absolute; top: 100%; left: 0;
+      background: var(--color-dark-light); border-radius: 8px; min-width: 220px;
+      padding-top: 0.5rem; overflow: hidden;
+    }
+    .dropdown:hover .dropdown-menu, .dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-menu a { display: block; padding: 0.75rem 1.5rem; }
+    .dropdown-menu a:hover { background: var(--color-primary); color: #0d0d1e; }
+    .cta-button {
+      background: var(--color-gradient);
+      color: #0d0d1e;
+      padding: 0.85rem 1.4rem;
+      border-radius: 6px;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 1rem;
+      font-family: var(--font-body);
+    }
+    .cta-button:disabled { opacity: 0.65; cursor: wait; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: #fff; }
+    main { max-width: 760px; margin: 0 auto; padding: 2.25rem 1.25rem 3rem; }
+    h1 { font-family: var(--font-heading); color: #fff; font-size: clamp(1.7rem, 3vw, 2.2rem); margin-bottom: 0.6rem; }
+    .lede { color: var(--color-text-muted); margin-bottom: 1.25rem; }
+    form {
+      background: var(--color-dark-light);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 1.25rem;
+    }
+    fieldset {
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 0.9rem 1rem 1rem;
+      margin: 1rem 0;
+    }
+    legend { font-family: var(--font-heading); color: #fff; padding: 0 0.35rem; }
+    label { display: block; margin: 0.85rem 0 0.3rem; color: #fff; font-weight: 600; }
+    .optional { color: var(--color-text-muted); font-weight: 500; }
+    .hint { color: var(--color-text-muted); font-size: 0.92rem; margin-top: 0.35rem; }
+    input[type="text"], input[type="tel"], input[type="email"], input[type="url"], textarea, input[type="file"] {
+      width: 100%;
+      background: #0d0d1e;
+      color: var(--color-text);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 0.7rem 0.75rem;
+      font: inherit;
+    }
+    textarea { min-height: 6.5rem; resize: vertical; }
+    .choice { display: flex; gap: 0.55rem; align-items: flex-start; margin-top: 0.55rem; font-weight: 500; color: var(--color-text); }
+    .choice input { margin-top: 0.3rem; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+    #form-error { color: #ffd27a; min-height: 1.3rem; margin: 0.6rem 0; }
+    .actions { margin-top: 1rem; }
+    footer { border-top: 1px solid var(--color-border); padding: 1.5rem; color: var(--color-text-muted); }
+    footer a { color: var(--color-text-muted); }
+    .footer-bottom { max-width: 760px; margin: 0 auto; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    @media (max-width: 700px) { .row { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      header { padding: 0 1rem 6px; }
+      nav {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        background: var(--color-dark); flex-direction: column; align-items: flex-start; gap: 0; padding: 0.5rem 0 1rem;
+      }
+      nav.open { display: flex; }
+      nav a { width: 100%; padding: 0.85rem 1.5rem; }
+      nav a.cta-button { width: calc(100% - 3rem); margin: 0.75rem 1.5rem 0; text-align: center; }
+      .dropdown { width: 100%; }
+      .dropdown-menu { position: static; display: none; }
+      .dropdown.open .dropdown-menu { display: block; }
+    }
+  </style>
+  <link rel="stylesheet" href="/motion.css">
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <a href="/">
+          <img src="/Omnix-logo-only.png" alt="" class="logo-icon">
+          <img src="/Omnix-name-only.png" alt="Omnix" class="logo-name">
+        </a>
+      </div>
+      <button class="hamburger" id="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="main-nav" onclick="toggleNav()">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="main-nav">
+        <div class="dropdown" id="products-dropdown">
+          <a href="/#functional-website" onclick="toggleDropdown(event, 'products-dropdown')">Products</a>
+          <div class="dropdown-menu">
+            <a href="/#functional-website" onclick="closeNav()">Custom Built Website</a>
+            <a href="/#review-funnel" onclick="closeNav()">Review Requests</a>
+            <a href="/#missed-calls" onclick="closeNav()">Turn Missed Calls Into Customers</a>
+            <a href="/#marketing" onclick="closeNav()">One-Click Marketing</a>
+            <a href="/#local-seo" onclick="closeNav()">Local SEO</a>
+          </div>
+        </div>
+        <a href="/pricing">Pricing</a>
+        <a href="/about">About</a>
+        <a href="/contact" class="cta-button">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Tell us about the business.</h1>
+    <p class="lede">This is the intake after you buy Never Miss a Job. Required: your name or your business name, and a phone number or an email. Everything else is optional. Setup goes live within 7 days of purchase and starts with a short kickoff call. We do not ask for passwords.</p>
+
+    <form id="intake-form" novalidate>
+      <input type="hidden" name="access_key" value="ec1ca8d2-a075-4b33-a0de-08fd835b7ca2">
+      <input type="hidden" name="subject" value="Never Miss a Job — intake">
+      <input type="hidden" name="from_name" value="Omnix Intake">
+      <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
+      <input type="hidden" id="session_id" name="stripe_session_id" value="">
+
+      <div class="row">
+        <div>
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" autocomplete="name">
+        </div>
+        <div>
+          <label for="business_name">Business name</label>
+          <input type="text" id="business_name" name="business_name" autocomplete="organization">
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel">
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email">
+        </div>
+      </div>
+      <p class="hint">One of name or business name, and one of phone or email.</p>
+
+      <fieldset>
+        <legend>Logo, photos, and brand colors <span class="optional">(optional)</span></legend>
+        <label for="logo_link">Logo link</label>
+        <input type="url" id="logo_link" name="logo_link" placeholder="https://">
+        <label for="logo_file">Or upload a logo</label>
+        <input type="file" id="logo_file" name="attachment" accept="image/*,.pdf,.svg">
+
+        <label for="photo_link">Photo link</label>
+        <input type="url" id="photo_link" name="photo_link" placeholder="https://">
+        <label for="photo_files">Or upload photos</label>
+        <input type="file" id="photo_files" name="attachment" accept="image/*" multiple>
+
+        <label for="brand_colors">Brand colors</label>
+        <input type="text" id="brand_colors" name="brand_colors" placeholder="Navy, white, safety orange">
+        <label for="brand_file">Or upload a brand file</label>
+        <input type="file" id="brand_file" name="attachment" accept="image/*,.pdf">
+        <p class="hint">A link is enough. Files stay under 5 MB each.</p>
+      </fieldset>
+
+      <label for="services">Services <span class="optional">(optional)</span></label>
+      <textarea id="services" name="services" placeholder="HVAC install and repair, maintenance plans…"></textarea>
+
+      <label for="service_area">Service area <span class="optional">(optional)</span></label>
+      <input type="text" id="service_area" name="service_area" placeholder="Indianapolis metro, including…">
+
+      <label for="hours">Business hours <span class="optional">(optional)</span></label>
+      <textarea id="hours" name="hours" placeholder="Mon–Fri 7–5, emergency after hours"></textarea>
+
+      <fieldset>
+        <legend>Google Business Profile <span class="optional">(optional)</span></legend>
+        <p class="hint">Add contact@omnixgenerational.com as a manager. Or we will do it together on the kickoff call. Do not send a password.</p>
+        <label class="choice"><input type="radio" name="gbp_access" value="Will add contact@omnixgenerational.com as a manager"> I will add Omnix as a manager</label>
+        <label class="choice"><input type="radio" name="gbp_access" value="Set up Google Business Profile on the kickoff call"> Set this up on the kickoff call</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Domain <span class="optional">(optional)</span></legend>
+        <p class="hint">You own the domain. Add contact@omnixgenerational.com as a delegate at the registrar, or we will do it on the kickoff call. Do not send a registrar password.</p>
+        <label for="domain_name">Domain name</label>
+        <input type="text" id="domain_name" name="domain_name" placeholder="yourcompany.com" autocomplete="url">
+        <label class="choice"><input type="radio" name="domain_access" value="Will add contact@omnixgenerational.com as a domain delegate"> I will add Omnix as a delegate</label>
+        <label class="choice"><input type="radio" name="domain_access" value="Set up the domain on the kickoff call"> Set this up on the kickoff call</label>
+      </fieldset>
+
+      <label for="phone_provider">Current phone provider <span class="optional">(optional)</span></label>
+      <input type="text" id="phone_provider" name="phone_provider" placeholder="The company that hosts your business number">
+
+      <fieldset>
+        <legend>Past customers <span class="optional">(optional)</span></legend>
+        <p class="hint">Used only to request reviews after jobs. A link or a file is fine.</p>
+        <label for="customers">List or notes</label>
+        <textarea id="customers" name="past_customers"></textarea>
+        <label for="customers_link">Link</label>
+        <input type="url" id="customers_link" name="past_customers_link" placeholder="https://">
+        <label for="customers_file">Or upload</label>
+        <input type="file" id="customers_file" name="attachment" accept=".csv,.txt,.pdf,.xlsx,image/*">
+      </fieldset>
+
+      <fieldset>
+        <legend>Open estimates <span class="optional">(optional)</span></legend>
+        <p class="hint">Estimates that still need a follow-up.</p>
+        <label for="estimates">List or notes</label>
+        <textarea id="estimates" name="open_estimates"></textarea>
+        <label for="estimates_link">Link</label>
+        <input type="url" id="estimates_link" name="open_estimates_link" placeholder="https://">
+        <label for="estimates_file">Or upload</label>
+        <input type="file" id="estimates_file" name="attachment" accept=".csv,.txt,.pdf,.xlsx,image/*">
+      </fieldset>
+
+      <p id="form-error" role="alert"></p>
+      <div class="actions">
+        <button type="submit" class="cta-button" id="submit-btn">Send intake</button>
+      </div>
+    </form>
+  </main>
+
+  <footer>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Omnix. All rights reserved.</p>
+      <div>
+        <a href="/terms">Terms &amp; Conditions</a> ·
+        <a href="/privacy">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/motion.js"></script>
+  <script>
+    function toggleNav() {
+      var nav = document.getElementById('main-nav');
+      var btn = document.getElementById('hamburger');
+      var open = nav.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    function closeNav() {
+      document.getElementById('main-nav').classList.remove('open');
+      var btn = document.getElementById('hamburger');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+    function toggleDropdown(e, id) {
+      if (window.innerWidth <= 768) {
+        e.preventDefault();
+        document.getElementById(id).classList.toggle('open');
+      }
+    }
+    document.addEventListener('click', function (e) {
+      if (!document.querySelector('header').contains(e.target)) closeNav();
+    });
+
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var session = params.get('session_id') || '';
+      document.getElementById('session_id').value = session;
+
+      var form = document.getElementById('intake-form');
+      var errorEl = document.getElementById('form-error');
+
+      function clientError() {
+        var name = document.getElementById('name').value.trim();
+        var business = document.getElementById('business_name').value.trim();
+        var phone = document.getElementById('phone').value.trim();
+        var email = document.getElementById('email').value.trim();
+        if (!name && !business) return 'Add your name or your business name.';
+        if (!phone && !email) return 'Add a phone number or an email address.';
+        if (phone && phone.replace(/\D/g, '').length < 10) return 'Enter a phone number with at least 10 digits, or leave phone blank and use email.';
+        if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return 'That email address does not look valid.';
+        var files = form.querySelectorAll('input[type="file"]');
+        var total = 0;
+        for (var i = 0; i < files.length; i++) {
+          var list = files[i].files;
+          for (var j = 0; j < list.length; j++) {
+            if (list[j].size > 5 * 1024 * 1024) return 'Each file needs to be 5 MB or smaller. Paste a link instead.';
+            total += list[j].size;
+          }
+        }
+        if (total > 10 * 1024 * 1024) return 'Those files together are over 10 MB. Send fewer files, or paste links.';
+        return '';
+      }
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        var problem = clientError();
+        errorEl.textContent = problem;
+        if (problem) return;
+
+        var btn = document.getElementById('submit-btn');
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+
+        var payload = {
+          name: document.getElementById('name').value.trim(),
+          business_name: document.getElementById('business_name').value.trim(),
+          phone: document.getElementById('phone').value.trim(),
+          email: document.getElementById('email').value.trim()
+        };
+
+        try {
+          var check = await fetch('/api/intake', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          var checked = await check.json().catch(function () { return {}; });
+          if (!check.ok) throw new Error(checked.error || 'Intake check failed.');
+
+          var sent = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: new FormData(form)
+          });
+          var json = await sent.json().catch(function () { return {}; });
+          if (!json.success) throw new Error(json.message || 'The form service did not accept the intake.');
+          window.location.href = '/success?type=intake';
+        } catch (err) {
+          btn.disabled = false;
+          btn.textContent = 'Send intake';
+          errorEl.textContent = (err && err.message ? err.message + ' ' : '') + 'You can also email the same details to contact@omnixgenerational.com.';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

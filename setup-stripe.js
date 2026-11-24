@@ -1,59 +1,28 @@
 /**
- * Run this once to create all Stripe products & prices for Omnix.
- * Usage: node setup-stripe.js sk_live_YOUR_SECRET_KEY
+ * Retired. Do not run this to create Stripe products.
+ *
+ * Checkout (api/create-checkout-session.js) uses inline price_data:
+ *   - Never Miss a Job — Setup: $500 one-time
+ *   - Never Miss a Job: $197/month
+ * No Price IDs are invented here. STRIPE_SECRET_KEY is still required on Vercel.
+ *
+ * Phone, SMS, and AI usage are passed through at cost and are not a Stripe line item.
+ *
+ * If the Stripe dashboard still has the old prices, archive them. Do not delete
+ * prices that old invoices already reference:
+ *   - Omnix Monthly Plan — $597/month
+ *   - Omnix Yearly Plan — $3,564/year
+ *   - Omnix Setup Fee (Monthly) — $1,499
+ *   - Omnix Setup Fee (Yearly) — $749
+ *   - Any Web Pack, AI Receptionist, or Ads prices at $297/month or $499/month
+ *     (env vars STRIPE_WEBPACK_*, STRIPE_RECEPTIONIST_*, STRIPE_ADS_*,
+ *     STRIPE_MONTHLY_PRICE_ID, STRIPE_YEARLY_PRICE_ID,
+ *     STRIPE_MONTHLY_SETUP_FEE_PRICE_ID, STRIPE_YEARLY_SETUP_FEE_PRICE_ID)
+ * Those env vars are no longer read.
+ *
+ * Starter and Premium on /start are PROPOSED. Do not create Stripe prices for
+ * them until Big Chicken approves a price.
  */
 
-const secretKey = process.argv[2];
-if (!secretKey || !secretKey.startsWith('sk_')) {
-  console.error('Usage: node setup-stripe.js sk_live_YOUR_SECRET_KEY');
-  process.exit(1);
-}
-
-const stripe = require('stripe')(secretKey);
-
-async function setup() {
-  console.log('\n⏳ Creating Stripe products and prices...\n');
-
-  // 1. Monthly subscription — $597/mo
-  const monthly = await stripe.prices.create({
-    currency: 'usd',
-    unit_amount: 59700,
-    recurring: { interval: 'month' },
-    product_data: { name: 'Omnix Monthly Plan' },
-  });
-
-  // 2. Yearly subscription — $3,564/yr
-  const yearly = await stripe.prices.create({
-    currency: 'usd',
-    unit_amount: 356400,
-    recurring: { interval: 'year' },
-    product_data: { name: 'Omnix Yearly Plan' },
-  });
-
-  // 3. Monthly setup fee — $1,499 one-time
-  const setupMonthly = await stripe.prices.create({
-    currency: 'usd',
-    unit_amount: 149900,
-    product_data: { name: 'Omnix Setup Fee (Monthly)' },
-  });
-
-  // 4. Yearly setup fee — $749 one-time
-  const setupYearly = await stripe.prices.create({
-    currency: 'usd',
-    unit_amount: 74900,
-    product_data: { name: 'Omnix Setup Fee (Yearly)' },
-  });
-
-  console.log('✅ Done! Add these to Vercel environment variables:\n');
-  console.log(`STRIPE_SECRET_KEY          = ${secretKey}`);
-  console.log(`STRIPE_MONTHLY_PRICE_ID    = ${monthly.id}`);
-  console.log(`STRIPE_YEARLY_PRICE_ID     = ${yearly.id}`);
-  console.log(`STRIPE_MONTHLY_SETUP_FEE_PRICE_ID = ${setupMonthly.id}`);
-  console.log(`STRIPE_YEARLY_SETUP_FEE_PRICE_ID  = ${setupYearly.id}`);
-  console.log('\nPaste these back to Claude and he will wire them in for you.\n');
-}
-
-setup().catch(err => {
-  console.error('Error:', err.message);
-  process.exit(1);
-});
+console.error('setup-stripe.js does not create products. Checkout uses inline price_data: $500 setup + $197/month.');
+process.exit(1);
