@@ -76,17 +76,17 @@ const STATEMENTS = [
     client_name TEXT NOT NULL,
     package_id TEXT NOT NULL DEFAULT 'never-miss-a-job',
     amount_cents INTEGER,
-    CHECK (
-      (package_id = 'custom-ai' AND amount_cents IS NULL)
-      OR (package_id = 'never-miss-a-job' AND amount_cents = 19700)
-      OR (package_id = 'answer-the-call' AND amount_cents = 9700)
-    ),
     status TEXT NOT NULL DEFAULT 'pending',
     note TEXT,
     decided_at INTEGER,
     created_at INTEGER NOT NULL,
     source TEXT NOT NULL DEFAULT 'api',
-    is_demo INTEGER NOT NULL DEFAULT 0
+    is_demo INTEGER NOT NULL DEFAULT 0,
+    CHECK (
+      (package_id = 'custom-ai' AND amount_cents IS NULL)
+      OR (package_id = 'never-miss-a-job' AND amount_cents = 19700)
+      OR (package_id = 'answer-the-call' AND amount_cents = 9700)
+    )
   )`,
   `CREATE TABLE IF NOT EXISTS auto_approve_settings (
     change_type TEXT PRIMARY KEY CHECK (change_type <> 'refund'),

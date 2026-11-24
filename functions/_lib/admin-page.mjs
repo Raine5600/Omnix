@@ -77,20 +77,32 @@ export function renderDashboard({ email, csrf, sample = false }) {
   return shell({
     title: "Dashboard | Omnix Admin",
     csrf,
-    extraHead: `<link rel="stylesheet" href="/admin/vendor/uPlot.min.css">`,
     body: `<header class="top">
   <a class="brand" href="/admin">
     <img src="/Omnix-logo-only.png" alt="" width="52" height="52">
     <span><strong>OMNIX</strong><em>Admin</em></span>
   </a>
+  <button type="button" class="nav-toggle" id="nav-toggle" aria-controls="admin-nav" aria-expanded="false">Menu</button>
   <div class="who">
     <span>${escapeHtml(email)}</span>
     <button type="button" id="logout">Log out</button>
   </div>
 </header>
+<nav id="admin-nav" aria-label="Admin">
+  <button type="button" data-view="overview" class="is-on">Overview</button>
+  <button type="button" data-view="leads">Leads</button>
+  <button type="button" data-view="messages">Messages</button>
+  <button type="button" data-view="changes">Changes</button>
+  <button type="button" data-view="refunds">Refunds</button>
+</nav>
 <main class="dash">
   ${sample ? `<p class="sample-banner" role="status">Sample data for this preview. These are not live visitors, not HubSpot, and not real refunds. This banner cannot appear on omnixgenerational.com.</p>` : ""}
-  <div class="layout">
+  <section class="view is-on" id="view-overview" data-view-panel="overview">
+    <div class="stats" id="stats">
+      <article class="stat"><span class="stat-n" id="stat-visitors">0</span><span>Visitors</span></article>
+      <article class="stat"><span class="stat-n" id="stat-pageviews">0</span><span>Pageviews</span></article>
+      <article class="stat"><span class="stat-n" id="stat-clicks">0</span><span>Clicks</span></article>
+    </div>
     <section class="chart-card" aria-labelledby="visitors-heading">
       <div class="section-head">
         <div>
@@ -106,28 +118,24 @@ export function renderDashboard({ email, csrf, sample = false }) {
       <ul class="legend">
         <li><i class="swatch visitors"></i> Visitors</li>
         <li><i class="swatch views"></i> Pageviews</li>
-        <li><i class="swatch clicks"></i> Clicks</li>
       </ul>
       <div id="chart"></div>
     </section>
-    <section class="queue-panel" aria-labelledby="queue-heading">
-      <div class="section-head">
-        <h2 id="queue-heading">Review queue</h2>
-        <div class="pills" id="filters" role="group" aria-label="Queue type">
-          <button type="button" data-filter="all" class="is-on">All</button>
-          <button type="button" data-filter="change">Changes</button>
-          <button type="button" data-filter="refund">Refunds</button>
-        </div>
-      </div>
-      <div id="queue-list"></div>
-      <div id="auto"></div>
-    </section>
-    <section class="lists" id="lists" aria-label="Pages and clicks"></section>
-  </div>
-  <section class="panel" id="leads" aria-labelledby="leads-heading"></section>
-  <section class="panel" id="messages" aria-labelledby="messages-heading"></section>
+    <section class="bars-grid" id="lists" aria-label="Pages and clicks"></section>
+  </section>
+  <section class="view" id="view-leads" data-view-panel="leads"></section>
+  <section class="view" id="view-messages" data-view-panel="messages"></section>
+  <section class="view" id="view-changes" data-view-panel="changes">
+    <div class="section-head"><h1>Changes</h1></div>
+    <div id="change-list" class="queue-list"></div>
+    <div id="auto"></div>
+  </section>
+  <section class="view" id="view-refunds" data-view-panel="refunds">
+    <div class="section-head"><h1>Refunds</h1></div>
+    <p class="muted">First month only. Never Miss a Job is $197. Answer the Call is $97. Setup and pass-through costs are not refundable. Custom AI is not covered.</p>
+    <div id="refund-list" class="queue-list"></div>
+  </section>
 </main>
-<script src="/admin/vendor/uPlot.iife.min.js" defer></script>
 <script src="/admin/admin.js" defer></script>`,
   });
 }
