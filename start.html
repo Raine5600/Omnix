@@ -4,18 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Start | Book a Call or Buy Never Miss a Job | OMNIX</title>
-  <meta name="description" content="Book a call or buy Never Miss a Job for HVAC, plumbing, roofing, and electrical companies in the Indianapolis metro. $500 setup and $197 a month.">
+  <meta name="description" content="Book a call or buy Never Miss a Job for service businesses and small businesses anywhere in the US. $500 setup and $197 a month.">
   <link rel="canonical" href="https://omnixgenerational.com/start">
   <meta name="robots" content="index, follow">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="OMNIX">
   <meta property="og:title" content="Start | Book a Call or Buy Never Miss a Job | OMNIX">
-  <meta property="og:description" content="Book a call or buy Never Miss a Job. $500 setup and $197 a month for Indianapolis home-service trades.">
+  <meta property="og:description" content="Book a call or buy Never Miss a Job. $500 setup and $197 a month, for service businesses and small businesses anywhere in the US.">
   <meta property="og:url" content="https://omnixgenerational.com/start">
   <meta property="og:image" content="https://omnixgenerational.com/favicon-512.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Start | Book a Call or Buy Never Miss a Job | OMNIX">
-  <meta name="twitter:description" content="Book a call or buy Never Miss a Job. $500 setup and $197 a month for Indianapolis home-service trades.">
+  <meta name="twitter:description" content="Book a call or buy Never Miss a Job. $500 setup and $197 a month, for service businesses and small businesses anywhere in the US.">
   <meta name="twitter:image" content="https://omnixgenerational.com/favicon-512.png">
   <link rel="icon" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -330,7 +330,7 @@
   <main>
     <section class="intro">
       <h1>Book a call or buy a system.</h1>
-      <p>Never Miss a Job is for HVAC, plumbing, roofing, and electrical companies in the Indianapolis metro. Omnix sets it up and runs it.</p>
+      <p>Never Miss a Job is for service businesses and small businesses anywhere in the US. Omnix sets it up and runs it.</p>
     </section>
 
     <div class="split">
@@ -345,7 +345,7 @@
 
       <section class="pane buy" aria-labelledby="buy-heading">
         <h2 id="buy-heading">Buy a system</h2>
-        <p class="lede">Move through the packages and select one. Only Never Miss a Job can be purchased. The others are proposals.</p>
+        <p class="lede">Move through the packages. They repeat. Only Never Miss a Job can be purchased. Answer the Call is a proposal. Custom AI is a call, with no price on this page.</p>
         <p id="pkg-status">Selected: Never Miss a Job. $500 setup and $197 a month.</p>
         <button type="button" class="cta-button buy-action" id="pkg-action">Buy Never Miss a Job</button>
         <p id="checkout-error" role="alert"></p>
@@ -391,26 +391,18 @@
                   <li>Starts with a short kickoff call</li>
                 </ul>
                 <p class="fine">Phone, SMS, and AI usage are passed through at cost, on top of this price.</p>
-                <p class="guarantee">No new paying customer within 30 days of going live? Your first month back.</p>
-                <p class="fine">Covers your first month ($197) if no paying customer tracked through the Omnix system (text-back, booking or follow-up) comes in within 30 days of all your services going live. The setup fee and pass-through usage costs aren't refundable. Request it through our <a href="/contact">contact page</a>.</p>
+                <p class="guarantee"><a href="/terms#guarantee">30-day money-back guarantee</a></p>
               </article>
 
-              <!-- PROPOSED. Pending Big Chicken's approval. Do not charge this tier. -->
+              <!-- Custom AI has no price and must not create a Stripe charge. The button opens the booking calendar. -->
               <article class="pkg-card" id="pkg-card-2" aria-labelledby="pkg-title-2" aria-hidden="true">
                 <div class="pkg-kicker">
-                  <span class="flag flag-proposed">PROPOSED</span>
-                  <span class="flag flag-proposed">Not for sale</span>
+                  <span class="flag flag-rec">Book a call</span>
                 </div>
-                <h3 id="pkg-title-2">Never Miss a Job + Ads</h3>
-                <p class="price">$800 <span>setup</span></p>
-                <p class="price-sub">+ $347/month, proposed</p>
-                <ul>
-                  <li>Everything in Never Miss a Job</li>
-                  <li>Google or Facebook ads management, proposed</li>
-                  <li>Ad spend is not included</li>
-                  <li>Short kickoff call</li>
-                </ul>
-                <p class="proposed-note">Proposed price, pending approval. Choosing this will not charge a card. It opens the booking calendar.</p>
+                <h3 id="pkg-title-2">Custom AI</h3>
+                <p class="fine">No price on this page.</p>
+                <p>AI integration into your business, such as custom programs, CRMs, or AI across the work you already do, so those processes take fewer steps.</p>
+                <p class="proposed-note">Choosing this will not charge a card. It opens the booking calendar.</p>
               </article>
 
             </div>
@@ -421,7 +413,7 @@
             <div class="dots" role="tablist" aria-label="Packages">
               <button type="button" class="dot" role="tab" id="pkg-tab-0" aria-controls="pkg-card-0" aria-selected="false"><span class="visually-hidden">Answer the Call, proposed, $350 setup and $97 a month</span></button>
               <button type="button" class="dot" role="tab" id="pkg-tab-1" aria-controls="pkg-card-1" aria-selected="true"><span class="visually-hidden">Never Miss a Job, recommended, $500 setup and $197 a month</span></button>
-              <button type="button" class="dot" role="tab" id="pkg-tab-2" aria-controls="pkg-card-2" aria-selected="false"><span class="visually-hidden">Never Miss a Job plus Ads, proposed, $800 setup and $347 a month</span></button>
+              <button type="button" class="dot" role="tab" id="pkg-tab-2" aria-controls="pkg-card-2" aria-selected="false"><span class="visually-hidden">Custom AI, book a call, no price on this page</span></button>
             </div>
             <button type="button" class="arrow" id="pkg-next" aria-label="Next package">›</button>
           </div>
@@ -493,7 +485,8 @@
 
     (function () {
       // Index 1 is Never Miss a Job, selected by default.
-      // TODO(Big Chicken): indexes 0 and 2 are PROPOSED. Do not point them at Stripe.
+      // TODO(Big Chicken): index 0 (Answer the Call) is PROPOSED. Do not charge it.
+      // Index 2 (Custom AI) has no price. Do not charge it. Open the booking calendar.
       var index = 1;
       var total = 3;
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -501,7 +494,7 @@
       var live = document.getElementById('pkg-live');
       var action = document.getElementById('pkg-action');
       var status = document.getElementById('pkg-status');
-      var names = ['Answer the Call', 'Never Miss a Job', 'Never Miss a Job + Ads'];
+      var names = ['Answer the Call', 'Never Miss a Job', 'Custom AI'];
 
       track.style.transition = reduce ? 'none' : 'transform 0.35s ease';
 
@@ -519,6 +512,9 @@
         if (index === 1) {
           action.textContent = 'Buy Never Miss a Job';
           status.textContent = 'Selected: Never Miss a Job. $500 setup and $197 a month.';
+        } else if (index === 2) {
+          action.textContent = 'Book a call';
+          status.textContent = 'Selected: Custom AI. No price on this page. This opens the booking calendar.';
         } else {
           action.textContent = 'Book a call about this proposed package';
           status.textContent = 'Selected: ' + names[index] + '. Proposed, and not for sale. This opens the booking calendar.';
@@ -527,7 +523,8 @@
       }
 
       function go(next) {
-        index = (next + total) % total;
+        // Wrap both ways: next from the last card returns to the first, and previous from the first returns to the last.
+        index = ((next % total) + total) % total;
         render();
       }
 

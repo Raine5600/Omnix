@@ -23,6 +23,13 @@ button.cta-button:hover {
   color: #0d0d1e;
 }
 
+.guarantee a,
+.hero-promise a {
+  color: #7cc5ff;
+  font-weight: 700;
+  text-underline-offset: 3px;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html.motion-ready .reveal {
     opacity: 0;

@@ -427,7 +427,7 @@
     </div>
     <h1 id="hero-heading">Payment received.</h1>
     <p class="hero-sub" id="hero-sub">Next, send the intake form. The only required pieces are a name or business name, and a phone or email.</p>
-    <div class="hero-promise" id="hero-promise">Live within 7 days of purchase. No new paying customer within 30 days of going live? Your first month back.</div>
+    <div class="hero-promise" id="hero-promise">Live within 7 days of purchase. <a href="/terms#guarantee">30-day money-back guarantee</a></div>
     <a href="/intake" class="cta-button" id="next-step">Finish intake</a>
   </section>
 
@@ -471,7 +471,7 @@
   <section class="demo-spotlight">
     <h2>What you bought</h2>
     <p>Never Miss a Job is $500 to set up and $197 a month. Phone, SMS, and AI usage are passed through at cost, on top of that price.</p>
-    <p>No new paying customer within 30 days of going live? Your first month back. Covers your first month ($197) if no paying customer tracked through the Omnix system (text-back, booking or follow-up) comes in within 30 days of all your services going live. The setup fee and pass-through usage costs aren't refundable. Request it through our <a href="contact.html">contact page</a>.</p>
+    <p><a href="/terms#guarantee">30-day money-back guarantee</a></p>
     <div class="demo-features">
       <div class="demo-feat"><i class="fas fa-check"></i> Missed-call text-back with after-hours answering</div>
       <div class="demo-feat"><i class="fas fa-check"></i> Review requests after every job, with no rating gate</div>
@@ -516,13 +516,13 @@
     if (type === 'contact') {
       document.getElementById('hero-heading').textContent = "Message received.";
       document.getElementById('hero-sub').textContent = "We have your note. If you are ready to buy, Never Miss a Job is on the pricing page.";
-      document.getElementById('hero-promise').textContent = "No new paying customer within 30 days of going live? Your first month back.";
+      document.getElementById('hero-promise').innerHTML = '<a href="/terms#guarantee">30-day money-back guarantee</a>';
       next.textContent = "See pricing";
       next.href = "/pricing";
     } else if (type === 'intake') {
       document.getElementById('hero-heading').textContent = "Intake received.";
       document.getElementById('hero-sub').textContent = "We have what you sent. Setup starts with a short kickoff call.";
-      document.getElementById('hero-promise').textContent = "Live within 7 days of purchase. No new paying customer within 30 days of going live? Your first month back.";
+      document.getElementById('hero-promise').innerHTML = 'Live within 7 days of purchase. <a href="/terms#guarantee">30-day money-back guarantee</a>';
       next.textContent = "Back to home";
       next.href = "/";
     }
