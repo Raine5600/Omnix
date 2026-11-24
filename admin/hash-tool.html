@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Password hash | Omnix Admin</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    :root { color-scheme: dark; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #0d0d1e;
+      color: #e7ebff;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+    main { max-width: 40rem; margin: 0 auto; padding: 2rem 1.2rem 3rem; }
+    h1 { font-family: "Trebuchet MS", sans-serif; letter-spacing: 0.04em; }
+    p, li { line-height: 1.5; }
+    .note {
+      background: #161630;
+      border: 1px solid rgba(124, 197, 255, 0.35);
+      border-radius: 12px;
+      padding: 0.8rem 1rem;
+    }
+    label { display: block; margin-top: 1rem; font-family: "Trebuchet MS", sans-serif; }
+    input, select, button, textarea {
+      font: 1rem/1.4 "Trebuchet MS", sans-serif;
+      width: 100%;
+      box-sizing: border-box;
+      margin-top: 0.35rem;
+      background: #0d0d1e;
+      color: #e7ebff;
+      border: 1px solid rgba(124, 197, 255, 0.35);
+      border-radius: 8px;
+      padding: 0.65rem 0.7rem;
+    }
+    button {
+      margin-top: 1rem;
+      background: linear-gradient(120deg, #7cc5ff, #c07aff);
+      color: #0d0d1e;
+      font-weight: 700;
+      border: 0;
+      cursor: pointer;
+    }
+    textarea { min-height: 5rem; }
+    a { color: #7cc5ff; }
+    .err { color: #ffd27a; min-height: 1.2rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Make the admin password hash</h1>
+    <p class="note">This page does not send your password anywhere. It does not make any network request. The hash is calculated in this browser. Copy the line into the Cloudflare secret named <strong>ADMIN_PASSWORD_HASH</strong>. Do not put the password or the hash in git, email, or a pull request.</p>
+    <label for="password">Password (at least 10 characters)</label>
+    <input id="password" type="password" autocomplete="new-password">
+    <label for="iterations">Iterations</label>
+    <select id="iterations">
+      <option value="20000" selected>20000 — use this on Cloudflare’s free plan</option>
+      <option value="100000">100000 — stronger, may time out on the free plan</option>
+    </select>
+    <p>The free Pages plan only allows a very short burst of computing on sign-in. 20000 iterations is the one that fits. The number is stored inside the hash, so sign-in uses the same count you pick here.</p>
+    <button type="button" id="go">Create hash</button>
+    <p id="error" class="err" role="alert"></p>
+    <label for="out">Paste this whole line into ADMIN_PASSWORD_HASH</label>
+    <textarea id="out" readonly></textarea>
+    <p><a href="/admin">Back to sign in</a></p>
+  </main>
+  <script>
+    (function () {
+      var blocked = function () { throw new Error("This page does not use the network."); };
+      window.fetch = blocked;
+      window.XMLHttpRequest = blocked;
+      if (navigator.sendBeacon) navigator.sendBeacon = blocked;
+
+      function bytesToB64(bytes) {
+        var binary = "";
+        for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+        return btoa(binary);
+      }
+
+      document.getElementById("go").addEventListener("click", async function () {
+        var error = document.getElementById("error");
+        var out = document.getElementById("out");
+        error.textContent = "";
+        out.value = "";
+        var password = document.getElementById("password").value;
+        var iterations = Number(document.getElementById("iterations").value);
+        if (password.length < 10) {
+          error.textContent = "Use at least 10 characters.";
+          return;
+        }
+        var salt = crypto.getRandomValues(new Uint8Array(16));
+        var key = await crypto.subtle.importKey("raw", new TextEncoder().encode(password), "PBKDF2", false, ["deriveBits"]);
+        var bits = await crypto.subtle.deriveBits({ name: "PBKDF2", hash: "SHA-256", salt: salt, iterations: iterations }, key, 256);
+        var hash = new Uint8Array(bits);
+        out.value = "pbkdf2$" + iterations + "$" + bytesToB64(salt) + "$" + bytesToB64(hash);
+        out.focus();
+        out.select();
+      });
+    })();
+  </script>
+</body>
+</html>

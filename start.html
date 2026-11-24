@@ -332,7 +332,7 @@
   <header>
     <div class="header-container">
       <div class="logo">
-        <a href="/">
+        <a href="/" data-track="nav:home">
           <div class="logo-planet-wrap">
             <img src="/Omnix-logo-only.png" alt="" class="logo-icon">
           </div>
@@ -344,18 +344,18 @@
       </button>
       <nav id="main-nav">
         <div class="dropdown" id="products-dropdown">
-          <a href="/#functional-website" onclick="toggleDropdown(event, 'products-dropdown')">Products</a>
+          <a href="/#functional-website" onclick="toggleDropdown(event, 'products-dropdown')" data-track="nav:products">Products</a>
           <div class="dropdown-menu">
-            <a href="/#functional-website" onclick="closeNav()">Custom Built Website</a>
-            <a href="/#review-funnel" onclick="closeNav()">Review Requests</a>
-            <a href="/#missed-calls" onclick="closeNav()">Turn Missed Calls Into Customers</a>
-            <a href="/#marketing" onclick="closeNav()">One-Click Marketing</a>
-            <a href="/#local-seo" onclick="closeNav()">Local SEO</a>
+            <a href="/#functional-website" onclick="closeNav()" data-track="nav:product-website">Custom Built Website</a>
+            <a href="/#review-funnel" onclick="closeNav()" data-track="nav:product-reviews">Review Requests</a>
+            <a href="/#missed-calls" onclick="closeNav()" data-track="nav:product-missed-calls">Turn Missed Calls Into Customers</a>
+            <a href="/#marketing" onclick="closeNav()" data-track="nav:product-marketing">One-Click Marketing</a>
+            <a href="/#local-seo" onclick="closeNav()" data-track="nav:product-seo">Local SEO</a>
           </div>
         </div>
-        <a href="/pricing">Pricing</a>
-        <a href="/about">About</a>
-        <a href="/contact" class="cta-button">Contact Us</a>
+        <a href="/pricing" data-track="nav:pricing">Pricing</a>
+        <a href="/about" data-track="nav:about">About</a>
+        <a href="/contact" class="cta-button" data-track="nav:contact">Contact Us</a>
       </nav>
     </div>
   </header>
@@ -374,7 +374,7 @@
           <div class="meetings-frame">
             <div class="meetings-iframe-container" data-src="https://meetings-na2.hubspot.com/raine5600?embed=true"></div>
           </div>
-          <a class="fallback" href="https://meetings-na2.hubspot.com/raine5600">Open the booking page</a>
+          <a class="fallback" href="https://meetings-na2.hubspot.com/raine5600" data-track="cta:book-a-call">Open the booking page</a>
         </div>
       </section>
 
@@ -394,10 +394,10 @@
                 <h3>Custom AI</h3>
                 <p class="fine">No price on this page.</p>
                 <p>AI integration into your business, such as custom programs, CRMs, or AI across the work you already do, so those processes take fewer steps.</p>
-                <button type="button" class="cta-button" data-action="book">Book a call about Custom AI</button>
+                <button type="button" class="cta-button" data-action="book" data-track="cta:book-a-call">Book a call about Custom AI</button>
               </article></div>
 
-              <div class="pkg-slide"><article class="pkg-card" id="pkg-card-0" data-real="0" aria-labelledby="pkg-title-0">
+              <div class="pkg-slide"><article class="pkg-card" id="pkg-card-0" data-real="0" data-track="package:answer-the-call" aria-labelledby="pkg-title-0">
                 <h3 id="pkg-title-0">Answer the Call</h3>
                 <p class="price">$350 <span>setup</span></p>
                 <p class="price-sub">+ $97/month</p>
@@ -409,10 +409,10 @@
                   <li>Short kickoff call</li>
                   <li>Live within 7 days of purchase</li>
                 </ul>
-                <button type="button" class="cta-button" data-action="answer-the-call">Buy Answer the Call</button>
+                <button type="button" class="cta-button" data-action="answer-the-call" data-track="cta:buy-answer-the-call">Buy Answer the Call</button>
               </article></div>
 
-              <div class="pkg-slide"><article class="pkg-card" id="pkg-card-1" data-real="1" aria-labelledby="pkg-title-1">
+              <div class="pkg-slide"><article class="pkg-card" id="pkg-card-1" data-real="1" data-track="package:never-miss-a-job" aria-labelledby="pkg-title-1">
                 <div class="pkg-kicker">
                   <span class="flag flag-rec">Recommended</span>
                 </div>
@@ -430,15 +430,15 @@
                 </ul>
                 <p class="fine">Phone, SMS, and AI usage are passed through at cost, on top of this price.</p>
                 <p class="guarantee"><a href="/terms#guarantee">30-day money-back guarantee</a></p>
-                <button type="button" class="cta-button" data-action="never-miss-a-job">Buy Never Miss a Job</button>
+                <button type="button" class="cta-button" data-action="never-miss-a-job" data-track="cta:buy">Buy Never Miss a Job</button>
               </article></div>
 
               <!-- Custom AI has no price and must not create a Stripe charge. -->
-              <div class="pkg-slide"><article class="pkg-card" id="pkg-card-2" data-real="2" aria-labelledby="pkg-title-2">
+              <div class="pkg-slide"><article class="pkg-card" id="pkg-card-2" data-real="2" data-track="package:custom-ai" aria-labelledby="pkg-title-2">
                 <h3 id="pkg-title-2">Custom AI</h3>
                 <p class="fine">No price on this page.</p>
                 <p>AI integration into your business, such as custom programs, CRMs, or AI across the work you already do, so those processes take fewer steps.</p>
-                <button type="button" class="cta-button" data-action="book">Book a call about Custom AI</button>
+                <button type="button" class="cta-button" data-action="book" data-track="cta:book-a-call">Book a call about Custom AI</button>
               </article></div>
 
               <div class="pkg-slide"><article class="pkg-card" data-clone="answer-the-call" aria-hidden="true">
@@ -453,7 +453,7 @@
                   <li>Short kickoff call</li>
                   <li>Live within 7 days of purchase</li>
                 </ul>
-                <button type="button" class="cta-button" data-action="answer-the-call">Buy Answer the Call</button>
+                <button type="button" class="cta-button" data-action="answer-the-call" data-track="cta:buy-answer-the-call">Buy Answer the Call</button>
               </article></div>
 
             </div>
@@ -462,9 +462,9 @@
           <div class="carousel-controls">
             <button type="button" class="arrow" id="pkg-prev" aria-label="Previous package">‹</button>
             <div class="dots" role="tablist" aria-label="Packages">
-              <button type="button" class="dot" role="tab" id="pkg-tab-0" aria-controls="pkg-card-0" aria-selected="false"><span class="visually-hidden">Answer the Call, $350 setup and $97 a month</span></button>
-              <button type="button" class="dot" role="tab" id="pkg-tab-1" aria-controls="pkg-card-1" aria-selected="true"><span class="visually-hidden">Never Miss a Job, recommended, $500 setup and $197 a month</span></button>
-              <button type="button" class="dot" role="tab" id="pkg-tab-2" aria-controls="pkg-card-2" aria-selected="false"><span class="visually-hidden">Custom AI, book a call, no price on this page</span></button>
+              <button type="button" class="dot" role="tab" id="pkg-tab-0" data-track="carousel:answer-the-call" aria-controls="pkg-card-0" aria-selected="false"><span class="visually-hidden">Answer the Call, $350 setup and $97 a month</span></button>
+              <button type="button" class="dot" role="tab" id="pkg-tab-1" data-track="carousel:never-miss-a-job" aria-controls="pkg-card-1" aria-selected="true"><span class="visually-hidden">Never Miss a Job, recommended, $500 setup and $197 a month</span></button>
+              <button type="button" class="dot" role="tab" id="pkg-tab-2" data-track="carousel:custom-ai" aria-controls="pkg-card-2" aria-selected="false"><span class="visually-hidden">Custom AI, book a call, no price on this page</span></button>
             </div>
             <button type="button" class="arrow" id="pkg-next" aria-label="Next package">›</button>
             <button type="button" id="pkg-pause" aria-pressed="false">Pause</button>
@@ -480,7 +480,7 @@
       TODO(Big Chicken): The free guide is not on the site yet. When
       /blog/3-leaks-costing-indy-trades-jobs is published, uncomment this link.
       Do not invent the post here.
-      <p class="guide-slot"><a href="/blog/3-leaks-costing-indy-trades-jobs">Free guide: 3 leaks costing Indy trades jobs</a></p>
+      <p class="guide-slot"><a href="/blog/3-leaks-costing-indy-trades-jobs" data-track="cta:free-guide">Free guide: 3 leaks costing Indy trades jobs</a></p>
     -->
   </main>
 
@@ -488,15 +488,15 @@
     <div class="footer-container">
       <div class="footer-section">
         <h4>Omnix</h4>
-        <a href="/#functional-website">Products</a>
-        <a href="/pricing">Pricing</a>
-        <a href="/about">About</a>
+        <a href="/#functional-website" data-track="nav:products">Products</a>
+        <a href="/pricing" data-track="nav:pricing">Pricing</a>
+        <a href="/about" data-track="nav:about">About</a>
       </div>
       <div class="footer-section">
         <h4>Support</h4>
         <a href="mailto:contact@omnixgenerational.com">contact@omnixgenerational.com</a>
         <a href="/faq">Help Center</a>
-        <a href="/contact">Contact Us</a>
+        <a href="/contact" data-track="nav:contact">Contact Us</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -713,5 +713,6 @@
       }
     })();
   </script>
+  <script src="/track.js" defer></script>
 </body>
 </html>

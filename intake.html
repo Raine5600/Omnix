@@ -146,7 +146,7 @@
   <header>
     <div class="header-container">
       <div class="logo">
-        <a href="/">
+        <a href="/" data-track="nav:home">
           <img src="/Omnix-logo-only.png" alt="" class="logo-icon">
           <img src="/Omnix-name-only.png" alt="Omnix" class="logo-name">
         </a>
@@ -156,18 +156,18 @@
       </button>
       <nav id="main-nav">
         <div class="dropdown" id="products-dropdown">
-          <a href="/#functional-website" onclick="toggleDropdown(event, 'products-dropdown')">Products</a>
+          <a href="/#functional-website" onclick="toggleDropdown(event, 'products-dropdown')" data-track="nav:products">Products</a>
           <div class="dropdown-menu">
-            <a href="/#functional-website" onclick="closeNav()">Custom Built Website</a>
-            <a href="/#review-funnel" onclick="closeNav()">Review Requests</a>
-            <a href="/#missed-calls" onclick="closeNav()">Turn Missed Calls Into Customers</a>
-            <a href="/#marketing" onclick="closeNav()">One-Click Marketing</a>
-            <a href="/#local-seo" onclick="closeNav()">Local SEO</a>
+            <a href="/#functional-website" onclick="closeNav()" data-track="nav:product-website">Custom Built Website</a>
+            <a href="/#review-funnel" onclick="closeNav()" data-track="nav:product-reviews">Review Requests</a>
+            <a href="/#missed-calls" onclick="closeNav()" data-track="nav:product-missed-calls">Turn Missed Calls Into Customers</a>
+            <a href="/#marketing" onclick="closeNav()" data-track="nav:product-marketing">One-Click Marketing</a>
+            <a href="/#local-seo" onclick="closeNav()" data-track="nav:product-seo">Local SEO</a>
           </div>
         </div>
-        <a href="/pricing">Pricing</a>
-        <a href="/about">About</a>
-        <a href="/contact" class="cta-button">Contact Us</a>
+        <a href="/pricing" data-track="nav:pricing">Pricing</a>
+        <a href="/about" data-track="nav:about">About</a>
+        <a href="/contact" class="cta-button" data-track="nav:contact">Contact Us</a>
       </nav>
     </div>
   </header>
@@ -278,7 +278,7 @@
 
       <p id="form-error" role="alert"></p>
       <div class="actions">
-        <button type="submit" class="cta-button" id="submit-btn">Send intake</button>
+        <button type="submit" class="cta-button" id="submit-btn" data-track="cta:intake-send">Send intake</button>
       </div>
     </form>
   </main>
@@ -370,11 +370,30 @@
         btn.disabled = true;
         btn.textContent = 'Sending…';
 
+        function radioValue(name) {
+          var picked = form.querySelector('input[name="' + name + '"]:checked');
+          return picked ? picked.value : '';
+        }
         var payload = {
           name: document.getElementById('name').value.trim(),
           business_name: document.getElementById('business_name').value.trim(),
           phone: document.getElementById('phone').value.trim(),
-          email: document.getElementById('email').value.trim()
+          email: document.getElementById('email').value.trim(),
+          logo_link: document.getElementById('logo_link').value.trim(),
+          photo_link: document.getElementById('photo_link').value.trim(),
+          brand_colors: document.getElementById('brand_colors').value.trim(),
+          services: document.getElementById('services').value.trim(),
+          service_area: document.getElementById('service_area').value.trim(),
+          hours: document.getElementById('hours').value.trim(),
+          gbp_access: radioValue('gbp_access'),
+          domain_name: document.getElementById('domain_name').value.trim(),
+          domain_access: radioValue('domain_access'),
+          phone_provider: document.getElementById('phone_provider').value.trim(),
+          past_customers: document.getElementById('customers').value.trim(),
+          past_customers_link: document.getElementById('customers_link').value.trim(),
+          open_estimates: document.getElementById('estimates').value.trim(),
+          open_estimates_link: document.getElementById('estimates_link').value.trim(),
+          stripe_session_id: document.getElementById('session_id').value.trim()
         };
 
         try {
@@ -401,5 +420,6 @@
       });
     })();
   </script>
+  <script src="/track.js" defer></script>
 </body>
 </html>

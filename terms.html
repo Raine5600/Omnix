@@ -161,7 +161,7 @@
     
     <div class="header-container">
       <div class="logo">
-        <a href="index.html">
+        <a href="index.html" data-track="nav:home">
           <div class="logo-planet-wrap"><img src="Omnix-logo-only.png" alt="" class="logo-icon"><span class="ray-star rs1">✦</span><span class="ray-star rs2">✦</span><span class="ray-star rs3">✦</span><span class="ray-star rs4">✦</span><span class="ray-star rs5">✦</span><span class="ray-star rs6">✦</span></div>
           <img src="Omnix-name-only.png" alt="Omnix" class="logo-name">
         </a>
@@ -171,18 +171,18 @@
       </button>
       <nav id="main-nav">
         <div class="dropdown" id="products-dropdown">
-          <a href="index.html#functional-website" onclick="toggleDropdown(event, 'products-dropdown')">Products</a>
+          <a href="index.html#functional-website" onclick="toggleDropdown(event, 'products-dropdown')" data-track="nav:products">Products</a>
           <div class="dropdown-menu">
-            <a href="index.html#functional-website">Custom Built Website</a>
-            <a href="index.html#review-funnel">Review Requests</a>
-            <a href="index.html#missed-calls">Turn Missed Calls Into Customers</a>
-            <a href="index.html#marketing">One-Click Marketing</a>
-            <a href="index.html#local-seo">Local SEO</a>
+            <a href="index.html#functional-website" data-track="nav:product-website">Custom Built Website</a>
+            <a href="index.html#review-funnel" data-track="nav:product-reviews">Review Requests</a>
+            <a href="index.html#missed-calls" data-track="nav:product-missed-calls">Turn Missed Calls Into Customers</a>
+            <a href="index.html#marketing" data-track="nav:product-marketing">One-Click Marketing</a>
+            <a href="index.html#local-seo" data-track="nav:product-seo">Local SEO</a>
           </div>
         </div>
-        <a href="pricing.html">Pricing</a>
-        <a href="about.html">About</a>
-        <a href="contact.html" class="cta-button">Contact Us</a>
+        <a href="pricing.html" data-track="nav:pricing">Pricing</a>
+        <a href="about.html" data-track="nav:about">About</a>
+        <a href="contact.html" class="cta-button" data-track="nav:contact">Contact Us</a>
       </nav>
     </div>
   </header>
@@ -286,5 +286,6 @@
   </script>
 
   <script src="/motion.js"></script>
+  <script src="/track.js" defer></script>
 </body>
 </html>

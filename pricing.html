@@ -963,7 +963,7 @@
     
     <div class="header-container">
       <div class="logo">
-        <a href="index.html">
+        <a href="index.html" data-track="nav:home">
           <div class="logo-planet-wrap"><img src="Omnix-logo-only.png" alt="" class="logo-icon"><span class="ray-star rs1">✦</span><span class="ray-star rs2">✦</span><span class="ray-star rs3">✦</span><span class="ray-star rs4">✦</span><span class="ray-star rs5">✦</span><span class="ray-star rs6">✦</span></div>
           <img src="Omnix-name-only.png" alt="Omnix" class="logo-name">
         </a>
@@ -973,18 +973,18 @@
       </button>
       <nav id="main-nav">
         <div class="dropdown" id="products-dropdown">
-          <a href="index.html#functional-website" onclick="toggleDropdown(event, 'products-dropdown')">Products</a>
+          <a href="index.html#functional-website" onclick="toggleDropdown(event, 'products-dropdown')" data-track="nav:products">Products</a>
           <div class="dropdown-menu">
-            <a href="index.html#functional-website">Custom Built Website</a>
-            <a href="index.html#review-funnel">Review Requests</a>
-            <a href="index.html#missed-calls">Turn Missed Calls Into Customers</a>
-            <a href="index.html#marketing">One-Click Marketing</a>
-            <a href="index.html#local-seo">Local SEO</a>
+            <a href="index.html#functional-website" data-track="nav:product-website">Custom Built Website</a>
+            <a href="index.html#review-funnel" data-track="nav:product-reviews">Review Requests</a>
+            <a href="index.html#missed-calls" data-track="nav:product-missed-calls">Turn Missed Calls Into Customers</a>
+            <a href="index.html#marketing" data-track="nav:product-marketing">One-Click Marketing</a>
+            <a href="index.html#local-seo" data-track="nav:product-seo">Local SEO</a>
           </div>
         </div>
-        <a href="pricing.html" style="color: var(--color-primary);">Pricing</a>
-        <a href="about.html">About</a>
-        <a href="contact.html" class="cta-button">Contact Us</a>
+        <a href="pricing.html" style="color: var(--color-primary);" data-track="nav:pricing">Pricing</a>
+        <a href="about.html" data-track="nav:about">About</a>
+        <a href="contact.html" class="cta-button" data-track="nav:contact">Contact Us</a>
       </nav>
     </div>
   </header>
@@ -997,7 +997,7 @@
 
   <section class="plan-section" aria-label="Packages">
     <div class="plan-grid">
-      <article class="plan-card">
+      <article class="plan-card" data-track="package:answer-the-call">
         <h2>Answer the Call</h2>
         <p class="plan-price">$350 <span>setup</span></p>
         <p class="plan-sub">+ $97/month</p>
@@ -1008,9 +1008,9 @@
           <li>Live within 7 days of purchase</li>
         </ul>
         <p class="guarantee"><a href="/terms#guarantee">30-day money-back guarantee</a></p>
-        <button type="button" class="cta-button" onclick="startPackageCheckout(this, 'Buy Answer the Call', 'answer-the-call')">Buy Answer the Call</button>
+        <button type="button" class="cta-button" data-track="cta:buy-answer-the-call" onclick="startPackageCheckout(this, 'Buy Answer the Call', 'answer-the-call')">Buy Answer the Call</button>
       </article>
-      <article class="plan-card featured">
+      <article class="plan-card featured" data-track="package:never-miss-a-job">
         <p class="popular-badge">Recommended</p>
         <h2>Never Miss a Job</h2>
         <p class="plan-price">$500 <span>setup</span></p>
@@ -1023,9 +1023,9 @@
           <li>Live within 7 days of purchase</li>
         </ul>
         <p class="guarantee"><a href="/terms#guarantee">30-day money-back guarantee</a></p>
-        <button type="button" class="cta-button" onclick="startPackageCheckout(this, 'Buy Never Miss a Job', 'never-miss-a-job')">Buy Never Miss a Job</button>
+        <button type="button" class="cta-button" data-track="cta:buy" onclick="startPackageCheckout(this, 'Buy Never Miss a Job', 'never-miss-a-job')">Buy Never Miss a Job</button>
       </article>
-      <article class="plan-card">
+      <article class="plan-card" data-track="package:custom-ai">
         <h2>Custom AI</h2>
         <p class="plan-sub">No price on this page. Scoped on a call.</p>
         <ul>
@@ -1033,7 +1033,7 @@
           <li>Custom programs and CRMs</li>
           <li>AI across the work you already do</li>
         </ul>
-        <a class="cta-button" href="#book">Book a call about Custom AI</a>
+        <a class="cta-button" href="#book" data-track="cta:book-a-call">Book a call about Custom AI</a>
       </article>
     </div>
     <p id="checkout-error" role="alert"></p>
@@ -1046,7 +1046,7 @@
       <div class="meetings-frame">
         <div class="meetings-iframe-container" data-src="https://meetings-na2.hubspot.com/raine5600?embed=true"></div>
       </div>
-      <a class="fallback" href="https://meetings-na2.hubspot.com/raine5600">Open the booking page</a>
+      <a class="fallback" href="https://meetings-na2.hubspot.com/raine5600" data-track="cta:book-a-call">Open the booking page</a>
     </div>
   </section>
 
@@ -1054,15 +1054,15 @@
     <div class="footer-container">
       <div class="footer-section">
         <h4>Omnix</h4>
-        <a href="index.html#functional-website">Products</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="about.html">About</a>
+        <a href="index.html#functional-website" data-track="nav:products">Products</a>
+        <a href="pricing.html" data-track="nav:pricing">Pricing</a>
+        <a href="about.html" data-track="nav:about">About</a>
       </div>
       <div class="footer-section">
         <h4>Support</h4>
         <a href="mailto:contact@omnixgenerational.com">contact@omnixgenerational.com</a>
         <a href="faq.html">Help Center</a>
-        <a href="contact.html">Contact Us</a>
+        <a href="contact.html" data-track="nav:contact">Contact Us</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -1098,5 +1098,6 @@
       if (!document.querySelector('header').contains(e.target)) closeNav();
     });
   </script>
+  <script src="/track.js" defer></script>
 </body>
 </html>

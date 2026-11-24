@@ -1,0 +1,7 @@
+# Local preview helper. Cloudflare's Git connection does not need this file.
+# Do not put a D1 database id here. In the Pages dashboard, bind the
+# database with the variable name DB. That dashboard binding is the one
+# the site uses. An id in this file would override it.
+name = "omnix"
+compatibility_date = "2026-10-01"
+pages_build_output_dir = "."
