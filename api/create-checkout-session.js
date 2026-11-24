@@ -49,7 +49,7 @@ module.exports = async (req, res) => {
             recurring: { interval: 'month' },
             product_data: {
               name: 'Never Miss a Job',
-              description: 'Monthly. Missed-call text-back with after-hours answering, non-gated review requests after every job, an estimate follow-up sequence, and a custom website. Phone, SMS, and AI usage are billed separately at cost. No new paying customer within 30 days of going live? Your first month back. The setup fee and pass-through usage costs are not refundable.',
+              description: 'Monthly. Missed-call text-back with after-hours answering, non-gated review requests after every job, an estimate follow-up sequence, and a custom website. Phone, SMS, and AI usage are billed separately at cost. Covers your first month ($197) if no paying customer tracked through the Omnix system (text-back, booking or follow-up) comes in within 30 days of all your services going live. The setup fee and pass-through usage costs aren\'t refundable.',
             },
           },
         },
