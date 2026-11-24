@@ -1,0 +1,22 @@
+/* Focus rings only. Button color, glow, and motion stay with each page's own CSS. */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+summary:focus-visible {
+  outline: 2px solid #7cc5ff;
+  outline-offset: 3px;
+}
+
+.guarantee a,
+.hero-promise a {
+  color: #7cc5ff;
+  font-weight: 700;
+  text-underline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

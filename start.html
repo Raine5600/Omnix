@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Start | Book a Call or Buy Never Miss a Job | OMNIX</title>
+  <meta name="description" content="Book a call or buy Never Miss a Job for service businesses and small businesses anywhere in the US. $500 setup and $197 a month.">
+  <link rel="canonical" href="https://omnixgenerational.com/start">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="OMNIX">
+  <meta property="og:title" content="Start | Book a Call or Buy Never Miss a Job | OMNIX">
+  <meta property="og:description" content="Book a call or buy Never Miss a Job. $500 setup and $197 a month, for service businesses and small businesses anywhere in the US.">
+  <meta property="og:url" content="https://omnixgenerational.com/start">
+  <meta property="og:image" content="https://omnixgenerational.com/favicon-512.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Start | Book a Call or Buy Never Miss a Job | OMNIX">
+  <meta name="twitter:description" content="Book a call or buy Never Miss a Job. $500 setup and $197 a month, for service businesses and small businesses anywhere in the US.">
+  <meta name="twitter:image" content="https://omnixgenerational.com/favicon-512.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png">
+  <link rel="apple-touch-icon" href="/favicon-512.png">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-primary: #7cc5ff;
+      --color-primary-dark: #4d9fff;
+      --color-secondary: #c07aff;
+      --color-gradient: linear-gradient(135deg, #7cc5ff, #c07aff);
+      --color-dark: #0d0d1e;
+      --color-dark-light: #161630;
+      --color-white: #ffffff;
+      --color-text: #dde0f0;
+      --color-text-muted: #b0b8e0;
+      --color-border: #2a2a50;
+      --font-heading: 'Montserrat', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      line-height: 1.6;
+      background: var(--color-dark);
+      overflow-x: hidden;
+    }
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--color-dark);
+      padding: 0 2rem 6px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo a { display: flex; align-items: center; text-decoration: none; }
+    .logo img.logo-icon { height: 70px; width: auto; display: block; padding: 5px 0; }
+    .logo img.logo-name { height: 28px; width: auto; display: block; margin-left: 4px; }
+    .logo-planet-wrap { position: relative; display: inline-flex; align-items: center; }
+    nav { display: flex; gap: 2rem; align-items: center; }
+    nav a { color: var(--color-white); text-decoration: none; font-size: 0.95rem; }
+    nav a:hover { color: var(--color-primary); }
+    .dropdown { position: relative; }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--color-dark-light);
+      border-radius: 8px;
+      min-width: 220px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      padding-top: 0.5rem;
+      overflow: hidden;
+    }
+    .dropdown:hover .dropdown-menu, .dropdown:focus-within .dropdown-menu { display: block; }
+    .dropdown-menu a { display: block; padding: 0.75rem 1.5rem; }
+    .dropdown-menu a:hover { background: var(--color-primary); color: #0d0d1e; }
+    .cta-button {
+      background: var(--color-gradient);
+      color: #0d0d1e;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-family: var(--font-body);
+    }
+    @keyframes btn-glow-pulse {
+      0%   { box-shadow: 0 0 10px 3px rgba(124,197,255,0.7), 0 0 30px 8px rgba(192,122,255,0.2); }
+      50%  { box-shadow: 0 0 18px 6px rgba(192,122,255,0.7), 0 0 40px 12px rgba(124,197,255,0.35); }
+      100% { box-shadow: 0 0 10px 3px rgba(124,197,255,0.7), 0 0 30px 8px rgba(192,122,255,0.2); }
+    }
+    .cta-button:hover { transform: translateY(-2px); animation: btn-glow-pulse 1.4s ease-in-out infinite; color: #0d0d1e; }
+    .cta-button:disabled { opacity: 0.6; cursor: wait; transform: none; }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+    }
+    .hamburger span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; }
+    .intro {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 1.25rem;
+      text-align: center;
+    }
+    .intro h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      color: var(--color-white);
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+    .intro p { color: var(--color-text-muted); }
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr);
+      max-width: 1180px;
+      margin: 0 auto 1rem;
+      align-items: stretch;
+    }
+    .pane { padding: 1.25rem 1.5rem 2rem; min-width: 0; }
+    .pane h2 {
+      font-family: var(--font-heading);
+      font-size: 1.45rem;
+      color: var(--color-white);
+      margin-bottom: 0.4rem;
+    }
+    .pane .lede { color: var(--color-text-muted); margin-bottom: 1rem; font-size: 0.95rem; }
+    .divider {
+      background: linear-gradient(180deg, transparent, #7cc5ff 20%, #c07aff 80%, transparent);
+    }
+    .carousel { outline: none; }
+    .carousel-viewport { overflow: hidden; touch-action: pan-y; padding: 8px 0 16px; }
+    .carousel-track { display: flex; align-items: stretch; }
+    .pkg-slide {
+      flex: 0 0 100%;
+      min-width: 100%;
+      box-sizing: border-box;
+      padding: 0 14px;
+      display: flex;
+    }
+    .pkg-card {
+      width: 100%;
+      min-width: 0;
+      background: #161630;
+      border: 1px solid rgba(124, 197, 255, 0.4);
+      border-radius: 16px;
+      padding: 1.25rem 1.2rem 1.15rem;
+      box-shadow: 0 0 32px rgba(124, 197, 255, 0.16), 0 0 56px rgba(192, 122, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+    }
+    @media (min-width: 1000px) {
+      .pkg-slide {
+        flex: 0 0 calc(100% - 56px);
+        min-width: calc(100% - 56px);
+        padding: 0 8px;
+      }
+    }
+    .pkg-card .price {
+      background: var(--color-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .pkg-card .cta-button { width: 100%; margin-top: 0.85rem; text-align: center; }
+    .pkg-kicker {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      align-items: center;
+      margin-bottom: 0.55rem;
+      min-height: 1.6rem;
+    }
+    .flag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      padding: 0.2rem 0.55rem;
+    }
+    .flag-proposed { background: #3a2a12; color: #ffd27a; border: 1px solid #ffd27a; }
+    .flag-rec { background: rgba(124, 197, 255, 0.15); color: #7cc5ff; border: 1px solid #7cc5ff; }
+    .pkg-card h3 {
+      font-family: var(--font-heading);
+      color: #fff;
+      font-size: 1.35rem;
+      margin-bottom: 0.35rem;
+    }
+    .price { color: #fff; font-size: 1.85rem; font-weight: 800; font-family: var(--font-heading); line-height: 1.1; }
+    .price span { font-size: 0.95rem; font-weight: 600; color: var(--color-text-muted); }
+    .price-sub { color: var(--color-text); margin: 0.15rem 0 0.7rem; }
+    .pkg-card ul { margin: 0.4rem 0 0.8rem 1.1rem; }
+    .pkg-card li { margin: 0.28rem 0; }
+    .fine, .proposed-note { color: var(--color-text-muted); font-size: 0.78rem; line-height: 1.4; margin: 0.15rem 0 0.7rem; }
+    .guarantee { margin-top: 0.45rem; color: #fff; font-weight: 700; }
+    .carousel-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 0.9rem;
+    }
+    .carousel-controls button.arrow {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--color-border);
+      background: var(--color-dark-light);
+      color: #fff;
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+    .carousel-controls button.arrow:hover { border-color: var(--color-primary); }
+    #pkg-pause {
+      height: 44px;
+      padding: 0 0.9rem;
+      border-radius: 999px;
+      border: 1px solid var(--color-border);
+      background: var(--color-dark-light);
+      color: #fff;
+      cursor: pointer;
+      font: inherit;
+    }
+    .dots { display: flex; gap: 0.45rem; }
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 0;
+      background: #3a3a62;
+      cursor: pointer;
+      padding: 0;
+    }
+    .dot[aria-selected="true"] { background: var(--color-primary); }
+    .buy-action { margin-top: 1rem; width: 100%; }
+    #pkg-status { min-height: 1.4rem; margin: 0.35rem 0 0.7rem; color: var(--color-text-muted); font-size: 0.92rem; }
+    #checkout-error { min-height: 1.2rem; margin: 0.45rem 0 0.2rem; color: #ffd27a; font-size: 0.92rem; }
+    .guide-slot { text-align: center; padding: 0.5rem 1rem 2.5rem; color: var(--color-text-muted); font-size: 0.9rem; }
+    footer { border-top: 1px solid var(--color-border); padding: 2rem 1.5rem 1.5rem; }
+    .footer-container {
+      max-width: 1100px;
+      margin: 0 auto 1.25rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .footer-section h4 { font-family: var(--font-heading); margin-bottom: 0.4rem; color: #fff; }
+    .footer-section a { display: block; color: var(--color-text-muted); text-decoration: none; margin: 0.25rem 0; }
+    .footer-section a:hover { color: var(--color-primary); }
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+    }
+    .footer-bottom a { color: var(--color-text-muted); }
+    @media (max-width: 860px) {
+      .split { grid-template-columns: 1fr; }
+      .book, .divider, .buy { grid-column: 1; }
+      .buy { order: 1; }
+      .divider { order: 2; height: 1px; margin: 0 1.5rem; background: linear-gradient(90deg, transparent, #7cc5ff, #c07aff, transparent); }
+      .book { order: 3; }
+      .meetings-iframe-container { min-height: 720px; }
+    }
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      header { padding: 0 1rem 6px; }
+      nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--color-dark);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        padding: 0.5rem 0 1rem;
+        border-top: 1px solid var(--color-border);
+      }
+      nav.open { display: flex; }
+      nav a { width: 100%; padding: 0.85rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+      nav a.cta-button { width: calc(100% - 3rem); margin: 0.75rem 1.5rem 0; text-align: center; }
+      .dropdown { width: 100%; }
+      .dropdown-menu { position: static; display: none; box-shadow: none; background: rgba(255,255,255,0.04); }
+      .dropdown.open .dropdown-menu, .dropdown:hover .dropdown-menu { display: block; }
+      .footer-container, .footer-bottom { grid-template-columns: 1fr; display: grid; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .carousel-track { transition: none !important; }
+      .cta-button:hover { transform: none; }
+    }
+  </style>
+  <link rel="stylesheet" href="/booking.css">
+  <link rel="stylesheet" href="/motion.css">
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <a href="/">
+          <div class="logo-planet-wrap">
+            <img src="/Omnix-logo-only.png" alt="" class="logo-icon">
+          </div>
+          <img src="/Omnix-name-only.png" alt="Omnix" class="logo-name">
+        </a>
+      </div>
+      <button class="hamburger" id="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="main-nav" onclick="toggleNav()">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="main-nav">
+        <div class="dropdown" id="products-dropdown">
+          <a href="/#functional-website" onclick="toggleDropdown(event, 'products-dropdown')">Products</a>
+          <div class="dropdown-menu">
+            <a href="/#functional-website" onclick="closeNav()">Custom Built Website</a>
+            <a href="/#review-funnel" onclick="closeNav()">Review Requests</a>
+            <a href="/#missed-calls" onclick="closeNav()">Turn Missed Calls Into Customers</a>
+            <a href="/#marketing" onclick="closeNav()">One-Click Marketing</a>
+            <a href="/#local-seo" onclick="closeNav()">Local SEO</a>
+          </div>
+        </div>
+        <a href="/pricing">Pricing</a>
+        <a href="/about">About</a>
+        <a href="/contact" class="cta-button">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <h1>Book a call or buy a system.</h1>
+      <p>For service businesses and small businesses anywhere in the US. Omnix sets it up and runs it.</p>
+    </section>
+
+    <div class="split">
+      <section class="pane book" id="book" aria-labelledby="book-heading">
+        <div class="book-card">
+          <h2 id="book-heading">Book your free kickoff call</h2>
+          <p class="lede">Pick a weekday, 9–5 ET. We use the call to start setup. If you would rather buy, the packages are beside this.</p>
+          <div class="meetings-frame">
+            <div class="meetings-iframe-container" data-src="https://meetings-na2.hubspot.com/raine5600?embed=true"></div>
+          </div>
+          <a class="fallback" href="https://meetings-na2.hubspot.com/raine5600">Open the booking page</a>
+        </div>
+      </section>
+
+      <div class="divider" role="separator" aria-orientation="vertical"></div>
+
+      <section class="pane buy" aria-labelledby="buy-heading">
+        <h2 id="buy-heading">Buy a system</h2>
+        <p class="lede">Pick a package to get started, or book a call first.</p>
+        <p id="pkg-status" class="visually-hidden">Selected: Never Miss a Job. $500 setup and $197 a month.</p>
+        <p class="visually-hidden" id="carousel-help">Use previous and next, the dots, or the left and right arrow keys. The packages loop. Autoplay pauses while you hover or focus the carousel.</p>
+
+        <div class="carousel" id="pkg-carousel" role="region" aria-roledescription="carousel" aria-label="Packages" tabindex="0" aria-describedby="carousel-help">
+          <div class="carousel-viewport" id="pkg-viewport">
+            <div class="carousel-track" id="pkg-track">
+
+              <div class="pkg-slide"><article class="pkg-card" data-clone="custom-ai" aria-hidden="true">
+                <h3>Custom AI</h3>
+                <p class="fine">No price on this page.</p>
+                <p>AI integration into your business, such as custom programs, CRMs, or AI across the work you already do, so those processes take fewer steps.</p>
+                <button type="button" class="cta-button" data-action="book">Book a call about Custom AI</button>
+              </article></div>
+
+              <div class="pkg-slide"><article class="pkg-card" id="pkg-card-0" data-real="0" aria-labelledby="pkg-title-0">
+                <h3 id="pkg-title-0">Answer the Call</h3>
+                <p class="price">$350 <span>setup</span></p>
+                <p class="price-sub">+ $97/month</p>
+                <p class="guarantee"><a href="/terms#guarantee">30-day money-back guarantee</a></p>
+                <p class="fine">Phone, SMS, and AI usage are passed through at cost, on top of this price.</p>
+                <ul>
+                  <li>Missed-call text-back with after-hours answering</li>
+                  <li>Custom-designed website</li>
+                  <li>Short kickoff call</li>
+                  <li>Live within 7 days of purchase</li>
+                </ul>
+                <button type="button" class="cta-button" data-action="answer-the-call">Buy Answer the Call</button>
+              </article></div>
+
+              <div class="pkg-slide"><article class="pkg-card" id="pkg-card-1" data-real="1" aria-labelledby="pkg-title-1">
+                <div class="pkg-kicker">
+                  <span class="flag flag-rec">Recommended</span>
+                </div>
+                <h3 id="pkg-title-1">Never Miss a Job</h3>
+                <p class="price">$500 <span>setup</span></p>
+                <p class="price-sub">+ $197/month</p>
+                <ul>
+                  <li>Missed-call text-back with after-hours answering</li>
+                  <li>Non-gated review requests after every job</li>
+                  <li>Estimate follow-up sequence</li>
+                  <li>Custom-designed website</li>
+                  <li>Set up and run by Omnix</li>
+                  <li>Live within 7 days of purchase</li>
+                  <li>Starts with a short kickoff call</li>
+                </ul>
+                <p class="fine">Phone, SMS, and AI usage are passed through at cost, on top of this price.</p>
+                <p class="guarantee"><a href="/terms#guarantee">30-day money-back guarantee</a></p>
+                <button type="button" class="cta-button" data-action="never-miss-a-job">Buy Never Miss a Job</button>
+              </article></div>
+
+              <!-- Custom AI has no price and must not create a Stripe charge. -->
+              <div class="pkg-slide"><article class="pkg-card" id="pkg-card-2" data-real="2" aria-labelledby="pkg-title-2">
+                <h3 id="pkg-title-2">Custom AI</h3>
+                <p class="fine">No price on this page.</p>
+                <p>AI integration into your business, such as custom programs, CRMs, or AI across the work you already do, so those processes take fewer steps.</p>
+                <button type="button" class="cta-button" data-action="book">Book a call about Custom AI</button>
+              </article></div>
+
+              <div class="pkg-slide"><article class="pkg-card" data-clone="answer-the-call" aria-hidden="true">
+                <h3>Answer the Call</h3>
+                <p class="price">$350 <span>setup</span></p>
+                <p class="price-sub">+ $97/month</p>
+                <p class="guarantee"><a href="/terms#guarantee">30-day money-back guarantee</a></p>
+                <p class="fine">Phone, SMS, and AI usage are passed through at cost, on top of this price.</p>
+                <ul>
+                  <li>Missed-call text-back with after-hours answering</li>
+                  <li>Custom-designed website</li>
+                  <li>Short kickoff call</li>
+                  <li>Live within 7 days of purchase</li>
+                </ul>
+                <button type="button" class="cta-button" data-action="answer-the-call">Buy Answer the Call</button>
+              </article></div>
+
+            </div>
+          </div>
+
+          <div class="carousel-controls">
+            <button type="button" class="arrow" id="pkg-prev" aria-label="Previous package">‹</button>
+            <div class="dots" role="tablist" aria-label="Packages">
+              <button type="button" class="dot" role="tab" id="pkg-tab-0" aria-controls="pkg-card-0" aria-selected="false"><span class="visually-hidden">Answer the Call, $350 setup and $97 a month</span></button>
+              <button type="button" class="dot" role="tab" id="pkg-tab-1" aria-controls="pkg-card-1" aria-selected="true"><span class="visually-hidden">Never Miss a Job, recommended, $500 setup and $197 a month</span></button>
+              <button type="button" class="dot" role="tab" id="pkg-tab-2" aria-controls="pkg-card-2" aria-selected="false"><span class="visually-hidden">Custom AI, book a call, no price on this page</span></button>
+            </div>
+            <button type="button" class="arrow" id="pkg-next" aria-label="Next package">›</button>
+            <button type="button" id="pkg-pause" aria-pressed="false">Pause</button>
+          </div>
+        </div>
+
+        <p id="checkout-error" role="alert"></p>
+        <p id="pkg-live" class="visually-hidden" aria-live="polite"></p>
+      </section>
+    </div>
+
+    <!--
+      TODO(Big Chicken): The free guide is not on the site yet. When
+      /blog/3-leaks-costing-indy-trades-jobs is published, uncomment this link.
+      Do not invent the post here.
+      <p class="guide-slot"><a href="/blog/3-leaks-costing-indy-trades-jobs">Free guide: 3 leaks costing Indy trades jobs</a></p>
+    -->
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h4>Omnix</h4>
+        <a href="/#functional-website">Products</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/about">About</a>
+      </div>
+      <div class="footer-section">
+        <h4>Support</h4>
+        <a href="mailto:contact@omnixgenerational.com">contact@omnixgenerational.com</a>
+        <a href="/faq">Help Center</a>
+        <a href="/contact">Contact Us</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Omnix. All rights reserved.</p>
+      <div>
+        <a href="/terms">Terms &amp; Conditions</a> ·
+        <a href="/privacy">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js"></script>
+  <script src="/checkout.js"></script>
+  <script src="/motion.js"></script>
+  <script>
+    function toggleNav() {
+      var nav = document.getElementById('main-nav');
+      var btn = document.getElementById('hamburger');
+      var open = nav.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    function closeNav() {
+      document.getElementById('main-nav').classList.remove('open');
+      var btn = document.getElementById('hamburger');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+    function toggleDropdown(e, id) {
+      if (window.innerWidth <= 768) {
+        e.preventDefault();
+        document.getElementById(id).classList.toggle('open');
+      }
+    }
+    document.addEventListener('click', function (e) {
+      var header = document.querySelector('header');
+      if (!header.contains(e.target)) closeNav();
+    });
+
+    (function () {
+      // Track order: [clone Custom AI, Answer the Call, Never Miss a Job, Custom AI, clone Answer the Call]
+      // Index 2 is Never Miss a Job. Moving onto a clone animates there, then snaps with no transition
+      // onto the matching real slide so the loop does not rewind.
+      var index = 2;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var track = document.getElementById('pkg-track');
+      var viewport = document.getElementById('pkg-viewport');
+      var live = document.getElementById('pkg-live');
+      var status = document.getElementById('pkg-status');
+      var pauseBtn = document.getElementById('pkg-pause');
+      var labels = [
+        'Selected: Answer the Call. $350 setup and $97 a month.',
+        'Selected: Never Miss a Job. $500 setup and $197 a month.',
+        'Selected: Custom AI. No price on this page. This opens the booking calendar.'
+      ];
+      var paused = reduce;
+      var timer = null;
+      var dragging = false;
+      var dragMoved = false;
+      var startX = 0;
+      var startIndex = 2;
+
+      function realFrom(i) {
+        if (i <= 0) return 2;
+        if (i >= 4) return 0;
+        return i - 1;
+      }
+
+      function metrics() {
+        var slide = track.children[0].getBoundingClientRect().width;
+        var view = viewport.getBoundingClientRect().width;
+        return { slide: slide, pad: (view - slide) / 2 };
+      }
+
+      function paint(animate) {
+        var m = metrics();
+        track.style.transition = animate && !reduce ? 'transform 0.45s ease' : 'none';
+        track.style.transform = 'translate3d(' + (m.pad - index * m.slide) + 'px,0,0)';
+      }
+
+      function updateChrome() {
+        var real = realFrom(index);
+        status.textContent = labels[real];
+        live.textContent = labels[real];
+        document.querySelectorAll('[data-real]').forEach(function (card) {
+          var on = Number(card.getAttribute('data-real')) === real && index > 0 && index < 4;
+          card.setAttribute('aria-hidden', on ? 'false' : 'true');
+        });
+        document.querySelectorAll('.dot').forEach(function (dot, i) {
+          var on = i === real;
+          dot.setAttribute('aria-selected', on ? 'true' : 'false');
+          dot.tabIndex = on ? 0 : -1;
+        });
+      }
+
+      function go(delta) {
+        index += delta;
+        paint(true);
+        updateChrome();
+      }
+
+      function jumpIfClone() {
+        if (index === 0) {
+          index = 3;
+          paint(false);
+        } else if (index === 4) {
+          index = 1;
+          paint(false);
+        }
+        updateChrome();
+      }
+
+      track.addEventListener('transitionend', function (e) {
+        if (e.target !== track || e.propertyName !== 'transform') return;
+        jumpIfClone();
+      });
+
+      document.getElementById('pkg-prev').addEventListener('click', function () { go(-1); });
+      document.getElementById('pkg-next').addEventListener('click', function () { go(1); });
+      document.querySelectorAll('.dot').forEach(function (dot, i) {
+        dot.addEventListener('click', function () {
+          index = i + 1;
+          paint(true);
+          updateChrome();
+        });
+      });
+
+      var carousel = document.getElementById('pkg-carousel');
+      carousel.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+      });
+
+      function bookCall() {
+        document.getElementById('book').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+        var link = document.querySelector('.book .fallback');
+        if (link) link.focus();
+      }
+
+      track.addEventListener('click', function (e) {
+        if (dragMoved) {
+          dragMoved = false;
+          e.preventDefault();
+          e.stopPropagation();
+          return;
+        }
+        var btn = e.target.closest('[data-action]');
+        if (!btn) return;
+        var action = btn.getAttribute('data-action');
+        if (action === 'book') {
+          bookCall();
+          return;
+        }
+        startPackageCheckout(btn, btn.textContent, action);
+      });
+
+      viewport.addEventListener('pointerdown', function (e) {
+        if (e.target.closest('button, a')) return;
+        dragging = true;
+        dragMoved = false;
+        startX = e.clientX;
+        startIndex = index;
+        track.style.transition = 'none';
+        viewport.setPointerCapture(e.pointerId);
+      });
+      viewport.addEventListener('pointermove', function (e) {
+        if (!dragging) return;
+        var dx = e.clientX - startX;
+        if (Math.abs(dx) > 8) dragMoved = true;
+        var m = metrics();
+        track.style.transform = 'translate3d(' + (m.pad - startIndex * m.slide + dx) + 'px,0,0)';
+      });
+      function endDrag(e) {
+        if (!dragging) return;
+        dragging = false;
+        var dx = e.clientX - startX;
+        if (Math.abs(dx) > 48) go(dx < 0 ? 1 : -1);
+        else paint(true);
+      }
+      viewport.addEventListener('pointerup', endDrag);
+      viewport.addEventListener('pointercancel', endDrag);
+
+      function stopAutoplay() {
+        if (timer) clearInterval(timer);
+        timer = null;
+      }
+      function startAutoplay() {
+        if (paused || reduce) return;
+        stopAutoplay();
+        timer = setInterval(function () { if (!dragging) go(1); }, 5000);
+      }
+      pauseBtn.addEventListener('click', function () {
+        paused = !paused;
+        pauseBtn.textContent = paused ? 'Play' : 'Pause';
+        pauseBtn.setAttribute('aria-pressed', paused ? 'true' : 'false');
+        if (paused) stopAutoplay();
+        else startAutoplay();
+      });
+      carousel.addEventListener('mouseenter', stopAutoplay);
+      carousel.addEventListener('mouseleave', startAutoplay);
+      carousel.addEventListener('focusin', stopAutoplay);
+      carousel.addEventListener('focusout', function (e) {
+        if (!carousel.contains(e.relatedTarget)) startAutoplay();
+      });
+
+      paint(false);
+      updateChrome();
+      window.addEventListener('resize', function () { paint(false); });
+      if (paused) {
+        pauseBtn.textContent = 'Play';
+        pauseBtn.setAttribute('aria-pressed', 'true');
+      } else {
+        startAutoplay();
+      }
+    })();
+  </script>
+</body>
+</html>
