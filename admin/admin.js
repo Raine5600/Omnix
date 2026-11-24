@@ -151,11 +151,24 @@
       label.textContent = String(Math.round((max / 3) * g));
       svg.appendChild(label);
     }
-    times.forEach(function (ts, i) {
-      if (n > 8 && i % 2 && i !== n - 1) return;
+    var plotWidth = width - pad.l - pad.r;
+    var maxLabels = Math.max(2, Math.floor(plotWidth / 58));
+    var indexes = [];
+    if (n <= maxLabels) {
+      for (var li = 0; li < n; li += 1) indexes.push(li);
+    } else {
+      var gaps = maxLabels - 1;
+      indexes.push(0);
+      for (var g = 1; g < gaps; g += 1) indexes.push(Math.round((g * (n - 1)) / gaps));
+      indexes.push(n - 1);
+    }
+    var seen = {};
+    indexes.forEach(function (i) {
+      if (seen[i]) return;
+      seen[i] = true;
       var anchor = i === 0 ? "start" : i === n - 1 ? "end" : "middle";
       var tick = svgEl("text", { x: xAt(i), y: height - 8, fill: "#b0b8e0", "font-size": "11", "text-anchor": anchor });
-      tick.textContent = tickLabel(ts);
+      tick.textContent = tickLabel(times[i]);
       svg.appendChild(tick);
     });
 

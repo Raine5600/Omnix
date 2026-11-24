@@ -49,9 +49,23 @@ await check("demo works on localhost and preview hosts only", () => {
 });
 
 await check("sample chart is labeled and has points", () => {
-  const week = sampleAnalytics("week", 1_700_000_000);
+  const stamp = 1_700_000_000;
+  const week = sampleAnalytics("week", stamp);
   assert.equal(week.sample, true);
   assert.equal(week.series.t.length, 7);
+  for (let i = 1; i < week.series.t.length; i += 1) {
+    assert.equal(week.series.t[i] - week.series.t[i - 1], 86400);
+  }
+  const month = sampleAnalytics("month", stamp);
+  assert.equal(month.series.t.length, 30);
+  for (let i = 1; i < month.series.t.length; i += 1) {
+    assert.equal(month.series.t[i] - month.series.t[i - 1], 86400);
+  }
+  const day = sampleAnalytics("day", stamp);
+  assert.equal(day.series.t.length, 24);
+  for (let i = 1; i < day.series.t.length; i += 1) {
+    assert.equal(day.series.t[i] - day.series.t[i - 1], 3600);
+  }
   assert.ok(week.totals.pageviews > 0);
 });
 

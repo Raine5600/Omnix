@@ -96,37 +96,41 @@ UPDATE auto_approve_settings SET enabled = 0;
 
 INSERT INTO clients (name, email, go_live_date, first_tracked_customer_at, created_at) VALUES
   ('Summit Air HVAC', 'summit@example.com', date('now', '-10 days'), NULL, strftime('%s','now')),
-  ('Riverbend Plumbing', 'river@example.com', date('now', '-45 days'), datetime('now', '-2 days'), strftime('%s','now')),
-  ('Eastside Electric', 'east@example.com', date('now', '-40 days'), NULL, strftime('%s','now')),
-  ('Northwind Roofing', 'north@example.com', NULL, NULL, strftime('%s','now'));
+  ('Lumen Hair Studio', 'lumen@example.com', date('now', '-45 days'), datetime('now', '-2 days'), strftime('%s','now')),
+  ('Harbor Auto Repair', 'harbor@example.com', date('now', '-40 days'), NULL, strftime('%s','now')),
+  ('Brightside Dental', 'brightside@example.com', NULL, NULL, strftime('%s','now'));
 
-INSERT INTO refund_requests (client_id, client_name, amount_cents, status, source, created_at)
-SELECT id, name, 19700, 'pending', 'demo', strftime('%s','now') FROM clients;
+INSERT INTO refund_requests (client_id, client_name, package_id, amount_cents, status, source, created_at)
+SELECT id, name, 'never-miss-a-job', 19700, 'pending', 'demo', strftime('%s','now') FROM clients WHERE name IN ('Summit Air HVAC', 'Lumen Hair Studio');
+INSERT INTO refund_requests (client_id, client_name, package_id, amount_cents, status, source, created_at)
+SELECT id, name, 'answer-the-call', 9700, 'pending', 'demo', strftime('%s','now') FROM clients WHERE name = 'Harbor Auto Repair';
+INSERT INTO refund_requests (client_id, client_name, package_id, amount_cents, status, source, created_at)
+SELECT id, name, 'custom-ai', NULL, 'pending', 'demo', strftime('%s','now') FROM clients WHERE name = 'Brightside Dental';
 
 INSERT INTO change_requests (client_id, client_name, request_text, suggestion, preview_url, status, created_at)
 SELECT id, name, 'Please show emergency hours on the homepage.', 'Add a line under the phone number: Emergency service, 24 hours.', 'https://example.com/preview/summit-hours', 'pending', strftime('%s','now')
 FROM clients WHERE name = 'Summit Air HVAC';
 
 INSERT INTO change_requests (client_id, client_name, request_text, suggestion, preview_url, status, created_at)
-SELECT id, name, 'Swap the hero photo for the truck photo.', 'Replace the hero image with the truck in the driveway.', 'https://example.com/preview/eastside-hero', 'pending', strftime('%s','now')
-FROM clients WHERE name = 'Eastside Electric';
+SELECT id, name, 'Swap the hero photo for the shop-bay photo.', 'Use the photo of the service bay with the bay doors open.', 'https://example.com/preview/harbor-bay', 'pending', strftime('%s','now')
+FROM clients WHERE name = 'Harbor Auto Repair';
 
 INSERT INTO intake_submissions (created_at, name, business_name, phone, email, payload_json, hubspot_status) VALUES
-  (strftime('%s','now') - 86400, 'Alicia Gomez', 'Summit Air HVAC', '3175550142', 'alicia@example.com', '{"services":"AC repair and install"}', 'demo'),
-  (strftime('%s','now') - 3600, 'Chris Patel', 'Riverbend Plumbing', '3175550199', 'chris@example.com', '{"services":"Drain cleaning"}', 'demo');
+  (strftime('%s','now') - 86400, 'Alicia Gomez', 'Lumen Hair Studio', '3175550142', 'alicia@example.com', '{"services":"Cuts, color, and blowouts"}', 'demo'),
+  (strftime('%s','now') - 3600, 'Dana Brooks', 'Maple and Co Cleaning', '3175550166', 'dana@example.com', '{"services":"Weekly office and home cleaning"}', 'demo');
 
 INSERT INTO hubspot_contacts (id, email, name, phone, company, updated_at, synced_at) VALUES
-  ('demo-contact-1', 'alicia@example.com', 'Alicia Gomez', '3175550142', 'Summit Air HVAC', strftime('%s','now'), strftime('%s','now')),
-  ('demo-contact-2', 'chris@example.com', 'Chris Patel', '3175550199', 'Riverbend Plumbing', strftime('%s','now'), strftime('%s','now')),
-  ('demo-contact-3', 'jamie@example.com', 'Jamie Cole', '3175550110', 'Northwind Roofing', strftime('%s','now'), strftime('%s','now'));
+  ('demo-contact-1', 'alicia@example.com', 'Alicia Gomez', '3175550142', 'Lumen Hair Studio', strftime('%s','now'), strftime('%s','now')),
+  ('demo-contact-2', 'chris@example.com', 'Chris Patel', '3175550199', 'Harbor Auto Repair', strftime('%s','now'), strftime('%s','now')),
+  ('demo-contact-3', 'jamie@example.com', 'Jamie Cole', '3175550110', 'Brightside Dental', strftime('%s','now'), strftime('%s','now'));
 
 INSERT INTO hubspot_form_submissions (id, form_id, form_name, submitted_at, email, summary, synced_at) VALUES
-  ('demo-form-1', 'demo', 'Contact form', strftime('%s','now') - 7200, 'jamie@example.com', 'email: jamie@example.com · message: Need a website', strftime('%s','now')),
-  ('demo-form-2', 'demo', 'Contact form', strftime('%s','now') - 18000, 'pat@example.com', 'email: pat@example.com · message: Book a call', strftime('%s','now'));
+  ('demo-form-1', 'demo', 'Contact form', strftime('%s','now') - 7200, 'jamie@example.com', 'email: jamie@example.com · message: Need a site for the clinic', strftime('%s','now')),
+  ('demo-form-2', 'demo', 'Contact form', strftime('%s','now') - 18000, 'dana@example.com', 'email: dana@example.com · message: Book a call about cleaning routes', strftime('%s','now'));
 
 INSERT INTO chat_messages (created_at, client_id, role, body)
-SELECT strftime('%s','now'), id, 'user', 'Demo only: can you move the phone number into the header?'
-FROM clients WHERE name = 'Summit Air HVAC';
+SELECT strftime('%s','now'), id, 'user', 'Demo only: can we add online booking to the homepage?'
+FROM clients WHERE name = 'Lumen Hair Studio';
 
 ${viewSql}
 ${clickSql}
