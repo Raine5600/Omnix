@@ -2,7 +2,14 @@
   "name": "omnix",
   "version": "1.0.0",
   "private": true,
+  "scripts": {
+    "pages:dev": "wrangler pages dev . --d1 DB=omnix --port 8788",
+    "test": "node scripts/test-unit.mjs"
+  },
   "dependencies": {
     "stripe": "^14.21.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.50.0"
   }
 }

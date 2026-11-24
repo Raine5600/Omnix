@@ -161,7 +161,7 @@
     
     <div class="header-container">
       <div class="logo">
-        <a href="index.html">
+        <a href="index.html" data-track="nav:home">
           <div class="logo-planet-wrap"><img src="Omnix-logo-only.png" alt="" class="logo-icon"><span class="ray-star rs1">✦</span><span class="ray-star rs2">✦</span><span class="ray-star rs3">✦</span><span class="ray-star rs4">✦</span><span class="ray-star rs5">✦</span><span class="ray-star rs6">✦</span></div>
           <img src="Omnix-name-only.png" alt="Omnix" class="logo-name">
         </a>
@@ -171,18 +171,18 @@
       </button>
       <nav id="main-nav">
         <div class="dropdown" id="products-dropdown">
-          <a href="index.html#functional-website" onclick="toggleDropdown(event, 'products-dropdown')">Products</a>
+          <a href="index.html#functional-website" onclick="toggleDropdown(event, 'products-dropdown')" data-track="nav:products">Products</a>
           <div class="dropdown-menu">
-            <a href="index.html#functional-website">Custom Built Website</a>
-            <a href="index.html#review-funnel">Review Requests</a>
-            <a href="index.html#missed-calls">Turn Missed Calls Into Customers</a>
-            <a href="index.html#marketing">One-Click Marketing</a>
-            <a href="index.html#local-seo">Local SEO</a>
+            <a href="index.html#functional-website" data-track="nav:product-website">Custom Built Website</a>
+            <a href="index.html#review-funnel" data-track="nav:product-reviews">Review Requests</a>
+            <a href="index.html#missed-calls" data-track="nav:product-missed-calls">Turn Missed Calls Into Customers</a>
+            <a href="index.html#marketing" data-track="nav:product-marketing">One-Click Marketing</a>
+            <a href="index.html#local-seo" data-track="nav:product-seo">Local SEO</a>
           </div>
         </div>
-        <a href="pricing.html">Pricing</a>
-        <a href="about.html">About</a>
-        <a href="contact.html" class="cta-button">Contact Us</a>
+        <a href="pricing.html" data-track="nav:pricing">Pricing</a>
+        <a href="about.html" data-track="nav:about">About</a>
+        <a href="contact.html" class="cta-button" data-track="nav:contact">Contact Us</a>
       </nav>
     </div>
   </header>
@@ -193,7 +193,7 @@
 </div>
 
 <div class="content-wrap">
-  <span class="last-updated">Last updated: March 2020</span>
+  <span class="last-updated">Last updated: November 24, 2026</span>
 
   <h2>1. Introduction</h2>
   <p>Omnix ("we," "us," or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our Services. By using Omnix, you consent to the practices described in this policy.</p>
@@ -251,9 +251,10 @@
   <p>We use cookies and similar technologies to enhance your experience on our website. Types of cookies we use:</p>
   <ul>
     <li><strong>Essential cookies:</strong> Required for the site to function (e.g., session management)</li>
-    <li><strong>Analytics cookies:</strong> Help us understand how visitors use the site (e.g., Google Analytics)</li>
-    <li><strong>Marketing cookies:</strong> Used to deliver relevant ads and track campaign performance</li>
+    <li><strong>Analytics:</strong> Cookieless first-party page and click counts. No analytics cookie is set.</li>
+    <li><strong>Marketing cookies:</strong> This site does not set marketing cookies or use third-party ad trackers.</li>
   </ul>
+  <p>This site uses cookieless first-party analytics (no cookies, no third-party trackers, no raw IP stored).</p>
   <p>You can control cookie preferences through your browser settings. Disabling certain cookies may affect site functionality.</p>
 
   <h2>8. Data Security</h2>
@@ -317,5 +318,6 @@
   </script>
 
   <script src="/motion.js"></script>
+  <script src="/track.js" defer></script>
 </body>
 </html>

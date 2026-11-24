@@ -1,0 +1,23 @@
+/admin
+  X-Robots-Tag: noindex, nofollow
+  X-Frame-Options: DENY
+  Referrer-Policy: no-referrer
+  Cache-Control: no-store
+
+/admin/*
+  X-Robots-Tag: noindex, nofollow
+  X-Frame-Options: DENY
+  Referrer-Policy: no-referrer
+  Cache-Control: no-store
+
+/api/admin
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store
+
+/api/admin/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store
+
+/api/cron/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store

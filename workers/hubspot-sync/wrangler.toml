@@ -1,0 +1,13 @@
+# Pages cannot run a cron. This separate Worker wakes every 15 minutes and
+# POSTs to the Pages route /api/cron/hubspot.
+# Do not put CRON_SECRET in this file. Set it as a Worker secret.
+# Set SYNC_URL to the real Pages hostname before you deploy this Worker.
+name = "omnix-hubspot-sync"
+main = "index.js"
+compatibility_date = "2026-10-01"
+
+[triggers]
+crons = ["*/15 * * * *"]
+
+[vars]
+SYNC_URL = "https://REPLACE-with-your-pages-hostname/api/cron/hubspot"

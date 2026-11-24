@@ -1,0 +1,10 @@
+# Copy to .dev.vars for local wrangler. Never commit .dev.vars.
+# Make ADMIN_PASSWORD_HASH with node scripts/hash-password.mjs
+# or with the browser page /admin/hash-tool.html.
+# DEMO_MODE=1 is for local and Pages preview only. Do not set it on production.
+ADMIN_EMAIL=raine5600@gmail.com
+ADMIN_PASSWORD_HASH=
+DEMO_MODE=1
+HUBSPOT_TOKEN=
+STRIPE_SECRET_KEY=
+CRON_SECRET=

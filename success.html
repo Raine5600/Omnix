@@ -394,7 +394,7 @@
     
     <div class="header-container">
       <div class="logo">
-        <a href="index.html">
+        <a href="index.html" data-track="nav:home">
           <div class="logo-planet-wrap"><img src="Omnix-logo-only.png" alt="" class="logo-icon"><span class="ray-star rs1">✦</span><span class="ray-star rs2">✦</span><span class="ray-star rs3">✦</span><span class="ray-star rs4">✦</span><span class="ray-star rs5">✦</span><span class="ray-star rs6">✦</span></div>
           <img src="Omnix-name-only.png" alt="Omnix" class="logo-name">
         </a>
@@ -404,18 +404,18 @@
       </button>
       <nav id="main-nav">
         <div class="dropdown" id="products-dropdown">
-          <a href="index.html#functional-website" onclick="toggleDropdown(event, 'products-dropdown')">Products</a>
+          <a href="index.html#functional-website" onclick="toggleDropdown(event, 'products-dropdown')" data-track="nav:products">Products</a>
           <div class="dropdown-menu">
-            <a href="index.html#functional-website">Custom Built Website</a>
-            <a href="index.html#review-funnel">Review Requests</a>
-            <a href="index.html#missed-calls">Turn Missed Calls Into Customers</a>
-            <a href="index.html#marketing">One-Click Marketing</a>
-            <a href="index.html#local-seo">Local SEO</a>
+            <a href="index.html#functional-website" data-track="nav:product-website">Custom Built Website</a>
+            <a href="index.html#review-funnel" data-track="nav:product-reviews">Review Requests</a>
+            <a href="index.html#missed-calls" data-track="nav:product-missed-calls">Turn Missed Calls Into Customers</a>
+            <a href="index.html#marketing" data-track="nav:product-marketing">One-Click Marketing</a>
+            <a href="index.html#local-seo" data-track="nav:product-seo">Local SEO</a>
           </div>
         </div>
-        <a href="pricing.html">Pricing</a>
-        <a href="about.html">About</a>
-        <a href="contact.html" class="cta-button">Contact Us</a>
+        <a href="pricing.html" data-track="nav:pricing">Pricing</a>
+        <a href="about.html" data-track="nav:about">About</a>
+        <a href="contact.html" class="cta-button" data-track="nav:contact">Contact Us</a>
       </nav>
     </div>
   </header>
@@ -428,7 +428,7 @@
     <h1 id="hero-heading">Payment received.</h1>
     <p class="hero-sub" id="hero-sub">Next, send the intake form. The only required pieces are a name or business name, and a phone or email.</p>
     <div class="hero-promise" id="hero-promise">Live within 7 days of purchase. <a href="/terms#guarantee">30-day money-back guarantee</a></div>
-    <a href="/intake" class="cta-button" id="next-step">Finish intake</a>
+    <a href="/intake" class="cta-button" id="next-step" data-track="cta:finish-intake">Finish intake</a>
   </section>
 
   <section class="timeline-section">
@@ -486,15 +486,15 @@
     <div class="footer-container">
       <div class="footer-section">
         <h4>Omnix</h4>
-        <a href="index.html#functional-website">Products</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="about.html">About</a>
+        <a href="index.html#functional-website" data-track="nav:products">Products</a>
+        <a href="pricing.html" data-track="nav:pricing">Pricing</a>
+        <a href="about.html" data-track="nav:about">About</a>
       </div>
       <div class="footer-section">
         <h4>Support</h4>
         <a href="mailto:contact@omnixgenerational.com">contact@omnixgenerational.com</a>
         <a href="faq.html">Help Center</a>
-        <a href="contact.html">Contact Us</a>
+        <a href="contact.html" data-track="nav:contact">Contact Us</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -579,5 +579,6 @@
     });
   </script>
   <script src="/motion.js"></script>
+  <script src="/track.js" defer></script>
 </body>
 </html>
