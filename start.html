@@ -345,7 +345,7 @@
 
       <section class="pane buy" aria-labelledby="buy-heading">
         <h2 id="buy-heading">Buy a system</h2>
-        <p class="lede">Move through the packages. They repeat. Only Never Miss a Job can be purchased. Answer the Call is a proposal. Custom AI is a call, with no price on this page.</p>
+        <p class="lede">Move through the packages. They repeat. Never Miss a Job and Answer the Call can be purchased. Custom AI is a call, with no price on this page.</p>
         <p id="pkg-status">Selected: Never Miss a Job. $500 setup and $197 a month.</p>
         <button type="button" class="cta-button buy-action" id="pkg-action">Buy Never Miss a Job</button>
         <p id="checkout-error" role="alert"></p>
@@ -355,15 +355,10 @@
           <div class="carousel-viewport">
             <div class="carousel-track" id="pkg-track">
 
-              <!-- PROPOSED. Pending Big Chicken's approval. Do not charge this tier. -->
               <article class="pkg-card" id="pkg-card-0" aria-labelledby="pkg-title-0" aria-hidden="true">
-                <div class="pkg-kicker">
-                  <span class="flag flag-proposed">PROPOSED</span>
-                  <span class="flag flag-proposed">Not for sale</span>
-                </div>
                 <h3 id="pkg-title-0">Answer the Call</h3>
                 <p class="price">$350 <span>setup</span></p>
-                <p class="price-sub">+ $97/month, proposed</p>
+                <p class="price-sub">+ $97/month</p>
                 <ul>
                   <li>Missed-call text-back with after-hours answering</li>
                   <li>Custom-designed website</li>
@@ -371,7 +366,7 @@
                   <li>Does not include review requests</li>
                   <li>Does not include estimate follow-up</li>
                 </ul>
-                <p class="proposed-note">Proposed price, pending approval. Choosing this will not charge a card. It opens the booking calendar.</p>
+                <p class="fine">Phone, SMS, and AI usage are passed through at cost, on top of this price.</p>
               </article>
 
               <article class="pkg-card is-selected" id="pkg-card-1" aria-labelledby="pkg-title-1">
@@ -411,7 +406,7 @@
           <div class="carousel-controls">
             <button type="button" class="arrow" id="pkg-prev" aria-label="Previous package">‹</button>
             <div class="dots" role="tablist" aria-label="Packages">
-              <button type="button" class="dot" role="tab" id="pkg-tab-0" aria-controls="pkg-card-0" aria-selected="false"><span class="visually-hidden">Answer the Call, proposed, $350 setup and $97 a month</span></button>
+              <button type="button" class="dot" role="tab" id="pkg-tab-0" aria-controls="pkg-card-0" aria-selected="false"><span class="visually-hidden">Answer the Call, $350 setup and $97 a month</span></button>
               <button type="button" class="dot" role="tab" id="pkg-tab-1" aria-controls="pkg-card-1" aria-selected="true"><span class="visually-hidden">Never Miss a Job, recommended, $500 setup and $197 a month</span></button>
               <button type="button" class="dot" role="tab" id="pkg-tab-2" aria-controls="pkg-card-2" aria-selected="false"><span class="visually-hidden">Custom AI, book a call, no price on this page</span></button>
             </div>
@@ -485,17 +480,15 @@
 
     (function () {
       // Index 1 is Never Miss a Job, selected by default.
-      // TODO(Big Chicken): index 0 (Answer the Call) is PROPOSED. Do not charge it.
       // Index 2 (Custom AI) has no price. Do not charge it. Open the booking calendar.
       var index = 1;
       var total = 3;
+      var productIds = ['answer-the-call', 'never-miss-a-job', ''];
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var track = document.getElementById('pkg-track');
       var live = document.getElementById('pkg-live');
       var action = document.getElementById('pkg-action');
       var status = document.getElementById('pkg-status');
-      var names = ['Answer the Call', 'Never Miss a Job', 'Custom AI'];
-
       track.style.transition = reduce ? 'none' : 'transform 0.35s ease';
 
       function render() {
@@ -512,12 +505,12 @@
         if (index === 1) {
           action.textContent = 'Buy Never Miss a Job';
           status.textContent = 'Selected: Never Miss a Job. $500 setup and $197 a month.';
-        } else if (index === 2) {
+        } else if (index === 0) {
+          action.textContent = 'Buy Answer the Call';
+          status.textContent = 'Selected: Answer the Call. $350 setup and $97 a month.';
+        } else {
           action.textContent = 'Book a call';
           status.textContent = 'Selected: Custom AI. No price on this page. This opens the booking calendar.';
-        } else {
-          action.textContent = 'Book a call about this proposed package';
-          status.textContent = 'Selected: ' + names[index] + '. Proposed, and not for sale. This opens the booking calendar.';
         }
         live.textContent = status.textContent;
       }
@@ -556,13 +549,13 @@
       }, { passive: true });
 
       action.addEventListener('click', function () {
-        if (index !== 1) {
+        if (index === 2) {
           document.getElementById('book').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
           var link = document.querySelector('.book .fallback');
           if (link) link.focus();
           return;
         }
-        startCoreCheckout(action, 'Buy Never Miss a Job');
+        startPackageCheckout(action, action.textContent, productIds[index]);
       });
 
       render();

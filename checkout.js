@@ -1,4 +1,4 @@
-async function startCoreCheckout(button, idleLabel) {
+async function startPackageCheckout(button, idleLabel, product) {
   if (!button) return;
   var errorEl = document.getElementById('checkout-error');
   if (errorEl) errorEl.textContent = '';
@@ -10,7 +10,7 @@ async function startCoreCheckout(button, idleLabel) {
     var res = await fetch('/api/create-checkout-session', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ product: 'never-miss-a-job' }),
+      body: JSON.stringify({ product: product }),
     });
     var data = await res.json().catch(function () { return {}; });
     if (!res.ok || !data.url) {
@@ -20,7 +20,11 @@ async function startCoreCheckout(button, idleLabel) {
   } catch (err) {
     button.disabled = false;
     button.textContent = idleLabel || previous;
-    var message = 'Checkout did not start. Email contact@omnixgenerational.com and we will help you buy Never Miss a Job.';
+    var message = 'Checkout did not start. Email contact@omnixgenerational.com and we will help you finish the purchase.';
     if (errorEl) errorEl.textContent = message;
   }
+}
+
+function startCoreCheckout(button, idleLabel) {
+  return startPackageCheckout(button, idleLabel || 'Buy Never Miss a Job', 'never-miss-a-job');
 }

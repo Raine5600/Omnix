@@ -174,14 +174,16 @@
 
   <main>
     <h1>Tell us about the business.</h1>
-    <p class="lede">This is the intake after you buy Never Miss a Job. Required: your name or your business name, and a phone number or an email. Everything else is optional. Setup goes live within 7 days of purchase and starts with a short kickoff call. We do not ask for passwords.</p>
+    <p class="lede" id="intake-lede">This is the intake after you buy. Required: your name or your business name, and a phone number or an email. Everything else is optional. Setup goes live within 7 days of purchase and starts with a short kickoff call. We do not ask for passwords.</p>
+    <p id="package-note" hidden></p>
 
     <form id="intake-form" novalidate>
       <input type="hidden" name="access_key" value="ec1ca8d2-a075-4b33-a0de-08fd835b7ca2">
-      <input type="hidden" name="subject" value="Never Miss a Job — intake">
+      <input type="hidden" name="subject" id="intake-subject" value="Omnix intake">
       <input type="hidden" name="from_name" value="Omnix Intake">
       <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
       <input type="hidden" id="session_id" name="stripe_session_id" value="">
+      <input type="hidden" id="package_id" name="package" value="">
 
       <div class="row">
         <div>
@@ -320,6 +322,18 @@
       var params = new URLSearchParams(window.location.search);
       var session = params.get('session_id') || '';
       document.getElementById('session_id').value = session;
+      var packageNames = {
+        'never-miss-a-job': 'Never Miss a Job',
+        'answer-the-call': 'Answer the Call'
+      };
+      var packageId = params.get('package') || '';
+      if (packageNames[packageId]) {
+        document.getElementById('package_id').value = packageId;
+        document.getElementById('intake-subject').value = packageNames[packageId] + ' — intake';
+        var note = document.getElementById('package-note');
+        note.hidden = false;
+        note.textContent = 'Package: ' + packageNames[packageId];
+      }
 
       var form = document.getElementById('intake-form');
       var errorEl = document.getElementById('form-error');

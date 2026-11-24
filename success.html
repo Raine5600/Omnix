@@ -470,13 +470,13 @@
 
   <section class="demo-spotlight">
     <h2>What you bought</h2>
-    <p>Never Miss a Job is $500 to set up and $197 a month. Phone, SMS, and AI usage are passed through at cost, on top of that price.</p>
-    <p><a href="/terms#guarantee">30-day money-back guarantee</a></p>
+    <p id="bought-summary">Never Miss a Job is $500 to set up and $197 a month. Phone, SMS, and AI usage are passed through at cost, on top of that price.</p>
+    <p id="bought-guarantee"><a href="/terms#guarantee">30-day money-back guarantee</a></p>
     <div class="demo-features">
-      <div class="demo-feat"><i class="fas fa-check"></i> Missed-call text-back with after-hours answering</div>
-      <div class="demo-feat"><i class="fas fa-check"></i> Review requests after every job, with no rating gate</div>
-      <div class="demo-feat"><i class="fas fa-check"></i> Estimate follow-up sequence</div>
-      <div class="demo-feat"><i class="fas fa-check"></i> Custom-designed website</div>
+      <div class="demo-feat" data-feature="textback"><i class="fas fa-check"></i> Missed-call text-back with after-hours answering</div>
+      <div class="demo-feat" data-feature="reviews"><i class="fas fa-check"></i> Review requests after every job, with no rating gate</div>
+      <div class="demo-feat" data-feature="estimates"><i class="fas fa-check"></i> Estimate follow-up sequence</div>
+      <div class="demo-feat" data-feature="website"><i class="fas fa-check"></i> Custom-designed website</div>
     </div>
     <p style="margin-top:1.5rem; color: var(--color-text-muted);">Questions? Email <a href="mailto:contact@omnixgenerational.com" style="color: var(--color-primary);">contact@omnixgenerational.com</a></p>
   </section>
@@ -512,19 +512,49 @@
     const type = params.get('type');
     const next = document.getElementById('next-step');
     const session = params.get('session_id');
-    if (session) next.href = '/intake?session_id=' + encodeURIComponent(session);
+    const packageId = params.get('package');
+    const known = {
+      'never-miss-a-job': {
+        summary: 'Never Miss a Job is $500 to set up and $197 a month. Phone, SMS, and AI usage are passed through at cost, on top of that price.',
+        guarantee: true,
+        hide: []
+      },
+      'answer-the-call': {
+        summary: 'Answer the Call is $350 to set up and $97 a month. Phone, SMS, and AI usage are passed through at cost, on top of that price. It does not include review requests or estimate follow-up.',
+        guarantee: false,
+        hide: ['reviews', 'estimates']
+      }
+    };
+    const bought = known[packageId] || null;
+    const intakeQuery = new URLSearchParams();
+    if (session) intakeQuery.set('session_id', session);
+    if (bought) intakeQuery.set('package', packageId);
+    const intakeHref = '/intake' + (intakeQuery.toString() ? '?' + intakeQuery.toString() : '');
+
     if (type === 'contact') {
       document.getElementById('hero-heading').textContent = "Message received.";
-      document.getElementById('hero-sub').textContent = "We have your note. If you are ready to buy, Never Miss a Job is on the pricing page.";
-      document.getElementById('hero-promise').innerHTML = '<a href="/terms#guarantee">30-day money-back guarantee</a>';
-      next.textContent = "See pricing";
-      next.href = "/pricing";
+      document.getElementById('hero-sub').textContent = "We have your note. If you are ready to buy, the packages are on the start page.";
+      document.getElementById('hero-promise').textContent = 'Live within 7 days of purchase.';
+      next.textContent = "See packages";
+      next.href = "/start";
     } else if (type === 'intake') {
       document.getElementById('hero-heading').textContent = "Intake received.";
       document.getElementById('hero-sub').textContent = "We have what you sent. Setup starts with a short kickoff call.";
-      document.getElementById('hero-promise').innerHTML = 'Live within 7 days of purchase. <a href="/terms#guarantee">30-day money-back guarantee</a>';
+      document.getElementById('hero-promise').textContent = 'Live within 7 days of purchase.';
       next.textContent = "Back to home";
       next.href = "/";
+    } else {
+      next.href = intakeHref;
+      if (bought) {
+        document.getElementById('bought-summary').textContent = bought.summary;
+        document.getElementById('bought-guarantee').hidden = !bought.guarantee;
+        document.querySelectorAll('[data-feature]').forEach(function (el) {
+          el.hidden = bought.hide.indexOf(el.getAttribute('data-feature')) !== -1;
+        });
+        if (!bought.guarantee) {
+          document.getElementById('hero-promise').textContent = 'Live within 7 days of purchase.';
+        }
+      }
     }
 
     function toggleNav() {

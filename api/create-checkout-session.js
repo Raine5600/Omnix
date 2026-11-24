@@ -1,11 +1,27 @@
-const CORE_PRODUCT = 'never-miss-a-job';
-
-// Approved price only. Inline price_data so checkout does not depend on
-// dashboard Price IDs (and so we do not invent IDs here).
-// Setup $500 once + Never Miss a Job $197/month.
-// Phone, SMS, and AI usage are passed through at cost and are NOT part of this charge.
-const SETUP_CENTS = 50000;
-const MONTHLY_CENTS = 19700;
+// Prices live only here. A client-sent amount is ignored.
+// Phone, SMS, and AI usage are passed through at cost and are not a line item.
+const PACKAGES = {
+  'never-miss-a-job': {
+    id: 'never-miss-a-job',
+    name: 'Never Miss a Job',
+    setupCents: 50000,
+    monthlyCents: 19700,
+    guarantee: true,
+    monthlyDescription: 'Monthly. Missed-call text-back with after-hours answering, non-gated review requests after every job, an estimate follow-up sequence, and a custom website. Phone, SMS, and AI usage are billed separately at cost. 30-day money-back guarantee: first month back if no tracked paying customer within 30 days of going live. Setup fee is not refundable.',
+    setupDescription: 'One-time setup. Live within 7 days of purchase. Starts with a short kickoff call. This setup fee is not refundable.',
+    cancelPath: '/pricing',
+  },
+  'answer-the-call': {
+    id: 'answer-the-call',
+    name: 'Answer the Call',
+    setupCents: 35000,
+    monthlyCents: 9700,
+    guarantee: false,
+    monthlyDescription: 'Monthly. Missed-call text-back with after-hours answering and a custom website. Does not include review requests or estimate follow-up. Phone, SMS, and AI usage are billed separately at cost. The 30-day money-back guarantee is not included.',
+    setupDescription: 'One-time setup. Live within 7 days of purchase. Starts with a short kickoff call. This setup fee is not refundable.',
+    cancelPath: '/start',
+  },
+};
 
 function getStripe() {
   const key = process.env.STRIPE_SECRET_KEY;
@@ -20,13 +36,13 @@ module.exports = async (req, res) => {
   }
 
   const body = req.body || {};
-  const product = body.product || CORE_PRODUCT;
+  const product = body.product;
+  const pkg = PACKAGES[product];
 
-  // Starter and Premium are proposals. Never create a Checkout Session for them.
-  // TODO(Big Chicken): when you approve another tier, add it here on purpose.
-  if (product !== CORE_PRODUCT) {
+  // Custom AI and anything else are not for sale. Client-sent amounts are ignored.
+  if (!pkg) {
     return res.status(400).json({
-      error: 'Only Never Miss a Job can be purchased here. Other packages are proposed and are not for sale.',
+      error: 'That package cannot be purchased here.',
     });
   }
 
@@ -45,11 +61,11 @@ module.exports = async (req, res) => {
           quantity: 1,
           price_data: {
             currency: 'usd',
-            unit_amount: MONTHLY_CENTS,
+            unit_amount: pkg.monthlyCents,
             recurring: { interval: 'month' },
             product_data: {
-              name: 'Never Miss a Job',
-              description: 'Monthly. Missed-call text-back with after-hours answering, non-gated review requests after every job, an estimate follow-up sequence, and a custom website. Phone, SMS, and AI usage are billed separately at cost. 30-day money-back guarantee: first month back if no tracked paying customer within 30 days of going live. Setup fee is not refundable.',
+              name: pkg.name,
+              description: pkg.monthlyDescription,
             },
           },
         },
@@ -57,18 +73,18 @@ module.exports = async (req, res) => {
           quantity: 1,
           price_data: {
             currency: 'usd',
-            unit_amount: SETUP_CENTS,
+            unit_amount: pkg.setupCents,
             product_data: {
-              name: 'Never Miss a Job — Setup',
-              description: 'One-time setup. Live within 7 days of purchase. Starts with a short kickoff call. This setup fee is not refundable.',
+              name: pkg.name + ' — Setup',
+              description: pkg.setupDescription,
             },
           },
         },
       ],
       billing_address_collection: 'required',
       allow_promotion_codes: true,
-      success_url: `${origin}/success?type=purchase&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${origin}/pricing`,
+      success_url: `${origin}/success?type=purchase&package=${pkg.id}&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${origin}${pkg.cancelPath}`,
     });
 
     return res.status(200).json({ url: session.url });
@@ -78,6 +94,4 @@ module.exports = async (req, res) => {
   }
 };
 
-module.exports.CORE_PRODUCT = CORE_PRODUCT;
-module.exports.SETUP_CENTS = SETUP_CENTS;
-module.exports.MONTHLY_CENTS = MONTHLY_CENTS;
+module.exports.PACKAGES = PACKAGES;

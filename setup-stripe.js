@@ -1,9 +1,11 @@
 /**
  * Retired. Do not run this to create Stripe products.
  *
- * Checkout (api/create-checkout-session.js) uses inline price_data:
- *   - Never Miss a Job — Setup: $500 one-time
- *   - Never Miss a Job: $197/month
+ * Checkout (api/create-checkout-session.js) uses inline price_data.
+ * Prices are fixed in that file. Do not pass an amount from the browser.
+ *   - Never Miss a Job: $500 setup + $197/month
+ *   - Answer the Call: $350 setup + $97/month
+ * Custom AI is not a Stripe product.
  * No Price IDs are invented here. STRIPE_SECRET_KEY is still required on Vercel.
  *
  * Phone, SMS, and AI usage are passed through at cost and are not a Stripe line item.
@@ -20,9 +22,8 @@
  *     STRIPE_MONTHLY_SETUP_FEE_PRICE_ID, STRIPE_YEARLY_SETUP_FEE_PRICE_ID)
  * Those env vars are no longer read.
  *
- * Starter and Premium on /start are PROPOSED. Do not create Stripe prices for
- * them until Big Chicken approves a price.
+ * Custom AI has no price. Do not create a Stripe price for it.
  */
 
-console.error('setup-stripe.js does not create products. Checkout uses inline price_data: $500 setup + $197/month.');
+console.error('setup-stripe.js does not create products. Checkout uses inline price_data for Never Miss a Job and Answer the Call.');
 process.exit(1);
