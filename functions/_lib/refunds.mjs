@@ -1,8 +1,36 @@
 import { HttpError, nowSec } from "./http.mjs";
 
-export const REFUND_CENTS = 19700;
-export const REFUND_AMOUNT_LABEL = "$197.00";
-export const REFUND_AMOUNT_NOTE = "First month only. The setup fee and pass-through usage costs are not refundable.";
+export const REFUND_PACKAGES = {
+  "never-miss-a-job": {
+    packageId: "never-miss-a-job",
+    packageName: "Never Miss a Job",
+    covered: true,
+    cents: 19700,
+    label: "$197.00",
+    note: "First month only. The $500 setup fee and pass-through usage costs are not refundable.",
+  },
+  "answer-the-call": {
+    packageId: "answer-the-call",
+    packageName: "Answer the Call",
+    covered: true,
+    cents: 9700,
+    label: "$97.00",
+    note: "First month only. The $350 setup fee and pass-through usage costs are not refundable.",
+  },
+  "custom-ai": {
+    packageId: "custom-ai",
+    packageName: "Custom AI",
+    covered: false,
+    cents: null,
+    label: "Not covered",
+    note: "Custom AI is not covered by the guarantee.",
+  },
+};
+
+export function refundOffer(packageId) {
+  const id = String(packageId || "").trim() || "never-miss-a-job";
+  return REFUND_PACKAGES[id] || null;
+}
 
 export const CHANGE_TYPES = [
   ["website_copy", "Website copy"],
@@ -50,7 +78,6 @@ export function refundFlags(row, now = new Date()) {
     hasCustomer,
     flagged: reasons.length > 0,
     reasons,
-    amountCents: REFUND_CENTS,
   };
 }
 
@@ -73,20 +100,30 @@ function cleanTimestamp(value) {
 }
 
 export function presentRefund(row, now = new Date()) {
+  const offer = refundOffer(row && row.package_id) || REFUND_PACKAGES["never-miss-a-job"];
   const flags = refundFlags(row, now);
+  const reasons = flags.reasons.slice();
+  let flagged = flags.flagged;
+  if (!offer.covered) {
+    flagged = true;
+    reasons.unshift(offer.note);
+  }
   return {
     kind: "refund",
     id: row.id,
     client_name: row.client_name,
+    package_id: offer.packageId,
+    package_name: offer.packageName,
+    covered: offer.covered,
     go_live_date: row.go_live_date || null,
     days_since_go_live: flags.days,
     tracked_customer: flags.hasCustomer,
     first_tracked_customer_at: row.first_tracked_customer_at || null,
-    amount_cents: REFUND_CENTS,
-    amount_label: REFUND_AMOUNT_LABEL,
-    amount_note: REFUND_AMOUNT_NOTE,
-    flagged: flags.flagged,
-    reasons: flags.reasons,
+    amount_cents: offer.cents,
+    amount_label: offer.label,
+    amount_note: offer.note,
+    flagged,
+    reasons,
     status: row.status,
     note: row.note || "",
     decided_at: row.decided_at || null,
@@ -122,7 +159,7 @@ export async function listQueue(db, now = new Date(), options = {}) {
      LIMIT 100`
   ).bind(includeDemo).all();
   const refunds = await db.prepare(
-    `SELECT r.id, r.client_name, r.amount_cents, r.status, r.note, r.decided_at, r.created_at, r.source, r.is_demo,
+    `SELECT r.id, r.client_name, r.amount_cents, r.package_id, r.status, r.note, r.decided_at, r.created_at, r.source, r.is_demo,
             c.go_live_date, c.first_tracked_customer_at
      FROM refund_requests r
      LEFT JOIN clients c ON c.id = r.client_id
@@ -182,11 +219,21 @@ export async function createRefundRequest(db, body, now = nowSec()) {
     }
   }
 
+  const requested = body && (body.package || body.package_id);
+  if (!requested) throw new HttpError(400, "Add the package: never-miss-a-job or answer-the-call.");
+  const offer = refundOffer(requested);
+  if (!offer) throw new HttpError(400, "That package has no refund amount.");
   const row = await db.prepare(
-    `INSERT INTO refund_requests (client_id, client_name, amount_cents, status, source, created_at)
-     VALUES (?, ?, ?, 'pending', 'api', ?) RETURNING id`
-  ).bind(client.id, client.name || name || email, REFUND_CENTS, now).first();
-  return { id: row.id, amount_cents: REFUND_CENTS, stripe: "not_called" };
+    `INSERT INTO refund_requests (client_id, client_name, package_id, amount_cents, status, source, created_at)
+     VALUES (?, ?, ?, ?, 'pending', 'api', ?) RETURNING id`
+  ).bind(client.id, client.name || name || email, offer.packageId, offer.cents, now).first();
+  return {
+    id: row.id,
+    package_id: offer.packageId,
+    covered: offer.covered,
+    amount_cents: offer.cents,
+    stripe: "not_called",
+  };
 }
 
 export async function decideRequest(db, kind, id, body, options = {}) {

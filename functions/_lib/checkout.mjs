@@ -1,50 +1,52 @@
 import { HttpError, json, readJson } from "./http.mjs";
 
-export const CORE_PRODUCT = "never-miss-a-job";
-export const SETUP_CENTS = 50000;
-export const MONTHLY_CENTS = 19700;
-
-const MONTHLY_DESCRIPTION = "Monthly. Missed-call text-back with after-hours answering, non-gated review requests after every job, an estimate follow-up sequence, and a custom website. Phone, SMS, and AI usage are billed separately at cost. 30-day money-back guarantee: first month back if no tracked paying customer within 30 days of going live. Setup fee is not refundable.";
-const SETUP_DESCRIPTION = "One-time setup. Live within 7 days of purchase. Starts with a short kickoff call. This setup fee is not refundable.";
+// Same packages and copy as api/create-checkout-session.js. A client-sent amount is ignored.
+export const PACKAGES = {
+  "never-miss-a-job": {
+    id: "never-miss-a-job",
+    name: "Never Miss a Job",
+    setupCents: 50000,
+    monthlyCents: 19700,
+    guarantee: true,
+    monthlyDescription: "Monthly. Missed-call text-back with after-hours answering, non-gated review requests after every job, an estimate follow-up sequence, and a custom website. Phone, SMS, and AI usage are billed separately at cost. 30-day money-back guarantee: first month back if no tracked paying customer within 30 days of going live. Setup fee is not refundable.",
+    setupDescription: "One-time setup. Live within 7 days of purchase. Starts with a short kickoff call. This setup fee is not refundable.",
+    cancelPath: "/pricing",
+  },
+  "answer-the-call": {
+    id: "answer-the-call",
+    name: "Answer the Call",
+    setupCents: 35000,
+    monthlyCents: 9700,
+    guarantee: true,
+    monthlyDescription: "Monthly. Missed-call text-back with after-hours answering and a custom website. Does not include review requests or estimate follow-up. Phone, SMS, and AI usage are billed separately at cost. 30-day money-back guarantee: first month back if no tracked paying customer within 30 days of going live. Setup fee is not refundable.",
+    setupDescription: "One-time setup. Live within 7 days of purchase. Starts with a short kickoff call. This setup fee is not refundable.",
+    cancelPath: "/start",
+  },
+};
 
 function encodeFormValue(value) {
   return encodeURIComponent(value).replace(/%20/g, "+");
 }
 
-export function buildCheckoutBody(origin) {
+export function buildCheckoutBody(origin, pkg) {
   const lines = [
     "mode=subscription",
     "billing_address_collection=required",
     "allow_promotion_codes=true",
-    `success_url=${encodeFormValue(`${origin}/success?type=purchase&session_id=`)}{CHECKOUT_SESSION_ID}`,
-    `cancel_url=${encodeFormValue(`${origin}/pricing`)}`,
+    `success_url=${encodeFormValue(`${origin}/success?type=purchase&package=${pkg.id}&session_id=`)}{CHECKOUT_SESSION_ID}`,
+    `cancel_url=${encodeFormValue(`${origin}${pkg.cancelPath}`)}`,
+    "line_items[0][quantity]=1",
+    "line_items[0][price_data][currency]=usd",
+    `line_items[0][price_data][unit_amount]=${pkg.monthlyCents}`,
+    "line_items[0][price_data][recurring][interval]=month",
+    `line_items[0][price_data][product_data][name]=${encodeFormValue(pkg.name)}`,
+    `line_items[0][price_data][product_data][description]=${encodeFormValue(pkg.monthlyDescription)}`,
+    "line_items[1][quantity]=1",
+    "line_items[1][price_data][currency]=usd",
+    `line_items[1][price_data][unit_amount]=${pkg.setupCents}`,
+    `line_items[1][price_data][product_data][name]=${encodeFormValue(`${pkg.name} — Setup`)}`,
+    `line_items[1][price_data][product_data][description]=${encodeFormValue(pkg.setupDescription)}`,
   ];
-
-  const items = [
-    {
-      name: "Never Miss a Job",
-      description: MONTHLY_DESCRIPTION,
-      unit_amount: MONTHLY_CENTS,
-      interval: "month",
-    },
-    {
-      name: "Never Miss a Job — Setup",
-      description: SETUP_DESCRIPTION,
-      unit_amount: SETUP_CENTS,
-    },
-  ];
-
-  items.forEach((item, i) => {
-    lines.push(`line_items[${i}][quantity]=1`);
-    lines.push(`line_items[${i}][price_data][currency]=usd`);
-    lines.push(`line_items[${i}][price_data][unit_amount]=${item.unit_amount}`);
-    lines.push(`line_items[${i}][price_data][product_data][name]=${encodeFormValue(item.name)}`);
-    lines.push(`line_items[${i}][price_data][product_data][description]=${encodeFormValue(item.description)}`);
-    if (item.interval) {
-      lines.push(`line_items[${i}][price_data][recurring][interval]=${item.interval}`);
-    }
-  });
-
   return lines.join("&");
 }
 
@@ -61,11 +63,9 @@ export async function createCheckout(request, env) {
     return json({ error: "Send a JSON object." }, 400);
   }
 
-  const product = body.product || CORE_PRODUCT;
-  if (product !== CORE_PRODUCT) {
-    return json({
-      error: "Only Never Miss a Job can be purchased here. Other packages are proposed and are not for sale.",
-    }, 400);
+  const pkg = PACKAGES[body.product];
+  if (!pkg) {
+    return json({ error: "That package cannot be purchased here." }, 400);
   }
 
   const key = env && env.STRIPE_SECRET_KEY;
@@ -80,7 +80,7 @@ export async function createCheckout(request, env) {
         Authorization: `Bearer ${key}`,
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: buildCheckoutBody(origin),
+      body: buildCheckoutBody(origin, pkg),
     });
   } catch {
     return json({ error: "Could not start checkout." }, 500);

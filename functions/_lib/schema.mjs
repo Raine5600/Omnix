@@ -74,7 +74,13 @@ const STATEMENTS = [
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     client_id INTEGER,
     client_name TEXT NOT NULL,
-    amount_cents INTEGER NOT NULL DEFAULT 19700 CHECK (amount_cents = 19700),
+    package_id TEXT NOT NULL DEFAULT 'never-miss-a-job',
+    amount_cents INTEGER,
+    CHECK (
+      (package_id = 'custom-ai' AND amount_cents IS NULL)
+      OR (package_id = 'never-miss-a-job' AND amount_cents = 19700)
+      OR (package_id = 'answer-the-call' AND amount_cents = 9700)
+    ),
     status TEXT NOT NULL DEFAULT 'pending',
     note TEXT,
     decided_at INTEGER,
@@ -160,6 +166,11 @@ async function apply(db) {
   await db.prepare(
     "INSERT OR IGNORE INTO schema_migrations (version, applied_at) VALUES ('0001', ?)"
   ).bind(nowSec()).run();
+  try {
+    await db.prepare("ALTER TABLE refund_requests ADD COLUMN package_id TEXT NOT NULL DEFAULT 'never-miss-a-job'").run();
+  } catch {
+    // The column is already there.
+  }
 }
 
 export function ensureSchema(db) {

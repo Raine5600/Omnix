@@ -146,10 +146,11 @@ await check("admin session, sample data, and refund decision", async () => {
   const created = await send("/api/admin/refunds", {
     method: "POST",
     headers,
-    body: JSON.stringify({ client_name: "HTTP Test HVAC", email: "http-refund@example.com", go_live_date: "2026-01-01", amount_cents: 1 }),
+    body: JSON.stringify({ client_name: "HTTP Test HVAC", email: "http-refund@example.com", package: "answer-the-call", go_live_date: "2026-01-01", amount_cents: 1 }),
   });
   assert.equal(created.response.status, 201);
-  assert.equal(created.json.amount_cents, 19700);
+  assert.equal(created.json.amount_cents, 9700);
+  assert.equal(created.json.package_id, "answer-the-call");
   assert.equal(created.json.stripe, "not_called");
   const decision = await send(`/api/admin/refunds/${created.json.id}`, {
     method: "POST",

@@ -3,13 +3,14 @@ import { createRequire } from "node:module";
 import assert from "node:assert/strict";
 import { demoAllowed, sampleAnalytics } from "../functions/_lib/demo.mjs";
 import { hashPassword, verifyPassword } from "../functions/_lib/password.mjs";
-import { buildCheckoutBody, createCheckout, MONTHLY_CENTS, SETUP_CENTS } from "../functions/_lib/checkout.mjs";
+import { buildCheckoutBody, createCheckout, PACKAGES } from "../functions/_lib/checkout.mjs";
 import { validateIntake } from "../functions/_lib/intake-validate.mjs";
 import {
   assertRefundNotAutoApproved,
   daysSinceGoLive,
   refundFlags,
-  REFUND_CENTS,
+  refundOffer,
+  presentRefund,
   shouldAutoApprove,
 } from "../functions/_lib/refunds.mjs";
 import { isBot, deviceClass, visitorHash, cleanReferrer } from "../functions/_lib/analytics.mjs";
@@ -67,7 +68,17 @@ await check("refund flags and amount", () => {
   const early = refundFlags({ go_live_date: "2026-11-20", first_tracked_customer_at: null }, now);
   assert.equal(early.flagged, true);
   assert.equal(early.days, 4);
-  assert.equal(early.amountCents, 19700);
+  assert.equal(refundOffer("never-miss-a-job").cents, 19700);
+  assert.equal(refundOffer("answer-the-call").cents, 9700);
+  assert.equal(refundOffer("custom-ai").covered, false);
+  assert.equal(refundOffer("custom-ai").cents, null);
+  const shown = presentRefund({ id: 1, client_name: "East", package_id: "answer-the-call", amount_cents: 1, go_live_date: "2026-10-01" }, now);
+  assert.equal(shown.amount_cents, 9700);
+  assert.equal(shown.covered, true);
+  const uncovered = presentRefund({ id: 2, client_name: "North", package_id: "custom-ai", go_live_date: "2026-10-01" }, now);
+  assert.equal(uncovered.covered, false);
+  assert.equal(uncovered.flagged, true);
+  assert.match(uncovered.reasons[0], /not covered/);
   const customer = refundFlags({ go_live_date: "2026-10-01", first_tracked_customer_at: "2026-11-01T00:00:00Z" }, now);
   assert.equal(customer.flagged, true);
   assert.equal(customer.hasCustomer, true);
@@ -77,13 +88,17 @@ await check("refund flags and amount", () => {
   assert.equal(shouldAutoApprove("refund", { enabled: 1 }), false);
   assert.equal(shouldAutoApprove("hours", { enabled: 1 }), false);
   assert.throws(() => assertRefundNotAutoApproved("refund"), /never auto-approved/);
-  assert.equal(REFUND_CENTS, 19700);
 });
 
 await check("checkout body matches the Vercel prices and does not call Stripe without a key", async () => {
-  const body = buildCheckoutBody("https://omnixgenerational.com");
-  assert.ok(body.includes(`unit_amount]=${MONTHLY_CENTS}`));
-  assert.ok(body.includes(`unit_amount]=${SETUP_CENTS}`));
+  const body = buildCheckoutBody("https://omnixgenerational.com", PACKAGES["never-miss-a-job"]);
+  assert.ok(body.includes("unit_amount]=19700"));
+  assert.ok(body.includes("unit_amount]=50000"));
+  assert.ok(body.includes("package%3Dnever-miss-a-job"));
+  const answer = buildCheckoutBody("https://omnixgenerational.com", PACKAGES["answer-the-call"]);
+  assert.ok(answer.includes("unit_amount]=9700"));
+  assert.ok(answer.includes("unit_amount]=35000"));
+  assert.ok(answer.includes("package%3Danswer-the-call"));
   assert.ok(body.includes("{CHECKOUT_SESSION_ID}"));
   assert.ok(body.includes("first+month+back+if+no+tracked+paying+customer"));
   assert.ok(body.includes("This+setup+fee+is+not+refundable."));
@@ -96,7 +111,7 @@ await check("checkout body matches the Vercel prices and does not call Stripe wi
   try {
     const response = await createCheckout(new Request("https://example.com/api/create-checkout-session", {
       method: "POST",
-      body: JSON.stringify({ product: "answer-the-call" }),
+      body: JSON.stringify({ product: "custom-ai" }),
     }), {});
     assert.equal(response.status, 400);
     const missing = await createCheckout(new Request("https://example.com/api/create-checkout-session", {

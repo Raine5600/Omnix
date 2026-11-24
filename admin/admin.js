@@ -203,7 +203,8 @@
       card.appendChild(kind);
       if (item.sample) card.appendChild(el("span", "badge", "Sample"));
       if (item.kind === "refund") {
-        card.appendChild(el("span", item.flagged ? "badge warn" : "badge ok", item.flagged ? "Terms not met" : "No flags"));
+        if (item.covered === false) card.appendChild(el("span", "badge warn", "Not covered"));
+        else card.appendChild(el("span", item.flagged ? "badge warn" : "badge ok", item.flagged ? "Terms not met" : "No flags"));
       }
       card.appendChild(el("span", "badge", item.status));
       card.appendChild(el("h3", "", item.client_name));
@@ -224,7 +225,7 @@
         var days = item.days_since_go_live == null ? "Go-live date not set" : item.days_since_go_live + " days since go-live";
         card.appendChild(el("p", "", "Go-live (all purchased services): " + dayLabel(item.go_live_date) + " · " + days));
         card.appendChild(el("p", "", "Tracked paying customer: " + (item.tracked_customer ? "Yes" : "No")));
-        card.appendChild(el("p", "", item.amount_label + ". " + item.amount_note));
+        card.appendChild(el("p", "", (item.package_name || "Package") + ": " + item.amount_label + ". " + item.amount_note));
         if (item.reasons && item.reasons.length) {
           var reasons = document.createElement("ul");
           reasons.className = "reasons";

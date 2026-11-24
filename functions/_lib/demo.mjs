@@ -100,16 +100,16 @@ export async function ensureDemoContent(db) {
   const north = await client("Northwind Roofing", "north@example.com", null, null);
 
   const refunds = [
-    [summit, "Summit Air HVAC"],
-    [river, "Riverbend Plumbing"],
-    [east, "Eastside Electric"],
-    [north, "Northwind Roofing"],
+    [summit, "Summit Air HVAC", "never-miss-a-job", 19700],
+    [river, "Riverbend Plumbing", "never-miss-a-job", 19700],
+    [east, "Eastside Electric", "answer-the-call", 9700],
+    [north, "Northwind Roofing", "custom-ai", null],
   ];
-  for (const [id, name] of refunds) {
+  for (const [id, name, packageId, cents] of refunds) {
     await db.prepare(
-      `INSERT INTO refund_requests (client_id, client_name, amount_cents, status, source, created_at, is_demo)
-       VALUES (?, ?, 19700, 'pending', 'demo', ?, 1)`
-    ).bind(id, name, now).run();
+      `INSERT INTO refund_requests (client_id, client_name, package_id, amount_cents, status, source, created_at, is_demo)
+       VALUES (?, ?, ?, ?, 'pending', 'demo', ?, 1)`
+    ).bind(id, name, packageId, cents, now).run();
   }
 
   await db.prepare(
