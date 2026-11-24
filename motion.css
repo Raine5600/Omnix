@@ -1,4 +1,4 @@
-/* Light motion and focus. Loaded after each page's own CSS. */
+/* Focus rings only. Button color, glow, and motion stay with each page's own CSS. */
 
 a:focus-visible,
 button:focus-visible,
@@ -10,19 +10,6 @@ summary:focus-visible {
   outline-offset: 3px;
 }
 
-/* Gradient buttons are light. Dark text keeps the label readable. */
-.cta-button,
-nav a.cta-button,
-button.cta-button {
-  color: #0d0d1e;
-}
-
-.cta-button:hover,
-nav a.cta-button:hover,
-button.cta-button:hover {
-  color: #0d0d1e;
-}
-
 .guarantee a,
 .hero-promise a {
   color: #7cc5ff;
@@ -30,30 +17,6 @@ button.cta-button:hover {
   text-underline-offset: 3px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  html.motion-ready .reveal {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-
-  html.motion-ready .reveal.is-visible {
-    opacity: 1;
-    transform: none;
-    transition: opacity 0.55s ease, transform 0.55s ease;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+  html { scroll-behavior: auto; }
 }

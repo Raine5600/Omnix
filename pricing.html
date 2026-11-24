@@ -889,25 +889,69 @@
     .rs5 { color:#4fc3ff; bottom:-4px;right: 2px;  font-size: 7px; animation-duration:4.8s; animation-delay:3.2s;  }
     .rs6 { color:#c07aff; top: -4px;  right:18px;  font-size: 7px; animation-duration:6.0s; animation-delay:1.8s;  }
 
-    .offer-wrap { max-width: 880px; margin: 0 auto; padding: 0 1.25rem 3rem; }
-    .offer-card {
+    .plan-section {
+      padding: 0 1.25rem 3.5rem;
+      background: radial-gradient(ellipse at top, #1a1040 0%, var(--color-dark) 62%);
+    }
+    .plan-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+      align-items: stretch;
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+    .plan-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
       background: var(--color-dark-light);
       border: 1px solid var(--color-border);
       border-radius: 16px;
-      padding: 1.5rem 1.35rem 1.4rem;
+      padding: 1.35rem 1.2rem 1.2rem;
+      box-shadow: 0 0 40px rgba(124, 197, 255, 0.12);
     }
-    .offer-card h2 { font-family: var(--font-heading); color: #fff; font-size: 1.7rem; margin-bottom: 0.35rem; }
-    .offer-price { font-family: var(--font-heading); color: #fff; font-size: 2rem; font-weight: 800; line-height: 1.15; }
-    .offer-price span { font-size: 1rem; font-weight: 600; color: var(--color-text-muted); }
-    .offer-card ul { margin: 0.9rem 0 0.9rem 1.15rem; }
-    .offer-card li { margin: 0.35rem 0; }
-    .offer-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; }
-    .offer-note { color: var(--color-text-muted); margin-top: 0.75rem; }
-    .guarantee { color: #fff; font-weight: 700; margin-top: 0.45rem; }
-    #checkout-error { color: #ffd27a; min-height: 1.3rem; margin-top: 0.6rem; }
-    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem; }
-    .step { background: var(--color-dark-light); border: 1px solid var(--color-border); border-radius: 12px; padding: 1rem; }
-    .step h3 { font-family: var(--font-heading); color: #fff; font-size: 1rem; margin-bottom: 0.35rem; }
+    .plan-card.featured {
+      border-color: #7cc5ff;
+      box-shadow: 0 0 48px rgba(124, 197, 255, 0.28), 0 0 80px rgba(192, 122, 255, 0.16);
+    }
+    .plan-card h2 {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 0.35rem 0 0.45rem;
+    }
+    .plan-price {
+      font-family: var(--font-heading);
+      font-size: 2.15rem;
+      font-weight: 800;
+      line-height: 1;
+      background: var(--color-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .plan-price span, .plan-sub { color: var(--color-text-muted); font-size: 0.95rem; font-weight: 600; -webkit-text-fill-color: var(--color-text-muted); }
+    .plan-sub { margin: 0.35rem 0 0.8rem; }
+    .plan-card ul { margin: 0 0 0.8rem 1.1rem; }
+    .plan-card li { margin: 0.32rem 0; }
+    .plan-card .guarantee { margin: 0.2rem 0 0.75rem; }
+    .plan-card > .cta-button {
+      margin-top: auto;
+      width: 100%;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      box-sizing: border-box;
+    }
+    .plan-card p { color: var(--color-text-muted); }
+    #checkout-error { color: #ffd27a; min-height: 1.3rem; margin: 1rem auto 0; max-width: 1140px; }
+    @media (max-width: 860px) {
+      .plan-grid { grid-template-columns: 1fr; }
+    }
   </style>
   <link rel="stylesheet" href="/motion.css">
 </head>
@@ -950,42 +994,48 @@
     <p>For service businesses and small businesses anywhere in the US. Omnix sets it up and runs it.</p>
   </section>
 
-  <section class="offer-wrap reveal">
-    <article class="offer-card">
-      <h2>Never Miss a Job</h2>
-      <p class="offer-price">$500 <span>one-time setup</span></p>
-      <p class="offer-price">$197 <span>per month</span></p>
-      <ul>
-        <li>Missed-call text-back with after-hours answering</li>
-        <li>Non-gated review requests after every job</li>
-        <li>An estimate follow-up sequence</li>
-        <li>A custom-designed website</li>
-        <li>Live within 7 days of purchase</li>
-        <li>Starts with a short kickoff call</li>
-      </ul>
-      <p class="offer-note">Phone, SMS, and AI usage are passed through at cost, on top of this price.</p>
-      <p class="guarantee"><a href="/terms#guarantee">30-day money-back guarantee</a></p>
-      <div class="offer-actions">
-        <button type="button" class="cta-button" id="buy-core" onclick="startCoreCheckout(this, 'Buy Never Miss a Job')">Buy Never Miss a Job</button>
-        <a href="/start" class="cta-button">Book a call instead</a>
-      </div>
-      <p id="checkout-error" role="alert"></p>
-    </article>
-
-    <div class="steps">
-      <div class="step">
-        <h3>1. Buy or book</h3>
-        <p>Buy here, or book a call from the start page if you want to talk first.</p>
-      </div>
-      <div class="step">
-        <h3>2. Intake</h3>
-        <p>After checkout, send a name or business name, and a phone or email. The rest of the form can wait.</p>
-      </div>
-      <div class="step">
-        <h3>3. Kickoff, then live</h3>
-        <p>Setup starts with a short kickoff call and goes live within 7 days of purchase.</p>
-      </div>
+  <section class="plan-section" aria-label="Packages">
+    <div class="plan-grid">
+      <article class="plan-card">
+        <h2>Answer the Call</h2>
+        <p class="plan-price">$350 <span>setup</span></p>
+        <p class="plan-sub">+ $97/month</p>
+        <ul>
+          <li>Missed-call text-back with after-hours answering</li>
+          <li>Custom-designed website</li>
+          <li>Short kickoff call</li>
+          <li>Live within 7 days of purchase</li>
+        </ul>
+        <p class="guarantee"><a href="/terms#guarantee">30-day money-back guarantee</a></p>
+        <button type="button" class="cta-button" onclick="startPackageCheckout(this, 'Buy Answer the Call', 'answer-the-call')">Buy Answer the Call</button>
+      </article>
+      <article class="plan-card featured">
+        <p class="popular-badge">Recommended</p>
+        <h2>Never Miss a Job</h2>
+        <p class="plan-price">$500 <span>setup</span></p>
+        <p class="plan-sub">+ $197/month</p>
+        <ul>
+          <li>Missed-call text-back with after-hours answering</li>
+          <li>Non-gated review requests after every job</li>
+          <li>Estimate follow-up sequence</li>
+          <li>Custom-designed website</li>
+          <li>Live within 7 days of purchase</li>
+        </ul>
+        <p class="guarantee"><a href="/terms#guarantee">30-day money-back guarantee</a></p>
+        <button type="button" class="cta-button" onclick="startPackageCheckout(this, 'Buy Never Miss a Job', 'never-miss-a-job')">Buy Never Miss a Job</button>
+      </article>
+      <article class="plan-card">
+        <h2>Custom AI</h2>
+        <p class="plan-sub">No price on this page. Scoped on a call.</p>
+        <ul>
+          <li>AI integration into your business</li>
+          <li>Custom programs and CRMs</li>
+          <li>AI across the work you already do</li>
+        </ul>
+        <a class="cta-button" href="/start#book">Book a call</a>
+      </article>
     </div>
+    <p id="checkout-error" role="alert"></p>
   </section>
 
   <footer>

@@ -107,7 +107,12 @@
       font-size: 0.95rem;
       font-family: var(--font-body);
     }
-    .cta-button:hover { transform: translateY(-2px); }
+    @keyframes btn-glow-pulse {
+      0%   { box-shadow: 0 0 10px 3px rgba(124,197,255,0.7), 0 0 30px 8px rgba(192,122,255,0.2); }
+      50%  { box-shadow: 0 0 18px 6px rgba(192,122,255,0.7), 0 0 40px 12px rgba(124,197,255,0.35); }
+      100% { box-shadow: 0 0 10px 3px rgba(124,197,255,0.7), 0 0 30px 8px rgba(192,122,255,0.2); }
+    }
+    .cta-button:hover { transform: translateY(-2px); animation: btn-glow-pulse 1.4s ease-in-out infinite; color: #0d0d1e; }
     .cta-button:disabled { opacity: 0.6; cursor: wait; transform: none; }
     .hamburger {
       display: none;
@@ -158,17 +163,26 @@
     }
     .meetings-iframe-container { min-height: 640px; }
     .carousel { outline: none; }
-    .carousel-viewport { overflow: hidden; }
-    .carousel-track { display: flex; align-items: stretch; transform: translateX(-100%); }
+    .carousel-viewport { overflow: hidden; touch-action: pan-y; }
+    .carousel-track { display: flex; align-items: stretch; transform: translateX(-200%); }
     .pkg-card {
       flex: 0 0 100%;
       min-width: 100%;
       background: var(--color-dark-light);
       border: 1px solid var(--color-border);
       border-radius: 16px;
-      padding: 1.25rem 1.25rem 1.1rem;
+      padding: 1.25rem 1.25rem 1.15rem;
+      box-shadow: 0 0 40px rgba(124, 197, 255, 0.14);
+      display: flex;
+      flex-direction: column;
     }
-    .pkg-card.is-selected { border-color: #7cc5ff; box-shadow: 0 0 0 1px rgba(124, 197, 255, 0.35); }
+    .pkg-card .price {
+      background: var(--color-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .pkg-card .cta-button { width: 100%; margin-top: 0.85rem; text-align: center; }
     .pkg-kicker {
       display: flex;
       flex-wrap: wrap;
@@ -219,6 +233,16 @@
       cursor: pointer;
     }
     .carousel-controls button.arrow:hover { border-color: var(--color-primary); }
+    #pkg-pause {
+      height: 44px;
+      padding: 0 0.9rem;
+      border-radius: 999px;
+      border: 1px solid var(--color-border);
+      background: var(--color-dark-light);
+      color: #fff;
+      cursor: pointer;
+      font: inherit;
+    }
     .dots { display: flex; gap: 0.45rem; }
     .dot {
       width: 12px;
@@ -347,15 +371,20 @@
         <h2 id="buy-heading">Buy a system</h2>
         <p class="lede">Move through the packages. They repeat. Never Miss a Job and Answer the Call can be purchased. Custom AI is a call, with no price on this page.</p>
         <p id="pkg-status">Selected: Never Miss a Job. $500 setup and $197 a month.</p>
-        <button type="button" class="cta-button buy-action" id="pkg-action">Buy Never Miss a Job</button>
-        <p id="checkout-error" role="alert"></p>
-        <p class="visually-hidden" id="carousel-help">Use previous and next, the dots, or the left and right arrow keys.</p>
+        <p class="visually-hidden" id="carousel-help">Use previous and next, the dots, or the left and right arrow keys. The packages loop. Autoplay pauses while you hover or focus the carousel.</p>
 
         <div class="carousel" id="pkg-carousel" role="region" aria-roledescription="carousel" aria-label="Packages" tabindex="0" aria-describedby="carousel-help">
-          <div class="carousel-viewport">
+          <div class="carousel-viewport" id="pkg-viewport">
             <div class="carousel-track" id="pkg-track">
 
-              <article class="pkg-card" id="pkg-card-0" aria-labelledby="pkg-title-0" aria-hidden="true">
+              <article class="pkg-card" data-clone="custom-ai" aria-hidden="true">
+                <h3>Custom AI</h3>
+                <p class="fine">No price on this page.</p>
+                <p>AI integration into your business, such as custom programs, CRMs, or AI across the work you already do, so those processes take fewer steps.</p>
+                <button type="button" class="cta-button" data-action="book">Book a call</button>
+              </article>
+
+              <article class="pkg-card" id="pkg-card-0" data-real="0" aria-labelledby="pkg-title-0">
                 <h3 id="pkg-title-0">Answer the Call</h3>
                 <p class="price">$350 <span>setup</span></p>
                 <p class="price-sub">+ $97/month</p>
@@ -368,9 +397,10 @@
                 </ul>
                 <p class="fine">Phone, SMS, and AI usage are passed through at cost, on top of this price.</p>
                 <p class="guarantee"><a href="/terms#guarantee">30-day money-back guarantee</a></p>
+                <button type="button" class="cta-button" data-action="answer-the-call">Buy Answer the Call</button>
               </article>
 
-              <article class="pkg-card is-selected" id="pkg-card-1" aria-labelledby="pkg-title-1">
+              <article class="pkg-card" id="pkg-card-1" data-real="1" aria-labelledby="pkg-title-1">
                 <div class="pkg-kicker">
                   <span class="flag flag-rec">Recommended</span>
                 </div>
@@ -388,17 +418,31 @@
                 </ul>
                 <p class="fine">Phone, SMS, and AI usage are passed through at cost, on top of this price.</p>
                 <p class="guarantee"><a href="/terms#guarantee">30-day money-back guarantee</a></p>
+                <button type="button" class="cta-button" data-action="never-miss-a-job">Buy Never Miss a Job</button>
               </article>
 
-              <!-- Custom AI has no price and must not create a Stripe charge. The button opens the booking calendar. -->
-              <article class="pkg-card" id="pkg-card-2" aria-labelledby="pkg-title-2" aria-hidden="true">
-                <div class="pkg-kicker">
-                  <span class="flag flag-rec">Book a call</span>
-                </div>
+              <!-- Custom AI has no price and must not create a Stripe charge. -->
+              <article class="pkg-card" id="pkg-card-2" data-real="2" aria-labelledby="pkg-title-2">
                 <h3 id="pkg-title-2">Custom AI</h3>
                 <p class="fine">No price on this page.</p>
                 <p>AI integration into your business, such as custom programs, CRMs, or AI across the work you already do, so those processes take fewer steps.</p>
-                <p class="proposed-note">Choosing this will not charge a card. It opens the booking calendar.</p>
+                <button type="button" class="cta-button" data-action="book">Book a call</button>
+              </article>
+
+              <article class="pkg-card" data-clone="answer-the-call" aria-hidden="true">
+                <h3>Answer the Call</h3>
+                <p class="price">$350 <span>setup</span></p>
+                <p class="price-sub">+ $97/month</p>
+                <ul>
+                  <li>Missed-call text-back with after-hours answering</li>
+                  <li>Custom-designed website</li>
+                  <li>Short kickoff call</li>
+                  <li>Does not include review requests</li>
+                  <li>Does not include estimate follow-up</li>
+                </ul>
+                <p class="fine">Phone, SMS, and AI usage are passed through at cost, on top of this price.</p>
+                <p class="guarantee"><a href="/terms#guarantee">30-day money-back guarantee</a></p>
+                <button type="button" class="cta-button" data-action="answer-the-call">Buy Answer the Call</button>
               </article>
 
             </div>
@@ -412,9 +456,11 @@
               <button type="button" class="dot" role="tab" id="pkg-tab-2" aria-controls="pkg-card-2" aria-selected="false"><span class="visually-hidden">Custom AI, book a call, no price on this page</span></button>
             </div>
             <button type="button" class="arrow" id="pkg-next" aria-label="Next package">›</button>
+            <button type="button" id="pkg-pause" aria-pressed="false">Pause</button>
           </div>
         </div>
 
+        <p id="checkout-error" role="alert"></p>
         <p id="pkg-live" class="visually-hidden" aria-live="polite"></p>
       </section>
     </div>
@@ -480,86 +526,172 @@
     });
 
     (function () {
-      // Index 1 is Never Miss a Job, selected by default.
-      // Index 2 (Custom AI) has no price. Do not charge it. Open the booking calendar.
-      var index = 1;
-      var total = 3;
-      var productIds = ['answer-the-call', 'never-miss-a-job', ''];
+      // Track order: [clone Custom AI, Answer the Call, Never Miss a Job, Custom AI, clone Answer the Call]
+      // Index 2 is Never Miss a Job. Moving onto a clone animates there, then snaps with no transition
+      // onto the matching real slide so the loop does not rewind.
+      var index = 2;
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var track = document.getElementById('pkg-track');
+      var viewport = document.getElementById('pkg-viewport');
       var live = document.getElementById('pkg-live');
-      var action = document.getElementById('pkg-action');
       var status = document.getElementById('pkg-status');
-      track.style.transition = reduce ? 'none' : 'transform 0.35s ease';
+      var pauseBtn = document.getElementById('pkg-pause');
+      var labels = [
+        'Selected: Answer the Call. $350 setup and $97 a month.',
+        'Selected: Never Miss a Job. $500 setup and $197 a month.',
+        'Selected: Custom AI. No price on this page. This opens the booking calendar.'
+      ];
+      var paused = reduce;
+      var timer = null;
+      var dragging = false;
+      var dragMoved = false;
+      var startX = 0;
+      var startIndex = 2;
 
-      function render() {
+      function realFrom(i) {
+        if (i <= 0) return 2;
+        if (i >= 4) return 0;
+        return i - 1;
+      }
+
+      function paint(animate) {
+        track.style.transition = animate && !reduce ? 'transform 0.45s ease' : 'none';
         track.style.transform = 'translateX(' + (-index * 100) + '%)';
-        for (var i = 0; i < total; i++) {
-          var card = document.getElementById('pkg-card-' + i);
-          var tab = document.getElementById('pkg-tab-' + i);
-          var on = i === index;
-          card.classList.toggle('is-selected', on);
+      }
+
+      function updateChrome() {
+        var real = realFrom(index);
+        status.textContent = labels[real];
+        live.textContent = labels[real];
+        document.querySelectorAll('[data-real]').forEach(function (card) {
+          var on = Number(card.getAttribute('data-real')) === real && index > 0 && index < 4;
           card.setAttribute('aria-hidden', on ? 'false' : 'true');
-          tab.setAttribute('aria-selected', on ? 'true' : 'false');
-          tab.tabIndex = on ? 0 : -1;
-        }
-        if (index === 1) {
-          action.textContent = 'Buy Never Miss a Job';
-          status.textContent = 'Selected: Never Miss a Job. $500 setup and $197 a month.';
-        } else if (index === 0) {
-          action.textContent = 'Buy Answer the Call';
-          status.textContent = 'Selected: Answer the Call. $350 setup and $97 a month.';
-        } else {
-          action.textContent = 'Book a call';
-          status.textContent = 'Selected: Custom AI. No price on this page. This opens the booking calendar.';
-        }
-        live.textContent = status.textContent;
+        });
+        document.querySelectorAll('.dot').forEach(function (dot, i) {
+          var on = i === real;
+          dot.setAttribute('aria-selected', on ? 'true' : 'false');
+          dot.tabIndex = on ? 0 : -1;
+        });
       }
 
-      function go(next) {
-        // Wrap both ways: next from the last card returns to the first, and previous from the first returns to the last.
-        index = ((next % total) + total) % total;
-        render();
+      function go(delta) {
+        index += delta;
+        paint(true);
+        updateChrome();
       }
 
-      document.getElementById('pkg-prev').addEventListener('click', function () { go(index - 1); });
-      document.getElementById('pkg-next').addEventListener('click', function () { go(index + 1); });
+      function jumpIfClone() {
+        if (index === 0) {
+          index = 3;
+          paint(false);
+        } else if (index === 4) {
+          index = 1;
+          paint(false);
+        }
+        updateChrome();
+      }
+
+      track.addEventListener('transitionend', function (e) {
+        if (e.target !== track || e.propertyName !== 'transform') return;
+        jumpIfClone();
+      });
+
+      document.getElementById('pkg-prev').addEventListener('click', function () { go(-1); });
+      document.getElementById('pkg-next').addEventListener('click', function () { go(1); });
       document.querySelectorAll('.dot').forEach(function (dot, i) {
-        dot.addEventListener('click', function () { go(i); });
+        dot.addEventListener('click', function () {
+          index = i + 1;
+          paint(true);
+          updateChrome();
+        });
       });
 
       var carousel = document.getElementById('pkg-carousel');
       carousel.addEventListener('keydown', function (e) {
-        if (e.key === 'ArrowLeft') { e.preventDefault(); go(index - 1); }
-        if (e.key === 'ArrowRight') { e.preventDefault(); go(index + 1); }
-        if (e.key === 'Home') { e.preventDefault(); go(0); }
-        if (e.key === 'End') { e.preventDefault(); go(total - 1); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
       });
 
-      var startX = 0;
-      var tracking = false;
-      carousel.addEventListener('touchstart', function (e) {
-        startX = e.changedTouches[0].clientX;
-        tracking = true;
-      }, { passive: true });
-      carousel.addEventListener('touchend', function (e) {
-        if (!tracking) return;
-        tracking = false;
-        var dx = e.changedTouches[0].clientX - startX;
-        if (Math.abs(dx) > 40) go(dx < 0 ? index + 1 : index - 1);
-      }, { passive: true });
+      function bookCall() {
+        document.getElementById('book').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+        var link = document.querySelector('.book .fallback');
+        if (link) link.focus();
+      }
 
-      action.addEventListener('click', function () {
-        if (index === 2) {
-          document.getElementById('book').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
-          var link = document.querySelector('.book .fallback');
-          if (link) link.focus();
+      track.addEventListener('click', function (e) {
+        if (dragMoved) {
+          dragMoved = false;
+          e.preventDefault();
+          e.stopPropagation();
           return;
         }
-        startPackageCheckout(action, action.textContent, productIds[index]);
+        var btn = e.target.closest('[data-action]');
+        if (!btn) return;
+        var action = btn.getAttribute('data-action');
+        if (action === 'book') {
+          bookCall();
+          return;
+        }
+        startPackageCheckout(btn, btn.textContent, action);
       });
 
-      render();
+      viewport.addEventListener('pointerdown', function (e) {
+        if (e.target.closest('button, a')) return;
+        dragging = true;
+        dragMoved = false;
+        startX = e.clientX;
+        startIndex = index;
+        track.style.transition = 'none';
+        viewport.setPointerCapture(e.pointerId);
+      });
+      viewport.addEventListener('pointermove', function (e) {
+        if (!dragging) return;
+        var dx = e.clientX - startX;
+        if (Math.abs(dx) > 8) dragMoved = true;
+        var width = viewport.getBoundingClientRect().width;
+        track.style.transform = 'translateX(' + ((-startIndex * width) + dx) + 'px)';
+      });
+      function endDrag(e) {
+        if (!dragging) return;
+        dragging = false;
+        var dx = e.clientX - startX;
+        if (Math.abs(dx) > 48) go(dx < 0 ? 1 : -1);
+        else paint(true);
+      }
+      viewport.addEventListener('pointerup', endDrag);
+      viewport.addEventListener('pointercancel', endDrag);
+
+      function stopAutoplay() {
+        if (timer) clearInterval(timer);
+        timer = null;
+      }
+      function startAutoplay() {
+        if (paused || reduce) return;
+        stopAutoplay();
+        timer = setInterval(function () { if (!dragging) go(1); }, 5000);
+      }
+      pauseBtn.addEventListener('click', function () {
+        paused = !paused;
+        pauseBtn.textContent = paused ? 'Play' : 'Pause';
+        pauseBtn.setAttribute('aria-pressed', paused ? 'true' : 'false');
+        if (paused) stopAutoplay();
+        else startAutoplay();
+      });
+      carousel.addEventListener('mouseenter', stopAutoplay);
+      carousel.addEventListener('mouseleave', startAutoplay);
+      carousel.addEventListener('focusin', stopAutoplay);
+      carousel.addEventListener('focusout', function (e) {
+        if (!carousel.contains(e.relatedTarget)) startAutoplay();
+      });
+
+      paint(false);
+      updateChrome();
+      if (paused) {
+        pauseBtn.textContent = 'Play';
+        pauseBtn.setAttribute('aria-pressed', 'true');
+      } else {
+        startAutoplay();
+      }
     })();
   </script>
 </body>
